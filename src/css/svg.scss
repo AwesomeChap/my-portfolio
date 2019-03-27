@@ -1,0 +1,79 @@
+$red : rgb(255, 13, 45);
+
+.jk{
+  fill: #333;
+  // stroke-width: 1;
+  // stroke : white;
+  // animation: shine 4s infinite;
+}
+
+@for $i from 1 through 6 {
+  .jk {
+    
+    &:nth-child(#{$i}) {
+      
+      // Delay the animation. Delay increases as items loop.
+      animation-delay: 1 + $i*(.1s);
+    }
+  }
+}
+
+// .jk:nth-child(1){
+//   animation-delay: 1s;
+// }
+
+// .jk:nth-child(2){
+//   animation-delay: 1.1s;
+// }
+
+// .jk:nth-child(3){
+//   animation-delay: 1.2s;
+// }
+
+// .jk:nth-child(6){
+//   animation-delay: 1.3s;
+// }
+
+// .jk:nth-child(4){
+//   animation-delay: 1.4s;
+// }
+
+// .jk:nth-child(5){
+//   animation-delay: 1.5s;
+// }
+
+// @keyframes shine{
+//   0%{
+//     fill: rgb(255, 100, 126);
+//   }
+//   20%{
+//     fill:$red;
+//   }
+//   100%{
+//     fill:$red;
+//   }
+// }
+
+// @keyframes shine{
+//   0%{
+//     fill: $red;
+//   }
+//   20%{
+//     fill:#333;
+//   }
+//   100%{
+//     fill:#333;
+//   }
+// }
+
+@keyframes shine{
+  0%{
+    fill: #555;
+  }
+  40%{
+    fill:#333;
+  }
+  100%{
+    fill:#333;  
+  }
+}

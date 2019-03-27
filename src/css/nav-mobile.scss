@@ -1,0 +1,354 @@
+$red : #ff0d2d;
+$eio : cubic-bezier(0.77, 0, 0.175, 1);
+
+.nav-m{
+  font-family: BoldFont !important;
+  display: none;
+  justify-content: space-between;
+  align-items: center;
+  height:10vh;
+  padding:14px;
+  box-sizing: border-box;
+}
+
+.nav-logo-m{
+  z-index: 1;
+  text-decoration: none;
+  color: $red;
+  font-size: 20px;
+}
+
+#hamburger{
+  z-index: 2;
+  // background: rgba(17, 17, 17, 0.795);
+  // background: #444;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 60px;
+  height: 50px;
+  cursor: pointer;
+  padding: 10px 0;
+  box-sizing: border-box;
+  transition: all 0.3s;
+}
+
+.bar{
+  display: block;
+  height: 1px;
+  background-color: #ddd;
+  transition: all 0.3s;
+}
+
+.bar2{
+  width: 85%;
+  opacity: 1;
+  transition: all 0.3s;
+}
+
+.bar1, .bar3{
+  width:50%;
+  transform: translateY(0) rotate(0);
+  transition: all 0.3s;
+}
+
+.close{
+  .bar{
+    background-color: $red;
+  }
+  .bar1{
+    animation:  close-bar1 .6s $eio forwards;
+  }
+  @keyframes close-bar1 {
+    50%{
+      transform: translateY(14px) rotate(0);
+    }
+    100%{
+      transform: translateY(14px) rotate(135deg);
+    }
+  }
+  
+  .bar2{
+    animation: close-bar2 .6s $eio forwards;
+  }
+  @keyframes close-bar2 {
+    50%{
+      width: 50%;
+      opacity: 1;
+    }
+    100%{
+      width: 50%;
+      opacity: 0;
+    }
+  }
+  .bar3{
+    animation: close-bar3 .6s $eio forwards;
+  }
+  @keyframes close-bar3 {
+    50%{
+      transform: translateY(-14px) rotate(0);
+    }
+    100%{
+      transform: translateY(-14px) rotate(45deg);
+    }
+  }
+}
+
+.ham{
+  .bar1{
+    transform: translateY(14px) rotate(135deg);
+    animation: ham1 .6s $eio forwards,;
+  }
+  @keyframes ham1 {
+    50%{
+      transform: translateY(14px) rotate(0);
+    }
+    100%{
+      transform: translateY(0px) rotate(0);
+    }
+  }
+  .bar2{
+    width: 50%;
+    opacity: 0;
+    animation: ham2 .6s $eio forwards;
+  }
+  @keyframes ham2 {
+    50%{
+      opacity: 1;
+      width: 50%;
+    }
+    100%{
+      opacity: 1;
+      width: 85%;
+    }
+  }
+  .bar3{
+    transform: translateY(-14px) rotate(45deg);
+    animation: ham3 .6s $eio forwards;
+  }
+  @keyframes ham3 {
+    50%{
+      transform: translateY(-14px) rotate(0);
+    }
+    100%{
+      transform: translateY(0px) rotate(0);
+    }
+  }
+}
+
+// ---------------------------------------------------------------
+
+#menu-wrapper{
+  position: absolute;
+  // display: none;
+  z-index: 1;
+  top:0vh;
+  left:0;
+  width: 100vw;
+  height: 0vh; //change this value for menu animation
+  overflow: hidden;
+}
+
+.open-menu{
+  animation: open-menu .5s $eio forwards;
+}
+
+@keyframes open-menu{
+  to{
+    height: 100vh;
+  }
+}
+
+.close-menu{
+  animation: close-menu  .5s $eio forwards;
+}
+
+@keyframes close-menu{
+  from{
+    height: 100vh;
+  }
+  to{
+    height: 0vh;
+  }
+}
+
+.menu{
+  width:100vw;
+  height: 100vh;
+  position: absolute;
+  top:0;
+  left:0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.bg-transparent{
+  background-color: transparent;
+}
+
+.menu-item-wrapper{
+  text-decoration: none;
+  color:#ddd;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  background-color: #171717;
+  // transition: all .3s $eio .2s;
+  
+  &.selected-menu-item{
+    background-color: transparent;
+  }
+}
+
+.nav-bar-bg{
+  flex: 0 0 10vh;
+  width: 100%;
+  background-color: #171717;
+}
+
+.shrink-nav-bar-bg{
+  flex: 0 0 0vh;
+  transition: all 0.3s $eio .3s;
+}
+
+
+.menu-item-wrapper:nth-child(even){
+  background-color: #1c1c1c;
+  &.selected-menu-item{
+    background-color: transparent;
+  }
+  // background-color: red;
+
+
+  // background-color: rgb(30, 30, 30);
+}
+
+.menu-item{
+  position: relative;
+  width:100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  z-index: 3;
+  // background: blue;
+
+  &:hover{
+    .menu-item-bg{
+      width:100%
+    }
+  }
+}
+
+.menu-item-bg{
+  width:0%;
+  height: 100%;
+  transition: all $eio 0.3s;
+}
+
+.menu-item-bg:nth-child(1){
+  background-color: rgb(255, 13, 45);
+}
+
+.menu-item-bg:nth-child(2){
+  align-self: flex-end;
+  background-color: rgb(236, 0, 32);
+}
+
+.menu-item-name{
+  position: absolute;
+  top:50%;
+  left:50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform:translate(-50%,-50%);
+  // border: 1px solid white;
+  overflow: hidden;
+  span{
+    font-size: 40px;
+    font-family: Sharp_Sans !important;
+    // font-family: Sharp_Sans !important;
+    display: inline-block;
+    transition: all .3s ;
+    // background-color: blue;
+    // transform: translateY(-30px);
+  }
+}
+
+.fadeIn-menu-item{
+  span{
+    transform:translate(0,-40px);
+    // opacity: 0;
+    animation: fadeInItem .3s .3s forwards;
+  }
+}
+
+@keyframes fadeInItem{
+  to{
+    transform:translate(0,0);
+    // opacity: 1;
+  }
+}
+
+.fadeOut-menu-item{
+  span{
+    transform:translate(0,0);
+    // opacity: 1;
+    animation: fadeOutItem .3s $eio forwards;
+  }
+}
+
+@keyframes fadeOutItem{
+  to{
+    transform:translate(0,-40px);
+    // opacity: 0;
+  }
+}
+
+.shrink-item{
+  height: 0;
+  transition: all .3s $eio .3s;
+
+  // animation: shrink 1.5s $eio; 
+}
+
+@keyframes shrink{
+  25%{
+    height: 0%;
+  }
+  100%{
+    height: 0%;
+  }
+}
+
+.selected-menu-item{
+  .menu-item-bg{
+    width: 100%;
+    animation: pageTransition .3s $eio 1.2s forwards;
+  }
+  span{
+    animation: fadeOutItem .3s $eio .9s forwards;
+  }
+}
+
+@keyframes pageTransition{
+  to{
+    width: 0%;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  /* For desktop: */
+  .nav-m{
+    display:flex;
+  }
+  #menu-wrapper{
+    display:block;
+  }
+}

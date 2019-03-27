@@ -1,0 +1,284 @@
+*{
+  font-family: 'Sniglet', cursive;
+}
+
+.strok-1 {stroke:black;stroke-width:1}
+.stroke-2 {stroke:#444;stroke-width:6}
+.fill-none {fill:none}
+.fill-black {fill:black}
+.fill-white {fill:white}
+.fill-grey {fill:#B3B3B3}
+.fill-silver-1 {fill:url(#right-eye-gradient)}
+.fill-silver-2 {fill:url(#left-eye-gradient)}
+
+
+body, .svg-box{
+  padding: 0;
+  margin: 0;
+  background: #111;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+svg{
+  display: inline-block;
+}
+
+.hidden{
+  visibility: hidden;
+}
+
+.eye-lashes{
+  fill:none;
+  stroke:#444;
+  stroke-width:6;
+  visibility: visible;
+  animation: UI 0.5s 0.7s forwards, close-eye 0.1s 1.4s forwards;
+}
+
+@keyframes close-eye{
+  to{
+    visibility: hidden;
+  }
+}
+
+.opened-eye{
+  visibility: hidden;
+  animation: open-eye 0.1s 1.5s forwards;
+}
+
+@keyframes open-eye{
+  to{
+    visibility: visible;
+  }
+}
+
+ .shine11, .shine21{
+  fill: #fff;
+  animation: rotate 0.5s 3s forwards;
+  transform-origin: 72% 55%;
+  opacity: 0;
+}
+
+ .shine2,  .shine1{
+  fill:#fff;
+  opacity: 0;
+  transform: scaleY(0.9) rotate(0deg);
+  transform-origin: 26% 58%;
+  animation: rotate 0.5s 3s forwards;
+}
+
+@keyframes rotate{
+  from{
+    transform: scaleY(0.9) rotate(330deg);
+    opacity: 0;
+  }
+  to{
+    transform: scaleY(0.9) rotate(360deg);
+    opacity: 1;
+  }
+}
+
+@keyframes rotate-again{
+  from{
+    transform: scaleY(0.9) rotate(0deg);
+    /* opacity: 1; */
+  }
+  to{
+    transform: scaleY(0.9) rotate(10deg);
+    /* opacity: 0; */
+  }
+}
+
+#left-eye-brow{
+  fill:none;
+  stroke:#444;
+  stroke-width:6;
+  animation: UI .5s .7s forwards, 
+             MUI .7s 2s forwards, 
+             raiseLeft 0.2s 3.5s forwards, 
+             decolorize .5s 4.5s forwards;
+}
+
+#right-eye-brow{
+  fill:none;
+  stroke:#444;
+  stroke-width:6;
+  animation: UI .5s .7s forwards,
+             MUI .7s 2s forwards,
+             raiseRight 0.2s 3.5s forwards,
+             decolorize .5s 4.5s forwards;
+}
+
+@keyframes MUI{
+  from{
+    fill:#000;
+  }
+  to{
+    fill:#B3B3B3;
+  }
+}
+
+@keyframes UI{
+  from{
+    fill:transparent;
+  }
+  to{
+    fill:#000;
+  }
+}
+
+#left-eye-ball{
+  clip-path: url(#id1);
+  animation: change-clip-path-left 0.1s 3.5s forwards;
+}
+
+#right-eye-ball{
+  clip-path: url(#id2);
+  animation: change-clip-path-right 0.1s 3.5s forwards;
+}
+
+/* stage 4 animations animation delay > 3.5s */
+
+@keyframes change-clip-path-left{
+  to{
+    clip-path:url(#id3);
+  }
+}
+
+@keyframes change-clip-path-right{
+  to{
+    clip-path:url(#id4);
+  }
+}
+
+@keyframes raiseLeft{
+  to{
+    d: path("M440 224l-2 38c-117,3 -260,-201 -436,-158l47 -100c177,27 332,247 391,220z");
+  }
+}
+
+@keyframes raiseRight{
+  to{
+    d: path("M534 220l2 39c117,3 260,-201 436,-159l-48 -99c-177,26 -331,247 -390,219z");
+  }
+}
+
+#left-eye-open{
+  animation: focus-left 0.2s 3.5s linear forwards;
+}
+
+#right-eye-open{
+  animation: focus-right 0.2s 3.5s linear forwards;
+}
+
+@keyframes focus-left{
+  to{
+    d : path('M80 100c1,-5 48,141 48,141 88,1 174,25 244,36l8 -26c-97,-53 -209,-143 -300,-151z')
+  }
+}
+
+@keyframes focus-right{
+  to{
+    d : path('M894 96c-1,-4 -48,142 -48,142 -88,0 -174,24 -244,36l-8 -26c97,-54 208,-143 300,-152z')
+  }
+}
+
+.eye-balls{
+  animation: focus 0.2s 3.5s linear forwards, fade 1s 4s forwards;
+}
+
+@keyframes focus {
+  to{
+    transform: translateY(14%);
+  }
+}
+
+/* morph to logo */
+
+#eyes-2{
+  visibility: hidden;
+  opacity: 0;
+  animation: comeEyes .1s 4s forwards;
+}
+
+@keyframes comeEyes{
+  to{
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+#eyes{
+  visibility: visible;
+  opacity: 1;
+  animation: goEyes .1s 4.7s forwards;
+}
+
+@keyframes goEyes{
+  to{
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+ @keyframes fade{
+  to{
+    opacity: 0;
+    visibility: hidden;
+  }
+ }
+
+ @keyframes decolorize{
+   from{
+     fill:grey;
+   }
+   to{
+     fill:transparent;
+   }
+ }
+
+ .logo-color{
+   fill:transparent;
+   animation: fill-logo .5s forwards;
+ }
+
+ .logo-color:nth-child(1){
+   animation-delay: 5.55s;
+ }
+
+ .logo-color:nth-child(2){
+  animation-delay: 5.6s;
+}
+
+.logo-color:nth-child(3){
+  animation-delay: 5.65s;
+}
+
+.logo-color:nth-child(6){
+  animation-delay: 5.7s;
+}
+
+.logo-color:nth-child(4){
+  animation-delay: 5.75s;
+}
+
+.logo-color:nth-child(5){
+  animation-delay: 5.8s;
+}
+
+ @keyframes fill-logo{
+   to{
+     fill:rgb(0, 204, 255);
+     stroke:#444;
+     stroke-width: 6;
+     /* stroke: rgba(255, 255, 255, 0.082);
+     stroke-width: 10; */
+   }
+ }
+
+
+
+

@@ -1,0 +1,359 @@
+$red : #ff0d2d;
+$eio : cubic-bezier(0.77, 0, 0.175, 1);
+$font-normal : 24px;
+
+
+.section{
+  // background: red;
+  min-height: 89%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.sub-section{
+  display: flex;
+  height: 80vh;
+  width: 100%; 
+}
+
+.sec{
+  border: 1px solid #333;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  // align-items: center;
+}
+
+// .sec1{
+
+// }
+
+.sec2{
+  padding: 1.3vw;  //20px
+  align-items: center;
+  .inner-section{
+    width: 75%;
+    // margin-top:7vh;
+    // background: #444;
+  }
+}
+
+.sec3{
+  box-sizing: border-box;
+  .inner-section{
+    width: 82%;
+    margin:10vh 0;
+    // background: #444;
+  }
+}
+
+.block{
+  min-height: 50vh;
+  width: 100%;
+  font-size: $font-normal;
+  height: 100%;
+  display:flex;
+  flex-direction: column;
+
+  .block-item{
+    margin: 2vh 0;
+    padding: 2vh;
+    background: #151515;
+    box-shadow: 0 0 5px #000;
+    
+    .item-heading{
+      font-family: Sharp_Sans;
+      font-size: 36px;
+      margin-bottom: 2vh;
+      
+      span{
+        color: #444;
+      }
+
+      a{
+        // text-decoration: none;
+        color: #aaa;
+      }
+
+      i{
+        transform: scale(0.7);
+        transition: all 0.3s;
+        margin: 0 20px;
+
+        &:hover{
+          color: $red;
+        }
+      }
+    }
+  }
+}
+
+.hglt{
+  display: inline-block;
+  background: #222;
+  color: #ccc;
+  border-bottom: 2px solid $red;
+}
+
+.skills-block{
+  // background: green;
+  min-height: 50vh;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  
+  .set{
+    width: 45%;
+    height: 100%;
+    // margin: 2vh 0;
+
+    .skill-wrapper{
+      margin: 4vh 0;
+      display: flex;
+      align-items: center;
+      font-size: $font-normal;
+      justify-content: space-between;
+
+      .skill{
+        // font-weight: 900;
+      }
+
+      .proficiency{
+        width: 60%;
+        height: 12px;
+        position: relative;
+        background-color: #1c1c1c;
+        // border-radius: 30px;
+        overflow: hidden;
+        // border: 2px solid rgba(0, 0, 0, 0.486);
+        box-shadow: 0 0 5px #000;
+        .barValue{
+          position: absolute;
+          height: 100%;
+          background-color: $red; 
+          visibility: hidden;  
+          transition: all 1s;
+        }
+      }
+    }
+  }
+}
+
+.animateSkillBar{
+  visibility: visible !important;
+  animation: skillBar 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+@keyframes skillBar {
+  from{
+    width: 0;
+  }
+}
+
+
+.text{
+  font-size: $font-normal;
+  text-align: justify;
+}
+
+.expand{
+  display: inline-block;
+  background-color: #222;
+  border-bottom: 2px solid $red;
+  color: #ccc;
+  cursor: pointer;
+  span{
+    // background: rgba(255, 255, 255, 0.164);
+    letter-spacing: -0.9em;
+    opacity: 0;
+    transition: all 0.3s;
+  }
+  &:hover{
+    span{
+      opacity: 1;
+      letter-spacing: 0em;
+    }
+  }
+}
+
+
+// Home
+
+.intro{
+  // width: 100%;
+  // height: 100%;
+  min-height: 89vh;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  font-family: Sharp_Sans;
+  font-size: 180px;
+}
+
+//Projects
+
+.keywords{
+  display: flex;
+  flex-wrap: wrap;
+  // justify-content: space-evenly;
+
+  .kw-selected{
+    .kw:after{
+      height: 100% !important;
+    }
+  }
+
+  .kw{
+    position: relative;
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: rgba(34, 34, 34, 0.356);
+    box-shadow: 0 0 10px #000;
+    margin: 9px;
+    color: #ddd;
+    cursor: pointer;
+    font-size: 20px;
+    
+    &:after{
+      content:"";
+      position: absolute;
+      bottom:0;
+      left: 0;
+      width: 100%;
+      height: 10%;
+      background-color: #373737;
+      z-index: -1;
+      transition: all 0.3s;
+    }
+
+    &:hover{
+      &:after{
+        height: 100%;
+      }
+    }
+  }
+}
+
+.kw-selected{
+  position: relative;
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: rgba(34, 34, 34, 0.356);
+  box-shadow: 0 0 10px #000;
+  margin: 10px;
+  color: #ddd;
+  cursor: pointer;
+  font-size: 20px;
+  
+  &:after{
+    content:"";
+    position: absolute;
+    bottom:0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #373737;
+    z-index: -1;
+    transition: all 0.3s;
+  }
+
+  &:hover{
+    &:after{
+      background-color:#444;
+    }
+  }
+}
+
+.show-filters{
+  display: inline-block;
+  font-size: 20px;
+  margin: 10px;
+  color: #777;
+
+  span{
+    color: #ddd;
+  }
+}
+
+.filter{
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  background: #222;
+  margin:0 5px;
+  font-size: 20px;
+  padding: 5px 10px;
+  box-shadow: 0 0 10px #000;
+  box-sizing: border-box;
+  animation: onFilterCreate 0.2s forwards;
+
+  div{
+    opacity: 0;
+    transform: translateY(3px);
+    position: relative;
+    margin: 0 5px;
+    animation: fadeInFilter .2s .2s forwards;
+  }
+
+  #cross{
+    color: #555;
+
+    &:hover{
+      color: #888;
+    }
+  }
+}
+
+.onFilterDelete {
+  animation: onFilterDelete .2s .2s forwards;
+}
+
+.fadeOutFilter{
+  animation: fadeOutFilter .2s forwards;
+}
+
+@keyframes onFilterDelete{
+  to{
+    transform: scale(0);
+  }
+}
+
+@keyframes fadeOutFilter{
+  to{
+    transform: translateY(3px);
+    opacity: 0;
+  }
+}
+
+@keyframes onFilterCreate{
+  from{
+    transform: scale(0);
+  }
+}
+
+@keyframes fadeInFilter{
+  to{
+    opacity: 1;
+    transform: translateY(0)
+  }
+}
+
+@media only screen and (max-width: 1096px) {
+  .block,.skill-wrapper,.text{
+    font-size: 20px;
+  }
+
+  .skills-block{
+    .set{
+      .skill-wrapper{
+        .proficiency{
+          height: 10px;
+        }
+      }
+    }
+  }
+}
