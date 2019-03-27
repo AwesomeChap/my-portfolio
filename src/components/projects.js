@@ -138,13 +138,30 @@ export default class Projects extends Component{
                         <div className="dots">
                           <div></div> <div></div> <div></div>
                         </div>
-                        <div className="name"></div>
+                        <div className="name">SuperMarket FoodInfo</div>
                       </div>
                     <div className="project">
                       <img src={superMarketImage} alt=""/>
+                      <div className="project-info">
+                        <div className="bg-up"></div>
+                        <div className="bg-down"></div>
+                        <div className="project-details">
+                          <div className="pd1"> <div>Technologies Used</div> </div>
+                          <div className="pd2">
+                            <div>
+                              <span>React</span> <span>Node</span> <span>CSS</span> <span>SCSS</span> <span>MongoDB</span>
+                            </div>
+                           </div>
+                          <div className="pd3">
+                            <a href="" target="_blank"><i class="fas fa-share"></i></a>
+                            <a href="" target="_blank"><i class="fab fa-github"></i></a>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                    <div className="project-desc"></div>
-                    {/* <div className="project-info"></div> */}
+                    <div className="project-desc">
+                      <p>A WebApp that let's you see important details of selected food items and then compare it's with others</p>
+                    </div>
                   </div>
                 </div>
             </div>
