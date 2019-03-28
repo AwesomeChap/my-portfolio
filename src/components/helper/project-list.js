@@ -8,17 +8,15 @@ export default class Project extends Component {
     super(props);
     this.state = {
       projects: projects,
-      kws : this.props.kws ? this.props.kws : [],
     };
   }
+
   render() {
     let projects = this.state.projects;
     projects = projects.map((p, i) => {
       let shouldReturn = true;
 
-      this.state.kws.forEach(kw => {
-        shouldReturn = shouldReturn && (p.keywords.indexOf(kw) !== -1)
-      });
+      shouldReturn = shouldReturn && (p.keywords.indexOf(this.props.filter) !== -1) || this.props.filter === 'Show All';
 
       if(shouldReturn)
       {
@@ -49,8 +47,8 @@ export default class Project extends Component {
                     </div>
                   </div>
                   <div className="pd3">
-                    <a href={p.link} className={p.link === '' && "disabled"}  target="_blank"><i class="fas fa-share"></i></a>
-                    <a href={p.gitUrl} className={p.gitUrl === '' && "disabled"} target="_blank"><i class="fab fa-github"></i></a>
+                    {p.link !== '' && <a href={p.link} target="_blank"><i class="fas fa-share"></i></a>}
+                    {p.gitUrl !== '' && <a href={p.gitUrl} target="_blank"><i class="fab fa-github"></i></a>}
                   </div>
                 </div>
               </div>

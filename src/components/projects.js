@@ -3,7 +3,6 @@ import Heading from './helper/heading';
 import Expand from './helper/expand';
 import { keywords } from './helper/data';
 import superMarketImage from '../images/sp.png';
-import '../css/projects.scss';
 import ProjectList from './helper/project-list';
 
 export default class Projects extends Component {
@@ -11,51 +10,26 @@ export default class Projects extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedItems: [],
-
+      selectedFilter : "Show All"
     }
   }
 
-  componentDidMount() {
-    this.filters = this.state.selectedItems.length && this.getFilters(this.state.selectedItems);
-  }
-
-  findItem = (item) => this.state.selectedItems.indexOf(item);
+  checkItem = (item) => this.state.selectedFilter !== item;
 
   handleClick = (e) => {
     let currentSelect = e.target.dataset.name;
     console.log(`current select is ${currentSelect}`);
-    let index = this.findItem(currentSelect);
-    if (index !== -1) {
-      console.log('after removal');
-      this.setState((prevState) => {
-        let selectedItems = prevState.selectedItems;
-        selectedItems.splice(index, 1);
-        return {
-          selectedItems
-        }
-      }, () => {
-        console.log(this.state.selectedItems);
-      })
+    
+    if(this.checkItem(currentSelect)){
+      this.setState({selectedFilter:currentSelect});
     }
-    else {
-      console.log('after insertion');
-      this.setState((prevState) => {
-        let selectedItems = prevState.selectedItems;
-        selectedItems.push(currentSelect);
-        return {
-          selectedItems
-        }
-      }, () => {
-        console.log(this.state.selectedItems);
-      });
-    }
+
   }
 
   render() {
 
     let kws = keywords.map((kw, index) => {
-      const classes = this.findItem(kw) === -1 ? 'kw' : 'kw-selected';
+      const classes = this.checkItem(kw)? 'kw' : 'kw-selected';
       return <div key={index} onClick={this.handleClick} data-name={kw} className={classes}>{kw}</div>
     });
 
@@ -86,7 +60,7 @@ export default class Projects extends Component {
               <div className="keywords">{kws}</div>
               <div className="show-filters">CLick above to apply or toggle filter </div>
               <div className="projects-container">
-                <ProjectList kws={this.state.selectedItems} />
+                <ProjectList filter={this.state.selectedFilter} />
               </div>
             </div>
           </div>

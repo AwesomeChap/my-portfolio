@@ -5,14 +5,28 @@ html{
 body{
   margin: 0;
   background: #111;
-  color: #aaa;
+  color: #ccc;
   height: 100%;
   width: 100%;
   font-family: 'Quicksand', sans-serif;
 }
 
-// #root, .router-wrapper{
-//   width: 100%;
-//   height: 100%;
-// }
+/* width */
+::-webkit-scrollbar {
+  width: 0px;
+}
 
+/* Track */
+::-webkit-scrollbar-track {
+  background: #222; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}

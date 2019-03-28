@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import Heading from './helper/heading';
 import Expand from './helper/expand';
-import { set1, set2 } from './helper/data';
+import { set1, set2, works } from './helper/data';
 
 export default class About extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      visible : 0
+      visible: 0
     };
   }
 
@@ -20,7 +20,7 @@ export default class About extends Component {
         if (bar.getBoundingClientRect().top <= window.innerHeight && bar.getBoundingClientRect().top > 0) {
           bar.classList.add("animateSkillBar");
         }
-        else if(bar.getBoundingClientRect().top >= window.innerHeight && bar.getBoundingClientRect().top > 0) {
+        else if (bar.getBoundingClientRect().top >= window.innerHeight && bar.getBoundingClientRect().top > 0) {
           bar.classList.remove("animateSkillBar");
         }
         if (bar.getBoundingClientRect().top < 0) {
@@ -89,7 +89,7 @@ export default class About extends Component {
                 <div className="item-content">Our Team Came <span className="hglt">1st</span> Runner Up</div>
               </div>
               <div className="block-item">
-                <div className="item-heading">More Coming soon ;)</div>
+                <div className="item-heading"><span>More coming pretty soon ;)</span></div>
               </div>
             </div>
           </div>

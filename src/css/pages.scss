@@ -52,12 +52,16 @@ $font-normal : 24px;
 }
 
 .block{
-  min-height: 50vh;
+  min-height: 20vh;
   width: 100%;
   font-size: $font-normal;
   height: 100%;
   display:flex;
   flex-direction: column;
+
+  .block-ul{
+    list-style: square;
+  }
 
   .block-item{
     margin: 2vh 0;
@@ -97,6 +101,15 @@ $font-normal : 24px;
   background: #222;
   color: #ccc;
   border-bottom: 2px solid $red;
+}
+
+.hglt-red{
+  display: inline-block;
+  background: $red;
+  color: #ddd;
+  padding: 3px 6px;
+  box-shadow: 0 0 10px #000;
+  border-bottom: 5px solid #ff5e73;
 }
 
 .skills-block{
@@ -200,6 +213,9 @@ $font-normal : 24px;
 .keywords{
   display: flex;
   flex-wrap: wrap;
+  // position: sticky;
+  // background: #111;
+  // top:0;
   // justify-content: space-evenly;
 
   .kw-selected{
@@ -245,7 +261,7 @@ $font-normal : 24px;
   padding: 10px 20px;
   background-color: rgba(34, 34, 34, 0.356);
   box-shadow: 0 0 10px #000;
-  margin: 10px;
+  margin: 9px;
   color: #ddd;
   cursor: pointer;
   font-size: 20px;

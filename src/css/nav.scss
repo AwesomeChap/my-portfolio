@@ -1,5 +1,6 @@
 $red : rgb(255, 13, 45);
 $eio : cubic-bezier(0.77, 0, 0.175, 1);
+$eo : cubic-bezier(0.165, 0.84, 0.44, 1);
 
 .nav-bar{
   z-index: 1;
@@ -8,6 +9,7 @@ $eio : cubic-bezier(0.77, 0, 0.175, 1);
   position: -webkit-sticky; /* Safari */
   position: sticky;
   top: 0;
+  transition: all 0.3s;
 }
 
 .nav-left{
@@ -20,7 +22,19 @@ $eio : cubic-bezier(0.77, 0, 0.175, 1);
 }
 
 .nav-right{
-  background: #111;
+  position: relative;
+  background: #171717;
+  box-shadow: 0 0 10px #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav-right-inner{
+  // display: none;
+  overflow: hidden;
+  height: 60px;
+  transition: all 0.3s;
 }
 
 .nav-logo{
@@ -28,39 +42,224 @@ $eio : cubic-bezier(0.77, 0, 0.175, 1);
   // background: blue; 
 }
 
-.nav-item{
-  text-decoration: none;
-  // position: relative;
-  color:#ddd;
-  display: inline-block;
-  font-size: 20px;
-  padding:20px; 
-  // margin:0 5px;
-  // background: #000;
-  transition: all 0.3s;
-  &:after{
-    transition: all 0.3s;
-    content: "";
-    display: block;
-    margin: 0; 
-    width: 20px;
-    padding-top: 10px;
-    border-bottom: 5px solid #444;
+.nav-item-open{
+  opacity: 0;
+  width:0vw;
+  animation:nav-item-open 0.3s forwards, ItemAppear 0.2s 0.3s forwards;
+}
+
+@keyframes ItemAppear{
+  to{
+    opacity: 1;
   }
+}
+
+@keyframes nav-item-open{
+  to{
+    width: 7vw;
+  }
+}
+
+.nav-item-close{
+  width:7vw !important;
+  opacity: 1;
+  animation:ItemDisappear 0.2s forwards, nav-item-close 0.3s 0.2s forwards;
+}
+
+@keyframes ItemDisappear{
+  to{
+    opacity: 0;
+  }
+}
+
+@keyframes nav-item-close{
+to{
+    width: 0vw;
+  }
+}
+
+
+.nav-item{
+  z-index: 1;
+  position: relative;
+  background-color: transparent;
+  text-decoration: none;
+  color:#ddd;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  font-size: 20px;
+  // padding: 20px;
+  // width:7vw;
+  height: 60px;
+  
+  width:0vw;
+
+  &::before{
+    content:'';
+    position: absolute;
+    bottom:0;
+    left:0;
+    right: 0;
+    width:98%;
+    height:0%;
+    background-color:#111;
+    box-sizing: border-box;
+    z-index: -1;
+    transition: height 0.3s;
+  }
+  
   &:hover{
-    &:after{
-      border-bottom-color: $red;
+    &::before{
+      height: 100%;
     }
   }
 }
 
 .selected{
   color: $red;
-  font-weight: 400;
+  &::before{
+    height: 100%;
+    border-bottom: 2px solid $red;
+    box-sizing: border-box;
+  }
+}
 
-  &.nav-item:after{
-    width:100%;
-    border-bottom: 5px solid $red;
+.ham-hide-wrapper{
+  display: inline-flex;
+  width: 60px;
+  height:60px;
+  padding: 10px 0;
+  margin: 0 20px;
+  box-sizing: border-box;
+  cursor: pointer;
+  // border: 1px solid green;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+
+  .ham-1{
+    // background: green;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    .line{
+      height:1px;
+      background: #fff;
+      transition: all 0.3s;
+    }
+    
+    .line1,.line3{
+      width: 50%;
+    }
+
+    .line1{
+      transform: translateY(-13px) rotate(0);
+    }
+
+    .line2{
+      width: 80%;
+      opacity: 1;
+    }
+
+    .line3{
+      transform: translateY(13px) rotate(0);
+    }
+  }
+
+  .start-1{
+
+    .line{
+      // transition: all 0.3s;
+    }
+
+    .line1{
+      transform: translate(0px) rotate(135deg);
+      animation: line1-ham 0.6s forwards;
+    }
+
+    @keyframes line1-ham {
+      50%{
+        transform: translate(0px) rotate(0deg);
+      }
+      100%{
+        transform: translateY(-13px) rotate(0);
+      }
+    }
+
+    .line2{
+      widows: 50%;
+      opacity: 0;
+      animation: line2-ham 0.6s forwards;
+    }
+
+    @keyframes line2-ham {
+      50%{
+        opacity: 1;
+        width: 50%;
+      }
+      100%{
+        opacity: 1;
+        width: 80%;
+      }
+    }
+
+    .line3{
+      transform: translate(0px) rotate(45deg);
+      animation: line3-ham 0.6s forwards;
+    }
+
+    @keyframes line3-ham {
+      50%{
+        transform: translate(0px) rotate(0);
+      }
+      100%{
+        transform: translateY(13px) rotate(0);
+      }
+    }
+
+  }
+
+  .close-1{
+    .line{
+      background-color: $red;
+    }
+
+    .line1{
+      animation: line1 0.6s forwards;
+    }
+
+    @keyframes line1 {
+      50%{
+        transform: translateY(1px) rotate(0deg);
+      }
+      100%{
+        transform: translateY(0px) rotate(135deg);
+      }
+    }
+
+    .line2{
+      width: 50%;
+      opacity: 0;
+    }
+
+    .line3{
+      animation: line3 0.6s forwards;
+    }
+
+    @keyframes line3 {
+      50%{
+        transform: translateY(0px) rotate(0deg);
+      }
+      100%{
+        transform: translateY(0px) rotate(45deg);
+      }
+    }
+
   }
 }
 
