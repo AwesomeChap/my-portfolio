@@ -1,0 +1,243 @@
+.sub-heading{
+  font-family: Futura, 'sans-serif';
+  font-size: 36px;
+  color: #999;
+  margin-top:5vh;
+}
+
+.social-container{
+  display: flex;
+  width:100%;
+  justify-content: space-between;
+
+  .social-icon{
+    position: relative;
+    cursor: pointer;
+    margin-top:5vh;
+    display: inline-flex;
+    padding: 10px;
+    background: transparent;
+    box-shadow: 0 0 5px #000;
+    background: rgba(255, 255, 255, 0.068);
+    justify-content: space-around;
+    align-items: center;
+    i{
+      display: inline-block;
+      font-size: 28px;
+      color: #fff;
+    }
+    span{
+      color: rgba(255, 255, 255, 0.63);
+      display: inline-block;
+      margin-left: 10px;
+      font-size: 16px;
+      font-family: Futura, 'sans-serif';
+    }
+
+    &::after{
+      content: "";
+      position: absolute;
+      bottom:0;
+      left:0;
+      width: 100%;
+      height: 10%;
+      transition: all 0.3s;
+      z-index: -1;
+    }
+
+    &:hover{
+      &::after{
+        height: 100%;
+      }
+    }
+
+    &:nth-child(1){
+      &::after{
+        background-color: rgba(0, 95, 184, 0.61);
+      }
+    }
+
+    &:nth-child(2){
+      &::after{
+        background-color: rgba(0, 0, 0, 0.664);
+      }
+    }
+
+    &:nth-child(3){
+      &::after{
+        background-color: rgba(0, 132, 255, 0.61);
+      }
+    }
+
+    &:nth-child(4){
+      &::after{
+        background-color: #00aeed8a;
+      }
+    }
+  }
+}
+
+.lets-talk-bg{
+  z-index: -2;
+  position: absolute;
+  font-size: 30vh;
+  font-family: Futura;
+  color: #171717;
+}
+
+.contact-form-wrapper{
+  width:100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.contact-form{
+  display: flex;
+  height: 50%;
+  width: 90%;
+  justify-content: space-evenly;
+  flex-direction: column;
+  
+  label{
+    position: relative;
+    display: inline-flex;
+    font-size: 36px;
+    letter-spacing: 0.1em;
+  }
+
+  .buttons{
+    font-size: 28px;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+  }
+
+  label, .buttons{
+    font-family: Futura, 'sans-serif';
+  }
+
+  input, textarea{
+    font-family: Quicksand, 'sans-serif';
+    font-size: 24px;
+    padding: 10px 20px;
+    outline: none;
+    background: #222;
+    color: #aaa;
+    border:none;
+    border-bottom: 2px solid #777; 
+
+    &.err{
+      border-bottom: 2px solid #ff0d2d;
+    }
+  }
+
+  .buttons{
+    display: inline-flex;
+    cursor: default;
+    .btn, button{
+      cursor: pointer;
+      position: relative;
+      padding: 5px 10px;
+      margin-right: 10px;
+      z-index: 1;
+      outline: none;
+      border:none;
+      font-size: 28px;
+      font-family: Futura, 'sans-serif';
+      letter-spacing: 0.1em;
+      color: #fff;
+      background-color: #555;
+
+      &::after{
+        content:"";
+        z-index: -1;
+        position: absolute;
+        bottom:0;
+        left:0;
+        width:100%;
+        height: 0%;
+        background-color: #ff0d2d;
+        transition: all 0.3s;
+      }
+    }
+
+    .sending.btn{
+      position: relative;
+      background-color: #ff0d2d;
+      overflow: hidden;
+      animation: sending-btn 0.3s 2.8s forwards;
+      &::after{
+        height:100%;
+        width:0%;
+        background-color: rgba(255, 255, 255, 0.13) ;
+        animation: sending 2s cubic-bezier(0.77, 0, 0.175, 1) 0.5s forwards;
+      }
+
+      .not-sent{
+        animation: not-sent 0.3s 2.5s forwards;
+      }
+
+      @keyframes not-sent {
+        to{
+          opacity: 0;
+        }
+      }
+
+      .sent{
+        transform: translate(47%,0);
+        animation: sent 0.3s 2.8s forwards;
+        position: absolute;
+      }
+
+      @keyframes sent {
+        to{
+          transform: translate(47%,-100%);
+        }
+      }
+
+      @keyframes sending {
+        to{
+          width:100%
+        }
+      }
+    }
+    .btn-active.btn{
+      &::after{
+        height: 100%;
+      }
+    }
+  }
+}
+
+.fields{
+  height: 5vh;
+  display: flex;
+  flex-wrap: wrap;
+  span{
+    display: inline-block; 
+    color: #fff;
+    width:5vh;
+    height: 5vh;
+    background-color: #ff0d2d;
+    box-shadow: 0 0 10px #000000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    margin: 0 2vh;
+    transform: scale(0);
+    animation: field-span 0.3s 0.3s forwards;
+    cursor: pointer;
+  }
+
+  @keyframes field-span {
+    80%{
+      transform: scale(1.2);
+    }
+    100%{
+      transform: scale(1);
+    }
+  }
+}

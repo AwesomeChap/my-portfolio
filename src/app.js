@@ -7,7 +7,6 @@ import {About, Blog, Contact, Home, Work, Projects} from './components/index';
 export default class App extends Component{
   constructor(props){
     super(props);
-    this.state = {};
   }
 
   render(){

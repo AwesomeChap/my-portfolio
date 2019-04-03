@@ -99,11 +99,12 @@ import timeTrackerImg from '../../images/time-tracker.PNG';
 import PiecesImage from '../../images/10_pieces.PNG';
 import chemAssisImage from '../../images/chem_assis.png';
 import sample from '../../images/sample.PNG';
+import portfolio from '../../images/portfolio.PNG';
 
 export const projects = [
   {
     name : 'Portfolio',
-    imgUrl: sample,
+    imgUrl: portfolio,
     keywords : ['Web', 'React', 'SCSS', 'SVG', 'Animations', 'Node'],
     link : '',
     gitUrl : '',

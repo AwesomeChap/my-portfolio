@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Heading from './helper/heading';
 import Expand from './helper/expand';
-import { set1, set2, works } from './helper/data';
+import { set1, set2} from './helper/data';
 
 export default class About extends Component {
   constructor(props) {
@@ -11,11 +11,13 @@ export default class About extends Component {
     };
   }
 
-
   componentDidMount() {
     var bars = document.querySelectorAll(".barValue");
 
     window.addEventListener('scroll', function () {
+
+      // console.log('you scrolled me');
+
       bars.forEach(bar => {
         if (bar.getBoundingClientRect().top <= window.innerHeight && bar.getBoundingClientRect().top > 0) {
           bar.classList.add("animateSkillBar");
@@ -85,11 +87,12 @@ export default class About extends Component {
             <Heading repair={{ y: -190 }} heading={"ACHEIVEMENTS"} subHeading={'Some worthy payoffs'} />
             <div className="block">
               <div className="block-item">
-                <div className="item-heading">WebQuicky, BPIT <span>April,10 2018</span></div>
-                <div className="item-content">Our Team Came <span className="hglt">1st</span> Runner Up</div>
+                <div className="item-heading">HackNSUT, NSUT <span>March,31 2019</span></div>
+                <div className="item-content">Our Team Came at <span>1 Position</span></div>
               </div>
               <div className="block-item">
-                <div className="item-heading"><span>More coming pretty soon ;)</span></div>
+                <div className="item-heading">WebQuicky, BPIT <span>April,10 2018</span></div>
+                <div className="item-content">Our Team Came at <span>2 Position</span></div>
               </div>
             </div>
           </div>

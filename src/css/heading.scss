@@ -3,8 +3,8 @@ $red : #ff0d2d;
 .heading-block{
   position: relative;
   display: inline-block;
-  font-family: Sharp_Sans;
-  padding: 20px;
+  font-family: Futura;
+  padding: 10px 20px;
   margin-top:7vh;
   margin-bottom:50px;
   box-sizing: border-box;
@@ -25,12 +25,13 @@ $red : #ff0d2d;
   font-size:72px;
   position: relative;
   transform: translate(0%,0%);
-  font-family: Sharp_Sans;
+  font-family: Futura;
 }
 
 .desc{
   display: inline-block;
-  padding: 5px 10px;
+  padding: 3px 10px;
+  margin-top:-5px;
   background: $red;
   box-shadow: 0 0 10px #000;
   position: absolute;

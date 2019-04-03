@@ -13,9 +13,10 @@ $eo : cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 .nav-left{
-  background: #111;
+  // background: red;
   display: flex;
-  padding: 0 20px;
+  width: 120px;
+  height: 60px;
   box-sizing: border-box;
   justify-content: center;
   align-items: center;
@@ -42,28 +43,10 @@ $eo : cubic-bezier(0.165, 0.84, 0.44, 1);
   // background: blue; 
 }
 
-.nav-item-open{
-  opacity: 0;
-  width:0vw;
-  animation:nav-item-open 0.3s forwards, ItemAppear 0.2s 0.3s forwards;
-}
-
-@keyframes ItemAppear{
-  to{
-    opacity: 1;
-  }
-}
-
-@keyframes nav-item-open{
-  to{
-    width: 7vw;
-  }
-}
-
 .nav-item-close{
   width:7vw !important;
   opacity: 1;
-  animation:ItemDisappear 0.2s forwards, nav-item-close 0.3s 0.2s forwards;
+  animation:ItemDisappear 0.2s forwards, nav-item-close 0.2s 0.3s forwards;
 }
 
 @keyframes ItemDisappear{
@@ -78,6 +61,47 @@ to{
   }
 }
 
+.nav-item-open{
+  width: 0vw;
+  animation: nav-item-open-1 0.2s forwards;
+
+  span{
+    opacity: 0;
+    transform: translate(15px);
+  }
+  .nav-item-span-6{
+    animation: nav-item-open-2 0.25s 0.3s forwards;
+  }
+  .nav-item-span-5{
+    animation: nav-item-open-2 0.25s 0.35s forwards;
+  }
+  .nav-item-span-4{
+    animation: nav-item-open-2 0.25s 0.4s forwards;
+  }
+  .nav-item-span-3{
+    animation: nav-item-open-2 0.25s 0.45s forwards;
+  }
+  .nav-item-span-2{
+    animation: nav-item-open-2 0.25s 0.50s forwards;
+  }
+  .nav-item-span-1{
+    animation: nav-item-open-2 0.25s 0.55s forwards;
+  }
+  
+}
+
+@keyframes nav-item-open-1{
+  to{
+    width: 7vw;
+  }
+}
+
+@keyframes nav-item-open-2{
+  to{
+    opacity: 1;
+    transform: translate(0px);
+  }
+}
 
 .nav-item{
   z-index: 1;
@@ -117,12 +141,23 @@ to{
   }
 }
 
-.selected{
+.nav-item-open.selected{
   color: $red;
   &::before{
     height: 100%;
     border-bottom: 2px solid $red;
     box-sizing: border-box;
+    transition: height 0.3s 0.45s;
+  }
+}
+
+.selected{
+  color: $red;
+  &::before{
+    height: 0%;
+    border-bottom: 2px solid $red;
+    box-sizing: border-box;
+    // transition: all 0s !important;
   }
 }
 
@@ -221,7 +256,6 @@ to{
         transform: translateY(13px) rotate(0);
       }
     }
-
   }
 
   .close-1{
@@ -243,8 +277,14 @@ to{
     }
 
     .line2{
-      width: 50%;
-      opacity: 0;
+      animation: line2 0.6s forwards;
+    }
+
+    @keyframes line2 {
+      to{
+        width: 0%;
+        opacity: 0;
+      }
     }
 
     .line3{
@@ -269,3 +309,75 @@ to{
     display:none;
   }
 }
+
+// .nav-item-open{
+//   opacity: 0;
+//   width:0vw;
+//   animation:nav-item-open 0.3s forwards, ItemAppear 0.2s 0.3s forwards;
+// }
+
+// @keyframes ItemAppear{
+//   to{
+//     opacity: 1;
+//   }
+// }
+
+// @keyframes nav-item-open{
+//   to{
+//     width: 7vw;
+//   }
+// }
+
+// .nav-item-close{
+//   width: 7vw !important;
+//   opacity: 1;
+//   animation: nav-item-close-1 0.3s 0.45s forwards;
+
+//   span{
+//     opacity: 1;
+//     transform: translate(0px);
+//   }
+//   .nav-item-span-1{
+//     animation: nav-item-close-2 0.2s 0s forwards;
+//   }
+//   .nav-item-span-2{
+//     animation: nav-item-close-2 0.2s 0.05s forwards;
+//   }
+//   .nav-item-span-3{
+//     animation: nav-item-close-2 0.2s 0.1s forwards;
+//   }
+//   .nav-item-span-4{
+//     animation: nav-item-close-2 0.2s 0.15s forwards;
+//   }
+//   .nav-item-span-5{
+//     animation: nav-item-close-2 0.2s 0.20s forwards;
+//   }
+//   .nav-item-span-6{
+//     animation: nav-item-close-2 0.2s 0.25s forwards;
+//   }
+  
+// }
+
+// @keyframes nav-item-close-1{
+//   to{
+//     width: 0vw;
+//   }
+// }
+
+// @keyframes nav-item-close-2{
+//   to{
+//     opacity: 0;
+//     transform: translate(15px);
+//   }
+// }
+
+// .nav-item-close.selected{
+//   color: #ddd;
+//   &::before{
+//     height: 0%;
+//     border-bottom: 0px solid $red;
+//     box-sizing: border-box;
+//     transition: all 0.3s 0s;
+//   }
+// }
+

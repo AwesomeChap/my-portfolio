@@ -9,6 +9,7 @@ body{
   height: 100%;
   width: 100%;
   font-family: 'Quicksand', sans-serif;
+  overflow-x: hidden;
 }
 
 /* width */
@@ -30,3 +31,4 @@ body{
 ::-webkit-scrollbar-thumb:hover {
   background: #555; 
 }
+

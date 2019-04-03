@@ -70,7 +70,7 @@ $font-normal : 24px;
     box-shadow: 0 0 5px #000;
     
     .item-heading{
-      font-family: Sharp_Sans;
+      font-family: Futura;
       font-size: 36px;
       margin-bottom: 2vh;
       
@@ -93,6 +93,16 @@ $font-normal : 24px;
         }
       }
     }
+
+    .item-content{
+      span{
+        // border:1px solid $red;
+        color: #fff;
+        padding: 2px 8px;
+        box-shadow: 0 0 10px #000;
+        background-color: #222;
+      }
+    }
   }
 }
 
@@ -105,7 +115,7 @@ $font-normal : 24px;
 
 .hglt-red{
   display: inline-block;
-  background: $red;
+  background-color: $red !important;
   color: #ddd;
   padding: 3px 6px;
   box-shadow: 0 0 10px #000;
@@ -193,20 +203,6 @@ $font-normal : 24px;
   }
 }
 
-
-// Home
-
-.intro{
-  // width: 100%;
-  // height: 100%;
-  min-height: 89vh;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-  font-family: Sharp_Sans;
-  font-size: 180px;
-}
 
 //Projects
 
@@ -357,6 +353,16 @@ $font-normal : 24px;
     opacity: 1;
     transform: translateY(0)
   }
+}
+
+.background{
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 99.5%;
+  width: 100%;
+  z-index: -1;
+  background-image: radial-gradient(#222, #000);
 }
 
 @media only screen and (max-width: 1096px) {

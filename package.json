@@ -22,7 +22,9 @@
     "rea": "0.0.1",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
-    "react-router-dom": "^5.0.0"
+    "react-router-dom": "^5.0.0",
+    "three": "^0.103.0",
+    "three-orbit-controls": "^82.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.4.0",

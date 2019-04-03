@@ -21,7 +21,7 @@ export default class Project extends Component {
       if(shouldReturn)
       {
         return (
-          <div className="project-wrapper">
+          <div key={"project"+i} className="project-wrapper">
             <div className="project-title">
               <div className="dots">
                 <div></div> <div></div> <div></div>
@@ -47,8 +47,8 @@ export default class Project extends Component {
                     </div>
                   </div>
                   <div className="pd3">
-                    {p.link !== '' && <a href={p.link} target="_blank"><i class="fas fa-share"></i></a>}
-                    {p.gitUrl !== '' && <a href={p.gitUrl} target="_blank"><i class="fab fa-github"></i></a>}
+                    {p.link !== '' && <a href={p.link} target="_blank"><i className="fas fa-share"></i></a>}
+                    {p.gitUrl !== '' && <a href={p.gitUrl} target="_blank"><i className="fab fa-github"></i></a>}
                   </div>
                 </div>
               </div>

@@ -67,14 +67,14 @@ export default class Heading extends Component {
         if(this.props.repair.x){
           dx+=this.props.repair.x;
         }
-        this.myTween1 = TweenLite.to(this.headingBg, 1, {x: 1*dx, y: dy, ease: Power1.easeOut});
-        this.myTween2 = TweenLite.to(this.heading, 1, {x: 2*dx, y: 2*dy, ease: Power1.easeOut});
-        this.myTween3 = TweenLite.to(this.subHeading, 1, {x: 2*dx, y: 2*dy, ease: Power3.easeOut});
+        this.myTween1 = TweenLite.to(this.headingBg, 1, {x: 0.5*dx, y: 0.5*dy, ease: Power1.easeOut});
+        this.myTween2 = TweenLite.to(this.heading, 1, {x: 1*dx, y: 1*dy, ease: Power1.easeOut});
+        this.myTween3 = TweenLite.to(this.subHeading, 1, {x: 1*dx, y: 1*dy, ease: Power3.easeOut});
       }
       else{
-        this.myTween1 = TweenLite.to(this.headingBg, 1, {x: dx, y: dy, ease: Power1.easeOut});
-        this.myTween2 = TweenLite.to(this.heading, 1, {x: 2*dx, y: 2*dy, ease: Power1.easeOut});
-        this.myTween3 = TweenLite.to(this.subHeading, 1, {x: 2*dx, y: 2*dy, ease: Power3.easeOut});
+        this.myTween1 = TweenLite.to(this.headingBg, 1, {x: 0.5*dx, y: 0.5*dy, ease: Power1.easeOut});
+        this.myTween2 = TweenLite.to(this.heading, 1, {x: 1*dx, y: 1*dy, ease: Power1.easeOut});
+        this.myTween3 = TweenLite.to(this.subHeading, 1, {x: 1*dx, y: 1*dy, ease: Power3.easeOut});
       }   
     }
   }

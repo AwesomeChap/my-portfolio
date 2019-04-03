@@ -36,12 +36,12 @@ export default class Work extends Component {
                  works.map((w,i)=>(
                   <div key={"w"+i} className="block-item">
                     <div className="item-heading">{w.place} <span>{w.date}</span>
-                      {w.link !== "" && <a target="_blank" href={w.link}><i class="fas fa-link"></i></a>}
+                      {w.link !== "" && <a target="_blank" href={w.link}><i className="fas fa-link"></i></a>}
                     </div>
                     <div className="item-content"> <span className="hglt-red">{w.designation}</span> </div>
                     <ul className="block-ul">
                       {w.rspbs.map((resp,i)=>(
-                        <li className="block-li">{resp}</li>
+                        <li key={"block-li"+i} className="block-li">{resp}</li>
                       ))}
                     </ul>
                   </div>
