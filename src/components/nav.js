@@ -70,7 +70,7 @@ class Nav extends Component {
               <NavLink data-to="/about" onClick={this.handleNavLinkClick} className={navItemClasses} activeClassName="selected" exact to="/about"><span data-to="/about" className="nav-item-span-2">About Me</span></NavLink>
               <NavLink data-to="/work" onClick={this.handleNavLinkClick} className={navItemClasses} activeClassName="selected" exact to="/work"><span data-to="/work" className="nav-item-span-3">Work</span></NavLink>
               <NavLink data-to="/projects" onClick={this.handleNavLinkClick} className={navItemClasses} activeClassName="selected" exact to="/projects"><span data-to="/projects" className="nav-item-span-4">Projects</span></NavLink>
-              <NavLink data-to="/blog" onClick={this.handleNavLinkClick} className={navItemClasses} activeClassName="selected" exact to="/blog"><span data-to="/blog" className="nav-item-span-5">Blog</span></NavLink>
+              {/* <NavLink data-to="/blog" onClick={this.handleNavLinkClick} className={navItemClasses} activeClassName="selected" exact to="/blog"><span data-to="/blog" className="nav-item-span-5">Blog</span></NavLink> */}
               <NavLink data-to="/contact" onClick={this.handleNavLinkClick} className={navItemClasses} activeClassName="selected" exact to="/contact"><span data-to="/contact" className="nav-item-span-6">Contact</span></NavLink>
             </div>
             <div ref={(node) => this.node = node} onClick={this.handleClick} className="ham-hide-wrapper">

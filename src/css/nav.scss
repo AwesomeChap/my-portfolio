@@ -10,6 +10,7 @@ $eo : cubic-bezier(0.165, 0.84, 0.44, 1);
   position: sticky;
   top: 0;
   transition: all 0.3s;
+  margin-bottom:5vh;
 }
 
 .nav-left{
@@ -227,7 +228,7 @@ to{
     }
 
     .line2{
-      widows: 50%;
+      width: 50%;
       opacity: 0;
       animation: line2-ham 0.6s forwards;
     }

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import Heading from './helper/heading';
 import Expand from './helper/expand';
-import { set1, set2} from './helper/data';
+import { set1, set2 } from './helper/data';
+import {aboutImg} from './helper/data-uri';
 
 export default class About extends Component {
   constructor(props) {
@@ -53,7 +54,13 @@ export default class About extends Component {
         <div className="sub-section">
           <div className="sec sec1">
             <div className="inner-section">
-              ONE
+              <div className="image-container">
+                <div className="image-border">
+                  <div className="image">
+                    <img className="about-img"  src={aboutImg} alt="" />
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
           <div className="sec sec2">

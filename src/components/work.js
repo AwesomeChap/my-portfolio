@@ -3,6 +3,7 @@ import Heading from './helper/heading';
 import Expand from './helper/expand';
 import '../css/pages.scss';
 import { works } from './helper/data'; 
+import {workImg} from './helper/data-uri';
 
 export default class Work extends Component {
   render() {
@@ -11,7 +12,13 @@ export default class Work extends Component {
         <div className="sub-section">
           <div className="sec sec1">
             <div className="inner-section">
-              ONE
+              <div className="image-container">
+                <div className="image-border">
+                  <div className="image">
+                    <img src={workImg} alt=""/>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
           <div className="sec sec2">

@@ -130,7 +130,7 @@ export default class Contact extends Component {
     return (
       <div className="section">
         <div className="sub-section">
-          <div className="sec sec2">
+          <div className="sec-contact sec2-contact ct">
             <div className="inner-section">
               <Heading heading={"CONTACT"} subHeading={'Get In Touch'} />
               <div className="text">
@@ -148,7 +148,7 @@ export default class Contact extends Component {
               </div>
             </div>
           </div>
-          <div className="sec sec2">
+          <div className="sec-contact sec2-contact">
             <div className="inner-section">
               <div className="lets-talk-bg">{"Let's Talk"}</div>
               <div className="contact-form-wrapper">

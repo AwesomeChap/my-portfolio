@@ -37,8 +37,12 @@ export default class NavMobile extends Component {
     const MINClasses = this.state.clicked ? "menu-item-name fadeIn-menu-item" : " menu-item-name fadeOut-menu-item";
     const MINClasses2 = this.state.selected ? "menu-item-name fadeOut-menu-item" : "";
 
-    const routes = ['/','/about','/work','/projects','/blog','/contact'];
-    const menu_items = ['HOME','ABOUT ME','WORK','PROJECTS','BLOG','CONTACT'];
+    const routes = ['/','/about','/work','/projects',
+    // '/blog',
+    '/contact'];
+    const menu_items = ['HOME','ABOUT ME','WORK','PROJECTS',
+    // 'BLOG',
+    'CONTACT'];
     
     const navLnks = menu_items.map((name,i)=>{
       if(this.state.selected === false){

@@ -2,15 +2,15 @@ import React, { Component } from 'react';
 import Heading from './helper/heading';
 import Expand from './helper/expand';
 import { keywords } from './helper/data';
-import superMarketImage from '../images/sp.png';
 import ProjectList from './helper/project-list';
+import {projectImg} from './helper/data-uri';
 
 export default class Projects extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      selectedFilter : "Show All"
+      selectedFilter: "Show All"
     }
   }
 
@@ -19,9 +19,9 @@ export default class Projects extends Component {
   handleClick = (e) => {
     let currentSelect = e.target.dataset.name;
     console.log(`current select is ${currentSelect}`);
-    
-    if(this.checkItem(currentSelect)){
-      this.setState({selectedFilter:currentSelect});
+
+    if (this.checkItem(currentSelect)) {
+      this.setState({ selectedFilter: currentSelect });
     }
 
   }
@@ -29,7 +29,7 @@ export default class Projects extends Component {
   render() {
 
     let kws = keywords.map((kw, index) => {
-      const classes = this.checkItem(kw)? 'kw' : 'kw-selected';
+      const classes = this.checkItem(kw) ? 'kw' : 'kw-selected';
       return <div key={index} onClick={this.handleClick} data-name={kw} className={classes}>{kw}</div>
     });
 
@@ -38,7 +38,13 @@ export default class Projects extends Component {
         <div className="sub-section">
           <div className="sec sec1">
             <div className="inner-section">
-              ONE
+              <div className="image-container">
+                <div className="image-border">
+                  <div className="image">
+                    <img src={projectImg} alt="" />
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
           <div className="sec sec2">

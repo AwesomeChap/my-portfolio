@@ -3,6 +3,7 @@ $ease-out : cubic-bezier(0.19, 1, 0.22, 1);
 
 .home{
   // font-family: Futura;
+  margin-top:-5vh;
   letter-spacing: 0.2em;
 }
 
@@ -122,7 +123,7 @@ $ease-out : cubic-bezier(0.19, 1, 0.22, 1);
       width: 0%;
       height:100%;
       z-index: -1;
-      background: #111;
+      background: #171717;
       transition: all 0.3s;
     }
 
