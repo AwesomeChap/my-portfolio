@@ -2,23 +2,20 @@
   "name": "my-portfolio",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "parcel src/index.html",
-    "build:prod": "parcel build src/index.html",
-    "start": "node server/server.js"
+    "dev": "parcel src/index.html",
+    "build": "parcel build src/index.html",
+    "start": "node server/server.js",
+    "heroku-postbuild": "parcel build src/index.html"
   },
   "keywords": [],
-  "author": "",
+  "author": "Jatin Kumar | AwesomeChap",
   "license": "ISC",
   "dependencies": {
     "an": "0.0.8",
     "body-parser": "^1.18.3",
-    "classnames": "^2.2.6",
     "express": "^4.16.4",
     "gsap": "^2.1.2",
-    "parcel-bundler": "^1.12.3",
     "rea": "0.0.1",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
@@ -29,6 +26,7 @@
   "devDependencies": {
     "@babel/core": "^7.4.0",
     "@babel/plugin-proposal-class-properties": "^7.4.0",
-    "node-sass": "^4.11.0"
+    "node-sass": "^4.11.0",
+    "parcel-bundler": "^1.12.3"
   }
 }

@@ -15,6 +15,7 @@ export default class Contact extends Component {
       nameErr: false,
       emailErr: false,
       msgErr: false,
+      err:""
     };
   }
 
@@ -50,9 +51,9 @@ export default class Contact extends Component {
     }
     else {
       switch (this.state.step) {
-        case 1: this.setState({ name: "Please enter valid name" }); break;
-        case 2: this.setState({ email: "Please enter valid email" }); this.setState({ emailErr: true }); break;
-        case 3: this.setState({ message: "Please enter some text" }); this.setState({ msgErr: true }); break;
+        case 1: this.setState({ err: "Please enter valid name" }); break;
+        case 2: this.setState({ err: "Please enter valid email" }); this.setState({ emailErr: true }); break;
+        case 3: this.setState({ err: "Please enter some text" }); this.setState({ msgErr: true }); break;
         default: console.log('yeh kya daldiya bhai');
       }
     }
@@ -62,6 +63,7 @@ export default class Contact extends Component {
     if (name.length >= 3 && !name.match(/[0-9?=.*!@#$%^&*]/i)) {
       this.setState({ isactive: true }, () => {
         if (this.state.nameErr) {
+          this.setState({ err: "" });
           this.setState({ nameErr: false });
         }
       })
@@ -69,6 +71,7 @@ export default class Contact extends Component {
     else {
       this.setState({ isactive: false }, () => {
         if (!this.state.nameErr) {
+          this.setState({ err: "Name Invalid" });
           this.setState({ nameErr: true });
         }
       });
@@ -79,22 +82,34 @@ export default class Contact extends Component {
     if (this.isEmail(email)) {
       // console.log('valid email');
       this.setState({ isactive: true });
-      if (this.state.emailErr) this.setState({ emailErr: false });
+      if (this.state.emailErr) {
+        this.setState({ err: "" });
+        this.setState({ emailErr: false });
+      }
     }
     else {
       this.setState({ isactive: false });
-      if (!this.state.emailErr) this.setState({ emailErr: true });
+      if (!this.state.emailErr) {
+        this.setState({ err: "Email Invalid" });
+        this.setState({ emailErr: true });
+      }
     }
   }
 
   checkMessage = (message) => {
     if (message.length > 1) {
       this.setState({ isactive: true });
-      if (this.state.msgErr) this.setState({ msgErr: false });
+      if (this.state.msgErr) {
+        this.setState({ err: "" });
+        this.setState({ msgErr: false });
+      }
     }
     else {
       this.setState({ isactive: false });
-      if (!this.state.msgErr) this.setState({ msgErr: true });
+      if (!this.state.msgErr) {
+        this.setState({ err: "Please enter some text" });
+        this.setState({ msgErr: true });
+      }
     }
   }
 
@@ -162,6 +177,7 @@ export default class Contact extends Component {
                     this.state.step === 1 && (
                       <>
                         <label htmlFor="name">NAME</label>
+                        {!this.state.name ? (<div className="status empty">Field is empty</div>) : this.state.err.length ? (<div className="error status" >{this.state.err}</div>) : (<div className="status okay">OK</div>) }
                         <input value={this.state.name} className={this.state.nameErr ? "err" : ""} onFocus={this.handleFocus} onClick={this.handleFocus} onChange={this.handleChange} type="text" id="name" name="name" placeholder="Your name.." />
                       </>
                     )

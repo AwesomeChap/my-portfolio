@@ -213,7 +213,7 @@
 
 .fields{
   height: 5vh;
-  display: flex;
+  display: inline-flex;
   flex-wrap: wrap;
   span{
     display: inline-block; 
@@ -239,5 +239,23 @@
     100%{
       transform: scale(1);
     }
+  }
+}
+
+.status{
+  display: inline-block;
+  font-weight: 900;
+  padding: 5px 10px;
+
+  &.empty{
+    color: #777;
+  }
+
+  &.error{
+    color: #ff0d2d;
+  }
+
+  &.okay{
+    color: rgb(0, 179, 15) ;
   }
 }

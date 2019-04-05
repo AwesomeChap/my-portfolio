@@ -382,3 +382,37 @@ to{
 //   }
 // }
 
+.black-screen{
+  position: fixed;
+  z-index: 3;
+  top:0;
+  height: 100%;
+  background-color: black;
+  &.in{
+    right: 0;
+    animation: black-screen-in 0.7s $eio;
+  }
+
+  @keyframes black-screen-in{
+    from{
+      width: 0;
+    }
+    to{
+      width:100%;
+    }
+  }
+
+  &.out{
+    left: 0;
+    animation: black-screen-out 0.7s $eio;
+  }
+
+  @keyframes black-screen-out{
+    from{
+      width: 100%;
+    }
+    to{
+      width:0%;
+    }
+  }
+}

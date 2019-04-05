@@ -1,0 +1,1 @@
+{"version":3,"sources":["scripts/scripts.js"],"names":["window","addEventListener","event"],"mappings":"AAAAA,MAAM,CAACC,gBAAP,CAAwB,kBAAxB,EAA2C,UAASC,KAAT,EAAe,CACxD;AACD,CAFD","file":"scripts.d2cda223.js","sourceRoot":"..\\src","sourcesContent":["window.addEventListener('DOMContentLoaded',function(event){\r\n  //not required till now ;)\r\n})\r\n"]}
