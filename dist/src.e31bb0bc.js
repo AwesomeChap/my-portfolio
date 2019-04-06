@@ -29854,104 +29854,7 @@ var svg = function svg(_ref) {
 
 var _default = svg;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","../css/svg.scss":"css/svg.scss"}],"components/delayedLink.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _react = _interopRequireWildcard(require("react"));
-
-var _reactRouterDom = require("react-router-dom");
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
-
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-var DelayedLink =
-/*#__PURE__*/
-function (_Component) {
-  _inherits(DelayedLink, _Component);
-
-  function DelayedLink(props) {
-    var _this;
-
-    _classCallCheck(this, DelayedLink);
-
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(DelayedLink).call(this, props));
-
-    _defineProperty(_assertThisInitialized(_this), "handleClick", function (e) {
-      var _this$props = _this.props,
-          replace = _this$props.replace,
-          to = _this$props.to,
-          delay = _this$props.delay,
-          onDelayStart = _this$props.onDelayStart,
-          onDelayEnd = _this$props.onDelayEnd;
-      var history = _this.props.history; // onDelayStart(e, to);
-      // if (e.defaultPrevented) {
-      //   return;
-      // }
-
-      e.preventDefault();
-      _this.timeout = setTimeout(function () {
-        if (replace) {
-          history.replace(to);
-        } else {
-          history.push(to);
-        } // onDelayEnd(e, to);
-
-      }, 1000);
-    });
-
-    _this.state = {};
-    _this.timeout = null;
-    return _this;
-  }
-
-  _createClass(DelayedLink, [{
-    key: "componentWillUnmount",
-    value: function componentWillUnmount() {
-      clearTimeout(this.timeout);
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_reactRouterDom.NavLink, {
-        onClick: this.handleClick,
-        className: this.props.navItemClasses,
-        activeClassName: "selected",
-        exact: true
-      }, _react.default.createElement("span", {
-        className: "nav-item-span-1"
-      }, "Home")));
-    }
-  }]);
-
-  return DelayedLink;
-}(_react.Component);
-
-exports.default = DelayedLink;
-},{"react":"../node_modules/react/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js"}],"css/nav.scss":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","../css/svg.scss":"css/svg.scss"}],"css/nav.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -29974,8 +29877,6 @@ var _react = _interopRequireWildcard(require("react"));
 var _svg = _interopRequireDefault(require("./svg"));
 
 var _reactRouterDom = require("react-router-dom");
-
-var _delayedLink = _interopRequireDefault(require("./delayedLink"));
 
 require("../css/nav.scss");
 
@@ -30090,6 +29991,7 @@ function (_Component) {
 
       var hamClasses = this.state.clicked ? "ham-1 close-1" : this.state.clicked === 0 ? "ham-1" : "ham-1 start-1";
       var navItemClasses = this.state.clicked ? "nav-item nav-item-open" : this.state.clicked === 0 ? "nav-item" : "nav-item nav-item-close";
+      var navRightInnerClasses = this.state.clicked ? "nav-right-inner nav-right-inner-open" : this.state.clicked === 0 ? "nav-right-inner" : "nav-right-inner nav-right-inner-close";
       return _react.default.createElement(_react.default.Fragment, null, this.state.navLinkClicked ? _react.default.createElement("div", {
         className: "black-screen in"
       }) : _react.default.createElement("div", {
@@ -30110,7 +30012,7 @@ function (_Component) {
       }, _react.default.createElement("div", {
         className: "nav-right"
       }, _react.default.createElement("div", {
-        className: "nav-right-inner"
+        className: navRightInnerClasses
       }, _react.default.createElement(_reactRouterDom.NavLink, {
         "data-to": "/",
         onClick: this.handleNavLinkClick,
@@ -30185,7 +30087,7 @@ function (_Component) {
 var _default = (0, _reactRouterDom.withRouter)(Nav);
 
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","./svg":"components/svg.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","./delayedLink":"components/delayedLink.js","../css/nav.scss":"css/nav.scss","../css/pages.scss":"css/pages.scss"}],"css/nav-mobile.scss":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","./svg":"components/svg.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","../css/nav.scss":"css/nav.scss","../css/pages.scss":"css/pages.scss"}],"css/nav-mobile.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -41514,7 +41416,104 @@ function (_Component) {
 }(_react.Component);
 
 exports.default = Heading;
-},{"react":"../node_modules/react/index.js","../../css/heading.scss":"css/heading.scss","gsap":"../node_modules/gsap/index.js"}],"components/helper/expand.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","../../css/heading.scss":"css/heading.scss","gsap":"../node_modules/gsap/index.js"}],"css/footer.scss":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"components/footer.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireWildcard(require("react"));
+
+require("../css/footer.scss");
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+var Footer =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(Footer, _Component);
+
+  function Footer(props) {
+    var _this;
+
+    _classCallCheck(this, Footer);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Footer).call(this, props));
+    _this.state = {};
+    return _this;
+  }
+
+  _createClass(Footer, [{
+    key: "render",
+    value: function render() {
+      return _react.default.createElement("div", {
+        className: "footer"
+      }, _react.default.createElement("div", {
+        className: "sub-footer"
+      }, _react.default.createElement("div", {
+        className: "footer-header"
+      }, "Let's Talk"), _react.default.createElement("div", null, "Wanna get in touch or talk about a project?"), _react.default.createElement("div", null, "Feel free to contact me via email at ", _react.default.createElement("span", null, "jatin15011999@gmail.com")), _react.default.createElement("div", null, "or drop a sweet message at ", _react.default.createElement("span", null, "contact page")), _react.default.createElement("div", {
+        className: "social-icons"
+      }, _react.default.createElement("a", {
+        className: "if",
+        href: "#"
+      }, _react.default.createElement("i", {
+        className: "fab fa-facebook-f"
+      })), _react.default.createElement("a", {
+        className: "ig",
+        href: "#"
+      }, _react.default.createElement("i", {
+        className: "fab fa-github"
+      })), _react.default.createElement("a", {
+        className: "il",
+        href: "#"
+      }, _react.default.createElement("i", {
+        className: "fab fa-linkedin-in"
+      })), _react.default.createElement("a", {
+        className: "it",
+        href: "#"
+      }, _react.default.createElement("i", {
+        className: "fab fa-twitter"
+      }))), _react.default.createElement("div", null, "Copyright \xA9 2019, Jatin Kumar. All Rights Reserved")));
+    }
+  }]);
+
+  return Footer;
+}(_react.Component); // Let's talk
+// Wanna get in touch or talk about a project?
+// Feel free to contact me via email at 
+// rafael@caferati.me
+// or drop a line in the form at the 
+// contact page
+
+
+exports.default = Footer;
+},{"react":"../node_modules/react/index.js","../css/footer.scss":"css/footer.scss"}],"components/helper/expand.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -41674,7 +41673,7 @@ var works = [{
   rspbs: ["Monitered Progress of participants", "Provided Guidence in Pre-event discussion", "Judged considering all equal"]
 }, {
   place: "Delhipreneurs",
-  date: "July,1 2018 - present",
+  date: "July,1 2018 - Dec,15 2018",
   link: "",
   designation: "Web Developer",
   rspbs: ["Wrote vareity ofJQuery and CSS animations", "improved previous base template", "Designed logo", "Connected Frontend and Backend"]
@@ -41764,6 +41763,8 @@ exports.default = void 0;
 var _react = _interopRequireWildcard(require("react"));
 
 var _heading = _interopRequireDefault(require("./helper/heading"));
+
+var _footer = _interopRequireDefault(require("./footer"));
 
 var _expand = _interopRequireDefault(require("./helper/expand"));
 
@@ -41922,7 +41923,7 @@ function (_Component) {
         className: "item-heading"
       }, "WebQuicky, BPIT ", _react.default.createElement("span", null, "April,10 2018")), _react.default.createElement("div", {
         className: "item-content"
-      }, "Our Team Came at ", _react.default.createElement("span", null, "2 Position"))))))));
+      }, "Our Team Came at ", _react.default.createElement("span", null, "2 Position"))))))), _react.default.createElement(_footer.default, null));
     }
   }]);
 
@@ -41930,7 +41931,7 @@ function (_Component) {
 }(_react.Component);
 
 exports.default = About;
-},{"react":"../node_modules/react/index.js","./helper/heading":"components/helper/heading.js","./helper/expand":"components/helper/expand.js","./helper/data":"components/helper/data.js","./helper/data-uri":"components/helper/data-uri.js"}],"css/styles.scss":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","./helper/heading":"components/helper/heading.js","./footer":"components/footer.js","./helper/expand":"components/helper/expand.js","./helper/data":"components/helper/data.js","./helper/data-uri":"components/helper/data-uri.js"}],"css/styles.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -42141,10 +42142,6 @@ function (_Component) {
         }, function () {
           if (_this.state.nameErr) {
             _this.setState({
-              err: ""
-            });
-
-            _this.setState({
               nameErr: false
             });
           }
@@ -42154,10 +42151,6 @@ function (_Component) {
           isactive: false
         }, function () {
           if (!_this.state.nameErr) {
-            _this.setState({
-              err: "Name Invalid"
-            });
-
             _this.setState({
               nameErr: true
             });
@@ -42175,10 +42168,6 @@ function (_Component) {
 
         if (_this.state.emailErr) {
           _this.setState({
-            err: ""
-          });
-
-          _this.setState({
             emailErr: false
           });
         }
@@ -42188,10 +42177,6 @@ function (_Component) {
         });
 
         if (!_this.state.emailErr) {
-          _this.setState({
-            err: "Email Invalid"
-          });
-
           _this.setState({
             emailErr: true
           });
@@ -42207,10 +42192,6 @@ function (_Component) {
 
         if (_this.state.msgErr) {
           _this.setState({
-            err: ""
-          });
-
-          _this.setState({
             msgErr: false
           });
         }
@@ -42220,10 +42201,6 @@ function (_Component) {
         });
 
         if (!_this.state.msgErr) {
-          _this.setState({
-            err: "Please enter some text"
-          });
-
           _this.setState({
             msgErr: true
           });
@@ -42378,48 +42355,66 @@ function (_Component) {
         className: "contact-form"
       }, this.state.step === 1 && _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("label", {
         htmlFor: "name"
-      }, "NAME"), !this.state.name ? _react.default.createElement("div", {
+      }, "NAME"), _react.default.createElement("div", {
+        className: "input-container"
+      }, _react.default.createElement("div", {
+        className: "status-container"
+      }, !this.state.name.length ? _react.default.createElement("span", {
         className: "status empty"
-      }, "Field is empty") : this.state.err.length ? _react.default.createElement("div", {
+      }, "Field is empty") : !this.state.isactive ? _react.default.createElement("span", {
         className: "error status"
-      }, this.state.err) : _react.default.createElement("div", {
+      }, "Name too short") : _react.default.createElement("span", {
         className: "status okay"
-      }, "OK"), _react.default.createElement("input", {
+      }, "Looks Fine")), _react.default.createElement("input", {
         value: this.state.name,
         className: this.state.nameErr ? "err" : "",
-        onFocus: this.handleFocus,
-        onClick: this.handleFocus,
         onChange: this.handleChange,
         type: "text",
         id: "name",
         name: "name",
-        placeholder: "Your name.."
-      })), this.state.step === 2 && _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("label", {
+        placeholder: "What's your good name ?"
+      }))), this.state.step === 2 && _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("label", {
         htmlFor: "email"
-      }, "EMAIL"), _react.default.createElement("input", {
+      }, "EMAIL"), _react.default.createElement("div", {
+        className: "input-container"
+      }, _react.default.createElement("div", {
+        className: "status-container"
+      }, !this.state.email.length ? _react.default.createElement("span", {
+        className: "status empty"
+      }, "Field is empty") : !this.state.isactive ? _react.default.createElement("span", {
+        className: "error status"
+      }, "Invalid Email") : _react.default.createElement("span", {
+        className: "status okay"
+      }, "Looks Fine")), _react.default.createElement("input", {
         value: this.state.email,
         className: this.state.emailErr ? "err" : "",
-        onFocus: this.handleFocus,
-        onClick: this.handleFocus,
         onChange: this.handleChange,
         type: "text",
         id: "email",
         name: "email",
-        placeholder: "Enter your email"
-      })), this.state.step >= 3 && _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("label", {
+        placeholder: "What's your email"
+      }))), this.state.step >= 3 && _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("label", {
         htmlFor: "message"
-      }, "MESSAGE"), _react.default.createElement("textarea", {
+      }, "MESSAGE"), _react.default.createElement("div", {
+        className: "input-container"
+      }, _react.default.createElement("div", {
+        className: "status-container"
+      }, !this.state.message.length ? _react.default.createElement("span", {
+        className: "status empty"
+      }, "Field is empty") : !this.state.isactive ? _react.default.createElement("span", {
+        className: "error status"
+      }, "Message too short") : _react.default.createElement("span", {
+        className: "status okay"
+      }, "Looks Fine")), _react.default.createElement("textarea", {
         value: this.state.message,
         className: this.state.msgErr ? "err" : "",
-        onFocus: this.handleFocus,
-        onClick: this.handleFocus,
         onChange: this.handleChange,
         rows: "1",
         type: "text",
         id: "message",
         name: "message",
-        placeholder: "Enter your message"
-      })), _react.default.createElement("div", {
+        placeholder: "Wanna leave a message ?"
+      }))), _react.default.createElement("div", {
         className: "buttons"
       }, this.state.step <= 3 ? _react.default.createElement("button", {
         onClick: function onClick(e) {
@@ -77018,13 +77013,21 @@ function (_Component) {
         }, t);
       })))), _react.default.createElement("div", {
         className: "follow-container"
-      }, _react.default.createElement("span", null, _react.default.createElement("i", {
+      }, _react.default.createElement("a", {
+        href: "#"
+      }, _react.default.createElement("i", {
         className: "fab if fa-facebook-f"
-      })), _react.default.createElement("span", null, _react.default.createElement("i", {
+      })), _react.default.createElement("a", {
+        href: "#"
+      }, _react.default.createElement("i", {
         className: "fab ig fa-github"
-      })), _react.default.createElement("span", null, _react.default.createElement("i", {
+      })), _react.default.createElement("a", {
+        href: "#"
+      }, _react.default.createElement("i", {
         className: "fab il fa-linkedin-in"
-      })), _react.default.createElement("span", null, _react.default.createElement("i", {
+      })), _react.default.createElement("a", {
+        href: "#"
+      }, _react.default.createElement("i", {
         className: "fab it fa-twitter"
       }))), _react.default.createElement("div", {
         className: "love"
@@ -77049,6 +77052,8 @@ var _react = _interopRequireWildcard(require("react"));
 var _heading = _interopRequireDefault(require("./helper/heading"));
 
 var _expand = _interopRequireDefault(require("./helper/expand"));
+
+var _footer = _interopRequireDefault(require("./footer"));
 
 require("../css/pages.scss");
 
@@ -77092,7 +77097,7 @@ function (_Component) {
   _createClass(Work, [{
     key: "render",
     value: function render() {
-      return _react.default.createElement("div", {
+      return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("div", {
         className: "section"
       }, _react.default.createElement("div", {
         className: "sub-section"
@@ -77153,7 +77158,7 @@ function (_Component) {
             className: "block-li"
           }, resp);
         })));
-      })))));
+      }))))), _react.default.createElement(_footer.default, null));
     }
   }]);
 
@@ -77161,7 +77166,7 @@ function (_Component) {
 }(_react.Component);
 
 exports.default = Work;
-},{"react":"../node_modules/react/index.js","./helper/heading":"components/helper/heading.js","./helper/expand":"components/helper/expand.js","../css/pages.scss":"css/pages.scss","./helper/data":"components/helper/data.js","./helper/data-uri":"components/helper/data-uri.js"}],"css/projects.scss":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","./helper/heading":"components/helper/heading.js","./helper/expand":"components/helper/expand.js","./footer":"components/footer.js","../css/pages.scss":"css/pages.scss","./helper/data":"components/helper/data.js","./helper/data-uri":"components/helper/data-uri.js"}],"css/projects.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -77226,12 +77231,17 @@ function (_Component) {
     value: function render() {
       var _this2 = this;
 
+      var no_of_projects_found = 0;
       var projects = this.state.projects;
+
+      var noProjectsMessage = _react.default.createElement("div", null);
+
       projects = projects.map(function (p, i) {
         var shouldReturn = true;
         shouldReturn = shouldReturn && p.keywords.indexOf(_this2.props.filter) !== -1 || _this2.props.filter === 'Show All';
 
         if (shouldReturn) {
+          no_of_projects_found++;
           return _react.default.createElement("div", {
             key: "project" + i,
             className: "project-wrapper"
@@ -77281,7 +77291,7 @@ function (_Component) {
           return _react.default.createElement(_react.default.Fragment, null);
         }
       });
-      return _react.default.createElement(_react.default.Fragment, null, projects);
+      return _react.default.createElement(_react.default.Fragment, null, no_of_projects_found !== 0 ? projects : noProjectsMessage);
     }
   }]);
 
@@ -77303,11 +77313,15 @@ var _heading = _interopRequireDefault(require("./helper/heading"));
 
 var _expand = _interopRequireDefault(require("./helper/expand"));
 
+var _footer = _interopRequireDefault(require("./footer"));
+
 var _data = require("./helper/data");
 
 var _projectList = _interopRequireDefault(require("./helper/project-list"));
 
 var _dataUri = require("./helper/data-uri");
+
+require("../css/projects.scss");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -77356,12 +77370,33 @@ function (_Component) {
       if (_this.checkItem(currentSelect)) {
         _this.setState({
           selectedFilter: currentSelect
+        }, function () {
+          var mapped = false;
+          var count = 0;
+
+          _data.projects.map(function (p, i) {
+            if (p.keywords.indexOf(_this.state.selectedFilter) !== -1) {
+              count++;
+              console.log(p);
+            }
+
+            if (i === _data.projects.length - 1) {
+              mapped = true;
+            }
+          });
+
+          if (mapped) {
+            _this.setState({
+              no_of_projects: count
+            });
+          }
         });
       }
     });
 
     _this.state = {
-      selectedFilter: "Show All"
+      selectedFilter: "Show All",
+      no_of_projects: 0
     };
     return _this;
   }
@@ -77381,7 +77416,7 @@ function (_Component) {
         }, kw);
       });
 
-      return _react.default.createElement("div", {
+      return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("div", {
         className: "section"
       }, _react.default.createElement("div", {
         className: "sub-section"
@@ -77421,13 +77456,15 @@ function (_Component) {
         className: "block"
       }, _react.default.createElement("div", {
         className: "keywords"
-      }, kws), _react.default.createElement("div", {
+      }, kws), this.state.selectedFilter === "Show All" ? _react.default.createElement("div", {
         className: "show-filters"
-      }, "CLick above to apply or toggle filter "), _react.default.createElement("div", {
+      }, "Showing all projects. Use the filter to display them by skill or technology") : _react.default.createElement("div", {
+        className: "show-filters"
+      }, "Showing ", this.state.no_of_projects, " projects related to ", this.state.selectedFilter), _react.default.createElement("div", {
         className: "projects-container"
       }, _react.default.createElement(_projectList.default, {
         filter: this.state.selectedFilter
-      }))))));
+      })))))), _react.default.createElement(_footer.default, null));
     }
   }]);
 
@@ -77435,7 +77472,7 @@ function (_Component) {
 }(_react.Component);
 
 exports.default = Projects;
-},{"react":"../node_modules/react/index.js","./helper/heading":"components/helper/heading.js","./helper/expand":"components/helper/expand.js","./helper/data":"components/helper/data.js","./helper/project-list":"components/helper/project-list.js","./helper/data-uri":"components/helper/data-uri.js"}],"components/index.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","./helper/heading":"components/helper/heading.js","./helper/expand":"components/helper/expand.js","./footer":"components/footer.js","./helper/data":"components/helper/data.js","./helper/project-list":"components/helper/project-list.js","./helper/data-uri":"components/helper/data-uri.js","../css/projects.scss":"css/projects.scss"}],"components/index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -77483,6 +77520,12 @@ Object.defineProperty(exports, "Svg", {
     return _svg.default;
   }
 });
+Object.defineProperty(exports, "Footer", {
+  enumerable: true,
+  get: function () {
+    return _footer.default;
+  }
+});
 
 var _about = _interopRequireDefault(require("./about"));
 
@@ -77498,8 +77541,10 @@ var _projects = _interopRequireDefault(require("./projects"));
 
 var _svg = _interopRequireDefault(require("./svg"));
 
+var _footer = _interopRequireDefault(require("./footer"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-},{"./about":"components/about.js","./blog":"components/blog.js","./contact":"components/contact.js","./home":"components/home.js","./work":"components/work.js","./projects":"components/projects.js","./svg":"components/svg.js"}],"app.js":[function(require,module,exports) {
+},{"./about":"components/about.js","./blog":"components/blog.js","./contact":"components/contact.js","./home":"components/home.js","./work":"components/work.js","./projects":"components/projects.js","./svg":"components/svg.js","./footer":"components/footer.js"}],"app.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -77629,7 +77674,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53525" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64804" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

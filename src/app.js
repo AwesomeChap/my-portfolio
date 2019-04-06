@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Route, BrowserRouter as Router} from 'react-router-dom'
 import NavBar from './components/nav';
 import NavBarMobile from './components/nav-mobile';
-import {About, Blog, Contact, Home, Work, Projects} from './components/index';
+import {About, Blog, Contact, Home, Work, Projects, Footer} from './components/index';
 
 export default class App extends Component{
   constructor(props){

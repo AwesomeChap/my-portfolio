@@ -5,8 +5,7 @@
   "scripts": {
     "dev": "parcel src/index.html",
     "build": "parcel build src/index.html",
-    "start": "node server/server.js",
-    "heroku-postbuild": "parcel build src/index.html"
+    "start": "node server/server.js"
   },
   "keywords": [],
   "author": "Jatin Kumar | AwesomeChap",
@@ -19,6 +18,7 @@
     "rea": "0.0.1",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
+    "react-r": "^2.0.0-rc02",
     "react-router-dom": "^5.0.0",
     "three": "^0.103.0",
     "three-orbit-controls": "^82.1.0"

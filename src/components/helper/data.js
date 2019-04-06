@@ -78,7 +78,7 @@ export const works = [
   },
   {
     place : "Delhipreneurs",
-    date : "July,1 2018 - present",
+    date : "July,1 2018 - Dec,15 2018",
     link : "",
     designation : "Web Developer",
     rspbs : [

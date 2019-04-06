@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Heading from './helper/heading';
+import Footer from './footer';
 import Expand from './helper/expand';
 import { set1, set2 } from './helper/data';
 import { aboutImg } from './helper/data-uri';
@@ -106,6 +107,7 @@ export default class About extends Component {
             </div>
           </div>
         </div>
+        <Footer/>
       </>
     )
   }

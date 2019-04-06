@@ -47,10 +47,10 @@ export default class Home extends Component {
           </div>
         </div>
         <div className="follow-container">
-          <span><i className="fab if fa-facebook-f"></i></span>
-          <span><i className="fab ig fa-github"></i></span>
-          <span><i className="fab il fa-linkedin-in"></i></span>
-          <span><i className="fab it fa-twitter"></i></span>
+          <a href="#"><i className="fab if fa-facebook-f"></i></a>
+          <a href="#"><i className="fab ig fa-github"></i></a>
+          <a href="#"><i className="fab il fa-linkedin-in"></i></a>
+          <a href="#"><i className="fab it fa-twitter"></i></a>
         </div>
         <div className="love">SHARE WITH <span>❤</span></div>
       </div>

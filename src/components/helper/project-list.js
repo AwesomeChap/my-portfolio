@@ -12,16 +12,21 @@ export default class Project extends Component {
   }
 
   render() {
+    let no_of_projects_found = 0;
     let projects = this.state.projects;
+
+    let noProjectsMessage = (
+      <div></div>
+    );
     projects = projects.map((p, i) => {
       let shouldReturn = true;
 
       shouldReturn = shouldReturn && (p.keywords.indexOf(this.props.filter) !== -1) || this.props.filter === 'Show All';
 
-      if(shouldReturn)
-      {
+      if (shouldReturn) {
+        no_of_projects_found++;
         return (
-          <div key={"project"+i} className="project-wrapper">
+          <div key={"project" + i} className="project-wrapper">
             <div className="project-title">
               <div className="dots">
                 <div></div> <div></div> <div></div>
@@ -39,8 +44,8 @@ export default class Project extends Component {
                     <div>
                       <>
                         {
-                          p.keywords.map((kw,i) => {
-                            return <span key={"keyword-"+i}>{kw}</span>
+                          p.keywords.map((kw, i) => {
+                            return <span key={"keyword-" + i}>{kw}</span>
                           })
                         }
                       </>
@@ -57,13 +62,16 @@ export default class Project extends Component {
               <p>{p.desc}</p>
             </div>
           </div>
-          )
-        }else{return <></>}
+        )
+      }
+      else {
+        return <></>
+      }
     })
 
     return (
       <>
-      {projects}
+        {no_of_projects_found !== 0 ? projects : noProjectsMessage}
       </>
     );
   }

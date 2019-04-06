@@ -1,16 +1,20 @@
 import React, { Component } from 'react';
 import Heading from './helper/heading';
 import Expand from './helper/expand';
+import Footer from './footer';
 import { keywords } from './helper/data';
+import { projects } from './helper/data';
 import ProjectList from './helper/project-list';
-import {projectImg} from './helper/data-uri';
+import { projectImg } from './helper/data-uri';
+import '../css/projects.scss'
 
 export default class Projects extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      selectedFilter: "Show All"
+      selectedFilter: "Show All",
+      no_of_projects: 0
     }
   }
 
@@ -21,7 +25,26 @@ export default class Projects extends Component {
     console.log(`current select is ${currentSelect}`);
 
     if (this.checkItem(currentSelect)) {
-      this.setState({ selectedFilter: currentSelect });
+      this.setState({ selectedFilter: currentSelect }, () => {
+        let mapped = false;
+        let count = 0;
+
+        projects.map((p, i) => {
+
+          if (p.keywords.indexOf(this.state.selectedFilter) !== -1) {
+            count++;
+            console.log(p);
+          }
+
+          if (i === projects.length - 1) {
+            mapped = true;
+          }
+        });
+
+        if (mapped) {
+          this.setState({ no_of_projects: count });
+        }
+      });
     }
 
   }
@@ -34,44 +57,53 @@ export default class Projects extends Component {
     });
 
     return (
-      <div className="section">
-        <div className="sub-section">
-          <div className="sec sec1">
-            <div className="inner-section">
-              <div className="image-container">
-                <div className="image-border">
-                  <div className="image">
-                    <img src={projectImg} alt="" />
+      <>
+        <div className="section">
+          <div className="sub-section">
+            <div className="sec sec1">
+              <div className="inner-section">
+                <div className="image-container">
+                  <div className="image-border">
+                    <div className="image">
+                      <img src={projectImg} alt="" />
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
+            <div className="sec sec2">
+              <div className="inner-section">
+                <Heading heading={"PROJECTS"} subHeading={"Developer's Playground"} />
+                <div className="text">
+                  Projects matter a lot for me. As they are great medium by which I can
+                  explore a technology or framework and check it's pros and limits at the
+                  same time.They also make learning new skills very easy and enjoyable as
+                  you mostly are working on something that you like and enjoy
+              </div>
+              </div>
+            </div>
           </div>
-          <div className="sec sec2">
+          <div className="sec sec3">
             <div className="inner-section">
-              <Heading heading={"PROJECTS"} subHeading={"Developer's Playground"} />
-              <div className="text">
-                Projects matter a lot for me. As they are great medium by which I can
-                explore a technology or framework and check it's pros and limits at the
-                same time.They also make learning new skills very easy and enjoyable as
-                you mostly are working on something that you like and enjoy
+              <Heading repair={{ y: -90 }} heading={"WHAT I MAKE"} subHeading={'some cool ones'} />
+              <div className="block">
+                <div className="keywords">{kws}</div>
+                {
+                  this.state.selectedFilter === "Show All" ? (
+                    <div className="show-filters">Showing all projects. Use the filter to display them by skill or technology</div>
+                  ) : (
+                      <div className="show-filters">Showing {this.state.no_of_projects} projects related to {this.state.selectedFilter}</div>
+                    )
+                }
+                <div className="projects-container">
+                  <ProjectList filter={this.state.selectedFilter} />
+                </div>
               </div>
             </div>
           </div>
         </div>
-        <div className="sec sec3">
-          <div className="inner-section">
-            <Heading repair={{ y: -90 }} heading={"WHAT I MAKE"} subHeading={'some cool ones'} />
-            <div className="block">
-              <div className="keywords">{kws}</div>
-              <div className="show-filters">CLick above to apply or toggle filter </div>
-              <div className="projects-container">
-                <ProjectList filter={this.state.selectedFilter} />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+        <Footer />
+      </>
     )
   }
 }

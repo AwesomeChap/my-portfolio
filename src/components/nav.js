@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Svg from './svg';
 import { NavLink, withRouter } from 'react-router-dom';
-import DelayedLink from './delayedLink';
 import '../css/nav.scss';
 import '../css/pages.scss';
 
@@ -60,6 +59,7 @@ class Nav extends Component {
   render() {
     const hamClasses = this.state.clicked ? "ham-1 close-1" : this.state.clicked === 0 ? "ham-1" : "ham-1 start-1";
     const navItemClasses = this.state.clicked ? "nav-item nav-item-open" : this.state.clicked === 0 ? "nav-item" : "nav-item nav-item-close";
+    const navRightInnerClasses = this.state.clicked ? "nav-right-inner nav-right-inner-open" : this.state.clicked === 0 ? "nav-right-inner" : "nav-right-inner nav-right-inner-close";
     return (
       <>
         {this.state.navLinkClicked ? (<div className="black-screen in"/>):(<div className="black-screen out"/>)}
@@ -72,7 +72,7 @@ class Nav extends Component {
           </div>
           <div className="nav-right-wrapper">
             <div className="nav-right">
-              <div className="nav-right-inner">
+              <div className={navRightInnerClasses}>
                 <NavLink data-to="/" onClick={this.handleNavLinkClick} className={navItemClasses} activeClassName="selected" exact to="/"><span data-to="/" className="nav-item-span-1">Home</span></NavLink>
                 <NavLink data-to="/about" onClick={this.handleNavLinkClick} className={navItemClasses} activeClassName="selected" exact to="/about"><span data-to="/about" className="nav-item-span-2">About Me</span></NavLink>
                 <NavLink data-to="/work" onClick={this.handleNavLinkClick} className={navItemClasses} activeClassName="selected" exact to="/work"><span data-to="/work" className="nav-item-span-3">Work</span></NavLink>
