@@ -6,7 +6,7 @@ $red : #ff0d2d;
   font-family: Futura;
   padding: 10px 20px;
   // margin-top:10vh;
-  margin-bottom:50px;
+  margin-bottom:80px;
   box-sizing: border-box;
 }
 
@@ -39,7 +39,7 @@ $red : #ff0d2d;
   font-size: 28px;
 }
 
-@media only screen and (max-width: 1096px) {
+@media only screen and (max-width: 1224px) {
   .heading-block{
     padding:16px;
     margin-bottom:40px;

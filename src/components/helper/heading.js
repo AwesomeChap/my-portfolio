@@ -38,7 +38,7 @@ export default class Heading extends Component {
       e_offsetY : this.headingWrapper.offsetTop, 
       e_offsetX_1 : this.headingWrapper.getBoundingClientRect().x,
       e_offsetY_1 : this.headingWrapper.getBoundingClientRect().y,  
-      disabled : this.props.disabled ? true : false,
+      disabled : this.props.disabled ? true : window.innerWidth <= 1024 ? true : false,
     });
   }
 

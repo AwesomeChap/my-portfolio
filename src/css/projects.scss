@@ -5,7 +5,7 @@ $font-normal : 24px;
 .projects-container{
   position: relative;
   margin: 5vh auto;
-  width: 80vw;
+  // width: 80vw;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
@@ -281,7 +281,166 @@ $font-normal : 24px;
 }
 
 
+
+.keywords{
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 20px;
+  // position: sticky;
+  // background: #111;
+  // top:0;
+  // justify-content: space-evenly;
+
+  .kw-selected{
+    .kw:after{
+      height: 100% !important;
+    }
+  }
+
+  .kw{
+    position: relative;
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: rgba(34, 34, 34, 0.356);
+    box-shadow: 0 0 10px #000;
+    margin: 9px;
+    color: #ddd;
+    cursor: pointer;
+    
+    &:after{
+      content:"";
+      position: absolute;
+      bottom:0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      transform-origin: bottom center;
+      transform: scaleY(0.1);
+      background-color: #373737;
+      z-index: -1;
+      transition: all 0.3s;
+    }
+
+    &:hover{
+      &:after{
+        transform: scaleY(1);
+      }
+    }
+  }
+}
+
+.kw-selected{
+  position: relative;
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: rgba(34, 34, 34, 0.356);
+  box-shadow: 0 0 10px #000;
+  margin: 9px;
+  color: #ddd;
+  cursor: pointer;
+  
+  &:after{
+    content:"";
+    position: absolute;
+    bottom:0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform-origin: bottom center;
+    transform: scaleY(1);
+    background-color: #373737;
+    z-index: -1;
+    transition: all 0.3s;
+  }
+
+  &:hover{
+    &:after{
+      background-color:#444;
+    }
+  }
+}
+
+.show-filters{
+  display: inline-block;
+  font-size: 20px;
+  margin: 10px;
+  color: #777;
+
+  span{
+    color: #ddd;
+  }
+}
+
+.filter{
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  background: #222;
+  margin:0 5px;
+  font-size: 20px;
+  padding: 5px 10px;
+  box-shadow: 0 0 10px #000;
+  box-sizing: border-box;
+  animation: onFilterCreate 0.2s forwards;
+
+  div{
+    opacity: 0;
+    transform: translateY(3px);
+    position: relative;
+    margin: 0 5px;
+    animation: fadeInFilter .2s .2s forwards;
+  }
+
+  #cross{
+    color: #555;
+
+    &:hover{
+      color: #888;
+    }
+  }
+}
+
+.onFilterDelete {
+  animation: onFilterDelete .2s .2s forwards;
+}
+
+.fadeOutFilter{
+  animation: fadeOutFilter .2s forwards;
+}
+
+@keyframes onFilterDelete{
+  to{
+    transform: scale(0);
+  }
+}
+
+@keyframes fadeOutFilter{
+  to{
+    transform: translateY(3px);
+    opacity: 0;
+  }
+}
+
+@keyframes onFilterCreate{
+  from{
+    transform: scale(0);
+  }
+}
+
+@keyframes fadeInFilter{
+  to{
+    opacity: 1;
+    transform: translateY(0)
+  }
+}
+
 .disabled{
   pointer-events: none;
   cursor: default;
+}
+
+@media only screen and (max-width : 1224px){
+  .keywords, .show-filters{
+    font-size: 18px;
+  }
 }

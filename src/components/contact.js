@@ -138,15 +138,15 @@ export default class Contact extends Component {
   render() {
     return (
       <div className="section">
-        <div className="sub-section">
-          <div className="sec-contact sec2-contact ct">
-            <div className="inner-section">
+        <div className="inner-section">
+          <div className="sub-section">
+            <div className="inner-sub-section">
               <Heading heading={"CONTACT"} subHeading={'Get In Touch'} />
               <div className="text">
                 I am always up for cool projects that creates a difference.
                 So in case you have one and wanna talk about it or just say hi,
-                fill the awesome form or just drop me a message at my email,
-                jatin15011999@gmail.com and ~{"let's talk"}
+                fill the awesome form or just drop me a message at my 
+                email, <span className="hglt">jatin15011999@gmail.com</span> and <span style={{fontWeight:900}} >~let's talk</span>
               </div>
               <div className="sub-heading">{"Let's Get Social"}</div>
               <div className="social-container">
@@ -156,10 +156,8 @@ export default class Contact extends Component {
                 <div className="social-icon" > <i className="fab it fa-twitter"></i><span>TWITTER</span></div>
               </div>
             </div>
-          </div>
-          <div className="sec-contact sec2-contact">
-            <div className="inner-section">
-              <div className="lets-talk-bg">{"Let's Talk"}</div>
+            <div className="inner-sub-section">
+              <div className="lets-talk-bg">Let's Talk</div>
               <div className="contact-form-wrapper">
                 <div className="fields">
                   {this.state.name.length > 0 && <span onClick={() => { this.handleFieldIconClick(1) }}><i className="fas fa-user"></i></span>}

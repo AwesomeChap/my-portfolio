@@ -9,6 +9,7 @@ $nav-bg : #1a1a1a;
   justify-content: space-between;
   position: -webkit-sticky; /* Safari */
   position: sticky;
+  // background: red;
   top: 0;
   transition: all 0.3s;
   margin-bottom:5vh;
@@ -28,6 +29,8 @@ $nav-bg : #1a1a1a;
   position: relative;
   // background: #171717;
   // box-shadow: 0 0 10px #000;
+  // font-family: Futura;
+  color: #aaa;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -126,7 +129,7 @@ $nav-bg : #1a1a1a;
   box-sizing: border-box;
   font-size: 20px;
   // padding: 20px;
-  width:7vw;
+  width:105px;
   height: 60px;
   
   // width:0vw;
@@ -155,23 +158,23 @@ $nav-bg : #1a1a1a;
 }
 
 .nav-item-open.selected{
-  color: $red;
+  // color: $red;
   &::before{
     width: 98%;
     height: 100%;
     transform-origin: bottom left;
     transform: scaleY(1);
-    border-bottom: 2px solid $red;
+    border-bottom: 5px solid #777;
     box-sizing: border-box;
     transition: transform 0.3s 0.45s;
   }
 }
 
 .selected{
-  color: $red;
+  color: #fff;
   &::before{
     height: 0%;
-    border-bottom: 2px solid $red;
+    border-bottom: 5px solid #777;
     box-sizing: border-box;
     // transition: all 0s !important;
   }

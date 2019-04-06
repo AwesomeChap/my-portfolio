@@ -41275,7 +41275,7 @@ function (_Component) {
         e_offsetY: _this.headingWrapper.offsetTop,
         e_offsetX_1: _this.headingWrapper.getBoundingClientRect().x,
         e_offsetY_1: _this.headingWrapper.getBoundingClientRect().y,
-        disabled: _this.props.disabled ? true : false
+        disabled: _this.props.disabled ? true : window.innerWidth <= 1024 ? true : false
       });
     });
 
@@ -41504,13 +41504,7 @@ function (_Component) {
   }]);
 
   return Footer;
-}(_react.Component); // Let's talk
-// Wanna get in touch or talk about a project?
-// Feel free to contact me via email at 
-// rafael@caferati.me
-// or drop a line in the form at the 
-// contact page
-
+}(_react.Component);
 
 exports.default = Footer;
 },{"react":"../node_modules/react/index.js","../css/footer.scss":"css/footer.scss"}],"components/helper/expand.js":[function(require,module,exports) {
@@ -41786,13 +41780,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 var About =
 /*#__PURE__*/
@@ -41805,8 +41801,18 @@ function (_Component) {
     _classCallCheck(this, About);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(About).call(this, props));
+
+    _defineProperty(_assertThisInitialized(_this), "resize", function () {
+      window.innerWidth <= 767 ? _this.setState({
+        breakLine: true
+      }) : _this.setState({
+        breakLine: false
+      });
+    });
+
     _this.state = {
-      visible: 0
+      visible: 0,
+      breakLine: false
     };
     return _this;
   }
@@ -41815,8 +41821,20 @@ function (_Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       var bars = document.querySelectorAll(".barValue");
+      var barsWrapper = document.querySelectorAll(".proficiency");
       window.addEventListener('scroll', function () {
         // console.log('you scrolled me');
+        barsWrapper.forEach(function (bw) {
+          if (bw.getBoundingClientRect().top <= window.innerHeight && bw.getBoundingClientRect().top > 0) {
+            bw.classList.add("animateSkillBarWrapper");
+          } else if (bw.getBoundingClientRect().top >= window.innerHeight && bw.getBoundingClientRect().top > 0) {
+            bw.classList.remove("animateSkillBarWrapper");
+          }
+
+          if (bw.getBoundingClientRect().top < 0) {
+            bw.classList.remove("animateSkillBarWrapper");
+          }
+        });
         bars.forEach(function (bar) {
           if (bar.getBoundingClientRect().top <= window.innerHeight && bar.getBoundingClientRect().top > 0) {
             bar.classList.add("animateSkillBar");
@@ -41829,6 +41847,12 @@ function (_Component) {
           }
         });
       });
+      window.addEventListener('resize', this.resize);
+    }
+  }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      window.removeEventListener('resize', this.resize);
     }
   }, {
     key: "render",
@@ -41855,11 +41879,9 @@ function (_Component) {
       return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("div", {
         className: "section"
       }, _react.default.createElement("div", {
-        className: "sub-section"
-      }, _react.default.createElement("div", {
-        className: "sec sec1"
-      }, _react.default.createElement("div", {
         className: "inner-section"
+      }, _react.default.createElement("div", {
+        className: "sub-section"
       }, _react.default.createElement("div", {
         className: "image-container"
       }, _react.default.createElement("div", {
@@ -41870,11 +41892,9 @@ function (_Component) {
         className: "about-img",
         src: _dataUri.aboutImg,
         alt: ""
-      })))))), _react.default.createElement("div", {
-        className: "sec sec2"
-      }, _react.default.createElement("div", {
-        className: "inner-section"
-      }, _react.default.createElement(_heading.default, {
+      })))), _react.default.createElement("div", {
+        className: "text-container"
+      }, _react.default.createElement("div", null, _react.default.createElement(_heading.default, {
         heading: "ABOUT ME",
         subHeading: 'A brief introduction'
       }), _react.default.createElement("div", {
@@ -41883,9 +41903,7 @@ function (_Component) {
         className: "hglt"
       }, "MERN"), "  stack. ", "I am currently in my 2nd year of B.tech which I am persuing from ", _react.default.createElement("span", {
         className: "hglt"
-      }, "USICT"), ", GGSIPU In my free time I like to play cricket and spread gained knowledge by means of youtube videos and blogs.")))), _react.default.createElement("div", {
-        className: "sec sec3"
-      }, _react.default.createElement("div", {
+      }, "USICT"), ", GGSIPU In my free time I like to play cricket and spread gained knowledge by means of youtube videos and blogs."))))), _react.default.createElement("div", {
         className: "inner-section"
       }, _react.default.createElement(_heading.default, {
         repair: {
@@ -41899,9 +41917,7 @@ function (_Component) {
         className: "set"
       }, getSkillsSet(_data.set1)), _react.default.createElement("div", {
         className: "set"
-      }, getSkillsSet(_data.set2))))), _react.default.createElement("div", {
-        className: "sec sec3"
-      }, _react.default.createElement("div", {
+      }, getSkillsSet(_data.set2)))), _react.default.createElement("div", {
         className: "inner-section"
       }, _react.default.createElement(_heading.default, {
         repair: {
@@ -41915,15 +41931,15 @@ function (_Component) {
         className: "block-item"
       }, _react.default.createElement("div", {
         className: "item-heading"
-      }, "HackNSUT, NSUT ", _react.default.createElement("span", null, "March,31 2019")), _react.default.createElement("div", {
+      }, "HackNSUT, NSUT ", this.state.breakLine && _react.default.createElement("br", null), " ", _react.default.createElement("span", null, "March,31 2019")), _react.default.createElement("div", {
         className: "item-content"
       }, "Our Team Came at ", _react.default.createElement("span", null, "1 Position"))), _react.default.createElement("div", {
         className: "block-item"
       }, _react.default.createElement("div", {
         className: "item-heading"
-      }, "WebQuicky, BPIT ", _react.default.createElement("span", null, "April,10 2018")), _react.default.createElement("div", {
+      }, "WebQuicky, BPIT ", this.state.breakLine && _react.default.createElement("br", null), " ", _react.default.createElement("span", null, "April,10 2018")), _react.default.createElement("div", {
         className: "item-content"
-      }, "Our Team Came at ", _react.default.createElement("span", null, "2 Position"))))))), _react.default.createElement(_footer.default, null));
+      }, "Our Team Came at ", _react.default.createElement("span", null, "2 Position")))))), _react.default.createElement(_footer.default, null));
     }
   }]);
 
@@ -42293,17 +42309,23 @@ function (_Component) {
       return _react.default.createElement("div", {
         className: "section"
       }, _react.default.createElement("div", {
+        className: "inner-section"
+      }, _react.default.createElement("div", {
         className: "sub-section"
       }, _react.default.createElement("div", {
-        className: "sec-contact sec2-contact ct"
-      }, _react.default.createElement("div", {
-        className: "inner-section"
+        className: "inner-sub-section"
       }, _react.default.createElement(_heading.default, {
         heading: "CONTACT",
         subHeading: 'Get In Touch'
       }), _react.default.createElement("div", {
         className: "text"
-      }, "I am always up for cool projects that creates a difference. So in case you have one and wanna talk about it or just say hi, fill the awesome form or just drop me a message at my email, jatin15011999@gmail.com and ~", "let's talk"), _react.default.createElement("div", {
+      }, "I am always up for cool projects that creates a difference. So in case you have one and wanna talk about it or just say hi, fill the awesome form or just drop me a message at my email, ", _react.default.createElement("span", {
+        className: "hglt"
+      }, "jatin15011999@gmail.com"), " and ", _react.default.createElement("span", {
+        style: {
+          fontWeight: 900
+        }
+      }, "~let's talk")), _react.default.createElement("div", {
         className: "sub-heading"
       }, "Let's Get Social"), _react.default.createElement("div", {
         className: "social-container"
@@ -42323,10 +42345,8 @@ function (_Component) {
         className: "social-icon"
       }, " ", _react.default.createElement("i", {
         className: "fab it fa-twitter"
-      }), _react.default.createElement("span", null, "TWITTER"))))), _react.default.createElement("div", {
-        className: "sec-contact sec2-contact"
-      }, _react.default.createElement("div", {
-        className: "inner-section"
+      }), _react.default.createElement("span", null, "TWITTER")))), _react.default.createElement("div", {
+        className: "inner-sub-section"
       }, _react.default.createElement("div", {
         className: "lets-talk-bg"
       }, "Let's Talk"), _react.default.createElement("div", {
@@ -77075,36 +77095,63 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 var Work =
 /*#__PURE__*/
 function (_Component) {
   _inherits(Work, _Component);
 
-  function Work() {
+  function Work(props) {
+    var _this;
+
     _classCallCheck(this, Work);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(Work).apply(this, arguments));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Work).call(this, props));
+
+    _defineProperty(_assertThisInitialized(_this), "resize", function () {
+      window.innerWidth <= 1024 ? _this.setState({
+        breakLine: true
+      }) : _this.setState({
+        breakLine: false
+      });
+    });
+
+    _this.state = {
+      breakLine: window.innerWidth <= 1024
+    };
+    return _this;
   }
 
   _createClass(Work, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      window.addEventListener('resize', this.resize);
+    }
+  }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      window.removeEventListener('resize', this.resize);
+    }
+  }, {
     key: "render",
     value: function render() {
+      var _this2 = this;
+
       return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("div", {
         className: "section"
       }, _react.default.createElement("div", {
-        className: "sub-section"
-      }, _react.default.createElement("div", {
-        className: "sec sec1"
-      }, _react.default.createElement("div", {
         className: "inner-section"
+      }, _react.default.createElement("div", {
+        className: "sub-section"
       }, _react.default.createElement("div", {
         className: "image-container"
       }, _react.default.createElement("div", {
@@ -77114,18 +77161,14 @@ function (_Component) {
       }, _react.default.createElement("img", {
         src: _dataUri.workImg,
         alt: ""
-      })))))), _react.default.createElement("div", {
-        className: "sec sec2"
-      }, _react.default.createElement("div", {
-        className: "inner-section"
-      }, _react.default.createElement(_heading.default, {
+      })))), _react.default.createElement("div", {
+        className: "text-container"
+      }, _react.default.createElement("div", null, _react.default.createElement(_heading.default, {
         heading: "WORK",
         subHeading: 'Things I do'
       }), _react.default.createElement("div", {
         className: "text"
-      }, "I always love to learn new technologies and like even more, when I get the chance to apply them. I have been doing Fullstack Web development for almost 2 years now. Till date my most work experience came from contribution to small startups and college technical festivals")))), _react.default.createElement("div", {
-        className: "sec sec3"
-      }, _react.default.createElement("div", {
+      }, "I always love to learn new technologies and like even more, when I get the chance to apply them. I have been doing Fullstack Web development for almost 2 years now. Till date my most work experience came from contribution to small startups and college technical festivals"))))), _react.default.createElement("div", {
         className: "inner-section"
       }, _react.default.createElement(_heading.default, {
         repair: {
@@ -77141,7 +77184,7 @@ function (_Component) {
           className: "block-item"
         }, _react.default.createElement("div", {
           className: "item-heading"
-        }, w.place, " ", _react.default.createElement("span", null, w.date), w.link !== "" && _react.default.createElement("a", {
+        }, w.place, " ", _this2.state.breakLine && _react.default.createElement("br", null), " ", _react.default.createElement("span", null, w.date), w.link !== "" && _react.default.createElement("a", {
           target: "_blank",
           href: w.link
         }, _react.default.createElement("i", {
@@ -77158,7 +77201,7 @@ function (_Component) {
             className: "block-li"
           }, resp);
         })));
-      }))))), _react.default.createElement(_footer.default, null));
+      })))), _react.default.createElement(_footer.default, null));
     }
   }]);
 
@@ -77419,11 +77462,9 @@ function (_Component) {
       return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("div", {
         className: "section"
       }, _react.default.createElement("div", {
-        className: "sub-section"
-      }, _react.default.createElement("div", {
-        className: "sec sec1"
-      }, _react.default.createElement("div", {
         className: "inner-section"
+      }, _react.default.createElement("div", {
+        className: "sub-section"
       }, _react.default.createElement("div", {
         className: "image-container"
       }, _react.default.createElement("div", {
@@ -77433,18 +77474,14 @@ function (_Component) {
       }, _react.default.createElement("img", {
         src: _dataUri.projectImg,
         alt: ""
-      })))))), _react.default.createElement("div", {
-        className: "sec sec2"
-      }, _react.default.createElement("div", {
-        className: "inner-section"
-      }, _react.default.createElement(_heading.default, {
+      })))), _react.default.createElement("div", {
+        className: "text-container"
+      }, _react.default.createElement("div", null, _react.default.createElement(_heading.default, {
         heading: "PROJECTS",
         subHeading: "Developer's Playground"
       }), _react.default.createElement("div", {
         className: "text"
-      }, "Projects matter a lot for me. As they are great medium by which I can explore a technology or framework and check it's pros and limits at the same time.They also make learning new skills very easy and enjoyable as you mostly are working on something that you like and enjoy")))), _react.default.createElement("div", {
-        className: "sec sec3"
-      }, _react.default.createElement("div", {
+      }, "Projects matter a lot for me. As they are great medium by which I can explore a technology or framework and check it's pros and limits at the same time.They also make learning new skills very easy and enjoyable as you mostly are working on something that you like and enjoy"))))), _react.default.createElement("div", {
         className: "inner-section"
       }, _react.default.createElement(_heading.default, {
         repair: {
@@ -77464,7 +77501,7 @@ function (_Component) {
         className: "projects-container"
       }, _react.default.createElement(_projectList.default, {
         filter: this.state.selectedFilter
-      })))))), _react.default.createElement(_footer.default, null));
+      }))))), _react.default.createElement(_footer.default, null));
     }
   }]);
 
@@ -77674,7 +77711,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64804" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55514" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -27,11 +27,3 @@ export default class Footer extends Component{
     )
   }
 }
-
-// Let's talk
-// Wanna get in touch or talk about a project?
-// Feel free to contact me via email at 
-// rafael@caferati.me
-
-// or drop a line in the form at the 
-// contact page

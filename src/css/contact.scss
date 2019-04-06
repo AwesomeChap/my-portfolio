@@ -8,7 +8,8 @@
 .social-container{
   display: flex;
   width:100%;
-  justify-content: space-between;
+  flex-wrap: wrap;
+  // justify-content: space-between;
 
   .social-icon{
     position: relative;
@@ -16,6 +17,7 @@
     margin-top:5vh;
     display: inline-flex;
     padding: 10px;
+    margin-right: 10px;
     background: transparent;
     box-shadow: 0 0 5px #000;
     background: rgba(255, 255, 255, 0.068);
@@ -23,14 +25,14 @@
     align-items: center;
     i{
       display: inline-block;
-      font-size: 28px;
+      font-size: 24px;
       color: #fff;
     }
     span{
       color: rgba(255, 255, 255, 0.63);
       display: inline-block;
       margin-left: 10px;
-      font-size: 16px;
+      font-size: 12px;
       font-family: Futura, 'sans-serif';
     }
 
@@ -86,6 +88,7 @@
 }
 
 .contact-form-wrapper{
+  // background-color: blue;
   width:100%;
   height: 100%;
   display: flex;
@@ -129,6 +132,7 @@
     flex-direction: column;
     flex-wrap: wrap; 
     animation-delay: 0.1s;
+    margin: 3vh 0;
   }
 
   @keyframes form-animation {
@@ -157,6 +161,7 @@
   .buttons{
     display: inline-flex;
     cursor: default;
+
     .btn, button{
       cursor: pointer;
       position: relative;
@@ -240,6 +245,7 @@
   height: 5vh;
   display: inline-flex;
   flex-wrap: wrap;
+  margin: -10vh 0 5vh 0;
   span{
     display: inline-block; 
     color: #fff;
@@ -283,6 +289,32 @@
 
     &.okay{
       background-color: rgb(0, 132, 255) ;
+    }
+  }
+}
+
+@media only screen and (max-width : 1224px){
+  .sub-heading{
+    font-size: 28px;
+  }
+  .lets-talk-bg{
+    // font-size: 10vh !important;
+  }
+}
+
+@media only screen and (max-width : 1024px){
+  
+  .contact-form{
+    label{
+      font-size: 28px;
+    }
+
+    input, textarea{
+      font-size: 20px;
+    }
+
+    .buttons .btn{
+      font-size: 24px;
     }
   }
 }

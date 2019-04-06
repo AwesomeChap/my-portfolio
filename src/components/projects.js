@@ -14,7 +14,7 @@ export default class Projects extends Component {
     super(props);
     this.state = {
       selectedFilter: "Show All",
-      no_of_projects: 0
+      no_of_projects: 0,
     }
   }
 
@@ -59,45 +59,46 @@ export default class Projects extends Component {
     return (
       <>
         <div className="section">
-          <div className="sub-section">
-            <div className="sec sec1">
-              <div className="inner-section">
-                <div className="image-container">
-                  <div className="image-border">
-                    <div className="image">
-                      <img src={projectImg} alt="" />
-                    </div>
+
+          <div className="inner-section">
+
+            <div className="sub-section">
+
+              <div className="image-container">
+                <div className="image-border">
+                  <div className="image">
+                    <img src={projectImg} alt="" />
                   </div>
                 </div>
               </div>
-            </div>
-            <div className="sec sec2">
-              <div className="inner-section">
-                <Heading heading={"PROJECTS"} subHeading={"Developer's Playground"} />
-                <div className="text">
-                  Projects matter a lot for me. As they are great medium by which I can
-                  explore a technology or framework and check it's pros and limits at the
-                  same time.They also make learning new skills very easy and enjoyable as
-                  you mostly are working on something that you like and enjoy
+
+              <div className="text-container">
+                <div>
+                  <Heading heading={"PROJECTS"} subHeading={"Developer's Playground"} />
+                  <div className="text">
+                    Projects matter a lot for me. As they are great medium by which I can
+                    explore a technology or framework and check it's pros and limits at the
+                    same time.They also make learning new skills very easy and enjoyable as
+                    you mostly are working on something that you like and enjoy
+                  </div>
+                </div>
               </div>
-              </div>
+
             </div>
           </div>
-          <div className="sec sec3">
-            <div className="inner-section">
-              <Heading repair={{ y: -90 }} heading={"WHAT I MAKE"} subHeading={'some cool ones'} />
-              <div className="block">
-                <div className="keywords">{kws}</div>
-                {
-                  this.state.selectedFilter === "Show All" ? (
-                    <div className="show-filters">Showing all projects. Use the filter to display them by skill or technology</div>
-                  ) : (
-                      <div className="show-filters">Showing {this.state.no_of_projects} projects related to {this.state.selectedFilter}</div>
-                    )
-                }
-                <div className="projects-container">
-                  <ProjectList filter={this.state.selectedFilter} />
-                </div>
+          <div className="inner-section">
+            <Heading repair={{ y: -90 }} heading={"WHAT I MAKE"} subHeading={'some cool ones'} />
+            <div className="block">
+              <div className="keywords">{kws}</div>
+              {
+                this.state.selectedFilter === "Show All" ? (
+                  <div className="show-filters">Showing all projects. Use the filter to display them by skill or technology</div>
+                ) : (
+                    <div className="show-filters">Showing {this.state.no_of_projects} projects related to {this.state.selectedFilter}</div>
+                  )
+              }
+              <div className="projects-container">
+                <ProjectList filter={this.state.selectedFilter} />
               </div>
             </div>
           </div>
