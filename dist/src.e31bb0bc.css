@@ -1,6 +1,7 @@
 .jk {
   fill: rgba(255, 255, 255, 0.2);
-  stroke: none; }
+  stroke: none;
+  animation: shine 4s infinite; }
 
 .jk:nth-child(1) {
   animation-delay: 1.1s; }
@@ -22,7 +23,7 @@
 
 @keyframes shine {
   0% {
-    fill: #555; }
+    fill: #444; }
   40% {
     fill: #333; }
   100% {
@@ -513,6 +514,9 @@
     flex-direction: column; }
   .inner-sub-section {
     width: 100%; }
+    .inner-sub-section:nth-child(2) {
+      min-height: 0;
+      margin-left: 0vh; }
   .text-container {
     width: 100%;
     order: 1; }
@@ -537,9 +541,7 @@
   box-sizing: border-box; }
 
 .nav-logo-m {
-  text-decoration: none;
-  color: #ff0d2d;
-  font-size: 20px; }
+  text-decoration: none; }
 
 #hamburger {
   display: flex;
@@ -633,6 +635,12 @@
     transform: translateY(-14px) rotate(0); }
   100% {
     transform: translateY(0px) rotate(0); } }
+
+@media only screen and (max-width: 767px) {
+  #hamburger {
+    width: 48px;
+    height: 45px;
+    padding: 7px 0; } }
 
 #menu-wrapper {
   position: fixed;
@@ -735,13 +743,13 @@
   transform: translate(-50%, -50%);
   overflow: hidden; }
   .menu-item-name span {
-    font-size: 40px;
+    font-size: 5vh;
     font-family: Futura;
     display: inline-block;
     transition: all .3s; }
 
 .fadeIn-menu-item span {
-  transform: translate(0, -45px);
+  transform: translate(0, -150%);
   animation: fadeInItem .3s .3s forwards; }
 
 @keyframes fadeInItem {
@@ -754,7 +762,7 @@
 
 @keyframes fadeOutItem {
   to {
-    transform: translate(0, -45px); } }
+    transform: translate(0, -150%); } }
 
 .shrink-item {
   height: 0;
@@ -817,6 +825,16 @@
   position: absolute;
   color: #ddd;
   font-size: 28px; }
+
+@media only screen and (max-width: 1224px) {
+  .heading-block {
+    padding: 16px;
+    margin-bottom: 40px; }
+  .heading {
+    font-size: 60px; }
+  .desc {
+    padding: 3px 6px;
+    font-size: 24px; } }
 
 @media only screen and (max-width: 1224px) {
   .heading-block {
@@ -1138,15 +1156,26 @@ body {
 
 @media only screen and (max-width: 1224px) {
   .sub-heading {
-    font-size: 28px; } }
+    font-size: 28px; }
+  .lets-talk-bg {
+    display: none; } }
 
 @media only screen and (max-width: 1024px) {
+  .fields {
+    margin: 0 0 5vh 0; }
+    .fields span {
+      width: 30px;
+      height: 30px; }
+      .fields span i {
+        font-size: 14px; }
   .contact-form label {
     font-size: 28px; }
   .contact-form input, .contact-form textarea {
     font-size: 20px; }
   .contact-form .buttons .btn {
-    font-size: 24px; } }
+    font-size: 24px; }
+  .contact-form .status-container {
+    font-size: 14px; } }
 
 .home {
   margin-top: -5vh;

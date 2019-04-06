@@ -361,6 +361,10 @@ $font-normal : 24px;
 
   .inner-sub-section{
     width: 100%;
+    &:nth-child(2){
+      min-height: 0;
+      margin-left: 0vh;
+    }
   }
 
 

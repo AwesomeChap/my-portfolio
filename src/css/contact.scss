@@ -298,11 +298,22 @@
     font-size: 28px;
   }
   .lets-talk-bg{
-    // font-size: 10vh !important;
+    display: none;
   }
 }
 
 @media only screen and (max-width : 1024px){
+
+  .fields{
+    margin: 0 0 5vh 0;
+    span{
+      width:30px;
+      height: 30px;
+      i{
+        font-size:14px; 
+      }
+    }
+  }
   
   .contact-form{
     label{
@@ -315,6 +326,10 @@
 
     .buttons .btn{
       font-size: 24px;
+    }
+
+    .status-container{
+      font-size: 14px;
     }
   }
 }

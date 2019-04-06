@@ -30244,12 +30244,22 @@ function (_Component) {
 
     _this.state = {
       clicked: 0,
-      selected: false
+      selected: false,
+      svgWidth: 80
     };
     return _this;
   }
 
   _createClass(NavMobile, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      window.innerWidth <= 476 ? this.setState({
+        svgWidth: 50
+      }) : window.innerWidth <= 767 ? this.setState({
+        svgWidth: 65
+      }) : "";
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this2 = this;
@@ -30311,6 +30321,7 @@ function (_Component) {
         exact: true,
         to: "/"
       }, _react.default.createElement(_svg.default, {
+        width: this.state.svgWidth,
         id: "logo"
       })), _react.default.createElement("div", {
         onClick: this.handleClick,
@@ -77711,7 +77722,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55514" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50675" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

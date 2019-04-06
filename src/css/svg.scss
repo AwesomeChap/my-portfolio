@@ -6,7 +6,7 @@ $red : rgb(255, 13, 45);
   // fill: #333;
   // stroke-width: 1;
   // stroke : white;
-  // animation: shine 4s infinite;
+  animation: shine 4s infinite;
 }
 
 @for $i from 1 through 6 {
@@ -70,7 +70,7 @@ $red : rgb(255, 13, 45);
 
 @keyframes shine{
   0%{
-    fill: #555;
+    fill: #444;
   }
   40%{
     fill:#333;

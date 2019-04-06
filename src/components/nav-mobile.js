@@ -10,7 +10,12 @@ export default class NavMobile extends Component {
     this.state = {
       clicked: 0,
       selected: false,
+      svgWidth : 80
     }
+  }
+
+  componentDidMount(){
+    window.innerWidth <= 476 ? this.setState({svgWidth : 50}) : window.innerWidth <= 767 ? this.setState({svgWidth : 65}) : ""; 
   }
 
   handleSelect = (index) => {
@@ -74,7 +79,7 @@ export default class NavMobile extends Component {
         <div className="nav-m">
           <NavLink className="nav-logo-m" exact to="/">
             {/* <div className="name-logo">JATIN KUMAR</div> */}
-            <Svg id="logo" />
+            <Svg width={this.state.svgWidth} id="logo" />
           </NavLink>
           <div onClick={this.handleClick} id="hamburger" className={hamburgerClasses}>
             <div className="bar bar1"></div>
