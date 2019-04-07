@@ -1789,6 +1789,8 @@ html, body {
         .projects-container .project-wrapper .project-title .dots div {
           width: 12px;
           height: 12px; }
+    .projects-container .project-wrapper .project-desc {
+      font-size: 11px; }
     .projects-container .project-wrapper .project img {
       width: 80vw;
       height: 40vw; }
