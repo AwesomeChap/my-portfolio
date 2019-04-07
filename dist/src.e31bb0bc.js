@@ -41824,7 +41824,7 @@ function (_Component) {
 
     _this.state = {
       visible: 0,
-      breakLine: false
+      breakLine: window.innerWidth <= 767
     };
     return _this;
   }
@@ -41834,6 +41834,28 @@ function (_Component) {
     value: function componentDidMount() {
       var bars = document.querySelectorAll(".barValue");
       var barsWrapper = document.querySelectorAll(".proficiency");
+      barsWrapper.forEach(function (bw) {
+        if (bw.getBoundingClientRect().top <= window.innerHeight && bw.getBoundingClientRect().top > 0) {
+          bw.classList.add("animateSkillBarWrapper");
+        } else if (bw.getBoundingClientRect().top >= window.innerHeight && bw.getBoundingClientRect().top > 0) {
+          bw.classList.remove("animateSkillBarWrapper");
+        }
+
+        if (bw.getBoundingClientRect().top < 0) {
+          bw.classList.remove("animateSkillBarWrapper");
+        }
+      });
+      bars.forEach(function (bar) {
+        if (bar.getBoundingClientRect().top <= window.innerHeight && bar.getBoundingClientRect().top > 0) {
+          bar.classList.add("animateSkillBar");
+        } else if (bar.getBoundingClientRect().top >= window.innerHeight && bar.getBoundingClientRect().top > 0) {
+          bar.classList.remove("animateSkillBar");
+        }
+
+        if (bar.getBoundingClientRect().top < 0) {
+          bar.classList.remove("animateSkillBar");
+        }
+      });
       window.addEventListener('scroll', function () {
         // console.log('you scrolled me');
         barsWrapper.forEach(function (bw) {
@@ -77328,10 +77350,13 @@ function (_Component) {
             className: "project-details"
           }, _react.default.createElement("div", {
             className: "pd1"
-          }, " ", _react.default.createElement("div", null, "Technologies Used"), " "), _react.default.createElement("div", {
+          }, " ", _react.default.createElement("div", {
+            className: "pd-tab"
+          }, "Technologies Used"), " "), _react.default.createElement("div", {
             className: "pd2"
           }, _react.default.createElement("div", null, _react.default.createElement(_react.default.Fragment, null, p.keywords.map(function (kw, i) {
             return _react.default.createElement("span", {
+              className: "pd-tab",
               key: "keyword-" + i
             }, kw);
           })))), _react.default.createElement("div", {
@@ -77516,7 +77541,7 @@ function (_Component) {
         className: "show-filters"
       }, "Showing all projects. Use the filter to display them by skill or technology") : _react.default.createElement("div", {
         className: "show-filters"
-      }, "Showing ", this.state.no_of_projects, " projects related to ", this.state.selectedFilter), _react.default.createElement("div", {
+      }, "Showing ", _react.default.createElement("span", null, this.state.no_of_projects), " projects related to ", _react.default.createElement("span", null, this.state.selectedFilter), " "), _react.default.createElement("div", {
         className: "projects-container"
       }, _react.default.createElement(_projectList.default, {
         filter: this.state.selectedFilter

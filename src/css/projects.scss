@@ -115,6 +115,15 @@ $font-normal : 24px;
           // justify-content: space-evenly;
           align-items: center;
 
+          .pd-tab{
+            display: inline-block;
+            padding: 7px 15px;
+            box-sizing: border-box;
+            margin: 5px;
+            box-shadow: 0 0 10px #000;
+            border-bottom: 3px solid
+          }
+
           .pd1{
               opacity: 0;
               display:flex;
@@ -126,14 +135,9 @@ $font-normal : 24px;
               transition: all 0.3s 0.3s;
               
               div{
-                text-transform: uppercase;
-                display: inline-block;
-                padding: 7px 15px;
-                box-sizing: border-box;
-                margin: 5px;
-                border-bottom: 3px solid #666;
+                text-transform: uppercase;                
+                border-bottom-color: #666;
                 background: #333;
-                box-shadow: 0 0 10px #000;
               }
               // font-size: 18px;
           }
@@ -156,15 +160,10 @@ $font-normal : 24px;
                 flex-wrap: wrap;
 
               span{
-                display: inline-block;
-                padding: 7px 15px;
-                box-sizing: border-box;
                 font-size: 14px;
-                margin: 5px;
                 // color: #999;
-                border-bottom: 3px solid #444;
+                border-bottom-color: #444;
                 background: #222;
-                box-shadow: 0 0 10px #000;
               }
             }
           }
@@ -368,6 +367,7 @@ $font-normal : 24px;
 
   span{
     color: #ddd;
+    // font-weight: 900;
   }
 }
 
@@ -442,5 +442,68 @@ $font-normal : 24px;
 @media only screen and (max-width : 1224px){
   .keywords, .show-filters{
     font-size: 18px;
+  }
+}
+
+@media only screen and (max-width : 479px){
+  .keywords, .show-filters{
+    font-size: 13px;
+    .kw, .kw-selected{
+      margin: 5px;
+      padding: 7px 15px;
+      box-shadow: 0 0 5px #000;
+    }
+  }
+
+  .projects-container{
+    .project-wrapper{
+      font-size: 13px;
+      width: 80vw;
+      .project-title{
+        height: 25px;
+        .dots{
+          width:20%;
+          div{
+            width: 12px;
+            height: 12px;
+          }
+        }
+      }
+      .project{
+        img{
+          width:80vw;
+          height:40vw;
+        }
+        .project-info{
+          .project-details{
+            .pd-tab{
+              padding: 5px 10px;
+              border-bottom: 2px solid;
+              box-shadow: 0 0 5px #000;
+            }
+            .pd1{
+              font-size: 12px;
+            }
+            .pd2 {
+              width: 85%;
+              div{
+                span{
+                  font-size: 11px;
+                  margin: 4px ;
+                }
+              }
+            }
+            .pd3{
+              i{
+                font-size: 14px;
+                padding: 8px 10px;
+                border-bottom: 2px solid #555;
+                box-shadow: 0 0 5px #000;
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }

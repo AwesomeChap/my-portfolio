@@ -80,6 +80,7 @@
 }
 
 .lets-talk-bg{
+  display: none;
   z-index: -2;
   position: absolute;
   font-size: 30vh;
@@ -330,6 +331,53 @@
 
     .status-container{
       font-size: 14px;
+    }
+  }
+}
+
+@media only screen and (max-width : 479px){
+
+  .fields{
+    margin: 0 0 3vh 0;
+    span{
+      width:30px;
+      height: 30px;
+      box-shadow: 0 0 5px #000;
+      i{
+        font-size:14px; 
+      }
+    }
+  }
+  
+  .social-container{
+    .social-icon{
+      margin-top:2vh;
+      i{
+        font-size: 18px;
+      }
+      span{
+        font-size: 12px;
+      }
+    } 
+  }
+  
+  .contact-form{
+    label{
+      font-size: 24px;
+    }
+
+    input, textarea{
+      font-size: 16px;
+      padding: 8px 15px;
+      border-bottom: 1px solid;
+    }
+
+    .buttons .btn{
+      font-size: 16px;
+    }
+
+    .status-container{
+      font-size: 12px;
     }
   }
 }

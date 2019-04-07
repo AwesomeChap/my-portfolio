@@ -39,13 +39,13 @@ export default class Project extends Component {
                 <div className="bg-up"></div>
                 <div className="bg-down"></div>
                 <div className="project-details">
-                  <div className="pd1"> <div>Technologies Used</div> </div>
+                  <div className="pd1"> <div className="pd-tab" >Technologies Used</div> </div>
                   <div className="pd2">
                     <div>
                       <>
                         {
                           p.keywords.map((kw, i) => {
-                            return <span key={"keyword-" + i}>{kw}</span>
+                            return <span className="pd-tab" key={"keyword-" + i}>{kw}</span>
                           })
                         }
                       </>

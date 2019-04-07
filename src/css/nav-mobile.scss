@@ -201,14 +201,14 @@ $ham-d : 0.6s;
 
 .menu-item-wrapper{
   text-decoration: none;
-  color:#777;
+  color:#555;
   height: 100%;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  background-color: #121212;
+  background-color: #0a0a0a;
   // transition: all .3s $eio .2s;
   
   &.selected-menu-item{
@@ -223,7 +223,7 @@ $ham-d : 0.6s;
 }
 
 .selected-m-nav-item{
-  color: #ddd;
+  color: #aaa;
 }
 
 
@@ -268,13 +268,13 @@ $ham-d : 0.6s;
 .menu-item-bg:nth-child(1){
   transform-origin: left center;
   // background-color: rgb(255, 13, 45);
-  background: #1c1c1c;
+  background: #171717;
 }
 
 .menu-item-bg:nth-child(2){
   transform-origin: right center;
   // background-color: rgb(236, 0, 32);
-  background: #171717;
+  background: #131313;
 }
 
 .menu-item-name{

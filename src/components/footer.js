@@ -7,7 +7,7 @@ export default class Footer extends Component{
     this.state = {};
   }
 
-  render(){
+  render(){ 
     return(
       <div className="footer">
         <div className="sub-footer">

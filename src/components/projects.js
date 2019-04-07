@@ -70,7 +70,7 @@ export default class Projects extends Component {
                     <img src={projectImg} alt="" />
                   </div>
                 </div>
-              </div>
+              </div> 
 
               <div className="text-container">
                 <div>
@@ -94,7 +94,7 @@ export default class Projects extends Component {
                 this.state.selectedFilter === "Show All" ? (
                   <div className="show-filters">Showing all projects. Use the filter to display them by skill or technology</div>
                 ) : (
-                    <div className="show-filters">Showing {this.state.no_of_projects} projects related to {this.state.selectedFilter}</div>
+                    <div className="show-filters">Showing <span>{this.state.no_of_projects}</span> projects related to <span>{this.state.selectedFilter}</span> </div>
                   )
               }
               <div className="projects-container">

@@ -10,13 +10,37 @@ export default class About extends Component {
     super(props);
     this.state = {
       visible: 0,
-      breakLine: false
+      breakLine: window.innerWidth <= 767
     };
   }
 
   componentDidMount() {
     var bars = document.querySelectorAll(".barValue");
     var barsWrapper = document.querySelectorAll(".proficiency");
+
+    barsWrapper.forEach(bw => {
+      if (bw.getBoundingClientRect().top <= window.innerHeight && bw.getBoundingClientRect().top > 0) {
+        bw.classList.add("animateSkillBarWrapper");
+      }
+      else if (bw.getBoundingClientRect().top >= window.innerHeight && bw.getBoundingClientRect().top > 0) {
+        bw.classList.remove("animateSkillBarWrapper");
+      }
+      if (bw.getBoundingClientRect().top < 0) {
+        bw.classList.remove("animateSkillBarWrapper");
+      }
+    });
+
+    bars.forEach(bar => {
+      if (bar.getBoundingClientRect().top <= window.innerHeight && bar.getBoundingClientRect().top > 0) {
+        bar.classList.add("animateSkillBar");
+      }
+      else if (bar.getBoundingClientRect().top >= window.innerHeight && bar.getBoundingClientRect().top > 0) {
+        bar.classList.remove("animateSkillBar");
+      }
+      if (bar.getBoundingClientRect().top < 0) {
+        bar.classList.remove("animateSkillBar");
+      }
+    });
 
     window.addEventListener('scroll', function () {
 
@@ -47,7 +71,7 @@ export default class About extends Component {
       });
     });
 
-    window.addEventListener('resize', this.resize);
+    window.addEventListener('resize',this.resize);
   }
 
   componentWillUnmount() {

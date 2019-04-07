@@ -28,7 +28,7 @@ $ease-out : cubic-bezier(0.19, 1, 0.22, 1);
     position: relative;
     display: inline-block;
     transform: translate(0%,80%);
-    animation: intro-text-span 0.3s $ease-out forwards;
+    animation: intro-text-span 0.6s $ease-out forwards;
   }
 
   @keyframes intro-text-span {
@@ -237,7 +237,7 @@ $ease-out : cubic-bezier(0.19, 1, 0.22, 1);
   
   .intro-text{
     span{
-      font-size: 60px;
+      font-size: 11vw;
     }
   }
 

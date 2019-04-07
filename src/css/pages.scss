@@ -347,6 +347,9 @@ $font-normal : 24px;
       margin:0;
       .skill-wrapper{
         margin-bottom: 0vh;
+        .proficiency{
+          height: 8px;
+        }
       }
     }
   }
@@ -388,5 +391,42 @@ $font-normal : 24px;
 @media only screen and (max-width: 767px){
   .section{
     margin-top:3vh;
+  }
+}
+
+@media only screen and (max-width: 479px){
+  .hglt-red{
+    border-width: 2px;
+    box-shadow: 0 0 5px #000;
+  }
+  .text{
+    font-size: 16px;
+  }
+  .inner-section{
+    width:90%;
+    padding: 3vh 0;
+  }
+  .skills-block{
+    flex-direction: column;
+    justify-content: center;
+    .set{
+      width:100%;
+      margin:0;
+      .skill-wrapper{
+        margin: 1vh 0;
+        font-size: 16px;
+      }
+    }
+  }
+  .block,.skill-wrapper{
+    font-size: 16px;
+    .block-item{
+      .item-heading{
+        font-size: 24px;
+        span,i{
+          font-size: 20px;
+        }
+      }
+    }
   }
 }

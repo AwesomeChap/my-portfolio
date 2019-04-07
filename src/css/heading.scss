@@ -73,3 +73,25 @@ $red : #ff0d2d;
   
 }
 
+@media only screen and (max-width: 479px) {
+  .heading-block{
+    padding:3vw;
+    margin-bottom:5vw;
+  }
+
+  .heading-bg{
+    box-shadow: 0 0 5px #000;
+  }
+
+  .heading{
+    font-size: 10vw;
+  }
+
+  .desc{
+    padding: 2px 4px;
+    font-size: 16px;
+    box-shadow: 0 0 5px #000;
+  }
+  
+}
+
