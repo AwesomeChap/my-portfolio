@@ -9,7 +9,7 @@ const WHITE = {
   secondaryColor: 0xffffff,
   secondaryEmissive: 0,
   detailColor: 0x999999,
-  detailEmissive: 0,
+  detailEmissive: 0
 }
 
 class ParticleSystem {
@@ -132,9 +132,6 @@ class ParticleSystem {
 export default class Background extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      mobileView: false
-    }
     this.particles = new ParticleSystem();
     this.renderer = null;
     this.width = null;
@@ -147,7 +144,6 @@ export default class Background extends Component {
 
   handleWindowResize = () => {
     // update height and width of the renderer and the camera
-    this.setState({ mobileView: this.width <= 479 });
     this.width = this.mount.clientWidth;
     this.height = this.mount.clientHeight;
     this.renderer.setSize(this.width, this.height)
@@ -158,8 +154,6 @@ export default class Background extends Component {
   componentDidMount() {
     this.width = this.mount.clientWidth;
     this.height = this.mount.clientHeight;
-
-    this.setState({ mobileView: this.width <= 479 });
 
     this.scene = new THREE.Scene();
     this.scene.fog = new THREE.Fog(0x2e2e2e, 2, 10);
@@ -179,7 +173,7 @@ export default class Background extends Component {
     const ambientLight = new THREE.AmbientLight(0xffffff, 1.0);
     this.scene.add(ambientLight);
 
-    this.controls = new OrbitControls(this.camera, this.renderer.domElement);
+    this.controls = new OrbitControls( this.camera, this.renderer.domElement );
     this.controls.enableDamping = true;
     this.controls.dampingFactor = 0.25;
     this.controls.enableZoom = false;
@@ -187,10 +181,10 @@ export default class Background extends Component {
     window.addEventListener('resize', this.handleWindowResize, false)
 
     //set camera at eyes height
-    this.camera.position.y = 1.7;
+    this.camera.position.y = 1.7; 
     this.camera.position.z = 0;
 
-    this.controls.target.set(0, this.camera.position.y * 10, 0)
+    this.controls.target.set(0, this.camera.position.y*10,0)
 
     // create particles
     this.particles.mesh.position.y = 4
@@ -230,9 +224,7 @@ export default class Background extends Component {
 
   render() {
     return (
-      <>
-        {!this.state.mobileView && <div ref={(mount) => { this.mount = mount }} className="background" ></div>}
-      </>
+      <div  ref={(mount) => { this.mount = mount }} className="background" ></div>
     )
   }
 }

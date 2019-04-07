@@ -76871,10 +76871,6 @@ function (_Component) {
 
     _defineProperty(_assertThisInitialized(_this), "handleWindowResize", function () {
       // update height and width of the renderer and the camera
-      _this.setState({
-        mobileView: _this.width <= 479
-      });
-
       _this.width = _this.mount.clientWidth;
       _this.height = _this.mount.clientHeight;
 
@@ -76913,9 +76909,6 @@ function (_Component) {
       cancelAnimationFrame(_this.frameId);
     });
 
-    _this.state = {
-      mobileView: false
-    };
     _this.particles = new ParticleSystem();
     _this.renderer = null;
     _this.width = null;
@@ -76932,9 +76925,6 @@ function (_Component) {
     value: function componentDidMount() {
       this.width = this.mount.clientWidth;
       this.height = this.mount.clientHeight;
-      this.setState({
-        mobileView: this.width <= 479
-      });
       this.scene = new THREE.Scene();
       this.scene.fog = new THREE.Fog(0x2e2e2e, 2, 10); //ADD CAMERA
 
@@ -76978,12 +76968,12 @@ function (_Component) {
     value: function render() {
       var _this2 = this;
 
-      return _react.default.createElement(_react.default.Fragment, null, !this.state.mobileView && _react.default.createElement("div", {
+      return _react.default.createElement("div", {
         ref: function ref(mount) {
           _this2.mount = mount;
         },
         className: "background"
-      }));
+      });
     }
   }]);
 
@@ -77026,26 +77016,49 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 var Home =
 /*#__PURE__*/
 function (_Component) {
   _inherits(Home, _Component);
 
-  function Home() {
+  function Home(props) {
+    var _this;
+
     _classCallCheck(this, Home);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(Home).apply(this, arguments));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Home).call(this, props));
+
+    _defineProperty(_assertThisInitialized(_this), "handleResize", function () {
+      _this.setState({
+        mobileView: window.innerWidth <= 479
+      });
+    });
+
+    _this.state = {
+      mobileView: false
+    };
+    return _this;
   }
 
   _createClass(Home, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.setState({
+        mobileView: window.innerWidth <= 479
+      });
+      window.addEventListener('resize', this.handleResize);
+    }
+  }, {
     key: "render",
     value: function render() {
       var text1 = "HELLO.";
@@ -77055,7 +77068,7 @@ function (_Component) {
       var t2 = text2.length + t1;
       return _react.default.createElement("div", {
         className: "section home"
-      }, _react.default.createElement(_background.default, null), _react.default.createElement("div", {
+      }, !this.state.mobileView && _react.default.createElement(_background.default, null), _react.default.createElement("div", {
         className: "intro"
       }, _react.default.createElement("div", {
         class: "content"

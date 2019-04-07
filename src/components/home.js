@@ -4,17 +4,33 @@ import '../css/pages.scss';
 import '../css/home.scss';
 
 export default class Home extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      mobileView: false
+    }
+  }
+  componentDidMount() {
+    this.setState({ mobileView: window.innerWidth <= 479 });
+    window.addEventListener('resize', this.handleResize);
+  }
+
+  handleResize = () => {
+    this.setState({ mobileView: window.innerWidth <= 479 });
+  }
+
   render() {
 
     const text1 = "HELLO.";
     const text2 = "I'M";
-    const text3= "JATIN";
+    const text3 = "JATIN";
     let t1 = text1.length;
     let t2 = text2.length + t1;
 
     return (
       <div className="section home">
-        <Background />
+        {!this.state.mobileView && <Background />}
         <div className="intro">
           <div class="content">
             <div className="intro-text" style={{ color: "#999" }}>
@@ -28,7 +44,7 @@ export default class Home extends Component {
             <div className="intro-text" >
               {
                 text2.split("").map((t, i) => {
-                  i+=t1;
+                  i += t1;
                   let style = { animationDelay: `${i / 10}s` };
                   return <span style={style}>{t}</span>
                 })
@@ -36,7 +52,7 @@ export default class Home extends Component {
               <span>&nbsp;</span>
               {
                 text3.split("").map((t, i) => {
-                  i+=t2;
+                  i += t2;
                   let style = { animationDelay: `${i / 10}s` };
                   return <span style={style}>{t}</span>
                 })
