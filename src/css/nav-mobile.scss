@@ -244,7 +244,13 @@ $eio : cubic-bezier(0.77, 0, 0.175, 1);
 .menu-item-wrapper:nth-child(even){
   background-color: #1c1c1c;
   &.selected-menu-item{
-    background-color: transparent;
+    animation: makeMeTransparent 0.1s 0.3s forwards;
+  }
+
+  @keyframes makeMeTransparent {
+    to{
+      background-color: transparent;
+    }
   }
   // background-color: red;
 

@@ -715,7 +715,11 @@
 .menu-item-wrapper:nth-child(even) {
   background-color: #1c1c1c; }
   .menu-item-wrapper:nth-child(even).selected-menu-item {
-    background-color: transparent; }
+    animation: makeMeTransparent 0.1s 0.3s forwards; }
+
+@keyframes makeMeTransparent {
+  to {
+    background-color: transparent; } }
 
 .menu-item {
   position: relative;
@@ -1266,6 +1270,14 @@ html, body {
   box-shadow: 0 0 10px #000;
   opacity: 0;
   animation: follow 0.5s 1.5s forwards; }
+  .follow-container .if {
+    background-color: #005fb8; }
+  .follow-container .ig {
+    background-color: #222; }
+  .follow-container .il {
+    background-color: #0084ff; }
+  .follow-container .it {
+    background-color: #00aeed; }
   .follow-container a {
     transform: translate(50%, 0);
     opacity: 0;
@@ -1289,7 +1301,7 @@ html, body {
       transform-origin: right center;
       transform: scaleX(0);
       z-index: -1;
-      background: #171717;
+      background: rgba(255, 255, 255, 0.2);
       transition: transform 0.3s; }
     .follow-container a:nth-child(1) {
       animation-delay: 1.7s; }
@@ -1300,12 +1312,10 @@ html, body {
     .follow-container a:nth-child(4) {
       animation-delay: 2.0s; }
     .follow-container a i {
-      color: #aaa;
+      color: #ddd;
       transition: all 0.2s; }
     .follow-container a:hover::after {
       transform: scaleX(1); }
-    .follow-container a:hover i {
-      color: #fff; }
 
 @keyframes follow-span {
   to {
@@ -1345,12 +1355,14 @@ html, body {
 @media only screen and (max-width: 767px) {
   .intro-text span {
     font-size: 60px; }
-  .follow-container a {
-    transform: translate(0, 50%);
-    font-size: 18px;
-    height: 50px;
-    width: 50px;
-    border-right: 2px solid #000; }
+  .follow-container {
+    box-shadow: none; }
+    .follow-container a {
+      overflow: hidden;
+      transform: translate(0, 50%);
+      font-size: 18px;
+      height: 50px;
+      width: 50px; }
   .love {
     margin: 0;
     font-size: 14px;

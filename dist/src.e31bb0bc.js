@@ -77045,21 +77045,25 @@ function (_Component) {
       })))), _react.default.createElement("div", {
         className: "follow-container"
       }, _react.default.createElement("a", {
+        className: "if",
         href: "#"
       }, _react.default.createElement("i", {
-        className: "fab if fa-facebook-f"
+        className: "fab fa-facebook-f"
       })), _react.default.createElement("a", {
+        className: "ig",
         href: "#"
       }, _react.default.createElement("i", {
-        className: "fab ig fa-github"
+        className: "fab fa-github"
       })), _react.default.createElement("a", {
+        className: "il",
         href: "#"
       }, _react.default.createElement("i", {
-        className: "fab il fa-linkedin-in"
+        className: "fab fa-linkedin-in"
       })), _react.default.createElement("a", {
+        className: "it",
         href: "#"
       }, _react.default.createElement("i", {
-        className: "fab it fa-twitter"
+        className: "fab fa-twitter"
       }))), _react.default.createElement("div", {
         className: "love"
       }, "SHARE WITH ", _react.default.createElement("span", null, "\u2764")));
