@@ -224,7 +224,7 @@ export default class Background extends Component {
 
   render() {
     return (
-      <div ref={(mount) => { this.mount = mount }} className="background" ></div>
+      <div style={{display : this.width < 768 ? "none" : "block"}} ref={(mount) => { this.mount = mount }} className="background" ></div>
     )
   }
 }

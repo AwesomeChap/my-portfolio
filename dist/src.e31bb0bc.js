@@ -30265,7 +30265,7 @@ function (_Component) {
       var _this2 = this;
 
       var navBgClasses = this.state.selected ? "shrink-nav-bar-bg nav-bar-bg" : "nav-bar-bg";
-      var menuClasses = this.state.clicked ? "open-menu" : this.state.clicked === 0 ? "" : "close-menu";
+      var menuClasses = this.state.clicked ? "open-menu" : "close-menu";
       var hamburgerClasses = this.state.clicked ? "close" : this.state.clicked === 0 ? "" : "ham";
       var MINClasses = this.state.clicked ? "menu-item-name fadeIn-menu-item" : " menu-item-name fadeOut-menu-item";
       var MINClasses2 = this.state.selected ? "menu-item-name fadeOut-menu-item" : "";
@@ -30277,6 +30277,7 @@ function (_Component) {
         if (_this2.state.selected === false) {
           return _react.default.createElement(_reactRouterDom.NavLink, {
             key: i,
+            activeClassName: "selected-m-nav-item",
             className: "menu-item-wrapper",
             exact: true,
             to: routes[i]
@@ -30290,6 +30291,7 @@ function (_Component) {
           if (_this2.state.selected !== i + 1) {
             return _react.default.createElement(_reactRouterDom.NavLink, {
               key: i,
+              activeClassName: "selected-m-nav-item",
               className: "menu-item-wrapper shrink-item",
               exact: true,
               to: routes[i]
@@ -30302,6 +30304,7 @@ function (_Component) {
           } else {
             return _react.default.createElement(_reactRouterDom.NavLink, {
               key: i,
+              activeClassName: "selected-m-nav-item",
               className: "menu-item-wrapper fadeOut-menu-item selected-menu-item",
               exact: true,
               to: routes[i]
@@ -30338,9 +30341,7 @@ function (_Component) {
         className: menuClasses
       }, _react.default.createElement("div", {
         className: "menu"
-      }, _react.default.createElement("div", {
-        className: navBgClasses
-      }), navLnks)));
+      }, navLnks)));
     }
   }]);
 
@@ -76932,6 +76933,9 @@ function (_Component) {
       var _this2 = this;
 
       return _react.default.createElement("div", {
+        style: {
+          display: this.width < 768 ? "none" : "block"
+        },
         ref: function ref(mount) {
           _this2.mount = mount;
         },

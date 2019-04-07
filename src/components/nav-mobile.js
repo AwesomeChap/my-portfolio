@@ -37,7 +37,7 @@ export default class NavMobile extends Component {
 
   render() {
     const navBgClasses = this.state.selected ? "shrink-nav-bar-bg nav-bar-bg" : "nav-bar-bg";   
-    const menuClasses = this.state.clicked ? "open-menu" : this.state.clicked === 0 ? "" : "close-menu";
+    const menuClasses = this.state.clicked ? "open-menu" : "close-menu";
     const hamburgerClasses = this.state.clicked ? "close" : this.state.clicked === 0 ? "" : "ham";
     const MINClasses = this.state.clicked ? "menu-item-name fadeIn-menu-item" : " menu-item-name fadeOut-menu-item";
     const MINClasses2 = this.state.selected ? "menu-item-name fadeOut-menu-item" : "";
@@ -52,7 +52,7 @@ export default class NavMobile extends Component {
     const navLnks = menu_items.map((name,i)=>{
       if(this.state.selected === false){
         return(
-          <NavLink key={i} className="menu-item-wrapper"  exact to={routes[i]}>
+          <NavLink key={i} activeClassName="selected-m-nav-item" className="menu-item-wrapper"  exact to={routes[i]}>
             <MenuItem onClick={this.handleSelect} index={i + 1} MINClasses={MINClasses} name={name} />
           </NavLink>
         );
@@ -60,14 +60,14 @@ export default class NavMobile extends Component {
       else{
         if(this.state.selected !== i + 1){
           return (
-          <NavLink key={i} className="menu-item-wrapper shrink-item" exact to={routes[i]}>
+          <NavLink key={i} activeClassName="selected-m-nav-item" className="menu-item-wrapper shrink-item" exact to={routes[i]}>
             <MenuItem onClick={this.handleSelect} index={i + 1} MINClasses={MINClasses2} name={name} />
           </NavLink>
           );
         }
         else{
           return(
-            <NavLink key={i} className="menu-item-wrapper fadeOut-menu-item selected-menu-item" exact to={routes[i]}>
+            <NavLink key={i} activeClassName="selected-m-nav-item" className="menu-item-wrapper fadeOut-menu-item selected-menu-item" exact to={routes[i]}>
               <MenuItem onClick={this.handleSelect} index={i + 1} MINClasses={MINClasses} name={name} />
             </NavLink>
           );
@@ -89,7 +89,6 @@ export default class NavMobile extends Component {
         </div>
         <div id="menu-wrapper" className={menuClasses} >
           <div className={"menu"}>
-            <div  className={navBgClasses} ></div>
             {navLnks}
           </div>
         </div>

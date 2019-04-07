@@ -242,6 +242,8 @@ $ease-out : cubic-bezier(0.19, 1, 0.22, 1);
   }
 
   .follow-container{
+    right: 100%;
+    transform: translate(100%,-100%);
     box-shadow: none;
     a{
       overflow: hidden;
@@ -255,8 +257,8 @@ $ease-out : cubic-bezier(0.19, 1, 0.22, 1);
   .love{
     margin: 0;
     font-size: 14px;
-    transform-origin: left center;
-    transform: rotate(-90deg) translate(10%,100%);
+    transform: translate(10%, 150%);
+    bottom:100%;
   }
 }
 
@@ -267,17 +269,4 @@ $ease-out : cubic-bezier(0.19, 1, 0.22, 1);
       font-size: 11vw;
     }
   }
-
-  // .follow-container{
-  //   a{
-  //     font-size: 16px;
-  //     height: 40px;
-  //     width: 40px;
-  //   }
-  // }
-
-  // .love{
-  //   font-size: 12px;
-  //   transform: rotate(-90deg) translate(10%,100%);
-  // }
 }

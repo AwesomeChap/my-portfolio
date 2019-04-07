@@ -1,20 +1,22 @@
 $red : #ff0d2d;
 $eio : cubic-bezier(0.77, 0, 0.175, 1);
+$e-bounce : cubic-bezier(0.175, 0.885, 0.32, 1.275);
+$ham-d : 0.6s;
 
 .nav-m{
   display: none;
-  position: sticky;
-  top:0;
+  position: fixed;
+  bottom:0;
+  right:0;
+  margin: 10px;
+  border-radius: 50%;
   z-index: 4;
-  justify-content: space-between;
-  align-items: center;
-  height:10vh;
-  padding:0 14px;
+  background-color: #070707;
   box-sizing: border-box;
 }
 
 .nav-logo-m{
-  text-decoration: none;
+  display: none;
 }
 
 
@@ -27,9 +29,8 @@ $eio : cubic-bezier(0.77, 0, 0.175, 1);
   justify-content: center;
   align-items: center;
   width: 60px;
-  height: 50px;
+  height: 60px;
   cursor: pointer;
-  padding: 10px 0;
   box-sizing: border-box;
   transition: all 0.3s;
 }
@@ -64,50 +65,47 @@ $eio : cubic-bezier(0.77, 0, 0.175, 1);
     background-color: $red;
   }
   .bar1{
-    animation:  close-bar1 .6s $eio forwards;
+    animation:  close-bar1 $ham-d $e-bounce forwards;
   }
   @keyframes close-bar1 {
     50%{
       transform: translateY(0) scale(0.5) rotate(0);
     }
     100%{
-      transform: translateY(0) scale(0.5) rotate(135deg);
+      transform: translateY(0) scale(0.6) rotate(135deg);
     }
   }
   
   .bar2{
-    animation: close-bar2 .6s $eio forwards;
+    animation: close-bar2 $ham-d $e-bounce forwards;
   }
   @keyframes close-bar2 {
     50%{
-      transform: scaleX(0.5);
-      opacity: 1;
+      transform: scaleX(0.7);
+      opacity: 0;
     }
     100%{
-      transform: scaleX(0.5);
+      transform: scaleX(0.7);
       opacity: 0;
     }
   }
   .bar3{
-    animation: close-bar3 .6s $eio forwards;
+    animation: close-bar3 $ham-d $e-bounce forwards;
   }
   @keyframes close-bar3 {
     50%{
       transform: translateY(0) scale(0.5) rotate(0);
     }
     100%{
-      transform: translateY(0) scale(0.5) rotate(45deg);
+      transform: translateY(0) scale(0.6) rotate(45deg);
     }
   }
 }
 
 .ham{
-  .bar{
-    
-  }
   .bar1{
-    transform: translateY(0) scale(0.5) rotate(135deg);
-    animation: ham1 .6s $eio forwards,;
+    transform: translateY(0) scale(0.6) rotate(135deg);
+    animation: ham1 $ham-d $e-bounce forwards,;
   }
   @keyframes ham1 {
     50%{
@@ -118,9 +116,9 @@ $eio : cubic-bezier(0.77, 0, 0.175, 1);
     }
   }
   .bar2{
-    transform: scaleX(0.5);
+    transform: scaleX(0.7);
     opacity: 0;
-    animation: ham2 .6s $eio forwards;
+    animation: ham2 $ham-d $e-bounce forwards;
   }
   @keyframes ham2 {
     50%{
@@ -133,8 +131,8 @@ $eio : cubic-bezier(0.77, 0, 0.175, 1);
     }
   }
   .bar3{
-    transform: translateY(0) scale(0.5) rotate(45deg);
-    animation: ham3 .6s $eio forwards;
+    transform: translateY(0) scale(0.6) rotate(45deg);
+    animation: ham3 $ham-d $e-bounce forwards;
   }
   @keyframes ham3 {
     50%{
@@ -147,17 +145,16 @@ $eio : cubic-bezier(0.77, 0, 0.175, 1);
 }
 
 @media only screen and (max-width: 767px) {
-  /* For desktop: */
-  .nav-m{
-    padding: 0 10px;
-  }
 
   #hamburger{
-    transform-origin: right center; 
-    transform: scale(0.9);
+    // transform-origin: right center; 
+    transform: scale(0.8);
   }
 }
 
+@media only screen and (max-width: 479px) {
+  
+}
 
 // ---------------------------------------------------------------
 
@@ -169,36 +166,26 @@ $eio : cubic-bezier(0.77, 0, 0.175, 1);
   left:0;
   min-width: 100%;
   z-index: 2;
-  height: 0vh; //change this value for menu animation
+  height: 100%;
+  max-height: 100%;
+  transform-origin: top center;
   overflow: hidden;
 }
 
 .open-menu{
-  animation: open-menu .5s $eio forwards;
-}
-
-@keyframes open-menu{
-  to{
-    height: 100vh;
-  }
+  transform: scaleY(1);
+  transition:  transform 0.3s;
 }
 
 .close-menu{
-  animation: close-menu  .5s $eio forwards;
-}
-
-@keyframes close-menu{
-  from{
-    height: 100vh;
-  }
-  to{
-    height: 0vh;
-  }
+  transform: scaleY(0);
+  transition:  transform 0.3s 0.3s;
 }
 
 .menu{
-  width:100vw;
-  height: 100vh;
+  width:100%;
+  height: 100%;
+  max-height: 100%;
   position: absolute;
   top:0;
   left:0;
@@ -214,35 +201,16 @@ $eio : cubic-bezier(0.77, 0, 0.175, 1);
 
 .menu-item-wrapper{
   text-decoration: none;
-  color:#ddd;
+  color:#777;
   height: 100%;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  background-color: #171717;
+  background-color: #121212;
   // transition: all .3s $eio .2s;
   
-  &.selected-menu-item{
-    background-color: transparent;
-  }
-}
-
-.nav-bar-bg{
-  flex: 0 0 10vh;
-  width: 100%;
-  background-color: #171717;
-}
-
-.shrink-nav-bar-bg{
-  flex: 0 0 0vh;
-  transition: all 0.3s $eio .3s;
-}
-
-
-.menu-item-wrapper:nth-child(even){
-  background-color: #1c1c1c;
   &.selected-menu-item{
     animation: makeMeTransparent 0.1s 0.3s forwards;
   }
@@ -252,19 +220,35 @@ $eio : cubic-bezier(0.77, 0, 0.175, 1);
       background-color: transparent;
     }
   }
-  // background-color: red;
+}
+
+.selected-m-nav-item{
+  color: #ddd;
+}
 
 
-  // background-color: rgb(30, 30, 30);
+.menu-item-wrapper:nth-child(even){
+  // background-color: #0f0f0f;
+  &.selected-menu-item{
+    animation: makeMeTransparent 0.1s 0.3s forwards;
+  }
+
+  @keyframes makeMeTransparent {
+    to{
+      background-color: transparent;
+    }
+  }
 }
 
 .menu-item{
   position: relative;
   width:100%;
+  max-height:100%;
   height: 100%;
   display: flex;
   flex-direction: column;
   z-index: 3;
+  transition: all 0.3;
   // background: blue;
 
   &:hover{
@@ -283,12 +267,14 @@ $eio : cubic-bezier(0.77, 0, 0.175, 1);
 
 .menu-item-bg:nth-child(1){
   transform-origin: left center;
-  background-color: rgb(255, 13, 45);
+  // background-color: rgb(255, 13, 45);
+  background: #1c1c1c;
 }
 
 .menu-item-bg:nth-child(2){
   transform-origin: right center;
-  background-color: rgb(236, 0, 32);
+  // background-color: rgb(236, 0, 32);
+  background: #171717;
 }
 
 .menu-item-name{
@@ -306,8 +292,6 @@ $eio : cubic-bezier(0.77, 0, 0.175, 1);
     font-family: Futura;
     display: inline-block;
     transition: all .3s ;
-    // background-color: blue;
-    // transform: translateY(-30px);
   }
 }
 
@@ -373,10 +357,10 @@ $eio : cubic-bezier(0.77, 0, 0.175, 1);
   }
 }
 
-@media only screen and (max-width: 1024px) {
+@media only screen and (max-width: 767px) {
   /* For desktop: */
   .nav-m{
-    display:flex;
+    display:inline-block;
   }
   #menu-wrapper{
     display:block;
