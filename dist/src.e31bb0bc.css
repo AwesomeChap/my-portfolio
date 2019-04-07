@@ -524,7 +524,7 @@
     order: 1; }
   .image-container {
     display: none;
-    margin-top: 10vh;
+    margin-top: 5vh;
     width: 100%;
     order: 2; }
     .image-container .image-border {
@@ -536,6 +536,12 @@
     margin-top: 3vh; } }
 
 @media only screen and (max-width: 479px) {
+  .image-container {
+    display: flex;
+    height: 40vh; }
+    .image-container .image-border {
+      width: 30vh;
+      height: 30vh; }
   .hglt-red {
     border-width: 2px;
     box-shadow: 0 0 5px #000; }
@@ -551,8 +557,10 @@
       width: 100%;
       margin: 0; }
       .skills-block .set .skill-wrapper {
-        margin: 1vh 0;
+        margin: 10px 0 0 0;
         font-size: 16px; }
+        .skills-block .set .skill-wrapper .proficiency {
+          height: 6px; }
   .block, .skill-wrapper {
     font-size: 16px; }
     .block .block-item .item-heading, .skill-wrapper .block-item .item-heading {
@@ -823,6 +831,10 @@
   #menu-wrapper {
     display: block; } }
 
+@media only screen and (max-width: 479px) {
+  .menu-item-name span {
+    font-size: 8vw; } }
+
 .heading-block {
   position: relative;
   display: inline-block;
@@ -887,7 +899,7 @@
     font-size: 10vw; }
   .desc {
     padding: 2px 4px;
-    font-size: 16px;
+    font-size: 4vw;
     box-shadow: 0 0 5px #000; } }
 
 .footer {
@@ -1256,7 +1268,8 @@ html, body {
   .contact-form .buttons .btn {
     font-size: 16px; }
   .contact-form .status-container {
-    font-size: 12px; } }
+    font-size: 12px;
+    width: 80vw; } }
 
 .home {
   margin-top: -5vh;
@@ -1782,9 +1795,11 @@ html, body {
       border-bottom: 2px solid;
       box-shadow: 0 0 5px #000; }
     .projects-container .project-wrapper .project .project-info .project-details .pd1 {
+      display: none;
       font-size: 12px; }
     .projects-container .project-wrapper .project .project-info .project-details .pd2 {
-      width: 85%; }
+      width: 85%;
+      height: 64%; }
       .projects-container .project-wrapper .project .project-info .project-details .pd2 div span {
         font-size: 11px;
         margin: 4px; }

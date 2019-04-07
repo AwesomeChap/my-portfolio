@@ -482,10 +482,12 @@ $font-normal : 24px;
               box-shadow: 0 0 5px #000;
             }
             .pd1{
+              display: none;
               font-size: 12px;
             }
             .pd2 {
               width: 85%;
+              height: 64%;
               div{
                 span{
                   font-size: 11px;

@@ -377,7 +377,7 @@ $font-normal : 24px;
   }
   .image-container{
     display: none;
-    margin-top: 10vh;
+    margin-top: 5vh;
     width: 100%;
     order: 2;
 
@@ -395,6 +395,15 @@ $font-normal : 24px;
 }
 
 @media only screen and (max-width: 479px){
+
+  .image-container{
+    display: flex;
+    height: 40vh;
+    .image-border{
+      width:30vh;
+      height: 30vh;
+    }
+  }
   .hglt-red{
     border-width: 2px;
     box-shadow: 0 0 5px #000;
@@ -413,8 +422,11 @@ $font-normal : 24px;
       width:100%;
       margin:0;
       .skill-wrapper{
-        margin: 1vh 0;
+        margin: 10px 0 0 0;
         font-size: 16px;
+        .proficiency{
+          height: 6px;
+        }
       }
     }
   }

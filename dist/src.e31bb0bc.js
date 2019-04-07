@@ -41476,7 +41476,9 @@ function (_Component) {
     _classCallCheck(this, Footer);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Footer).call(this, props));
-    _this.state = {};
+    _this.state = {
+      mobileView: window.innerWidth < 479
+    };
     return _this;
   }
 
@@ -41489,7 +41491,7 @@ function (_Component) {
         className: "sub-footer"
       }, _react.default.createElement("div", {
         className: "footer-header"
-      }, "Let's Talk"), _react.default.createElement("div", null, "Wanna get in touch or talk about a project?"), _react.default.createElement("div", null, "Feel free to contact me via email at ", _react.default.createElement("span", null, "jatin15011999@gmail.com")), _react.default.createElement("div", null, "or drop a sweet message at ", _react.default.createElement("span", null, "contact page")), _react.default.createElement("div", {
+      }, "Let's Talk"), _react.default.createElement("div", null, "Wanna get in touch or talk about a project?"), !this.state.mobileView && _react.default.createElement("div", null, "Feel free to contact me via email at ", _react.default.createElement("span", null, "jatin15011999@gmail.com")), this.state.mobileView && _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("div", null, "Feel free to contact me via email "), _react.default.createElement("div", null, " at ", _react.default.createElement("span", null, "jatin15011999@gmail.com"))), _react.default.createElement("div", null, "or drop a sweet message at ", _react.default.createElement("span", null, "contact page")), _react.default.createElement("div", {
         className: "social-icons"
       }, _react.default.createElement("a", {
         className: "if",
@@ -76955,9 +76957,6 @@ function (_Component) {
       var _this2 = this;
 
       return _react.default.createElement("div", {
-        style: {
-          display: this.width < 768 ? "none" : "block"
-        },
         ref: function ref(mount) {
           _this2.mount = mount;
         },
