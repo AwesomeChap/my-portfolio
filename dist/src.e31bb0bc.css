@@ -1,15 +1,18 @@
 .jk {
   fill: rgba(255, 255, 255, 0.2);
   stroke: none;
-  animation: shine 4s infinite; }
+  animation: shine 5s infinite; }
 
 .jk:nth-child(1) {
-  animation-delay: 1.1s; }
+  animation-delay: 1s; }
 
 .jk:nth-child(2) {
-  animation-delay: 1.2s; }
+  animation-delay: 1.1s; }
 
 .jk:nth-child(3) {
+  animation-delay: 1.2s; }
+
+.jk:nth-child(6) {
   animation-delay: 1.3s; }
 
 .jk:nth-child(4) {
@@ -18,16 +21,13 @@
 .jk:nth-child(5) {
   animation-delay: 1.5s; }
 
-.jk:nth-child(6) {
-  animation-delay: 1.6s; }
-
 @keyframes shine {
   0% {
-    fill: #444; }
+    fill: rgba(255, 255, 255, 0.3); }
   40% {
-    fill: #333; }
+    fill: rgba(255, 255, 255, 0.2); }
   100% {
-    fill: #333; } }
+    fill: rgba(255, 255, 255, 0.2); } }
 
 .nav-bar {
   z-index: 1;
@@ -537,16 +537,17 @@
   justify-content: space-between;
   align-items: center;
   height: 10vh;
-  padding: 14px;
+  padding: 0 14px;
   box-sizing: border-box; }
 
 .nav-logo-m {
   text-decoration: none; }
 
 #hamburger {
+  position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   width: 60px;
   height: 50px;
@@ -556,22 +557,27 @@
   transition: all 0.3s; }
 
 .bar {
+  position: absolute;
   display: block;
-  height: 1px;
+  height: 0px;
+  border: 0.5px solid #fff;
   background-color: #ddd;
-  transition: all 0.3s; }
+  transition: all 0.3s;
+  width: 100%; }
 
 .bar2 {
-  width: 85%;
-  opacity: 1;
-  transition: all 0.3s; }
+  transform: scaleX(0.85);
+  opacity: 1; }
 
-.bar1, .bar3 {
-  width: 50%;
-  transform: translateY(0) rotate(0);
-  transition: all 0.3s; }
+.bar1 {
+  transform: translateY(-15px) scaleX(0.5) rotate(0); }
+
+.bar3 {
+  transform: translateY(15px) scaleX(0.5) rotate(0); }
 
 .close .bar {
+  height: 0px;
+  border: 1.5px solid #ff0d2d;
   background-color: #ff0d2d; }
 
 .close .bar1 {
@@ -579,19 +585,19 @@
 
 @keyframes close-bar1 {
   50% {
-    transform: translateY(14px) rotate(0); }
+    transform: translateY(0) scale(0.5) rotate(0); }
   100% {
-    transform: translateY(14px) rotate(135deg); } }
+    transform: translateY(0) scale(0.5) rotate(135deg); } }
 
 .close .bar2 {
   animation: close-bar2 0.6s cubic-bezier(0.77, 0, 0.175, 1) forwards; }
 
 @keyframes close-bar2 {
   50% {
-    width: 50%;
+    transform: scaleX(0.5);
     opacity: 1; }
   100% {
-    width: 50%;
+    transform: scaleX(0.5);
     opacity: 0; } }
 
 .close .bar3 {
@@ -599,48 +605,50 @@
 
 @keyframes close-bar3 {
   50% {
-    transform: translateY(-14px) rotate(0); }
+    transform: translateY(0) scale(0.5) rotate(0); }
   100% {
-    transform: translateY(-14px) rotate(45deg); } }
+    transform: translateY(0) scale(0.5) rotate(45deg); } }
 
 .ham .bar1 {
-  transform: translateY(14px) rotate(135deg);
+  transform: translateY(0) scale(0.5) rotate(135deg);
   animation: ham1 0.6s cubic-bezier(0.77, 0, 0.175, 1) forwards; }
 
 @keyframes ham1 {
   50% {
-    transform: translateY(14px) rotate(0); }
+    transform: translateY(0) scale(0.5) rotate(0); }
   100% {
-    transform: translateY(0px) rotate(0); } }
+    transform: translateY(-15px) scaleX(0.5) rotate(0); } }
 
 .ham .bar2 {
-  width: 50%;
+  transform: scaleX(0.5);
   opacity: 0;
   animation: ham2 0.6s cubic-bezier(0.77, 0, 0.175, 1) forwards; }
 
 @keyframes ham2 {
   50% {
     opacity: 1;
-    width: 50%; }
+    transform: scaleX(0.5); }
   100% {
     opacity: 1;
-    width: 85%; } }
+    transform: scaleX(0.85); } }
 
 .ham .bar3 {
-  transform: translateY(-14px) rotate(45deg);
+  transform: translateY(0) scale(0.5) rotate(45deg);
   animation: ham3 0.6s cubic-bezier(0.77, 0, 0.175, 1) forwards; }
 
 @keyframes ham3 {
   50% {
-    transform: translateY(-14px) rotate(0); }
+    transform: translateY(0) scale(0.5) rotate(0); }
   100% {
-    transform: translateY(0px) rotate(0); } }
+    transform: translateY(15px) scaleX(0.5) rotate(0); } }
 
 @media only screen and (max-width: 767px) {
+  /* For desktop: */
+  .nav-m {
+    padding: 0 10px; }
   #hamburger {
-    width: 48px;
-    height: 45px;
-    padding: 7px 0; } }
+    transform-origin: right center;
+    transform: scale(0.9); } }
 
 #menu-wrapper {
   position: fixed;
@@ -1193,7 +1201,7 @@ body {
   font-family: Futura;
   overflow: hidden; }
   .intro-text span {
-    font-size: 120px;
+    font-size: 110px;
     letter-spacing: 0.2em;
     position: relative;
     display: inline-block;
@@ -1214,6 +1222,7 @@ body {
 
 .love {
   position: absolute;
+  align-self: flex-start;
   bottom: 0;
   margin: 0 0 40px 40px;
   cursor: pointer;
@@ -1306,6 +1315,58 @@ body {
 @keyframes follow {
   to {
     opacity: 1; } }
+
+@media only screen and (max-width: 1024px) {
+  .intro-text span {
+    font-size: 80px; }
+  .follow-container {
+    flex-direction: row;
+    position: absolute;
+    top: 100%;
+    transform: translate(0, -100%); }
+    .follow-container a {
+      transform: translate(0, 50%);
+      font-size: 22px;
+      height: 60px;
+      width: 60px; }
+      .follow-container a::after {
+        transform-origin: bottom center;
+        transform: scaleY(0); }
+      .follow-container a:hover::after {
+        content: "";
+        transform: scaleY(1); }
+  @keyframes follow-span {
+    to {
+      transform: translate(0, 0);
+      opacity: 1; } }
+  .love {
+    margin: 0 0 25px 25px; } }
+
+@media only screen and (max-width: 767px) {
+  .intro-text span {
+    font-size: 60px; }
+  .follow-container a {
+    transform: translate(0, 50%);
+    font-size: 18px;
+    height: 50px;
+    width: 50px;
+    border-right: 2px solid #000; }
+  .love {
+    margin: 0;
+    font-size: 14px;
+    transform-origin: left center;
+    transform: rotate(-90deg) translate(10%, 100%); } }
+
+@media only screen and (max-width: 479px) {
+  .intro-text span {
+    font-size: 11vw; }
+  .follow-container a {
+    font-size: 16px;
+    height: 40px;
+    width: 40px; }
+  .love {
+    font-size: 10px;
+    transform: rotate(-90deg) translate(10%, 100%); } }
 
 .projects-container {
   position: relative;

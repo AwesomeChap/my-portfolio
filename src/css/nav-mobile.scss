@@ -9,7 +9,7 @@ $eio : cubic-bezier(0.77, 0, 0.175, 1);
   justify-content: space-between;
   align-items: center;
   height:10vh;
-  padding:14px;
+  padding:0 14px;
   box-sizing: border-box;
 }
 
@@ -21,9 +21,10 @@ $eio : cubic-bezier(0.77, 0, 0.175, 1);
 #hamburger{
   // background: rgba(17, 17, 17, 0.795);
   // background: #444;
+  position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   width: 60px;
   height: 50px;
@@ -34,26 +35,32 @@ $eio : cubic-bezier(0.77, 0, 0.175, 1);
 }
 
 .bar{
+  position: absolute;
   display: block;
-  height: 1px;
+  height: 0px;
+  border: 0.5px solid #fff;
   background-color: #ddd;
   transition: all 0.3s;
+  width:100%;
 }
 
 .bar2{
-  width: 85%;
+  transform: scaleX(0.85);
   opacity: 1;
-  transition: all 0.3s;
 }
 
-.bar1, .bar3{
-  width:50%;
-  transform: translateY(0) rotate(0);
-  transition: all 0.3s;
+.bar1{
+  transform: translateY(-15px) scaleX(0.5) rotate(0);
+}
+
+.bar3{
+  transform: translateY(15px) scaleX(0.5) rotate(0);
 }
 
 .close{
   .bar{
+    height: 0px;
+    border: 1.5px solid $red;
     background-color: $red;
   }
   .bar1{
@@ -61,10 +68,10 @@ $eio : cubic-bezier(0.77, 0, 0.175, 1);
   }
   @keyframes close-bar1 {
     50%{
-      transform: translateY(14px) rotate(0);
+      transform: translateY(0) scale(0.5) rotate(0);
     }
     100%{
-      transform: translateY(14px) rotate(135deg);
+      transform: translateY(0) scale(0.5) rotate(135deg);
     }
   }
   
@@ -73,11 +80,11 @@ $eio : cubic-bezier(0.77, 0, 0.175, 1);
   }
   @keyframes close-bar2 {
     50%{
-      width: 50%;
+      transform: scaleX(0.5);
       opacity: 1;
     }
     100%{
-      width: 50%;
+      transform: scaleX(0.5);
       opacity: 0;
     }
   }
@@ -86,63 +93,71 @@ $eio : cubic-bezier(0.77, 0, 0.175, 1);
   }
   @keyframes close-bar3 {
     50%{
-      transform: translateY(-14px) rotate(0);
+      transform: translateY(0) scale(0.5) rotate(0);
     }
     100%{
-      transform: translateY(-14px) rotate(45deg);
+      transform: translateY(0) scale(0.5) rotate(45deg);
     }
   }
 }
 
 .ham{
+  .bar{
+    
+  }
   .bar1{
-    transform: translateY(14px) rotate(135deg);
+    transform: translateY(0) scale(0.5) rotate(135deg);
     animation: ham1 .6s $eio forwards,;
   }
   @keyframes ham1 {
     50%{
-      transform: translateY(14px) rotate(0);
+      transform: translateY(0) scale(0.5) rotate(0);
     }
     100%{
-      transform: translateY(0px) rotate(0);
+      transform: translateY(-15px) scaleX(0.5) rotate(0);
     }
   }
   .bar2{
-    width: 50%;
+    transform: scaleX(0.5);
     opacity: 0;
     animation: ham2 .6s $eio forwards;
   }
   @keyframes ham2 {
     50%{
       opacity: 1;
-      width: 50%;
+      transform: scaleX(0.5);
     }
     100%{
       opacity: 1;
-      width: 85%;
+      transform: scaleX(0.85);
     }
   }
   .bar3{
-    transform: translateY(-14px) rotate(45deg);
+    transform: translateY(0) scale(0.5) rotate(45deg);
     animation: ham3 .6s $eio forwards;
   }
   @keyframes ham3 {
     50%{
-      transform: translateY(-14px) rotate(0);
+      transform: translateY(0) scale(0.5) rotate(0);
     }
     100%{
-      transform: translateY(0px) rotate(0);
+      transform: translateY(15px) scaleX(0.5) rotate(0);
     }
   }
 }
 
-@media only screen  and (max-width: 767px){
+@media only screen and (max-width: 767px) {
+  /* For desktop: */
+  .nav-m{
+    padding: 0 10px;
+  }
+
   #hamburger{
-    width: 48px;
-    height: 45px;
-    padding: 7px 0;
+    transform-origin: right center; 
+    transform: scale(0.9);
   }
 }
+
 
 // ---------------------------------------------------------------
 

@@ -23,7 +23,7 @@ $ease-out : cubic-bezier(0.19, 1, 0.22, 1);
   // background: red;
   // width:50%;
   span{
-    font-size: 120px;
+    font-size: 110px;
     letter-spacing: 0.2em;
     position: relative;
     display: inline-block;
@@ -49,7 +49,8 @@ $ease-out : cubic-bezier(0.19, 1, 0.22, 1);
 
 .love{
   position: absolute;
-  bottom : 0;
+  align-self: flex-start;
+  bottom: 0;
   margin: 0 0 40px 40px;
   cursor: pointer;
   color: #fff;
@@ -174,5 +175,95 @@ $ease-out : cubic-bezier(0.19, 1, 0.22, 1);
 @keyframes follow{
   to{
     opacity: 1;
+  }
+}
+
+@media only screen and (max-width: 1024px){
+  
+  .intro-text{
+    span{
+      font-size: 80px;
+    }
+  }
+
+  .follow-container{
+    flex-direction: row;
+    position: absolute;
+    top:100%;
+    transform: translate(0,-100%);
+    a{
+      transform: translate(0,50%);
+      font-size: 22px;
+      height: 60px;
+      width: 60px;
+      &::after{
+        transform-origin: bottom center;
+        transform : scaleY(0);
+      }
+      &:hover{
+        &::after{
+          content: "";
+          transform: scaleY(1);
+        }
+      }
+    }
+    @keyframes follow-span {
+      to{
+        transform: translate(0,0);
+        opacity: 1;
+      }
+    }
+  }
+
+  .love{
+    margin: 0 0 25px 25px;
+  }
+}
+
+@media only screen and (max-width: 767px){
+  
+  .intro-text{
+    span{
+      font-size: 60px;
+    }
+  }
+
+  .follow-container{
+    a{
+      transform: translate(0,50%);
+      font-size: 18px;
+      height: 50px;
+      width: 50px;
+      border-right: 2px solid #000;
+    }
+  }
+
+  .love{
+    margin: 0;
+    font-size: 14px;
+    transform-origin: left center;
+    transform: rotate(-90deg) translate(10%,100%);
+  }
+}
+
+@media only screen and (max-width: 479px){
+  
+  .intro-text{
+    span{
+      font-size: 11vw;
+    }
+  }
+
+  .follow-container{
+    a{
+      font-size: 16px;
+      height: 40px;
+      width: 40px;
+    }
+  }
+
+  .love{
+    font-size: 10px;
+    transform: rotate(-90deg) translate(10%,100%);
   }
 }
