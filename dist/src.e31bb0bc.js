@@ -76776,7 +76776,7 @@ function () {
 
     this.time = 0.0;
     var triangles = 1;
-    var instances = 200;
+    var instances = 700;
     var geometry = new THREE.InstancedBufferGeometry();
     var vertices = new THREE.BufferAttribute(new Float32Array(triangles * 3 * 3), 3);
     var unit = 0.1;
@@ -76871,6 +76871,10 @@ function (_Component) {
 
     _defineProperty(_assertThisInitialized(_this), "handleWindowResize", function () {
       // update height and width of the renderer and the camera
+      _this.setState({
+        mobileView: _this.width <= 479
+      });
+
       _this.width = _this.mount.clientWidth;
       _this.height = _this.mount.clientHeight;
 
@@ -76909,6 +76913,9 @@ function (_Component) {
       cancelAnimationFrame(_this.frameId);
     });
 
+    _this.state = {
+      mobileView: false
+    };
     _this.particles = new ParticleSystem();
     _this.renderer = null;
     _this.width = null;
@@ -76925,6 +76932,9 @@ function (_Component) {
     value: function componentDidMount() {
       this.width = this.mount.clientWidth;
       this.height = this.mount.clientHeight;
+      this.setState({
+        mobileView: this.width <= 479
+      });
       this.scene = new THREE.Scene();
       this.scene.fog = new THREE.Fog(0x2e2e2e, 2, 10); //ADD CAMERA
 
@@ -76968,12 +76978,12 @@ function (_Component) {
     value: function render() {
       var _this2 = this;
 
-      return _react.default.createElement("div", {
+      return _react.default.createElement(_react.default.Fragment, null, !this.state.mobileView && _react.default.createElement("div", {
         ref: function ref(mount) {
           _this2.mount = mount;
         },
         className: "background"
-      });
+      }));
     }
   }]);
 
