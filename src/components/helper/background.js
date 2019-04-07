@@ -16,7 +16,7 @@ class ParticleSystem {
   constructor() {
     this.time = 0.0
     let triangles = 1
-    let instances = 1000
+    let instances = 200
     let geometry = new THREE.InstancedBufferGeometry()
 
     let vertices = new THREE.BufferAttribute(new Float32Array(triangles * 3 * 3), 3)

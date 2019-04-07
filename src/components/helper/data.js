@@ -100,6 +100,7 @@ import PiecesImage from '../../images/10_pieces.PNG';
 import chemAssisImage from '../../images/chem_assis.png';
 import sample from '../../images/sample.PNG';
 import portfolio from '../../images/portfolio.PNG';
+import tcp from '../../images/tcp.png';
 
 export const projects = [
   {
@@ -110,14 +111,14 @@ export const projects = [
     gitUrl : '',
     desc : 'This is My portfolio website'
   },
-  {
-    name : 'Blog',
-    imgUrl : sample,
-    keywords : ['Web', 'React', 'SCSS', 'SVG', 'Animations', 'Node'],
-    link : '',
-    gitUrl : '',
-    desc : 'This is my blog'
-  },
+  // {
+  //   name : 'Blog',
+  //   imgUrl : sample,
+  //   keywords : ['Web', 'React', 'SCSS', 'SVG', 'Animations', 'Node'],
+  //   link : '',
+  //   gitUrl : '',
+  //   desc : 'This is my blog'
+  // },
   {
     name : 'SuperMarket FoodInfo',
     imgUrl : superMarketImg,
@@ -140,7 +141,7 @@ export const projects = [
     keywords : ['Web', 'CSS', 'Node', 'Web Sockets'],
     link: 'https://room-chatx.herokuapp.com/',
     gitUrl : 'https://github.com/AwesomeChap/Room_Chat',
-    desc : "A Chat App build to provide room like experience to group of people while conversing with each other"
+    desc : "A Chat App build to provide room like experience to group of people"
   },
   {
     name : '10_Pieces',
@@ -148,7 +149,15 @@ export const projects = [
     keywords : ['Web', 'CSS', 'Animations'],
     link: 'https://awesomechap.github.io/10-Pieces/.',
     gitUrl : 'https://github.com/AwesomeChap/10-Pieces',
-    desc : "A web demonstration showing power of pure CSS"
+    desc : "A web demonstration to show power of pure CSS"
+  },
+  {
+    name : 'TCP Server',
+    imgUrl : tcp,
+    keywords : ['C++', 'Web Sockets'],
+    link: '',
+    gitUrl : 'https://github.com/AwesomeChap/TCP_CLient_Server',
+    desc : "A TCP server made using C++ utilising Web Sockets"
   },
   {
     name : 'Chem Assis',

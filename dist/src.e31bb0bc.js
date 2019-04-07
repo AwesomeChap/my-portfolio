@@ -41601,6 +41601,8 @@ module.exports = "/chem_assis.d7ec2af8.png";
 module.exports = "/sample.2aec3b69.PNG";
 },{}],"images/portfolio.PNG":[function(require,module,exports) {
 module.exports = "/portfolio.81482cd6.PNG";
+},{}],"images/tcp.png":[function(require,module,exports) {
+module.exports = "/tcp.d12e4ce8.png";
 },{}],"components/helper/data.js":[function(require,module,exports) {
 "use strict";
 
@@ -41624,6 +41626,8 @@ var _chem_assis = _interopRequireDefault(require("../../images/chem_assis.png"))
 var _sample = _interopRequireDefault(require("../../images/sample.PNG"));
 
 var _portfolio = _interopRequireDefault(require("../../images/portfolio.PNG"));
+
+var _tcp = _interopRequireDefault(require("../../images/tcp.png"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -41696,14 +41700,15 @@ var projects = [{
   link: '',
   gitUrl: '',
   desc: 'This is My portfolio website'
-}, {
-  name: 'Blog',
-  imgUrl: _sample.default,
-  keywords: ['Web', 'React', 'SCSS', 'SVG', 'Animations', 'Node'],
-  link: '',
-  gitUrl: '',
-  desc: 'This is my blog'
-}, {
+}, // {
+//   name : 'Blog',
+//   imgUrl : sample,
+//   keywords : ['Web', 'React', 'SCSS', 'SVG', 'Animations', 'Node'],
+//   link : '',
+//   gitUrl : '',
+//   desc : 'This is my blog'
+// },
+{
   name: 'SuperMarket FoodInfo',
   imgUrl: _sp.default,
   keywords: ['Web', 'SCSS', 'Node', 'React', 'MongoDB'],
@@ -41723,14 +41728,21 @@ var projects = [{
   keywords: ['Web', 'CSS', 'Node', 'Web Sockets'],
   link: 'https://room-chatx.herokuapp.com/',
   gitUrl: 'https://github.com/AwesomeChap/Room_Chat',
-  desc: "A Chat App build to provide room like experience to group of people while conversing with each other"
+  desc: "A Chat App build to provide room like experience to group of people"
 }, {
   name: '10_Pieces',
   imgUrl: _pieces.default,
   keywords: ['Web', 'CSS', 'Animations'],
   link: 'https://awesomechap.github.io/10-Pieces/.',
   gitUrl: 'https://github.com/AwesomeChap/10-Pieces',
-  desc: "A web demonstration showing power of pure CSS"
+  desc: "A web demonstration to show power of pure CSS"
+}, {
+  name: 'TCP Server',
+  imgUrl: _tcp.default,
+  keywords: ['C++', 'Web Sockets'],
+  link: '',
+  gitUrl: 'https://github.com/AwesomeChap/TCP_CLient_Server',
+  desc: "A TCP server made using C++ utilising Web Sockets"
 }, {
   name: 'Chem Assis',
   imgUrl: _chem_assis.default,
@@ -41747,7 +41759,7 @@ var projects = [{
   desc: "An application made using assembly language, converting blank file to ordered sentences"
 }];
 exports.projects = projects;
-},{"../../images/chat.PNG":"images/chat.PNG","../../images/sp.png":"images/sp.png","../../images/order_me.PNG":"images/order_me.PNG","../../images/time-tracker.PNG":"images/time-tracker.PNG","../../images/10_pieces.PNG":"images/10_pieces.PNG","../../images/chem_assis.png":"images/chem_assis.png","../../images/sample.PNG":"images/sample.PNG","../../images/portfolio.PNG":"images/portfolio.PNG"}],"components/helper/data-uri.js":[function(require,module,exports) {
+},{"../../images/chat.PNG":"images/chat.PNG","../../images/sp.png":"images/sp.png","../../images/order_me.PNG":"images/order_me.PNG","../../images/time-tracker.PNG":"images/time-tracker.PNG","../../images/10_pieces.PNG":"images/10_pieces.PNG","../../images/chem_assis.png":"images/chem_assis.png","../../images/sample.PNG":"images/sample.PNG","../../images/portfolio.PNG":"images/portfolio.PNG","../../images/tcp.png":"images/tcp.png"}],"components/helper/data-uri.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -76764,7 +76776,7 @@ function () {
 
     this.time = 0.0;
     var triangles = 1;
-    var instances = 1000;
+    var instances = 200;
     var geometry = new THREE.InstancedBufferGeometry();
     var vertices = new THREE.BufferAttribute(new Float32Array(triangles * 3 * 3), 3);
     var unit = 0.1;
@@ -77624,7 +77636,70 @@ var _svg = _interopRequireDefault(require("./svg"));
 var _footer = _interopRequireDefault(require("./footer"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-},{"./about":"components/about.js","./blog":"components/blog.js","./contact":"components/contact.js","./home":"components/home.js","./work":"components/work.js","./projects":"components/projects.js","./svg":"components/svg.js","./footer":"components/footer.js"}],"app.js":[function(require,module,exports) {
+},{"./about":"components/about.js","./blog":"components/blog.js","./contact":"components/contact.js","./home":"components/home.js","./work":"components/work.js","./projects":"components/projects.js","./svg":"components/svg.js","./footer":"components/footer.js"}],"components/helper/scrollToTop.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _reactRouterDom = require("react-router-dom");
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+var ScrollToTop =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(ScrollToTop, _Component);
+
+  function ScrollToTop() {
+    _classCallCheck(this, ScrollToTop);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(ScrollToTop).apply(this, arguments));
+  }
+
+  _createClass(ScrollToTop, [{
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps) {
+      if (this.props.location !== prevProps.location) {
+        window.scrollTo(0, 0);
+      }
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return this.props.children;
+    }
+  }]);
+
+  return ScrollToTop;
+}(_react.Component);
+
+var _default = (0, _reactRouterDom.withRouter)(ScrollToTop);
+
+exports.default = _default;
+},{"react":"../node_modules/react/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js"}],"app.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -77641,6 +77716,8 @@ var _nav = _interopRequireDefault(require("./components/nav"));
 var _navMobile = _interopRequireDefault(require("./components/nav-mobile"));
 
 var _index = require("./components/index");
+
+var _scrollToTop = _interopRequireDefault(require("./components/helper/scrollToTop"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -77680,7 +77757,7 @@ function (_Component) {
     value: function render() {
       return _react.default.createElement("div", {
         className: "router-wrapper"
-      }, _react.default.createElement(_reactRouterDom.BrowserRouter, null, _react.default.createElement(_nav.default, null), _react.default.createElement(_navMobile.default, null), _react.default.createElement(_reactRouterDom.Route, {
+      }, _react.default.createElement(_reactRouterDom.BrowserRouter, null, _react.default.createElement(_scrollToTop.default, null, _react.default.createElement(_nav.default, null)), _react.default.createElement(_navMobile.default, null), _react.default.createElement(_reactRouterDom.Route, {
         exact: true,
         path: "/",
         component: _index.Home
@@ -77712,7 +77789,7 @@ function (_Component) {
 }(_react.Component);
 
 exports.default = App;
-},{"react":"../node_modules/react/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","./components/nav":"components/nav.js","./components/nav-mobile":"components/nav-mobile.js","./components/index":"components/index.js"}],"index.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","./components/nav":"components/nav.js","./components/nav-mobile":"components/nav-mobile.js","./components/index":"components/index.js","./components/helper/scrollToTop":"components/helper/scrollToTop.js"}],"index.js":[function(require,module,exports) {
 "use strict";
 
 var _react = _interopRequireDefault(require("react"));

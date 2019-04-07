@@ -3,6 +3,7 @@ import {Route, BrowserRouter as Router} from 'react-router-dom'
 import NavBar from './components/nav';
 import NavBarMobile from './components/nav-mobile';
 import {About, Blog, Contact, Home, Work, Projects, Footer} from './components/index';
+import ScrollToTop from './components/helper/scrollToTop';
 
 export default class App extends Component{
   constructor(props){
@@ -13,7 +14,7 @@ export default class App extends Component{
     return(
       <div className="router-wrapper">
         <Router>
-          <NavBar/>
+          <ScrollToTop><NavBar/></ScrollToTop>
           <NavBarMobile/>
           <Route exact path="/" component={Home}></Route>
           <Route exact path="/about" component={About}></Route>

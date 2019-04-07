@@ -420,7 +420,7 @@
         width: 60%;
         height: 12px;
         position: relative;
-        background-color: #222;
+        background-color: #333;
         transform-origin: right center;
         transform: scaleX(0);
         overflow: hidden;
@@ -564,9 +564,11 @@
   .block, .skill-wrapper {
     font-size: 16px; }
     .block .block-item .item-heading, .skill-wrapper .block-item .item-heading {
-      font-size: 24px; }
+      font-size: 6vw; }
       .block .block-item .item-heading span, .block .block-item .item-heading i, .skill-wrapper .block-item .item-heading span, .skill-wrapper .block-item .item-heading i {
-        font-size: 20px; } }
+        font-size: 5vw; }
+      .block .block-item .item-heading i, .skill-wrapper .block-item .item-heading i {
+        margin: 0 0 0 2vw; } }
 
 .nav-m {
   display: none;
@@ -576,7 +578,7 @@
   margin: 10px;
   border-radius: 50%;
   z-index: 4;
-  background-color: #070707;
+  background-color: #000;
   box-sizing: border-box; }
 
 .nav-logo-m {
@@ -1168,7 +1170,7 @@ html, body {
   to {
     opacity: 0; } }
       .contact-form .buttons .sending.btn .sent {
-        transform: translate(47%, 0);
+        transform: translate(47%, 20%);
         animation: sent 0.3s 2.8s forwards;
         position: absolute; }
 
