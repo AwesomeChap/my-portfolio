@@ -923,13 +923,15 @@
     .footer .sub-footer .footer-header {
       font-size: 24px; } }
 
+body {
+  background: #111;
+  color: #ccc;
+  font-family: 'Quicksand', sans-serif; }
+
 html, body {
   width: 100%;
   height: 100%;
-  margin: 0;
-  background: #111;
-  color: #ccc;
-  font-family: 'Quicksand', sans-serif;
+  margin: 0px;
   padding: 0px;
   overflow-x: hidden; }
 
