@@ -723,7 +723,7 @@
 
 .menu-item-wrapper {
   text-decoration: none;
-  color: #555;
+  color: #777;
   height: 100%;
   width: 100%;
   display: flex;
@@ -739,7 +739,7 @@
     background-color: transparent; } }
 
 .selected-m-nav-item {
-  color: #aaa; }
+  color: #ccc; }
 
 .menu-item-wrapper:nth-child(even).selected-menu-item {
   animation: makeMeTransparent 0.1s 0.3s forwards; }
@@ -768,11 +768,11 @@
 
 .menu-item-bg:nth-child(1) {
   transform-origin: left center;
-  background: #171717; }
+  background: #2a2a2a; }
 
 .menu-item-bg:nth-child(2) {
   transform-origin: right center;
-  background: #131313; }
+  background: #1c1c1c; }
 
 .menu-item-name {
   position: absolute;
