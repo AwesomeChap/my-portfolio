@@ -1,14 +1,16 @@
 $red : rgb(255, 13, 45);
 $eio : cubic-bezier(0.77, 0, 0.175, 1);
 $eo : cubic-bezier(0.165, 0.84, 0.44, 1);
-$nav-bg : #1a1a1a;
+$nav-bg : #222;
 
 .nav-bar{
   z-index: 1;
+  width: 100%;
   display: flex;
   justify-content: space-between;
-  position: -webkit-sticky; /* Safari */
-  position: sticky;
+  // position: -webkit-sticky; /* Safari */
+  // position: sticky;
+  position: fixed;
   top: 0;
   transition: all 0.3s;
   margin-bottom:5vh;
@@ -29,6 +31,7 @@ $nav-bg : #1a1a1a;
   // background: #171717;
   // box-shadow: 0 0 10px #000;
   // font-family: Futura;
+  align-self: flex-end;
   color: #aaa;
   display: flex;
   justify-content: center;
@@ -143,7 +146,7 @@ $nav-bg : #1a1a1a;
     height: 100%;
     transform-origin: bottom left;
     transform: scaleY(0);
-    background-color:#141414;
+    background-color:#1a1a1a;
     box-sizing: border-box;
     z-index: -1;
     transition: transform 0.3s;
@@ -269,6 +272,7 @@ $nav-bg : #1a1a1a;
   .close-1{
     .line{
       background-color: $red;
+      height: 2px;
     }
 
     .line1{
@@ -277,10 +281,10 @@ $nav-bg : #1a1a1a;
 
     @keyframes line1 {
       50%{
-        transform: scale(0.5) translateY(1px) rotate(0deg);
+        transform: scale(0.6) translateY(3px) rotate(0deg);
       }
       100%{
-        transform: scale(0.5) translateY(0px) rotate(135deg);
+        transform: scale(0.6) translateY(3px) rotate(135deg);
       }
     }
 
@@ -301,10 +305,10 @@ $nav-bg : #1a1a1a;
 
     @keyframes line3 {
       50%{
-        transform: scale(0.5) translateY(0px) rotate(0deg);
+        transform: scale(0.6) translateY(-3px) rotate(0deg);
       }
       100%{
-        transform: scale(0.5) translateY(0px) rotate(45deg);
+        transform: scale(0.6) translateY(-3px) rotate(45deg);
       }
     }
 

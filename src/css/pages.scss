@@ -9,12 +9,13 @@ $font-normal : 24px;
   display: flex;
   align-items: center;
   flex-direction: column;
-  margin-top:-3vh;
+  margin-top:10vh;
 }
 
 .inner-section{
   padding: 10vh 0;
   width:75%;
+  // position: relative;
   // overflow: hidden;
 }
 
@@ -127,7 +128,7 @@ $font-normal : 24px;
   .block-item{
     margin: 2vh 0;
     padding: 2vh;
-    background: #151515;
+    background: #222;
     box-shadow: 0 0 5px #000;
     
     .item-heading{
@@ -136,7 +137,7 @@ $font-normal : 24px;
       margin-bottom: 2vh;
       
       span{
-        color: #444;
+        color: #666;
       }
 
       a{
@@ -169,9 +170,9 @@ $font-normal : 24px;
 
 .hglt{
   display: inline-block;
-  background: #222;
+  background: #333;
   color: #ccc;
-  border-bottom: 2px solid $red;
+  // border-bottom: 2px solid $red;
 }
 
 .hglt-red{
