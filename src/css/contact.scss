@@ -156,6 +156,8 @@
   }
 
   .input-container{
+    width: 100vw;
+    max-width: 100%;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap; 
@@ -303,6 +305,7 @@
 
 .status-container{
   width:100%;
+  max-width: 100%;
   span{
     display: inline-block;
     padding: 5px 10px;
