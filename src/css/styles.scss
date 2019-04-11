@@ -2,6 +2,7 @@ body{
   background: #171717;
   color: #ccc;
   font-family: 'Quicksand', sans-serif;
+  // overflow-x: hidden;
 }
 
 html,body {
@@ -10,7 +11,10 @@ html,body {
   max-height:100%;
   margin: 0px;
   padding: 0px;
-  overflow-x: hidden;
+}
+
+html{
+  overflow: auto;
 }
 
 /* width */
