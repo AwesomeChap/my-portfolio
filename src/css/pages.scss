@@ -291,7 +291,7 @@ $font-normal : 24px;
   position: absolute;
   top: 0;
   left: 0;
-  height: 100%;
+  height: 100vh;
   max-height: 100%;
   width: 100%;
   z-index: -1;
@@ -454,6 +454,11 @@ $font-normal : 24px;
 }
 
 @media only screen and (max-width: 479px){
+  .inner-sub-section{
+    &:nth-child(2){
+      height: 400px;
+    }
+  }
 
   .image-container{
     display: flex;
