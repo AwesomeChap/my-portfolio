@@ -1164,7 +1164,7 @@ html, body {
   .contact-form label, .contact-form .buttons {
     font-family: Futura, 'sans-serif'; }
   .contact-form .input-container {
-    width: 90vw;
+    width: 20vw;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
