@@ -15,7 +15,8 @@ export default class Contact extends Component {
       nameErr: false,
       emailErr: false,
       msgErr: false,
-      err: ""
+      err: "",
+      mobileView: window.innerWidth < 479 ? true : false
     };
   }
 
@@ -135,6 +136,14 @@ export default class Contact extends Component {
 
   handleFocus = (event) => event.target.select();
 
+  componentDidMount(){
+    window.addEventListener('resize',this.resize);
+  }
+
+  resize = () => {
+    this.setState({mobileView : window.innerWidth < 479 ? true : false});
+  }
+
   render() {
     return (
       <div className="section">
@@ -145,15 +154,28 @@ export default class Contact extends Component {
               <div className="text">
                 I am always up for cool projects that creates a difference.
                 So in case you have one and wanna talk about it or just say hi,
-                fill the awesome form or just drop me a message at my 
-                email, <span className="hglt">jatin15011999@gmail.com</span> and <span style={{fontWeight:900}} >~let's talk</span>
+                fill the awesome form or just drop me a message at my
+                email, <span className="hglt">jatin15011999@gmail.com</span> and <span style={{ fontWeight: 900 }} >~let's talk</span>
               </div>
               <div className="sub-heading">{"Let's Get Social"}</div>
               <div className="social-container">
-                <div className="social-icon" > <i className="fab if fa-facebook-f"></i><span>FACEBOOK</span></div>
-                <div className="social-icon" > <i className="fab ig fa-github"></i><span>GITHUB</span></div>
-                <div className="social-icon" > <i className="fab il fa-linkedin-in"></i><span>LINKEDIN</span></div>
-                <div className="social-icon" > <i className="fab it fa-twitter"></i><span>TWITTER</span></div>
+                {
+                  !this.state.mobileView ? (
+                    <>
+                      <div className="social-icon" > <i className="fab if fa-facebook-f"></i><span>FACEBOOK</span></div>
+                      <div className="social-icon" > <i className="fab ig fa-github"></i><span>GITHUB</span></div>
+                      <div className="social-icon" > <i className="fab il fa-linkedin-in"></i><span>LINKEDIN</span></div>
+                      <div className="social-icon" > <i className="fab it fa-twitter"></i><span>TWITTER</span></div>
+                    </>
+                  ) : (
+                    <>
+                      <div className="social-icon-m" > <i className="fab if fa-facebook-f"></i></div>
+                      <div className="social-icon-m" > <i className="fab ig fa-github"></i></div>
+                      <div className="social-icon-m" > <i className="fab il fa-linkedin-in"></i></div>
+                      <div className="social-icon-m" > <i className="fab it fa-twitter"></i></div>
+                    </>
+                  )
+                }
               </div>
             </div>
             <div className="inner-sub-section">

@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import Background from './helper/background';
+import Mbackground from './helper/background';
 import '../css/pages.scss';
 import '../css/home.scss';
+import MBackground from './helper/mBackground';
 
 export default class Home extends Component {
 
@@ -30,7 +32,7 @@ export default class Home extends Component {
 
     return (
       <div className="section home">
-        {!this.state.mobileView && <Background />}
+        {this.state.mobileView ? <MBackground/> : <Background />}
         <div className="intro">
           <div class="content">
             <div className="intro-text" style={{ color: "#999" }}>
@@ -65,6 +67,7 @@ export default class Home extends Component {
         <div className="follow-container">
           <a className="if" href="#"><i className="fab fa-facebook-f"></i></a>
           <a className="ig" href="#"><i className="fab fa-github"></i></a>
+          {/* <a className="iy" href="#"><i className="fab fa-youtube"></i></a> */}
           <a className="il" href="#"><i className="fab fa-linkedin-in"></i></a>
           <a className="it" href="#"><i className="fab fa-twitter"></i></a>
         </div>

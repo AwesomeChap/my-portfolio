@@ -3,12 +3,13 @@ $ease-out : cubic-bezier(0.19, 1, 0.22, 1);
 
 .home{
   // font-family: Futura;
-  margin-top:-5vh;
+  margin-top:0vh;
   letter-spacing: 0.2em;
 }
 
 .intro{
-  min-height: 89vh;
+  height: 100vh;
+  max-height: 100%;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -56,6 +57,7 @@ $ease-out : cubic-bezier(0.19, 1, 0.22, 1);
   color: #fff;
   opacity: 0;
   animation: love 0.5s 1.5s forwards;
+  backface-visibility: hidden;
 
   &:after{
     content: '';
@@ -99,11 +101,9 @@ $ease-out : cubic-bezier(0.19, 1, 0.22, 1);
   transform: translate(0,-50%);
   display: inline-flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
-  box-shadow: 0 0 10px #000;
-  opacity: 0;
-  animation: follow 0.5s 1.5s forwards;
+  opacity: 1;
 
   .if{
     background-color: rgb(0, 95, 184);
@@ -111,6 +111,10 @@ $ease-out : cubic-bezier(0.19, 1, 0.22, 1);
 
   .ig{
     background-color: #222;
+  }
+
+  .iy{
+    background-color: rgb(219, 0, 0);
   }
 
   .il{
@@ -122,31 +126,19 @@ $ease-out : cubic-bezier(0.19, 1, 0.22, 1);
   }
 
   a{
-    transform: translate(50%,0);
+    transform: translate(50%,0) scale(1);
     opacity:0;
     text-decoration: none;
-    animation: follow-span 0.3s forwards;
     position: relative;
     box-sizing: border-box;
-    width:70px;
-    height: 70px;
+    width:60px;
+    height: 60px;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 28px;
-    &::after{
-      content:"";
-      position: absolute;
-      top:0;
-      right:0;
-      width: 100%;
-      height:100%;
-      transform-origin: right center;
-      transform: scaleX(0);
-      z-index: -1;
-      background: rgba(255, 255, 255, 0.2);
-      transition: transform 0.3s;
-    }
+    transition: all 0.6s cubic-bezier(.16,.74,.35,1);
+    animation: follow-span 0.3s forwards;
 
     &:nth-child(1){
       animation-delay: 1.7s;
@@ -164,30 +156,31 @@ $ease-out : cubic-bezier(0.19, 1, 0.22, 1);
       animation-delay: 2.0s;
     }
 
+    &:nth-child(5){
+      animation-delay: 2.1s;
+    }
+
     i{
       color : #ddd;
       transition : all 0.2s;
-    }
-    
-
-    &:hover{
-      &::after{
-        transform: scaleX(1);
-      }
     }
   }
 
   @keyframes follow-span{
     to{
-      transform: translate(0,0);
+      transform: translate(0,0) scale(1);
       opacity: 1;
     }
   }
 }
 
-@keyframes follow{
-  to{
-    opacity: 1;
+@media (min-width:767px){
+  .follow-container{
+    a:hover{
+      padding-right: 30%;
+      width: 130%;
+      transition-duration:0.4s;
+    }
   }
 }
 
@@ -196,35 +189,6 @@ $ease-out : cubic-bezier(0.19, 1, 0.22, 1);
   .intro-text{
     span{
       font-size: 80px;
-    }
-  }
-
-  .follow-container{
-    flex-direction: row;
-    position: absolute;
-    top:100%;
-    transform: translate(0,-100%);
-    a{
-      transform: translate(0,50%);
-      font-size: 22px;
-      height: 60px;
-      width: 60px;
-      &::after{
-        transform-origin: bottom center;
-        transform : scaleY(0);
-      }
-      &:hover{
-        &::after{
-          content: "";
-          transform: scaleY(1);
-        }
-      }
-    }
-    @keyframes follow-span {
-      to{
-        transform: translate(0,0);
-        opacity: 1;
-      }
     }
   }
 
@@ -242,13 +206,15 @@ $ease-out : cubic-bezier(0.19, 1, 0.22, 1);
   }
 
   .follow-container{
+    flex-direction: row;
+    top:100%;
     right: 100%;
     transform: translate(100%,-100%);
     box-shadow: none;
     a{
       overflow: hidden;
       transform: translate(0,50%);
-      font-size: 18px;
+      font-size: 22px;
       height: 50px;
       width: 50px;
     }

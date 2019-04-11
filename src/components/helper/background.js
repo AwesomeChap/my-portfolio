@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import '../../css/styles.scss';
 import * as THREE from 'three';
 let OrbitControls = require('three-orbit-controls')(THREE);
 

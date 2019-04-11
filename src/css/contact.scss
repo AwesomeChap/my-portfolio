@@ -77,6 +77,33 @@
       }
     }
   }
+
+  .social-icon-m{
+    margin-top: 4vh;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px;
+    
+    &:nth-child(1){
+      background-color: rgb(0, 95, 184);
+    }
+
+    &:nth-child(2){
+      background-color: #272727;
+    }
+
+    &:nth-child(3){
+      background-color: rgb(0, 108, 209)
+    }
+
+    &:nth-child(4){
+      background-color: #009bd3;
+    }
+  }
 }
 
 .lets-talk-bg{
