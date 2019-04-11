@@ -1041,9 +1041,6 @@ html, body {
   margin: 0px;
   padding: 0px; }
 
-html {
-  overflow: auto; }
-
 /* width */
 ::-webkit-scrollbar {
   width: 0px; }
@@ -1167,8 +1164,7 @@ html {
   .contact-form label, .contact-form .buttons {
     font-family: Futura, 'sans-serif'; }
   .contact-form .input-container {
-    width: 100vw;
-    max-width: 100%;
+    width: 90vw;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -1317,7 +1313,7 @@ html {
 
 @media only screen and (max-width: 479px) {
   .fields {
-    margin: 0 0 3vh 0; }
+    margin: 0 0 3vw 0; }
     .fields span {
       width: 30px;
       height: 30px;
@@ -1325,13 +1321,15 @@ html {
       .fields span i {
         font-size: 14px; }
   .social-container .social-icon {
-    margin-top: 2vh; }
+    margin-top: 2vw; }
     .social-container .social-icon i {
       font-size: 18px; }
     .social-container .social-icon span {
       font-size: 12px; }
   .contact-form label {
     font-size: 24px; }
+  .contact-form .input-container {
+    margin: 4vw 0; }
   .contact-form input, .contact-form textarea {
     font-size: 16px;
     padding: 8px 15px;
