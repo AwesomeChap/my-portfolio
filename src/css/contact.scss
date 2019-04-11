@@ -156,11 +156,11 @@
   }
 
   .input-container{
-    width: 20vw;
+    width: 100%;
     // max-width: 100%;
     display: flex;   
     flex-direction: column;
-    flex-wrap: wrap; 
+    // flex-wrap: wrap; 
     animation-delay: 0.1s;
     margin: 3vh 0;
   }
