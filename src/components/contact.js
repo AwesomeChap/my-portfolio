@@ -155,7 +155,7 @@ export default class Contact extends Component {
                 I am always up for cool projects that creates a difference.
                 So in case you have one and wanna talk about it or just say hi,
                 fill the awesome form or just drop me a message at my
-                email, <span className="hglt">jatin15011999@gmail.com</span> and <span style={{ fontWeight: 900 }} >~let's talk</span>
+                email, <span className="hglt">jatin@jatinkumar.tech</span> and <span style={{ fontWeight: 900 }} >~let's talk</span>
               </div>
               <div className="sub-heading">{"Let's Get Social"}</div>
               <div className="social-container">

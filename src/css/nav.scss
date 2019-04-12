@@ -1,7 +1,7 @@
 $red : rgb(255, 13, 45);
 $eio : cubic-bezier(0.77, 0, 0.175, 1);
 $eo : cubic-bezier(0.165, 0.84, 0.44, 1);
-$nav-bg : #222;
+$nav-bg : #272727;
 
 .nav-bar{
   z-index: 1;
@@ -142,11 +142,11 @@ $nav-bg : #222;
     bottom:0;
     left:0;
     right: 0;
-    width:98%;
+    width:100%;
     height: 100%;
     transform-origin: bottom left;
     transform: scaleY(0);
-    background-color:#1a1a1a;
+    background-color:#393939;
     box-sizing: border-box;
     z-index: -1;
     transition: transform 0.3s;
@@ -162,7 +162,7 @@ $nav-bg : #222;
 .nav-item-open.selected{
   // color: $red;
   &::before{
-    width: 98%;
+    width: 100%;
     height: 100%;
     transform-origin: bottom left;
     transform: scaleY(1);
@@ -175,6 +175,7 @@ $nav-bg : #222;
 .selected{
   color: #fff;
   &::before{
+    background-color: #393939;
     height: 0%;
     border-bottom: 5px solid #777;
     box-sizing: border-box;

@@ -137,7 +137,7 @@ $ease-out : cubic-bezier(0.19, 1, 0.22, 1);
     justify-content: center;
     align-items: center;
     font-size: 28px;
-    transition: all 0.6s cubic-bezier(.16,.74,.35,1);
+    transition: all cubic-bezier(0.075, 0.82, 0.165, 1) 0.6s;
     animation: follow-span 0.3s forwards;
 
     &:nth-child(1){
@@ -179,7 +179,7 @@ $ease-out : cubic-bezier(0.19, 1, 0.22, 1);
     a:hover{
       padding-right: 30%;
       width: 130%;
-      transition-duration:0.4s;
+      transition-duration:0.6s;
     }
   }
 }

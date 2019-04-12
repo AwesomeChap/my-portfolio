@@ -41491,7 +41491,7 @@ function (_Component) {
         className: "sub-footer"
       }, _react.default.createElement("div", {
         className: "footer-header"
-      }, "Let's Talk"), _react.default.createElement("div", null, "Wanna get in touch or talk about a project?"), !this.state.mobileView && _react.default.createElement("div", null, "Feel free to contact me via email at ", _react.default.createElement("span", null, "jatin15011999@gmail.com")), this.state.mobileView && _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("div", null, "Feel free to contact me via email "), _react.default.createElement("div", null, " at ", _react.default.createElement("span", null, "jatin15011999@gmail.com"))), _react.default.createElement("div", null, "or drop a sweet message at ", _react.default.createElement("span", null, "contact page")), _react.default.createElement("div", {
+      }, "Let's Talk"), _react.default.createElement("div", null, "Wanna get in touch or talk about a project?"), !this.state.mobileView && _react.default.createElement("div", null, "Feel free to contact me via email at ", _react.default.createElement("span", null, "jatin@jatinkumar.tech")), this.state.mobileView && _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("div", null, "Feel free to contact me via email "), _react.default.createElement("div", null, " at ", _react.default.createElement("span", null, "jatin@jatinkumar.tech"))), _react.default.createElement("div", null, "or drop a sweet message at ", _react.default.createElement("span", null, "contact page")), _react.default.createElement("div", {
         className: "social-icons"
       }, _react.default.createElement("a", {
         className: "if",
@@ -42381,7 +42381,7 @@ function (_Component) {
         className: "text"
       }, "I am always up for cool projects that creates a difference. So in case you have one and wanna talk about it or just say hi, fill the awesome form or just drop me a message at my email, ", _react.default.createElement("span", {
         className: "hglt"
-      }, "jatin15011999@gmail.com"), " and ", _react.default.createElement("span", {
+      }, "jatin@jatinkumar.tech"), " and ", _react.default.createElement("span", {
         style: {
           fontWeight: 900
         }
