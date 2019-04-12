@@ -35,9 +35,9 @@ app.use(express.static(path.join(__dirname, '..', 'dist')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(publicPath, 'index.html'))
-});
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(publicPath, 'index.html'))
+// });
 
 app.post('/send', (req, res) => {
   const { name, email, message } = req.body;
