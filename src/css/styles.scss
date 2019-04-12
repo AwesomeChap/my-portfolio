@@ -12,6 +12,8 @@ html,body {
   max-height:100%;
   margin: 0px;
   padding: 0px;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-tap-highlight-color: transparent;
 }
 
 html{
