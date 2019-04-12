@@ -4,16 +4,20 @@
   "description": "",
   "scripts": {
     "dev": "parcel src/index.html",
-    "start": "node server/server.js"
+    "start": "node server/server.js",
+    "start:dev":"nodemon server/server.js"
   },
   "keywords": [],
   "author": "Jatin Kumar | AwesomeChap",
   "license": "ISC",
   "dependencies": {
     "an": "0.0.8",
+    "axios": "^0.18.0",
     "body-parser": "^1.18.3",
+    "dotenv": "^7.0.0",
     "express": "^4.16.4",
     "gsap": "^2.1.2",
+    "nodemailer": "^6.1.0",
     "rea": "0.0.1",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",

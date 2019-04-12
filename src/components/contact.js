@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Heading from './helper/heading';
 import '../css/pages.scss';
 import '../css/contact.scss';
+import axios from 'axios';
 
 export default class Contact extends Component {
   constructor(props) {
@@ -35,6 +36,14 @@ export default class Contact extends Component {
           default: console.log('hye');
         }
         if (this.state.step === 4) {
+          const {name,email,message} = this.state;
+          
+          axios.post('/send', {name,email,message}).then(function ({msg}) {
+            console.log(msg);
+          }).catch(function ({msg}) {
+            console.log(msg);
+          });
+
           setTimeout(() => {
             this.setState({
               step: 1,

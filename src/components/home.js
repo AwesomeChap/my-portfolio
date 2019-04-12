@@ -35,7 +35,7 @@ export default class Home extends Component {
         {this.state.mobileView ? <MBackground/> : <Background />}
         <div className="intro">
           <div class="content">
-            <div className="intro-text" style={{ color: "#999" }}>
+            <div className="intro-text" style={{ color: "#777" }}>
               {
                 text1.split("").map((t, i) => {
                   let style = { animationDelay: `${i / 10}s` };

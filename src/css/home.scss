@@ -207,11 +207,13 @@ $ease-out : cubic-bezier(0.19, 1, 0.22, 1);
 
   .follow-container{
     flex-direction: row;
+    overflow: hidden;
     top:100%;
     right: 100%;
     transform: translate(100%,-100%);
     box-shadow: none;
     a{
+      margin:0 0 15px 5px;
       overflow: hidden;
       transform: translate(0,50%);
       font-size: 22px;

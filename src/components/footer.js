@@ -16,7 +16,7 @@ export default class Footer extends Component{
           <div className="footer-header">Let's Talk</div>
           <div>Wanna get in touch or talk about a project?</div>
           {!this.state.mobileView && <div>Feel free to contact me via email at <span>jatin@jatinkumar.tech</span></div>}
-          {this.state.mobileView && <><div>Feel free to contact me via email </div><div> at <span>jatin@jatinkumar.tech</span></div></>}
+          {this.state.mobileView && <><div>Feel free to contact me via <span>jatin@jatinkumar.tech</span></div></>}
           <div>or drop a sweet message at <span>contact page</span></div>
           <div className="social-icons">
             <a className="if" href="#"><i className="fab fa-facebook-f"></i></a>

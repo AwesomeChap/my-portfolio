@@ -1026,7 +1026,7 @@
   .footer {
     font-size: 13px; }
     .footer .sub-footer .footer-header {
-      font-size: 10vw; }
+      font-size: 8vw; }
     .footer .sub-footer .social-icons a {
       width: 35px;
       height: 35px;
@@ -1486,11 +1486,13 @@ html, body {
     font-size: 11vw; }
   .follow-container {
     flex-direction: row;
+    overflow: hidden;
     top: 100%;
     right: 100%;
     transform: translate(100%, -100%);
     box-shadow: none; }
     .follow-container a {
+      margin: 0 0 15px 5px;
       overflow: hidden;
       transform: translate(0, 50%);
       font-size: 22px;
