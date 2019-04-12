@@ -4,11 +4,11 @@ $font-normal : 24px;
 
 .projects-container{
   position: relative;
-  margin: 5vh auto;
+  margin: 5vh auto 0 auto;
   // width: 80vw;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly;
+  justify-content: center;
   // background: green;
 
   .project-wrapper{
@@ -16,7 +16,7 @@ $font-normal : 24px;
     font-size: 16px;
     position: relative;
     display: inline-block;
-    margin: 20px;
+    margin: 15px;
     background-color: #222;
     color: #ddd;
     width:500px;
@@ -173,7 +173,7 @@ $font-normal : 24px;
             width: 30%;
             display: flex;
             height: 33%;
-            justify-content: space-evenly;
+            justify-content: space-around;
             align-items: center;
             transform: translateY(-5px);
             transition: all 0.3s 0s;
@@ -244,7 +244,7 @@ $font-normal : 24px;
     &:hover{
       .project-info{
         .bg-up,.bg-down{
-          transform: scale(1);
+          transform: scaleX(1);
           transition: transform 0.2s $eio;
         }
         .project-details{

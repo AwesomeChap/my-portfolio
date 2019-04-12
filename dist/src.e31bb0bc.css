@@ -103,8 +103,8 @@
     -webkit-transform: scaleX(1);
             transform: scaleX(1); } }
   .nav-right-inner.nav-right-inner-close {
-    -webkit-transform: scaleX(1) !important;
-            transform: scaleX(1) !important;
+    -webkit-transform: scaleX(1);
+            transform: scaleX(1);
     -webkit-animation: nav-right-inner-close 0.3s 0.3s forwards;
             animation: nav-right-inner-close 0.3s 0.3s forwards; }
 
@@ -1362,8 +1362,8 @@
     height: 80%;
     display: -ms-flexbox;
     display: flex;
-    -ms-flex-pack: space-evenly;
-        justify-content: space-evenly;
+    -ms-flex-pack: justify;
+        justify-content: space-between;
     -ms-flex-direction: column;
         flex-direction: column; }
     .footer .sub-footer .footer-header {
@@ -1404,7 +1404,7 @@
         .footer .sub-footer .social-icons a.il:after {
           background-color: rgba(0, 132, 255, 0.61); }
         .footer .sub-footer .social-icons a.it:after {
-          background-color: #00d1ed8a; }
+          background-color: #00aeed; }
         .footer .sub-footer .social-icons a:after {
           content: "";
           position: absolute;
@@ -2044,18 +2044,18 @@ html, body {
 
 .projects-container {
   position: relative;
-  margin: 5vh auto;
+  margin: 5vh auto 0 auto;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
-  -ms-flex-pack: space-evenly;
-      justify-content: space-evenly; }
+  -ms-flex-pack: center;
+      justify-content: center; }
   .projects-container .project-wrapper {
     font-size: 16px;
     position: relative;
     display: inline-block;
-    margin: 20px;
+    margin: 15px;
     background-color: #222;
     color: #ddd;
     width: 500px;
@@ -2195,8 +2195,8 @@ html, body {
             display: -ms-flexbox;
             display: flex;
             height: 33%;
-            -ms-flex-pack: space-evenly;
-                justify-content: space-evenly;
+            -ms-flex-pack: distribute;
+                justify-content: space-around;
             -ms-flex-align: center;
                 align-items: center;
             -webkit-transform: translateY(-5px);
@@ -2255,8 +2255,8 @@ html, body {
       -webkit-transform: translate(-30px, 15px) rotate(-45deg);
               transform: translate(-30px, 15px) rotate(-45deg); }
     .projects-container .project-wrapper:hover .project-info .bg-up, .projects-container .project-wrapper:hover .project-info .bg-down {
-      -webkit-transform: scale(1);
-              transform: scale(1);
+      -webkit-transform: scaleX(1);
+              transform: scaleX(1);
       transition: -webkit-transform 0.2s cubic-bezier(0.77, 0, 0.175, 1);
       transition: transform 0.2s cubic-bezier(0.77, 0, 0.175, 1);
       transition: transform 0.2s cubic-bezier(0.77, 0, 0.175, 1), -webkit-transform 0.2s cubic-bezier(0.77, 0, 0.175, 1); }

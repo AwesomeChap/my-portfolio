@@ -13,7 +13,7 @@ export default class NavMobile extends Component {
       svgWidth : 80
     }
   }
-
+ 
   componentDidMount(){
     window.innerWidth <= 476 ? this.setState({svgWidth : 50}) : window.innerWidth <= 767 ? this.setState({svgWidth : 65}) : ""; 
   }
