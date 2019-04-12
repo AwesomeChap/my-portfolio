@@ -29783,6 +29783,10 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
+module.exports = {
+  "jk": "_jk_72bcc",
+  "shine": "_shine_72bcc"
+};
 },{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"components/svg.js":[function(require,module,exports) {
 "use strict";
 
@@ -29859,11 +29863,87 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
+module.exports = {
+  "nav-bar": "_nav-bar_bd2ea",
+  "nav-left": "_nav-left_bd2ea",
+  "nav-right": "_nav-right_bd2ea",
+  "nav-right-inner": "_nav-right-inner_bd2ea",
+  "nav-right-inner-open": "_nav-right-inner-open_bd2ea",
+  "nav-right-inner-close": "_nav-right-inner-close_bd2ea",
+  "nav-logo": "_nav-logo_bd2ea",
+  "nav-item-close": "_nav-item-close_bd2ea",
+  "ItemDisappear": "_ItemDisappear_bd2ea",
+  "nav-item-open": "_nav-item-open_bd2ea",
+  "nav-item-span-6": "_nav-item-span-6_bd2ea",
+  "nav-item-span-5": "_nav-item-span-5_bd2ea",
+  "nav-item-span-4": "_nav-item-span-4_bd2ea",
+  "nav-item-span-3": "_nav-item-span-3_bd2ea",
+  "nav-item-span-2": "_nav-item-span-2_bd2ea",
+  "nav-item-span-1": "_nav-item-span-1_bd2ea",
+  "nav-item": "_nav-item_bd2ea",
+  "selected": "_selected_bd2ea",
+  "ham-hide-wrapper": "_ham-hide-wrapper_bd2ea",
+  "ham-1": "_ham-1_bd2ea",
+  "line": "_line_bd2ea",
+  "line1": "_line1_bd2ea",
+  "line2": "_line2_bd2ea",
+  "line3": "_line3_bd2ea",
+  "start-1": "_start-1_bd2ea",
+  "line1-ham": "_line1-ham_bd2ea",
+  "line2-ham": "_line2-ham_bd2ea",
+  "line3-ham": "_line3-ham_bd2ea",
+  "close-1": "_close-1_bd2ea",
+  "black-screen": "_black-screen_bd2ea",
+  "in": "_in_bd2ea",
+  "black-screen-in": "_black-screen-in_bd2ea",
+  "out": "_out_bd2ea",
+  "black-screen-out": "_black-screen-out_bd2ea"
+};
 },{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"css/pages.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
+module.exports = {
+  "section": "_section_c98a7",
+  "inner-section": "_inner-section_c98a7",
+  "sub-section": "_sub-section_c98a7",
+  "text-container": "_text-container_c98a7",
+  "image-container": "_image-container_c98a7",
+  "image-border": "_image-border_c98a7",
+  "rotateCW": "_rotateCW_c98a7",
+  "image": "_image_c98a7",
+  "about-img": "_about-img_c98a7",
+  "sec-contact": "_sec-contact_c98a7",
+  "sec2-contact": "_sec2-contact_c98a7",
+  "ct": "_ct_c98a7",
+  "block": "_block_c98a7",
+  "block-ul": "_block-ul_c98a7",
+  "block-item": "_block-item_c98a7",
+  "item-heading": "_item-heading_c98a7",
+  "item-content": "_item-content_c98a7",
+  "hglt": "_hglt_c98a7",
+  "hglt-red": "_hglt-red_c98a7",
+  "skills-block": "_skills-block_c98a7",
+  "set": "_set_c98a7",
+  "skill-wrapper": "_skill-wrapper_c98a7",
+  "proficiency": "_proficiency_c98a7",
+  "barValue": "_barValue_c98a7",
+  "animateSkillBarWrapper": "_animateSkillBarWrapper_c98a7",
+  "skillBarWrapper": "_skillBarWrapper_c98a7",
+  "animateSkillBar": "_animateSkillBar_c98a7",
+  "skillBar": "_skillBar_c98a7",
+  "text": "_text_c98a7",
+  "expand": "_expand_c98a7",
+  "background": "_background_c98a7",
+  "m-background": "_m-background_c98a7",
+  "uf": "_uf_c98a7",
+  "lf": "_lf_c98a7",
+  "uh": "_uh_c98a7",
+  "m-bg": "_m-bg_c98a7",
+  "lh": "_lh_c98a7",
+  "inner-sub-section": "_inner-sub-section_c98a7"
+};
 },{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"components/nav.js":[function(require,module,exports) {
 "use strict";
 
@@ -30092,6 +30172,42 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
+module.exports = {
+  "nav-m": "_nav-m_6a670",
+  "nav-logo-m": "_nav-logo-m_6a670",
+  "hamburger": "_hamburger_6a670",
+  "bar": "_bar_6a670",
+  "bar2": "_bar2_6a670",
+  "bar1": "_bar1_6a670",
+  "bar3": "_bar3_6a670",
+  "close": "_close_6a670",
+  "close-bar1": "_close-bar1_6a670",
+  "close-bar2": "_close-bar2_6a670",
+  "close-bar3": "_close-bar3_6a670",
+  "ham": "_ham_6a670",
+  "ham1": "_ham1_6a670",
+  "ham2": "_ham2_6a670",
+  "ham3": "_ham3_6a670",
+  "menu-wrapper": "_menu-wrapper_6a670",
+  "open-menu": "_open-menu_6a670",
+  "close-menu": "_close-menu_6a670",
+  "menu": "_menu_6a670",
+  "bg-transparent": "_bg-transparent_6a670",
+  "menu-item-wrapper": "_menu-item-wrapper_6a670",
+  "selected-menu-item": "_selected-menu-item_6a670",
+  "makeMeTransparent": "_makeMeTransparent_6a670",
+  "selected-m-nav-item": "_selected-m-nav-item_6a670",
+  "menu-item": "_menu-item_6a670",
+  "menu-item-bg": "_menu-item-bg_6a670",
+  "menu-item-name": "_menu-item-name_6a670",
+  "fadeIn-menu-item": "_fadeIn-menu-item_6a670",
+  "fadeInItem": "_fadeInItem_6a670",
+  "fadeOut-menu-item": "_fadeOut-menu-item_6a670",
+  "fadeOutItem": "_fadeOutItem_6a670",
+  "shrink-item": "_shrink-item_6a670",
+  "pageTransition": "_pageTransition_6a670",
+  "shrink": "_shrink_6a670"
+};
 },{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"components/helper/menu-item.js":[function(require,module,exports) {
 "use strict";
 
@@ -30354,6 +30470,12 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
+module.exports = {
+  "heading-block": "_heading-block_b7318",
+  "heading-bg": "_heading-bg_b7318",
+  "heading": "_heading_b7318",
+  "desc": "_desc_b7318"
+};
 },{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../node_modules/gsap/TweenLite.js":[function(require,module,exports) {
 var global = arguments[3];
 "use strict";
@@ -41433,6 +41555,16 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
+module.exports = {
+  "footer": "_footer_14029",
+  "sub-footer": "_sub-footer_14029",
+  "footer-header": "_footer-header_14029",
+  "social-icons": "_social-icons_14029",
+  "if": "_if_14029",
+  "ig": "_ig_14029",
+  "il": "_il_14029",
+  "it": "_it_14029"
+};
 },{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"components/footer.js":[function(require,module,exports) {
 "use strict";
 
@@ -42000,6 +42132,7 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
+module.exports = {};
 },{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"components/blog.js":[function(require,module,exports) {
 "use strict";
 
@@ -42061,6 +42194,31 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
+module.exports = {
+  "sub-heading": "_sub-heading_bdf09",
+  "social-container": "_social-container_bdf09",
+  "social-icon": "_social-icon_bdf09",
+  "social-icon-m": "_social-icon-m_bdf09",
+  "lets-talk-bg": "_lets-talk-bg_bdf09",
+  "contact-form-wrapper": "_contact-form-wrapper_bdf09",
+  "contact-form": "_contact-form_bdf09",
+  "input-container": "_input-container_bdf09",
+  "form-animation": "_form-animation_bdf09",
+  "buttons": "_buttons_bdf09",
+  "err": "_err_bdf09",
+  "btn": "_btn_bdf09",
+  "sending": "_sending_bdf09",
+  "sending-btn": "_sending-btn_bdf09",
+  "not-sent": "_not-sent_bdf09",
+  "sent": "_sent_bdf09",
+  "btn-active": "_btn-active_bdf09",
+  "fields": "_fields_bdf09",
+  "field-span": "_field-span_bdf09",
+  "status-container": "_status-container_bdf09",
+  "empty": "_empty_bdf09",
+  "error": "_error_bdf09",
+  "okay": "_okay_bdf09"
+};
 },{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../node_modules/axios/lib/helpers/bind.js":[function(require,module,exports) {
 'use strict';
 
@@ -78676,6 +78834,20 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
+module.exports = {
+  "home": "_home_69b61",
+  "intro": "_intro_69b61",
+  "intro-text": "_intro-text_69b61",
+  "intro-text-span": "_intro-text-span_69b61",
+  "love": "_love_69b61",
+  "follow-container": "_follow-container_69b61",
+  "if": "_if_69b61",
+  "ig": "_ig_69b61",
+  "iy": "_iy_69b61",
+  "il": "_il_69b61",
+  "it": "_it_69b61",
+  "follow-span": "_follow-span_69b61"
+};
 },{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"components/helper/mBackground.js":[function(require,module,exports) {
 "use strict";
 
@@ -79051,6 +79223,37 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
+module.exports = {
+  "projects-container": "_projects-container_cdaac",
+  "project-wrapper": "_project-wrapper_cdaac",
+  "fadeUp": "_fadeUp_cdaac",
+  "project-title": "_project-title_cdaac",
+  "dots": "_dots_cdaac",
+  "name": "_name_cdaac",
+  "project": "_project_cdaac",
+  "project-info": "_project-info_cdaac",
+  "bg-up": "_bg-up_cdaac",
+  "bg-down": "_bg-down_cdaac",
+  "project-details": "_project-details_cdaac",
+  "pd-tab": "_pd-tab_cdaac",
+  "pd1": "_pd1_cdaac",
+  "pd2": "_pd2_cdaac",
+  "pd3": "_pd3_cdaac",
+  "project-desc": "_project-desc_cdaac",
+  "label": "_label_cdaac",
+  "keywords": "_keywords_cdaac",
+  "kw-selected": "_kw-selected_cdaac",
+  "kw": "_kw_cdaac",
+  "show-filters": "_show-filters_cdaac",
+  "-webkit-filter": "_filter_cdaac",
+  "filter": "_filter_cdaac",
+  "onFilterCreate": "_onFilterCreate_cdaac",
+  "fadeInFilter": "_fadeInFilter_cdaac",
+  "cross": "_cross_cdaac",
+  "onFilterDelete": "_onFilterDelete_cdaac",
+  "fadeOutFilter": "_fadeOutFilter_cdaac",
+  "disabled": "_disabled_cdaac"
+};
 },{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"components/helper/project-list.js":[function(require,module,exports) {
 "use strict";
 
@@ -79616,7 +79819,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53587" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51641" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

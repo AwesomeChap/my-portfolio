@@ -209,17 +209,18 @@ $font-normal : 24px;
 
       .proficiency{
         width: 60%;
-        height: 12px;
+        height: 9px;
         position: relative;
         background-color: #333;
         transform-origin: right center;
         transform: scaleX(0);
         // border-radius: 30px;
-        overflow: hidden;
+        // overflow: hidden;
         // border: 2px solid rgba(0, 0, 0, 0.486);
         box-shadow: 0 0 5px #000;
         .barValue{
           position: absolute;
+          // top:-20%;
           height: 100%;
           background-color: $red; 
           transition: all 1s;
