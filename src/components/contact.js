@@ -171,17 +171,17 @@ export default class Contact extends Component {
                 {
                   !this.state.mobileView ? (
                     <>
-                      <div className="social-icon" > <i className="fab if fa-facebook-f"></i><span>FACEBOOK</span></div>
-                      <div className="social-icon" > <i className="fab ig fa-github"></i><span>GITHUB</span></div>
-                      <div className="social-icon" > <i className="fab il fa-linkedin-in"></i><span>LINKEDIN</span></div>
-                      <div className="social-icon" > <i className="fab it fa-twitter"></i><span>TWITTER</span></div>
+                      <a href="#" className="social-icon" > <i className="fab if fa-facebook-f"></i><span>FACEBOOK</span></a>
+                      <a href="#" className="social-icon" > <i className="fab ig fa-github"></i><span>GITHUB</span></a>
+                      <a href="#" className="social-icon" > <i className="fab il fa-linkedin-in"></i><span>LINKEDIN</span></a>
+                      <a href="#" className="social-icon" > <i className="fab it fa-twitter"></i><span>TWITTER</span></a>
                     </>
                   ) : (
                     <>
-                      <div className="social-icon-m" > <i className="fab if fa-facebook-f"></i></div>
-                      <div className="social-icon-m" > <i className="fab ig fa-github"></i></div>
-                      <div className="social-icon-m" > <i className="fab il fa-linkedin-in"></i></div>
-                      <div className="social-icon-m" > <i className="fab it fa-twitter"></i></div>
+                      <a href="#" className="social-icon-m" > <i className="fab if fa-facebook-f"></i></a>
+                      <a href="#" className="social-icon-m" > <i className="fab ig fa-github"></i></a>
+                      <a href="#" className="social-icon-m" > <i className="fab il fa-linkedin-in"></i></a>
+                      <a href="#" className="social-icon-m" > <i className="fab it fa-twitter"></i></a>
                     </>
                   )
                 }

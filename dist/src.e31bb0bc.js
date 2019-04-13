@@ -44053,35 +44053,43 @@ function (_Component) {
         className: "sub-heading"
       }, "Let's Get Social"), _react.default.createElement("div", {
         className: "social-container"
-      }, !this.state.mobileView ? _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("div", {
+      }, !this.state.mobileView ? _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("a", {
+        href: "#",
         className: "social-icon"
       }, " ", _react.default.createElement("i", {
         className: "fab if fa-facebook-f"
-      }), _react.default.createElement("span", null, "FACEBOOK")), _react.default.createElement("div", {
+      }), _react.default.createElement("span", null, "FACEBOOK")), _react.default.createElement("a", {
+        href: "#",
         className: "social-icon"
       }, " ", _react.default.createElement("i", {
         className: "fab ig fa-github"
-      }), _react.default.createElement("span", null, "GITHUB")), _react.default.createElement("div", {
+      }), _react.default.createElement("span", null, "GITHUB")), _react.default.createElement("a", {
+        href: "#",
         className: "social-icon"
       }, " ", _react.default.createElement("i", {
         className: "fab il fa-linkedin-in"
-      }), _react.default.createElement("span", null, "LINKEDIN")), _react.default.createElement("div", {
+      }), _react.default.createElement("span", null, "LINKEDIN")), _react.default.createElement("a", {
+        href: "#",
         className: "social-icon"
       }, " ", _react.default.createElement("i", {
         className: "fab it fa-twitter"
-      }), _react.default.createElement("span", null, "TWITTER"))) : _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("div", {
+      }), _react.default.createElement("span", null, "TWITTER"))) : _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("a", {
+        href: "#",
         className: "social-icon-m"
       }, " ", _react.default.createElement("i", {
         className: "fab if fa-facebook-f"
-      })), _react.default.createElement("div", {
+      })), _react.default.createElement("a", {
+        href: "#",
         className: "social-icon-m"
       }, " ", _react.default.createElement("i", {
         className: "fab ig fa-github"
-      })), _react.default.createElement("div", {
+      })), _react.default.createElement("a", {
+        href: "#",
         className: "social-icon-m"
       }, " ", _react.default.createElement("i", {
         className: "fab il fa-linkedin-in"
-      })), _react.default.createElement("div", {
+      })), _react.default.createElement("a", {
+        href: "#",
         className: "social-icon-m"
       }, " ", _react.default.createElement("i", {
         className: "fab it fa-twitter"
@@ -79484,7 +79492,172 @@ function (_Component) {
 var _default = (0, _reactRouterDom.withRouter)(ScrollToTop);
 
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js"}],"app.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js"}],"css/cursor.scss":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"components/helper/cursor.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireWildcard(require("react"));
+
+require("../../css/cursor.scss");
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+var Cursor =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(Cursor, _Component);
+
+  function Cursor() {
+    _classCallCheck(this, Cursor);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(Cursor).call(this));
+  }
+
+  _createClass(Cursor, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var cursor = {
+        delay: 8,
+        _x: 0,
+        _y: 0,
+        endX: window.innerWidth / 2,
+        endY: window.innerHeight / 2,
+        cursorVisible: true,
+        cursorEnlarged: false,
+        $dot: document.querySelector('.cursor-dot'),
+        $outline: document.querySelector('.cursor-dot-outline'),
+        init: function init() {
+          // Set up element sizes
+          this.dotSize = this.$dot.offsetWidth;
+          this.outlineSize = this.$outline.offsetWidth;
+          this.setupEventListeners();
+          this.animateDotOutline();
+        },
+        setupEventListeners: function setupEventListeners() {
+          var self = this; // Anchor hovering
+
+          document.querySelectorAll('a').forEach(function (el) {
+            el.addEventListener('mouseover', function () {
+              self.cursorEnlarged = true;
+              self.toggleCursorSize();
+            });
+            el.addEventListener('mouseout', function () {
+              self.cursorEnlarged = false;
+              self.toggleCursorSize();
+            });
+          }); // Click events
+
+          document.addEventListener('mousedown', function () {
+            self.cursorEnlarged = true;
+            self.toggleCursorSize();
+          });
+          document.addEventListener('mouseup', function () {
+            self.cursorEnlarged = false;
+            self.toggleCursorSize();
+          });
+          document.addEventListener('mousemove', function (e) {
+            // Show the cursor
+            self.cursorVisible = true;
+            self.toggleCursorVisibility(); // console.log(e)
+            // Position the dot
+
+            self.endX = e.clientX;
+            self.endY = e.clientY;
+            self.$dot.style.top = self.endY + 'px';
+            self.$dot.style.left = self.endX + 'px';
+          }); // Hide/show cursor
+
+          document.addEventListener('mouseenter', function (e) {
+            self.cursorVisible = true;
+            self.toggleCursorVisibility();
+            self.$dot.style.opacity = 1;
+            self.$outline.style.opacity = 1;
+          });
+          document.addEventListener('mouseleave', function (e) {
+            self.cursorVisible = true;
+            self.toggleCursorVisibility();
+            self.$dot.style.opacity = 0;
+            self.$outline.style.opacity = 0;
+          });
+        },
+        animateDotOutline: function animateDotOutline() {
+          var self = this;
+          self._x += (self.endX - self._x) / self.delay;
+          self._y += (self.endY - self._y) / self.delay;
+          self.$outline.style.top = self._y + 'px';
+          self.$outline.style.left = self._x + 'px';
+          requestAnimationFrame(this.animateDotOutline.bind(self));
+        },
+        toggleCursorSize: function toggleCursorSize() {
+          var self = this;
+
+          if (self.cursorEnlarged) {
+            self.$dot.style.transform = 'translate(-50%, -50%) scale(0.75)';
+            self.$outline.style.transform = 'translate(-50%, -50%) scale(1.5)';
+            self.$outline.style.backgroundColor = "rgba(255, 255, 255, 0.15)";
+          } else {
+            self.$outline.style.backgroundColor = "rgba(255, 255, 255, 0.3)";
+            self.$dot.style.transform = 'translate(-50%, -50%) scale(1)';
+            self.$outline.style.transform = 'translate(-50%, -50%) scale(1)';
+          }
+        },
+        toggleCursorVisibility: function toggleCursorVisibility() {
+          var self = this;
+
+          if (self.cursorVisible) {
+            self.$dot.style.opacity = 1;
+            self.$outline.style.opacity = 1;
+          } else {
+            self.$dot.style.opacity = 0;
+            self.$outline.style.opacity = 0;
+          }
+        }
+      };
+      cursor.init();
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("div", {
+        className: "cursor-dot-outline"
+      }), _react.default.createElement("div", {
+        className: "cursor-dot"
+      }));
+    }
+  }]);
+
+  return Cursor;
+}(_react.Component);
+
+exports.default = Cursor;
+},{"react":"../node_modules/react/index.js","../../css/cursor.scss":"css/cursor.scss"}],"app.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -79503,6 +79676,8 @@ var _navMobile = _interopRequireDefault(require("./components/nav-mobile"));
 var _index = require("./components/index");
 
 var _scrollToTop = _interopRequireDefault(require("./components/helper/scrollToTop"));
+
+var _cursor = _interopRequireDefault(require("./components/helper/cursor"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -79532,15 +79707,19 @@ function (_Component) {
   _inherits(App, _Component);
 
   function App(props) {
+    var _this;
+
     _classCallCheck(this, App);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(App).call(this, props));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(App).call(this, props));
+    _this.isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    return _this;
   }
 
   _createClass(App, [{
     key: "render",
     value: function render() {
-      return _react.default.createElement("div", {
+      return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("div", {
         className: "router-wrapper"
       }, _react.default.createElement(_reactRouterDom.BrowserRouter, null, _react.default.createElement(_scrollToTop.default, null, _react.default.createElement(_nav.default, null)), _react.default.createElement(_navMobile.default, null), _react.default.createElement(_reactRouterDom.Route, {
         exact: true,
@@ -79566,7 +79745,7 @@ function (_Component) {
         exact: true,
         path: "/contact",
         component: _index.Contact
-      })));
+      }))), !this.isMobile && _react.default.createElement(_cursor.default, null));
     }
   }]);
 
@@ -79574,7 +79753,7 @@ function (_Component) {
 }(_react.Component);
 
 exports.default = App;
-},{"react":"../node_modules/react/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","./components/nav":"components/nav.js","./components/nav-mobile":"components/nav-mobile.js","./components/index":"components/index.js","./components/helper/scrollToTop":"components/helper/scrollToTop.js"}],"index.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","./components/nav":"components/nav.js","./components/nav-mobile":"components/nav-mobile.js","./components/index":"components/index.js","./components/helper/scrollToTop":"components/helper/scrollToTop.js","./components/helper/cursor":"components/helper/cursor.js"}],"index.js":[function(require,module,exports) {
 "use strict";
 
 var _react = _interopRequireDefault(require("react"));

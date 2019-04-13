@@ -1113,7 +1113,7 @@
 .menu-item-wrapper {
   text-decoration: none;
   color: #777;
-  height: 100%;
+  height: 100% !important;
   width: 100%;
   display: -ms-flexbox;
   display: flex;
@@ -1129,11 +1129,27 @@
 
 @-webkit-keyframes makeMeTransparent {
   to {
-    background-color: transparent; } }
+    background-color: rgba(255, 255, 255, 0); } }
 
 @keyframes makeMeTransparent {
   to {
-    background-color: transparent; } }
+    background-color: rgba(255, 255, 255, 0); } }
+
+.shrink-item {
+  height: 0% !important;
+  transition: all 0.3s cubic-bezier(0.77, 0, 0.175, 1) 0.3s; }
+
+@-webkit-keyframes shrink {
+  25% {
+    height: 0%; }
+  100% {
+    height: 0%; } }
+
+@keyframes shrink {
+  25% {
+    height: 0%; }
+  100% {
+    height: 0%; } }
 
 .selected-m-nav-item {
   color: #ccc; }
@@ -1228,22 +1244,6 @@
   to {
     -webkit-transform: translate(0, -150%);
             transform: translate(0, -150%); } }
-
-.shrink-item {
-  height: 0;
-  transition: all 0.3s cubic-bezier(0.77, 0, 0.175, 1) 0.3s; }
-
-@-webkit-keyframes shrink {
-  25% {
-    height: 0%; }
-  100% {
-    height: 0%; } }
-
-@keyframes shrink {
-  25% {
-    height: 0%; }
-  100% {
-    height: 0%; } }
 
 .selected-menu-item .menu-item-bg {
   -webkit-transform: scaleX(1);
@@ -1489,6 +1489,7 @@ html, body {
       flex-wrap: wrap; }
   .social-container .social-icon {
     position: relative;
+    text-decoration: none;
     cursor: pointer;
     margin-top: 5vh;
     display: -ms-inline-flexbox;
@@ -2493,6 +2494,35 @@ html, body {
       padding: 8px 10px;
       border-bottom: 2px solid #555;
       box-shadow: 0 0 5px #000; } }
+
+body,
+body * {
+  cursor: none !important; }
+
+.cursor-dot,
+.cursor-dot-outline {
+  pointer-events: none;
+  position: fixed;
+  z-index: 100;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  opacity: 0;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  transition: opacity 0.3s ease-in-out, background-color 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out;
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out, background-color 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out; }
+
+.cursor-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #fff; }
+
+.cursor-dot-outline {
+  width: 40px;
+  height: 40px;
+  background-color: rgba(255, 255, 255, 0.3); }
 
 
 /*# sourceMappingURL=/src.e31bb0bc.css.map */
