@@ -465,8 +465,9 @@ $font-normal : 24px;
     display: flex;
     height: 40vh;
     .image-border{
-      width:30vh;
-      height: 30vh;
+      border-width: 5px;
+      width:35vh;
+      height: 35vh;
     }
   }
   .hglt-red{

@@ -78815,7 +78815,8 @@ function (_Component) {
     });
 
     _this.state = {
-      mobileView: false
+      mobileView: false,
+      shared: false
     };
     return _this;
   }
@@ -78831,6 +78832,8 @@ function (_Component) {
   }, {
     key: "render",
     value: function render() {
+      var _this2 = this;
+
       var text1 = "HELLO.";
       var text2 = "I'M";
       var text3 = "JATIN";
@@ -78841,7 +78844,7 @@ function (_Component) {
       }, this.state.mobileView ? _react.default.createElement(_mBackground.default, null) : _react.default.createElement(_background.default, null), _react.default.createElement("div", {
         className: "intro"
       }, _react.default.createElement("div", {
-        class: "content"
+        className: "content"
       }, _react.default.createElement("div", {
         className: "intro-text",
         style: {
@@ -78873,6 +78876,10 @@ function (_Component) {
           style: style
         }, t);
       })))), _react.default.createElement("div", {
+        className: "follow-container-wrapper"
+      }, _react.default.createElement("small", {
+        className: "follow-me"
+      }, "Follow me"), _react.default.createElement("div", {
         className: "follow-container"
       }, _react.default.createElement("a", {
         className: "if",
@@ -78885,6 +78892,11 @@ function (_Component) {
       }, _react.default.createElement("i", {
         className: "fab fa-github"
       })), _react.default.createElement("a", {
+        className: "iy",
+        href: "#"
+      }, _react.default.createElement("i", {
+        className: "fab fa-youtube"
+      })), _react.default.createElement("a", {
         className: "il",
         href: "#"
       }, _react.default.createElement("i", {
@@ -78894,9 +78906,66 @@ function (_Component) {
         href: "#"
       }, _react.default.createElement("i", {
         className: "fab fa-twitter"
-      }))), _react.default.createElement("div", {
+      })))), !this.state.shared ? _react.default.createElement("div", {
+        onClick: function onClick() {
+          _this2.setState({
+            shared: !_this2.state.shared
+          });
+        },
         className: "love"
-      }, "SHARE WITH ", _react.default.createElement("span", null, "\u2764")));
+      }, "SHARE WITH ", _react.default.createElement("span", null, "\u2764")) : _react.default.createElement("div", {
+        className: "love"
+      }, _react.default.createElement("div", {
+        className: "share-buttons"
+      }, _react.default.createElement("a", {
+        onClick: function onClick() {
+          _this2.setState({
+            shared: !_this2.state.shared
+          });
+        },
+        href: "https://facebook.com/sharer/sharer.php?u=http%3A%2F%2Fjatinkumar.tech",
+        target: "_blank",
+        rel: "noopener",
+        "aria-label": ""
+      }, _react.default.createElement("i", {
+        className: "fab fa-facebook-f"
+      })), _react.default.createElement("a", {
+        onClick: function onClick() {
+          _this2.setState({
+            shared: !_this2.state.shared
+          });
+        },
+        href: "https://twitter.com/intent/tweet/?text=Super%20fast%20and%20easy%20Social%20Media%20Sharing%20Buttons.%20No%20JavaScript.%20No%20tracking.&url=http%3A%2F%2Fjatinkumar.tech",
+        target: "_blank",
+        rel: "noopener",
+        "aria-label": ""
+      }, _react.default.createElement("i", {
+        className: "fab fa-twitter"
+      })), _react.default.createElement("a", {
+        onClick: function onClick() {
+          _this2.setState({
+            shared: !_this2.state.shared
+          });
+        },
+        href: "whatsapp://send?text=Super%20fast%20and%20easy%20Social%20Media%20Sharing%20Buttons.%20No%20JavaScript.%20No%20tracking.%20http%3A%2F%2Fjatinkumar.tech",
+        target: "_blank",
+        rel: "noopener",
+        "aria-label": "Share on WhatsApp"
+      }, _react.default.createElement("i", {
+        className: "fab fa-whatsapp"
+      })), _react.default.createElement("a", {
+        onClick: function onClick() {
+          _this2.setState({
+            shared: !_this2.state.shared
+          });
+        },
+        href: "https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Fsharingbuttons.io&title=Super%20fast%20and%20easy%20Social%20Media%20Sharing%20Buttons.%20No%20JavaScript.%20No%20tracking.&summary=Super%20fast%20and%20easy%20Social%20Media%20Sharing%20Buttons.%20No%20JavaScript.%20No%20tracking.&source=http%3A%2F%2Fjatinkumar.tech",
+        target: "_blank",
+        rel: "noopener",
+        "aria-label": ""
+      }, _react.default.createElement("i", {
+        className: "fab fa-linkedin-in"
+      })))));
     }
   }]);
 
@@ -79563,7 +79632,7 @@ function (_Component) {
         setupEventListeners: function setupEventListeners() {
           var self = this; // Anchor hovering
 
-          document.querySelectorAll('a').forEach(function (el) {
+          document.querySelectorAll('a, span').forEach(function (el) {
             el.addEventListener('mouseover', function () {
               self.cursorEnlarged = true;
               self.toggleCursorSize();
@@ -79621,7 +79690,7 @@ function (_Component) {
           if (self.cursorEnlarged) {
             self.$dot.style.transform = 'translate(-50%, -50%) scale(0.75)';
             self.$outline.style.transform = 'translate(-50%, -50%) scale(1.5)';
-            self.$outline.style.backgroundColor = "rgba(255, 255, 255, 0.15)";
+            self.$outline.style.backgroundColor = "rgba(255, 255, 255, 0.2)";
           } else {
             self.$outline.style.backgroundColor = "rgba(255, 255, 255, 0.3)";
             self.$dot.style.transform = 'translate(-50%, -50%) scale(1)';
@@ -79795,7 +79864,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60418" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52689" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -48,32 +48,64 @@ $ease-out : cubic-bezier(0.19, 1, 0.22, 1);
   }
 }
 
+.share-buttons{
+  display: inline-flex;
+
+  a{
+    text-decoration: none;
+    color: #fff;
+    margin: 0 10px;
+    font-size: 22px;
+    border-radius: 50%;
+    width:40px;
+    height: 40px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    i{
+      margin-left: 3px;
+    }
+
+    &:nth-child(1){
+      background-color: rgb(0, 62, 196);
+    }
+
+    &:nth-child(2){
+      background-color: rgb(0, 162, 255);
+    }
+
+    &:nth-child(3){
+      background-color: rgb(0, 182, 45);
+    }
+
+    &:nth-child(4){
+      background-color: rgb(0, 81, 255);
+    }
+  }
+}
+
+
 .love{
+  border-radius: 10px;
   position: absolute;
   align-self: flex-start;
   bottom: 0;
   margin: 0 0 40px 40px;
+  height: 40px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
   color: #fff;
   opacity: 0;
   animation: love 0.5s 1.5s forwards;
   backface-visibility: hidden;
-
-  &:after{
-    content: '';
-    z-index: -1;
-    position: absolute;
-    top:35%;
-    left:0;
-    width:100%;
-    transform-origin: top left;
-    transform: scaleX(1);
-    height: 30%;
-    background-color: #ff0d2d6e;
-    transition: all 0.3s;
-  }
+  padding: 10px 20px;
+  background: rgba(255, 255, 255, 0.1);
 
   span{
+    margin-left: 10px; 
     transition: all 0.3s;
   }
 
@@ -94,11 +126,24 @@ $ease-out : cubic-bezier(0.19, 1, 0.22, 1);
   }
 }
 
-.follow-container{
+.follow-container-wrapper{
   position: absolute;
-  right:0;
+  right:0;    
   top:50%;
   transform: translate(0,-50%);
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.follow-me{
+  display: inline-block;
+  font-size: 12px;
+  letter-spacing: 0em;
+  margin-bottom: 6px;
+}
+
+.follow-container{
   display: inline-flex;
   flex-direction: column;
   align-items: flex-end;
@@ -106,7 +151,7 @@ $ease-out : cubic-bezier(0.19, 1, 0.22, 1);
   opacity: 1;
 
   .if{
-    background-color: rgb(0, 95, 184);
+    background-color: rgb(0, 75, 146);
   }
 
   .ig{
@@ -117,12 +162,12 @@ $ease-out : cubic-bezier(0.19, 1, 0.22, 1);
     background-color: rgb(219, 0, 0);
   }
 
-  .il{
-    background-color: rgb(0, 132, 255);
+  .il{ 
+    background-color: rgb(0, 99, 192);
   }
 
   .it{
-    background-color: #00aeed;
+    background-color: #008ce9;
   }
 
   a{
@@ -192,9 +237,9 @@ $ease-out : cubic-bezier(0.19, 1, 0.22, 1);
     }
   }
 
-  .love{
-    margin: 0 0 25px 25px;
-  }
+  // .love{
+  //   margin: 0 0 25px 25px;
+  // }
 }
 
 @media only screen and (max-width: 767px){
@@ -205,15 +250,23 @@ $ease-out : cubic-bezier(0.19, 1, 0.22, 1);
     }
   }
 
-  .follow-container{
-    flex-direction: row;
-    overflow: hidden;
+  .follow-container-wrapper{
     top:100%;
     right: 100%;
     transform: translate(100%,-100%);
+  }
+
+  .follow-me{
+    letter-spacing: 0.1em;
+    margin-left: 5px;
+  }
+
+  .follow-container{
+    flex-direction: row;
+    overflow: hidden;
     box-shadow: none;
     a{
-      margin:0 0 15px 5px;
+      margin:0 0 12px 5px;
       overflow: hidden;
       transform: translate(0,50%);
       font-size: 22px;
@@ -225,12 +278,31 @@ $ease-out : cubic-bezier(0.19, 1, 0.22, 1);
   .love{
     margin: 0;
     font-size: 14px;
-    transform: translate(10%, 150%);
+    transform: translate(5%, 120%);
     bottom:100%;
+    height: 30px;
+    padding: 10px 10px;
+    transition: all 1s;
+  }
+
+  .share-buttons {
+    a {
+      margin: 0 7px;
+      width: 35px;
+      height: 35px;
+      font-size: 18px;
+    }
   }
 }
 
 @media only screen and (max-width: 479px){
+  .follow-container{
+    a{
+      font-size: 20px;
+      height: 45px;
+      width: 45px;
+    }
+  }
   
   .intro-text{
     span{
