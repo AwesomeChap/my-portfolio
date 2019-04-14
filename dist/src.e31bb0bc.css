@@ -1450,6 +1450,9 @@ body {
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none; }
+  body,
+  body * {
+    cursor: none !important; }
 
 html, body {
   width: 100%;
@@ -2549,10 +2552,6 @@ html, body {
       padding: 8px 10px;
       border-bottom: 2px solid #555;
       box-shadow: 0 0 5px #000; } }
-
-body,
-body * {
-  cursor: none !important; }
 
 .cursor-dot,
 .cursor-dot-outline {

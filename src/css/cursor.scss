@@ -1,13 +1,6 @@
 $primary-light: rgba(255, 255, 255, 0.3);
 $primary: #fff;
 
-body{
-  &,
-  * {
-      cursor: none !important;        
-  }
-}
-
 .cursor-dot,
 .cursor-dot-outline {
     pointer-events: none;

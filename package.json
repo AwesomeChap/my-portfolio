@@ -23,6 +23,7 @@
     "rea": "0.0.1",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
+    "react-helmet": "^5.2.0",
     "react-r": "^2.0.0-rc02",
     "react-router-dom": "^5.0.0",
     "three": "^0.103.0",
