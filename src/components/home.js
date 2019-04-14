@@ -27,8 +27,9 @@ export default class Home extends Component {
     const text1 = "HELLO.";
     const text2 = "I'M";
     const text3 = "JATIN";
-    let t1 = text1.length;
-    let t2 = text2.length + t1;
+    let t0 = 0.7;
+    let t1 = text1.length/15 + t0;
+    let t2 = text2.length/15 + t1;
 
     return (
       <>
@@ -39,24 +40,23 @@ export default class Home extends Component {
               <div className="intro-text" style={{ color: "#777" }}>
                 {
                   text1.split("").map((t, i) => {
-                    let style = { animationDelay: `${i / 15}s` };
+                    let style = { animationDelay: `${t0 + i / 15}s` };
                     return <span style={style}>{t}</span>
+                    t1 += i/15;
                   })
                 }
               </div>
               <div className="intro-text" >
                 {
                   text2.split("").map((t, i) => {
-                    i += t1;
-                    let style = { animationDelay: `${i / 15}s` };
+                    let style = { animationDelay: `${t1 + i / 15}s` };
                     return <span style={style}>{t}</span>
                   })
                 }
                 <span>&nbsp;</span>
                 {
                   text3.split("").map((t, i) => {
-                    i += t2;
-                    let style = { animationDelay: `${i / 15}s` };
+                    let style = { animationDelay: `${t2 + i / 15}s` };
                     return <span style={style}>{t}</span>
                   })
                 }

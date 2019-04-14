@@ -1069,17 +1069,76 @@
 
 #menu-wrapper {
   position: fixed;
-  z-index: 1;
   top: 0;
   left: 0;
   min-width: 100%;
   z-index: 2;
   height: 100%;
   max-height: 100%;
+  background-color: #0a0a0a;
   box-sizing: border-box;
   -webkit-transform-origin: top center;
           transform-origin: top center;
-  overflow: hidden; }
+  overflow: hidden;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -ms-flex-align: center;
+      align-items: center;
+  -ms-flex-direction: column;
+      flex-direction: column; }
+
+.menu-item {
+  font-family: Futura;
+  text-decoration: none;
+  font-size: 8vw;
+  color: #999;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: center;
+      justify-content: center;
+  -ms-flex-align: center;
+      align-items: center;
+  width: 100%;
+  height: 100%; }
+  .menu-item .split {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    overflow: hidden;
+    -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%); }
+  .menu-item .upper-split {
+    -webkit-clip-path: polygon(0 65%, 100% 30%, 100% 0, 0 0);
+            clip-path: polygon(0 65%, 100% 30%, 100% 0, 0 0); }
+  .menu-item .upper-split-move {
+    -webkit-animation: upper-split-move 0.1s forwards;
+            animation: upper-split-move 0.1s forwards; }
+
+@-webkit-keyframes upper-split-move {
+  to {
+    -webkit-transform: translate(-51%, -52%);
+            transform: translate(-51%, -52%); } }
+
+@keyframes upper-split-move {
+  to {
+    -webkit-transform: translate(-51%, -52%);
+            transform: translate(-51%, -52%); } }
+  .menu-item .lower-split {
+    -webkit-clip-path: polygon(0 65%, 100% 30%, 100% 100%, 0 100%);
+            clip-path: polygon(0 65%, 100% 30%, 100% 100%, 0 100%); }
+  .menu-item .lower-split-move {
+    -webkit-animation: lower-split-move 0.1s forwards;
+            animation: lower-split-move 0.1s forwards; }
+
+@-webkit-keyframes lower-split-move {
+  to {
+    -webkit-transform: translate(-49%, -48%);
+            transform: translate(-49%, -48%); } }
+
+@keyframes lower-split-move {
+  to {
+    -webkit-transform: translate(-49%, -48%);
+            transform: translate(-49%, -48%); } }
 
 .open-menu {
   -webkit-transform: scaleY(1);
@@ -1091,172 +1150,61 @@
 .close-menu {
   -webkit-transform: scaleY(0);
           transform: scaleY(0);
-  transition: -webkit-transform 0.3s 0.3s;
-  transition: transform 0.3s 0.3s;
-  transition: transform 0.3s 0.3s, -webkit-transform 0.3s 0.3s; }
+  transition: -webkit-transform 0.3s 0.4s;
+  transition: transform 0.3s 0.4s;
+  transition: transform 0.3s 0.4s, -webkit-transform 0.3s 0.4s; }
 
-.menu {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-direction: column;
-      flex-direction: column;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
-  -ms-flex-align: center;
-      align-items: center; }
+.selected-m-nav-item div {
+  color: #fff; }
 
-.bg-transparent {
-  background-color: transparent; }
-
-.menu-item-wrapper {
-  text-decoration: none;
-  color: #888;
-  height: 100% !important;
-  width: 100%;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-pack: center;
-      justify-content: center;
-  -ms-flex-align: center;
-      align-items: center;
-  cursor: pointer;
-  background-color: #0a0a0a; }
-  .menu-item-wrapper.selected-menu-item {
-    -webkit-animation: makeMeTransparent 0.1s 0.3s forwards;
-            animation: makeMeTransparent 0.1s 0.3s forwards; }
-
-@-webkit-keyframes makeMeTransparent {
-  to {
-    background-color: rgba(255, 255, 255, 0); } }
-
-@keyframes makeMeTransparent {
-  to {
-    background-color: rgba(255, 255, 255, 0); } }
-
-.shrink-item {
-  height: 0% !important;
-  transition: all 0.3s cubic-bezier(0.77, 0, 0.175, 1) 0.3s; }
-
-@-webkit-keyframes shrink {
-  25% {
-    height: 0%; }
-  100% {
-    height: 0%; } }
-
-@keyframes shrink {
-  25% {
-    height: 0%; }
-  100% {
-    height: 0%; } }
-
-.selected-m-nav-item {
-  color: #ddd; }
-
-.menu-item-wrapper:nth-child(even).selected-menu-item {
-  -webkit-animation: makeMeTransparent 1s 0.3s forwards;
-          animation: makeMeTransparent 1s 0.3s forwards; }
-
-@keyframes makeMeTransparent {
-  to {
-    background-color: transparent; } }
-
-.menu-item {
-  position: relative;
-  width: 100%;
-  max-height: 100%;
-  height: 100%;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-direction: column;
-      flex-direction: column;
-  z-index: 3;
-  transition: all 0.3; }
-  .menu-item:hover .menu-item-bg {
-    -webkit-transform: scaleX(1);
-            transform: scaleX(1); }
-
-.menu-item-bg {
-  width: 100%;
-  height: 100%;
-  -webkit-transform: scaleX(0);
-          transform: scaleX(0);
-  transition: all cubic-bezier(0.77, 0, 0.175, 1) 0.3s; }
-
-.menu-item-bg:nth-child(1) {
-  -webkit-transform-origin: left center;
-          transform-origin: left center;
-  background: #272727; }
-
-.menu-item-bg:nth-child(2) {
-  -webkit-transform-origin: right center;
-          transform-origin: right center;
-  background: #1c1c1c; }
-
-.menu-item-name {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-pack: center;
-      justify-content: center;
-  -ms-flex-align: center;
-      align-items: center;
-  -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
-  overflow: hidden; }
-  .menu-item-name span {
-    font-size: 5vh;
-    font-family: Futura;
-    display: inline-block;
-    transition: all .3s; }
-
-.fadeIn-menu-item span {
+.fadeIn-menu-item {
   -webkit-transform: translate(0, -150%);
           transform: translate(0, -150%);
-  -webkit-animation: fadeInItem .3s .3s forwards;
-          animation: fadeInItem .3s .3s forwards; }
+  opacity: 0;
+  -webkit-animation: fadeInItem 0.5s cubic-bezier(0.17, 0.89, 0.26, 1) forwards;
+          animation: fadeInItem 0.5s cubic-bezier(0.17, 0.89, 0.26, 1) forwards; }
+  .fadeIn-menu-item:nth-child(1) {
+    -webkit-animation-delay: .5s;
+            animation-delay: .5s; }
+  .fadeIn-menu-item:nth-child(2) {
+    -webkit-animation-delay: .45s;
+            animation-delay: .45s; }
+  .fadeIn-menu-item:nth-child(3) {
+    -webkit-animation-delay: .4s;
+            animation-delay: .4s; }
+  .fadeIn-menu-item:nth-child(4) {
+    -webkit-animation-delay: .35s;
+            animation-delay: .35s; }
+  .fadeIn-menu-item:nth-child(5) {
+    -webkit-animation-delay: .3s;
+            animation-delay: .3s; }
 
 @-webkit-keyframes fadeInItem {
   to {
     -webkit-transform: translate(0, 0);
-            transform: translate(0, 0); } }
+            transform: translate(0, 0);
+    opacity: 1; } }
 
 @keyframes fadeInItem {
   to {
     -webkit-transform: translate(0, 0);
-            transform: translate(0, 0); } }
+            transform: translate(0, 0);
+    opacity: 1; } }
 
-.fadeOut-menu-item span {
+.fadeOut-menu-item {
   -webkit-transform: translate(0, 0);
           transform: translate(0, 0);
-  -webkit-animation: fadeOutItem 0.3s cubic-bezier(0.77, 0, 0.175, 1) forwards;
-          animation: fadeOutItem 0.3s cubic-bezier(0.77, 0, 0.175, 1) forwards; }
+  opacity: 1;
+  -webkit-animation: fadeOutItem 0.1s 0.3s cubic-bezier(0.17, 0.89, 0.26, 1) forwards;
+          animation: fadeOutItem 0.1s 0.3s cubic-bezier(0.17, 0.89, 0.26, 1) forwards; }
 
 @-webkit-keyframes fadeOutItem {
   to {
-    -webkit-transform: translate(0, -150%);
-            transform: translate(0, -150%); } }
+    opacity: 0; } }
 
 @keyframes fadeOutItem {
   to {
-    -webkit-transform: translate(0, -150%);
-            transform: translate(0, -150%); } }
-
-.selected-menu-item .menu-item-bg {
-  -webkit-transform: scaleX(1);
-          transform: scaleX(1);
-  -webkit-animation: pageTransition 0.3s cubic-bezier(0.77, 0, 0.175, 1) 1.2s forwards;
-          animation: pageTransition 0.3s cubic-bezier(0.77, 0, 0.175, 1) 1.2s forwards; }
-
-.selected-menu-item span {
-  -webkit-animation: fadeOutItem 0.3s cubic-bezier(0.77, 0, 0.175, 1) 0.9s forwards;
-          animation: fadeOutItem 0.3s cubic-bezier(0.77, 0, 0.175, 1) 0.9s forwards; }
+    opacity: 0; } }
 
 @-webkit-keyframes pageTransition {
   to {
@@ -1273,7 +1221,8 @@
   .nav-m {
     display: inline-block; }
   #menu-wrapper {
-    display: block; } }
+    display: -ms-flexbox;
+    display: flex; } }
 
 @media only screen and (max-width: 479px) {
   .menu-item-name span {
@@ -1915,8 +1864,8 @@ body {
         justify-content: center;
     -ms-flex-align: center;
         align-items: center;
-    -webkit-animation: fadeInRight 0.5s forwards;
-            animation: fadeInRight 0.5s forwards;
+    -webkit-animation: fadeInRight 0.4s forwards;
+            animation: fadeInRight 0.4s forwards;
     -webkit-transform: translate(-100%, 0);
             transform: translate(-100%, 0);
     opacity: 0; }
@@ -2055,20 +2004,20 @@ body {
     -webkit-animation: follow-span 0.3s forwards;
             animation: follow-span 0.3s forwards; }
     .follow-container a:nth-child(1) {
-      -webkit-animation-delay: 1.7s;
-              animation-delay: 1.7s; }
+      -webkit-animation-delay: 2s;
+              animation-delay: 2s; }
     .follow-container a:nth-child(2) {
-      -webkit-animation-delay: 1.8s;
-              animation-delay: 1.8s; }
+      -webkit-animation-delay: 2.05s;
+              animation-delay: 2.05s; }
     .follow-container a:nth-child(3) {
-      -webkit-animation-delay: 1.9s;
-              animation-delay: 1.9s; }
-    .follow-container a:nth-child(4) {
-      -webkit-animation-delay: 2.0s;
-              animation-delay: 2.0s; }
-    .follow-container a:nth-child(5) {
       -webkit-animation-delay: 2.1s;
               animation-delay: 2.1s; }
+    .follow-container a:nth-child(4) {
+      -webkit-animation-delay: 2.15s;
+              animation-delay: 2.15s; }
+    .follow-container a:nth-child(5) {
+      -webkit-animation-delay: 2.2s;
+              animation-delay: 2.2s; }
     .follow-container a i {
       color: #ddd;
       transition: all 0.2s; }
@@ -2610,17 +2559,28 @@ body {
   width: 8px;
   height: 8px;
   background-color: #fff;
-  transition: opacity 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out;
-  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
-  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out; }
+  transition: opacity 0.3s ease-in-out,
+ -webkit-transform 0.3s ease-in-out;
+  transition: opacity 0.3s ease-in-out,
+ transform 0.3s ease-in-out;
+  transition: opacity 0.3s ease-in-out,
+ transform 0.3s ease-in-out,
+ -webkit-transform 0.3s ease-in-out; }
 
 .cursor-dot-outline {
   width: 40px;
   height: 40px;
   background-color: rgba(255, 255, 255, 0.4);
-  transition: opacity 0.3s ease-in-out, background-color 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out;
-  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
-  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out, background-color 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out; }
+  transition: opacity 0.3s ease-in-out,
+ background-color 0.3s ease-in-out,
+ -webkit-transform 0.3s ease-in-out;
+  transition: opacity 0.3s ease-in-out,
+ transform 0.3s ease-in-out,
+ background-color 0.3s ease-in-out;
+  transition: opacity 0.3s ease-in-out,
+ transform 0.3s ease-in-out,
+ background-color 0.3s ease-in-out,
+ -webkit-transform 0.3s ease-in-out; }
 
 
 /*# sourceMappingURL=/src.e31bb0bc.css.map */

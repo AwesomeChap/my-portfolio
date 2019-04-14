@@ -30092,7 +30092,7 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"components/helper/menu-item.js":[function(require,module,exports) {
+},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"components/helper/split-text.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -30126,21 +30126,20 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var MenuItem =
+var SplitText =
 /*#__PURE__*/
 function (_Component) {
-  _inherits(MenuItem, _Component);
+  _inherits(SplitText, _Component);
 
-  function MenuItem(props) {
+  function SplitText(props) {
     var _this;
 
-    _classCallCheck(this, MenuItem);
+    _classCallCheck(this, SplitText);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(MenuItem).call(this, props));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(SplitText).call(this, props));
 
     _defineProperty(_assertThisInitialized(_this), "handleClick", function () {
-      _this.props.onClick(_this.props.index); // this.setState({clickedItem : !this.state.clickedItem});
-
+      _this.props.onClick(_this.props.index);
     });
 
     _this.state = {
@@ -30149,41 +30148,26 @@ function (_Component) {
     return _this;
   }
 
-  _createClass(MenuItem, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      this.isFirefox = /Android.+Firefox\//.test(navigator.userAgent);
-    }
-  }, {
+  _createClass(SplitText, [{
     key: "render",
     value: function render() {
+      var upperSplitClasses = this.props.selected === this.props.index ? "upper-split split upper-split-move" : "upper-split split";
+      var lowerSplitClasses = this.props.selected === this.props.index ? "lower-split split lower-split-move" : "lower-split split";
       return _react.default.createElement("div", {
         onClick: this.handleClick,
         className: "menu-item"
-      }, !this.isFirefox ? _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("div", {
-        className: "menu-item-bg"
-      }), _react.default.createElement("div", {
-        className: "menu-item-bg"
-      })) : _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("div", {
-        style: {
-          transform: "scaleX(1)"
-        },
-        className: "menu-item-bg"
-      }), _react.default.createElement("div", {
-        style: {
-          transform: "scaleX(1)"
-        },
-        className: "menu-item-bg"
-      })), _react.default.createElement("div", {
-        className: this.props.MINClasses
-      }, " ", _react.default.createElement("span", null, this.props.name), " "));
+      }, _react.default.createElement("div", {
+        className: upperSplitClasses
+      }, " ", this.props.name, " "), _react.default.createElement("div", {
+        className: lowerSplitClasses
+      }, " ", this.props.name, " "));
     }
   }]);
 
-  return MenuItem;
+  return SplitText;
 }(_react.Component);
 
-exports.default = MenuItem;
+exports.default = SplitText;
 },{"react":"../node_modules/react/index.js","../../css/nav-mobile.scss":"css/nav-mobile.scss"}],"components/nav-mobile.js":[function(require,module,exports) {
 "use strict";
 
@@ -30198,7 +30182,7 @@ var _reactRouterDom = require("react-router-dom");
 
 var _svg = _interopRequireDefault(require("./svg"));
 
-var _menuItem = _interopRequireDefault(require("./helper/menu-item"));
+var _splitText = _interopRequireDefault(require("./helper/split-text"));
 
 require("../css/nav-mobile.scss");
 
@@ -30243,18 +30227,16 @@ function (_Component) {
         selected: index
       }, function () {
         console.log("you clicked ", _this.state.selected);
-        setTimeout(function () {
-          _this.setState({
-            clicked: !_this.state.clicked
-          });
-        }, 1850);
+
+        _this.setState({
+          clicked: !_this.state.clicked
+        });
       });
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleClick", function () {
       _this.setState({
-        clicked: !_this.state.clicked,
-        selected: false
+        clicked: !_this.state.clicked
       }, function () {
         console.log("you clicked ", _this.state.selected);
       });
@@ -30271,69 +30253,51 @@ function (_Component) {
   _createClass(NavMobile, [{
     key: "componentDidMount",
     value: function componentDidMount() {
+      var _this2 = this;
+
       window.innerWidth <= 476 ? this.setState({
         svgWidth: 50
       }) : window.innerWidth <= 767 ? this.setState({
         svgWidth: 65
       }) : "";
+      var routes = ['/', '/about', '/work', '/projects', '/contact'];
+      var selected = routes.map(function (r, i) {
+        if (r === _this2.props.history.location.pathname) {
+          _this2.setState({
+            selected: i + 1
+          });
+
+          return i + 1;
+        }
+
+        ;
+      });
     }
   }, {
     key: "render",
     value: function render() {
-      var _this2 = this;
+      var _this3 = this;
 
-      var navBgClasses = this.state.selected ? "shrink-nav-bar-bg nav-bar-bg" : "nav-bar-bg";
       var menuClasses = this.state.clicked ? "open-menu" : "close-menu";
       var hamburgerClasses = this.state.clicked ? "close" : this.state.clicked === 0 ? "" : "ham";
-      var MINClasses = this.state.clicked ? "menu-item-name fadeIn-menu-item" : " menu-item-name fadeOut-menu-item";
-      var MINClasses2 = this.state.selected ? "menu-item-name fadeOut-menu-item" : "";
+      var MINClasses = this.state.clicked ? "menu-item fadeIn-menu-item" : " menu-item fadeOut-menu-item";
       var routes = ['/', '/about', '/work', '/projects', // '/blog',
       '/contact'];
       var menu_items = ['HOME', 'ABOUT ME', 'WORK', 'PROJECTS', // 'BLOG',
       'CONTACT'];
       var navLnks = menu_items.map(function (name, i) {
-        if (_this2.state.selected === false) {
-          return _react.default.createElement(_reactRouterDom.NavLink, {
-            key: i,
-            activeClassName: "selected-m-nav-item",
-            className: "menu-item-wrapper",
-            exact: true,
-            to: routes[i]
-          }, _react.default.createElement(_menuItem.default, {
-            onClick: _this2.handleSelect,
-            index: i + 1,
-            MINClasses: MINClasses,
-            name: name
-          }));
-        } else {
-          if (_this2.state.selected !== i + 1) {
-            return _react.default.createElement(_reactRouterDom.NavLink, {
-              key: i,
-              activeClassName: "selected-m-nav-item",
-              className: "menu-item-wrapper shrink-item",
-              exact: true,
-              to: routes[i]
-            }, _react.default.createElement(_menuItem.default, {
-              onClick: _this2.handleSelect,
-              index: i + 1,
-              MINClasses: MINClasses2,
-              name: name
-            }));
-          } else {
-            return _react.default.createElement(_reactRouterDom.NavLink, {
-              key: i,
-              activeClassName: "selected-m-nav-item",
-              className: "menu-item-wrapper fadeOut-menu-item selected-menu-item",
-              exact: true,
-              to: routes[i]
-            }, _react.default.createElement(_menuItem.default, {
-              onClick: _this2.handleSelect,
-              index: i + 1,
-              MINClasses: MINClasses,
-              name: name
-            }));
-          }
-        }
+        return _react.default.createElement(_reactRouterDom.NavLink, {
+          key: i,
+          activeClassName: "selected-m-nav-item",
+          className: MINClasses,
+          exact: true,
+          to: routes[i]
+        }, _react.default.createElement(_splitText.default, {
+          onClick: _this3.handleSelect,
+          index: i + 1,
+          selected: _this3.state.selected,
+          name: name
+        }));
       });
       return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("div", {
         className: "nav-m"
@@ -30357,17 +30321,17 @@ function (_Component) {
       }))), _react.default.createElement("div", {
         id: "menu-wrapper",
         className: menuClasses
-      }, _react.default.createElement("div", {
-        className: "menu"
-      }, navLnks)));
+      }, navLnks));
     }
   }]);
 
   return NavMobile;
 }(_react.Component);
 
-exports.default = NavMobile;
-},{"react":"../node_modules/react/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","./svg":"components/svg.js","./helper/menu-item":"components/helper/menu-item.js","../css/nav-mobile.scss":"css/nav-mobile.scss"}],"css/heading.scss":[function(require,module,exports) {
+var _default = (0, _reactRouterDom.withRouter)(NavMobile);
+
+exports.default = _default;
+},{"react":"../node_modules/react/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","./svg":"components/svg.js","./helper/split-text":"components/helper/split-text.js","../css/nav-mobile.scss":"css/nav-mobile.scss"}],"css/heading.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -78877,8 +78841,9 @@ function (_Component) {
       var text1 = "HELLO.";
       var text2 = "I'M";
       var text3 = "JATIN";
-      var t1 = text1.length;
-      var t2 = text2.length + t1;
+      var t0 = 0.7;
+      var t1 = text1.length / 15 + t0;
+      var t2 = text2.length / 15 + t1;
       return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("div", {
         className: "section home"
       }, this.state.mobileView ? _react.default.createElement(_mBackground.default, null) : _react.default.createElement(_background.default, null), _react.default.createElement("div", {
@@ -78892,25 +78857,24 @@ function (_Component) {
         }
       }, text1.split("").map(function (t, i) {
         var style = {
-          animationDelay: "".concat(i / 15, "s")
+          animationDelay: "".concat(t0 + i / 15, "s")
         };
         return _react.default.createElement("span", {
           style: style
         }, t);
+        t1 += i / 15;
       })), _react.default.createElement("div", {
         className: "intro-text"
       }, text2.split("").map(function (t, i) {
-        i += t1;
         var style = {
-          animationDelay: "".concat(i / 15, "s")
+          animationDelay: "".concat(t1 + i / 15, "s")
         };
         return _react.default.createElement("span", {
           style: style
         }, t);
       }), _react.default.createElement("span", null, "\xA0"), text3.split("").map(function (t, i) {
-        i += t2;
         var style = {
-          animationDelay: "".concat(i / 15, "s")
+          animationDelay: "".concat(t2 + i / 15, "s")
         };
         return _react.default.createElement("span", {
           style: style
