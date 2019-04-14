@@ -30001,11 +30001,13 @@ function (_Component) {
       }, _react.default.createElement("div", {
         className: "nav-left"
       }, _react.default.createElement(_reactRouterDom.NavLink, {
+        "data-to": "/",
         className: "nav-logo",
         activeClassName: "selected",
         exact: true,
         to: "/"
       }, _react.default.createElement(_svg.default, {
+        "data-to": "/",
         id: "logo"
       }))), _react.default.createElement("div", {
         className: "nav-right-wrapper"
@@ -41477,22 +41479,26 @@ function (_Component) {
         className: "social-icons"
       }, _react.default.createElement("a", {
         className: "if",
-        href: "#"
+        target: "_blank",
+        href: "https://www.facebook.com/J4TINKUMAR"
       }, _react.default.createElement("i", {
         className: "fab fa-facebook-f"
       })), _react.default.createElement("a", {
         className: "ig",
-        href: "#"
+        target: "_blank",
+        href: "https://github.com/AwesomeChap"
       }, _react.default.createElement("i", {
         className: "fab fa-github"
       })), _react.default.createElement("a", {
         className: "il",
-        href: "#"
+        target: "_blank",
+        href: "https://www.linkedin.com/in/-jatin-kumar/"
       }, _react.default.createElement("i", {
         className: "fab fa-linkedin-in"
       })), _react.default.createElement("a", {
         className: "it",
-        href: "#"
+        target: "_blank",
+        href: "https://twitter.com/jatink99"
       }, _react.default.createElement("i", {
         className: "fab fa-twitter"
       }))), _react.default.createElement("div", null, "Copyright \xA9 2019, Jatin Kumar. All Rights Reserved")));
@@ -41615,7 +41621,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var set1 = [{
   name: 'React',
-  value: '85'
+  value: '80'
 }, {
   name: 'Redux',
   value: '75'
@@ -41673,13 +41679,13 @@ var works = [{
   rspbs: ["Wrote vareity ofJQuery and CSS animations", "improved previous base template", "Designed logo", "Connected Frontend and Backend"]
 }];
 exports.works = works;
-var keywords = ['Show All', 'Web', 'React', 'CSS', 'SCSS', 'SVG', 'Animations', 'Node', 'Web Sockets', 'MongoDB', 'GraphQL', 'Mobile', 'ReactNative', 'C++', 'NASM'];
+var keywords = ['Show All', 'Web', 'React', 'CSS', 'SCSS', 'SVG', 'Animations', 'Node', 'SEO', 'Web Sockets', 'MongoDB', 'GraphQL', 'Mobile', 'ReactNative', 'C++', 'NASM'];
 exports.keywords = keywords;
 var projects = [{
   name: 'Portfolio',
   imgUrl: _portfolio.default,
-  keywords: ['Web', 'React', 'SCSS', 'SVG', 'Animations', 'Node'],
-  link: '',
+  keywords: ['Web', 'React', 'SCSS', 'SVG', 'Animations', 'Node', 'SEO'],
+  link: 'http://www.jatinkumar.tech/',
   gitUrl: '',
   desc: 'This is My portfolio website'
 }, // {
@@ -44036,42 +44042,50 @@ function (_Component) {
       }, "Let's Get Social"), _react.default.createElement("div", {
         className: "social-container"
       }, !this.state.mobileView ? _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("a", {
-        href: "#",
+        target: "_blank",
+        href: "https://www.facebook.com/J4TINKUMAR",
         className: "social-icon"
       }, " ", _react.default.createElement("i", {
         className: "fab if fa-facebook-f"
       }), _react.default.createElement("span", null, "FACEBOOK")), _react.default.createElement("a", {
-        href: "#",
+        target: "_blank",
+        href: "https://github.com/AwesomeChap",
         className: "social-icon"
       }, " ", _react.default.createElement("i", {
         className: "fab ig fa-github"
       }), _react.default.createElement("span", null, "GITHUB")), _react.default.createElement("a", {
-        href: "#",
+        target: "_blank",
+        href: "https://www.linkedin.com/in/-jatin-kumar/",
         className: "social-icon"
       }, " ", _react.default.createElement("i", {
         className: "fab il fa-linkedin-in"
       }), _react.default.createElement("span", null, "LINKEDIN")), _react.default.createElement("a", {
-        href: "#",
+        target: "_blank",
+        href: "https://twitter.com/jatink99",
         className: "social-icon"
       }, " ", _react.default.createElement("i", {
         className: "fab it fa-twitter"
       }), _react.default.createElement("span", null, "TWITTER"))) : _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("a", {
-        href: "#",
+        target: "_blank",
+        href: "https://www.facebook.com/J4TINKUMAR",
         className: "social-icon-m"
       }, " ", _react.default.createElement("i", {
         className: "fab if fa-facebook-f"
       })), _react.default.createElement("a", {
-        href: "#",
+        target: "_blank",
+        href: "https://github.com/AwesomeChap",
         className: "social-icon-m"
       }, " ", _react.default.createElement("i", {
         className: "fab ig fa-github"
       })), _react.default.createElement("a", {
-        href: "#",
+        target: "_blank",
+        href: "https://www.linkedin.com/in/-jatin-kumar/",
         className: "social-icon-m"
       }, " ", _react.default.createElement("i", {
         className: "fab il fa-linkedin-in"
       })), _react.default.createElement("a", {
-        href: "#",
+        target: "_blank",
+        href: "https://twitter.com/jatink99",
         className: "social-icon-m"
       }, " ", _react.default.createElement("i", {
         className: "fab it fa-twitter"
@@ -44092,15 +44106,16 @@ function (_Component) {
       })), this.state.email.length > 0 && _react.default.createElement("span", {
         onClick: function onClick() {
           _this2.handleFieldIconClick(2);
+        },
+        style: {
+          fontWeight: "900"
         }
-      }, _react.default.createElement("i", {
-        className: "fas fa-envelope"
-      })), this.state.message.length > 0 && _react.default.createElement("span", {
+      }, "@"), this.state.message.length > 0 && _react.default.createElement("span", {
         onClick: function onClick() {
           _this2.handleFieldIconClick(3);
         }
       }, _react.default.createElement("i", {
-        className: "fas fa-comment-dots"
+        className: "fas fa-envelope"
       }))) : this.state.name.length || this.state.email.length || this.state.message.length ? _react.default.createElement("div", {
         className: "fields"
       }, this.state.name.length > 0 && _react.default.createElement("span", {
@@ -44112,15 +44127,16 @@ function (_Component) {
       })), this.state.email.length > 0 && _react.default.createElement("span", {
         onClick: function onClick() {
           _this2.handleFieldIconClick(2);
+        },
+        style: {
+          fontWeight: "900"
         }
-      }, _react.default.createElement("i", {
-        className: "fas fa-envelope"
-      })), this.state.message.length > 0 && _react.default.createElement("span", {
+      }, "@"), this.state.message.length > 0 && _react.default.createElement("span", {
         onClick: function onClick() {
           _this2.handleFieldIconClick(3);
         }
       }, _react.default.createElement("i", {
-        className: "fas fa-comment-dots"
+        className: "fas fa-envelope"
       }))) : "", _react.default.createElement("form", {
         className: "contact-form"
       }, this.state.step === 1 && _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("label", {
@@ -78887,27 +78903,32 @@ function (_Component) {
         className: "follow-container"
       }, _react.default.createElement("a", {
         className: "if",
-        href: "#"
+        target: "_blank",
+        href: "https://www.facebook.com/J4TINKUMAR"
       }, _react.default.createElement("i", {
         className: "fab fa-facebook-f"
       })), _react.default.createElement("a", {
         className: "ig",
-        href: "#"
+        target: "_blank",
+        href: "https://github.com/AwesomeChap"
       }, _react.default.createElement("i", {
         className: "fab fa-github"
       })), _react.default.createElement("a", {
         className: "iy",
-        href: "#"
+        target: "_blank",
+        href: "https://www.youtube.com/channel/UCWOv0PVApOlYYk56d0pU57g"
       }, _react.default.createElement("i", {
         className: "fab fa-youtube"
       })), _react.default.createElement("a", {
         className: "il",
-        href: "#"
+        target: "_blank",
+        href: "https://www.linkedin.com/in/-jatin-kumar/"
       }, _react.default.createElement("i", {
         className: "fab fa-linkedin-in"
       })), _react.default.createElement("a", {
         className: "it",
-        href: "#"
+        target: "_blank",
+        href: "https://twitter.com/jatink99"
       }, _react.default.createElement("i", {
         className: "fab fa-twitter"
       })))), !this.state.shared ? _react.default.createElement("div", {
@@ -78939,36 +78960,24 @@ function (_Component) {
             shared: !_this2.state.shared
           });
         },
-        href: "https://twitter.com/intent/tweet/?text=Super%20fast%20and%20easy%20Social%20Media%20Sharing%20Buttons.%20No%20JavaScript.%20No%20tracking.&url=http%3A%2F%2Fjatinkumar.tech",
-        target: "_blank",
-        rel: "noopener",
-        "aria-label": ""
-      }, _react.default.createElement("i", {
-        className: "fab fa-twitter"
-      })), _react.default.createElement("a", {
-        onClick: function onClick() {
-          _this2.setState({
-            shared: !_this2.state.shared
-          });
-        },
-        href: "whatsapp://send?text=Super%20fast%20and%20easy%20Social%20Media%20Sharing%20Buttons.%20No%20JavaScript.%20No%20tracking.%20http%3A%2F%2Fjatinkumar.tech",
-        target: "_blank",
-        rel: "noopener",
-        "aria-label": "Share on WhatsApp"
-      }, _react.default.createElement("i", {
-        className: "fab fa-whatsapp"
-      })), _react.default.createElement("a", {
-        onClick: function onClick() {
-          _this2.setState({
-            shared: !_this2.state.shared
-          });
-        },
-        href: "https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Fsharingbuttons.io&title=Super%20fast%20and%20easy%20Social%20Media%20Sharing%20Buttons.%20No%20JavaScript.%20No%20tracking.&summary=Super%20fast%20and%20easy%20Social%20Media%20Sharing%20Buttons.%20No%20JavaScript.%20No%20tracking.&source=http%3A%2F%2Fjatinkumar.tech",
+        href: "https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Fjatinkumar.tech&title=Portfolio of Jatin Kumar.&summary=It is web based portfolio website of Jatin Kumar which shares various things like Projects, Skills, Work Experience, etc.&source=http%3A%2F%2Fjatinkumar.tech",
         target: "_blank",
         rel: "noopener",
         "aria-label": ""
       }, _react.default.createElement("i", {
         className: "fab fa-linkedin-in"
+      })), _react.default.createElement("a", {
+        onClick: function onClick() {
+          _this2.setState({
+            shared: !_this2.state.shared
+          });
+        },
+        href: "https://twitter.com/intent/tweet/?text=Just saw the awesome portfolio of jatin, and couldn't resist without sharing it, you can view it live here. &url=http%3A%2F%2Fjatinkumar.tech",
+        target: "_blank",
+        rel: "noopener",
+        "aria-label": ""
+      }, _react.default.createElement("i", {
+        className: "fab fa-twitter"
       }))))));
     }
   }]);
@@ -80330,7 +80339,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63203" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50298" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

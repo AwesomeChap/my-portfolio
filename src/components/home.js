@@ -28,8 +28,8 @@ export default class Home extends Component {
     const text2 = "I'M";
     const text3 = "JATIN";
     let t0 = 0.7;
-    let t1 = text1.length/15 + t0;
-    let t2 = text2.length/15 + t1;
+    let t1 = text1.length / 15 + t0;
+    let t2 = text2.length / 15 + t1;
 
     return (
       <>
@@ -42,7 +42,7 @@ export default class Home extends Component {
                   text1.split("").map((t, i) => {
                     let style = { animationDelay: `${t0 + i / 15}s` };
                     return <span style={style}>{t}</span>
-                    t1 += i/15;
+                    t1 += i / 15;
                   })
                 }
               </div>
@@ -66,11 +66,11 @@ export default class Home extends Component {
           <div className="follow-container-wrapper">
             <small className="follow-me">Follow me</small>
             <div className="follow-container">
-              <a className="if" href="#"><i className="fab fa-facebook-f"></i></a>
-              <a className="ig" href="#"><i className="fab fa-github"></i></a>
-              <a className="iy" href="#"><i className="fab fa-youtube"></i></a>
-              <a className="il" href="#"><i className="fab fa-linkedin-in"></i></a>
-              <a className="it" href="#"><i className="fab fa-twitter"></i></a>
+              <a className="if" target="_blank" href="https://www.facebook.com/J4TINKUMAR"><i className="fab fa-facebook-f"></i></a>
+              <a className="ig" target="_blank" href="https://github.com/AwesomeChap"><i className="fab fa-github"></i></a>
+              <a className="iy" target="_blank" href="https://www.youtube.com/channel/UCWOv0PVApOlYYk56d0pU57g"><i className="fab fa-youtube"></i></a>
+              <a className="il" target="_blank" href="https://www.linkedin.com/in/-jatin-kumar/"><i className="fab fa-linkedin-in"></i></a>
+              <a className="it" target="_blank" href="https://twitter.com/jatink99"><i className="fab fa-twitter"></i></a>
             </div>
           </div>
           {
@@ -87,17 +87,17 @@ export default class Home extends Component {
                       <i className="fab fa-facebook-f"></i>
                     </a>
 
-                    <a onClick={() => { this.setState({ shared: !this.state.shared }) }} href="https://twitter.com/intent/tweet/?text=Super%20fast%20and%20easy%20Social%20Media%20Sharing%20Buttons.%20No%20JavaScript.%20No%20tracking.&amp;url=http%3A%2F%2Fjatinkumar.tech" target="_blank" rel="noopener" aria-label="">
+                    <a onClick={() => { this.setState({ shared: !this.state.shared }) }} href="https://www.linkedin.com/shareArticle?mini=true&amp;url=http%3A%2F%2Fjatinkumar.tech&amp;title=Portfolio of Jatin Kumar.&amp;summary=It is web based portfolio website of Jatin Kumar which shares various things like Projects, Skills, Work Experience, etc.&amp;source=http%3A%2F%2Fjatinkumar.tech" target="_blank" rel="noopener" aria-label="">
+                      <i className="fab fa-linkedin-in"></i>
+                    </a>
+
+                    <a onClick={() => { this.setState({ shared: !this.state.shared }) }} href="https://twitter.com/intent/tweet/?text=Just saw the awesome portfolio of jatin, and couldn't resist without sharing it, you can view it live here. &amp;url=http%3A%2F%2Fjatinkumar.tech" target="_blank" rel="noopener" aria-label="">
                       <i className="fab fa-twitter"></i>
                     </a>
 
-                    <a onClick={() => { this.setState({ shared: !this.state.shared }) }} href="whatsapp://send?text=Super%20fast%20and%20easy%20Social%20Media%20Sharing%20Buttons.%20No%20JavaScript.%20No%20tracking.%20http%3A%2F%2Fjatinkumar.tech" target="_blank" rel="noopener" aria-label="Share on WhatsApp">
+                    {/* <a onClick={() => { this.setState({ shared: !this.state.shared }) }} href="whatsapp://send?text=Web based portfolio of Jatin Kumar which displays various things like Projects, Skills, Work Experience, etc." target="_blank" rel="noopener" aria-label="Share on WhatsApp">
                       <i className="fab fa-whatsapp"></i>
-                    </a>
-
-                    <a onClick={() => { this.setState({ shared: !this.state.shared }) }} href="https://www.linkedin.com/shareArticle?mini=true&amp;url=http%3A%2F%2Fsharingbuttons.io&amp;title=Super%20fast%20and%20easy%20Social%20Media%20Sharing%20Buttons.%20No%20JavaScript.%20No%20tracking.&amp;summary=Super%20fast%20and%20easy%20Social%20Media%20Sharing%20Buttons.%20No%20JavaScript.%20No%20tracking.&amp;source=http%3A%2F%2Fjatinkumar.tech" target="_blank" rel="noopener" aria-label="">
-                      <i className="fab fa-linkedin-in"></i>
-                    </a>
+                    </a> */}
 
                   </div>
                 </div>

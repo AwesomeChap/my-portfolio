@@ -1,7 +1,7 @@
 export const set1 = [
   {
     name : 'React',
-    value : '85'
+    value : '80'
   },
   {
     name : 'Redux',
@@ -90,7 +90,7 @@ export const works = [
   }
 ]
 
-export const keywords = ['Show All','Web','React','CSS', 'SCSS', 'SVG', 'Animations', 'Node', 'Web Sockets', 'MongoDB', 'GraphQL', 'Mobile', 'ReactNative', 'C++', 'NASM'];
+export const keywords = ['Show All','Web','React','CSS', 'SCSS', 'SVG', 'Animations', 'Node','SEO','Web Sockets', 'MongoDB', 'GraphQL', 'Mobile', 'ReactNative', 'C++', 'NASM'];
 
 import roomChatImg from '../../images/chat.PNG';
 import superMarketImg from '../../images/sp.png';
@@ -106,8 +106,8 @@ export const projects = [
   {
     name : 'Portfolio',
     imgUrl: portfolio,
-    keywords : ['Web', 'React', 'SCSS', 'SVG', 'Animations', 'Node'],
-    link : '',
+    keywords : ['Web', 'React', 'SCSS', 'SVG', 'Animations', 'Node', 'SEO'],
+    link : 'http://www.jatinkumar.tech/',
     gitUrl : '',
     desc : 'This is My portfolio website'
   },

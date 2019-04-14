@@ -66,8 +66,8 @@ class Nav extends Component {
         
         <div className="nav-bar" >
           <div className="nav-left">
-            <NavLink className="nav-logo" activeClassName="selected" exact to="/">
-              <Svg id="logo" />
+            <NavLink data-to="/" className="nav-logo" activeClassName="selected" exact to="/">
+              <Svg data-to="/" id="logo" />
             </NavLink>
           </div>
           <div className="nav-right-wrapper">

@@ -1334,7 +1334,7 @@
       .footer .sub-footer .social-icons a {
         position: relative;
         text-decoration: none;
-        color: #aaa;
+        color: #fff;
         font-size: 20px;
         height: 40px;
         width: 40px;
@@ -1696,6 +1696,7 @@ body {
       flex-wrap: wrap;
   margin: -10vh 0 10vh 0; }
   .fields span {
+    font-size: 20px;
     display: inline-block;
     color: #fff;
     width: 5vh;
@@ -1876,15 +1877,15 @@ body {
       -webkit-animation-delay: 0.4s;
               animation-delay: 0.4s; }
     .share-buttons a:nth-child(2) {
-      background-color: #00a2ff;
+      background-color: #0051ff;
       -webkit-animation-delay: 0.3s;
               animation-delay: 0.3s; }
     .share-buttons a:nth-child(3) {
-      background-color: #00b62d;
+      background-color: #00a2ff;
       -webkit-animation-delay: 0.2s;
               animation-delay: 0.2s; }
     .share-buttons a:nth-child(4) {
-      background-color: #0051ff;
+      background-color: #00b62d;
       -webkit-animation-delay: 0.1s;
               animation-delay: 0.1s; }
 
@@ -2004,20 +2005,20 @@ body {
     -webkit-animation: follow-span 0.3s forwards;
             animation: follow-span 0.3s forwards; }
     .follow-container a:nth-child(1) {
+      -webkit-animation-delay: 1.8s;
+              animation-delay: 1.8s; }
+    .follow-container a:nth-child(2) {
+      -webkit-animation-delay: 1.85s;
+              animation-delay: 1.85s; }
+    .follow-container a:nth-child(3) {
+      -webkit-animation-delay: 1.9s;
+              animation-delay: 1.9s; }
+    .follow-container a:nth-child(4) {
+      -webkit-animation-delay: 1.95s;
+              animation-delay: 1.95s; }
+    .follow-container a:nth-child(5) {
       -webkit-animation-delay: 2s;
               animation-delay: 2s; }
-    .follow-container a:nth-child(2) {
-      -webkit-animation-delay: 2.05s;
-              animation-delay: 2.05s; }
-    .follow-container a:nth-child(3) {
-      -webkit-animation-delay: 2.1s;
-              animation-delay: 2.1s; }
-    .follow-container a:nth-child(4) {
-      -webkit-animation-delay: 2.15s;
-              animation-delay: 2.15s; }
-    .follow-container a:nth-child(5) {
-      -webkit-animation-delay: 2.2s;
-              animation-delay: 2.2s; }
     .follow-container a i {
       color: #ddd;
       transition: all 0.2s; }
@@ -2559,28 +2560,17 @@ body {
   width: 8px;
   height: 8px;
   background-color: #fff;
-  transition: opacity 0.3s ease-in-out,
- -webkit-transform 0.3s ease-in-out;
-  transition: opacity 0.3s ease-in-out,
- transform 0.3s ease-in-out;
-  transition: opacity 0.3s ease-in-out,
- transform 0.3s ease-in-out,
- -webkit-transform 0.3s ease-in-out; }
+  transition: opacity 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out;
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out; }
 
 .cursor-dot-outline {
   width: 40px;
   height: 40px;
   background-color: rgba(255, 255, 255, 0.4);
-  transition: opacity 0.3s ease-in-out,
- background-color 0.3s ease-in-out,
- -webkit-transform 0.3s ease-in-out;
-  transition: opacity 0.3s ease-in-out,
- transform 0.3s ease-in-out,
- background-color 0.3s ease-in-out;
-  transition: opacity 0.3s ease-in-out,
- transform 0.3s ease-in-out,
- background-color 0.3s ease-in-out,
- -webkit-transform 0.3s ease-in-out; }
+  transition: opacity 0.3s ease-in-out, background-color 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out;
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out, background-color 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out; }
 
 
 /*# sourceMappingURL=/src.e31bb0bc.css.map */

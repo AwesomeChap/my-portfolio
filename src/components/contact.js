@@ -172,17 +172,17 @@ export default class Contact extends Component {
                 {
                   !this.state.mobileView ? (
                     <>
-                      <a href="#" className="social-icon" > <i className="fab if fa-facebook-f"></i><span>FACEBOOK</span></a>
-                      <a href="#" className="social-icon" > <i className="fab ig fa-github"></i><span>GITHUB</span></a>
-                      <a href="#" className="social-icon" > <i className="fab il fa-linkedin-in"></i><span>LINKEDIN</span></a>
-                      <a href="#" className="social-icon" > <i className="fab it fa-twitter"></i><span>TWITTER</span></a>
+                      <a target="_blank" href="https://www.facebook.com/J4TINKUMAR" className="social-icon" > <i className="fab if fa-facebook-f"></i><span>FACEBOOK</span></a>
+                      <a target="_blank" href="https://github.com/AwesomeChap" className="social-icon" > <i className="fab ig fa-github"></i><span>GITHUB</span></a>
+                      <a target="_blank" href="https://www.linkedin.com/in/-jatin-kumar/" className="social-icon" > <i className="fab il fa-linkedin-in"></i><span>LINKEDIN</span></a>
+                      <a target="_blank" href="https://twitter.com/jatink99" className="social-icon" > <i className="fab it fa-twitter"></i><span>TWITTER</span></a>
                     </>
                   ) : (
                     <>
-                      <a href="#" className="social-icon-m" > <i className="fab if fa-facebook-f"></i></a>
-                      <a href="#" className="social-icon-m" > <i className="fab ig fa-github"></i></a>
-                      <a href="#" className="social-icon-m" > <i className="fab il fa-linkedin-in"></i></a>
-                      <a href="#" className="social-icon-m" > <i className="fab it fa-twitter"></i></a>
+                      <a target="_blank" href="https://www.facebook.com/J4TINKUMAR" className="social-icon-m" > <i className="fab if fa-facebook-f"></i></a>
+                      <a target="_blank" href="https://github.com/AwesomeChap" className="social-icon-m" > <i className="fab ig fa-github"></i></a>
+                      <a target="_blank" href="https://www.linkedin.com/in/-jatin-kumar/" className="social-icon-m" > <i className="fab il fa-linkedin-in"></i></a>
+                      <a target="_blank" href="https://twitter.com/jatink99" className="social-icon-m" > <i className="fab it fa-twitter"></i></a>
                     </>
                   )
                 }
@@ -195,14 +195,14 @@ export default class Contact extends Component {
                  !this.state.mobileView ? (
                   <div className="fields">
                     {this.state.name.length > 0 && <span onClick={() => { this.handleFieldIconClick(1) }}><i className="fas fa-user"></i></span>}
-                    {this.state.email.length > 0 && <span onClick={() => { this.handleFieldIconClick(2) }}><i className="fas fa-envelope"></i></span>}
-                    {this.state.message.length > 0 && <span onClick={() => { this.handleFieldIconClick(3) }}><i className="fas fa-comment-dots"></i></span>}
+                    {this.state.email.length > 0 && <span onClick={() => { this.handleFieldIconClick(2) }} style={{fontWeight:"900"}} >@</span>}
+                    {this.state.message.length > 0 && <span onClick={() => { this.handleFieldIconClick(3) }}><i className="fas fa-envelope"></i></span>}
                   </div>
                  ) : this.state.name.length || this.state.email.length || this.state.message.length ? (
                   <div className="fields">
                     {this.state.name.length > 0 && <span onClick={() => { this.handleFieldIconClick(1) }}><i className="fas fa-user"></i></span>}
-                    {this.state.email.length > 0 && <span onClick={() => { this.handleFieldIconClick(2) }}><i className="fas fa-envelope"></i></span>}
-                    {this.state.message.length > 0 && <span onClick={() => { this.handleFieldIconClick(3) }}><i className="fas fa-comment-dots"></i></span>}
+                    {this.state.email.length > 0 && <span onClick={() => { this.handleFieldIconClick(2) }}style={{fontWeight:"900"}} >@</span>}
+                    {this.state.message.length > 0 && <span onClick={() => { this.handleFieldIconClick(3) }}><i className="fas fa-envelope"></i></span>}
                   </div>
                  ) : ""
                }
