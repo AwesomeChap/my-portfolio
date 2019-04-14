@@ -29977,12 +29977,12 @@ function (_Component) {
       // setTimeout(()=>{
       //   this.props.history.push('/contact');
       // },1000);
-      window.addEventListener("scroll", this.handleScroll);
+      document.body.addEventListener("scroll", this.handleScroll);
     }
   }, {
     key: "componentWillUnmount",
     value: function componentWillUnmount() {
-      window.removeEventListener("scroll", this.handleScroll);
+      document.body.removeEventListener("scroll", this.handleScroll);
     }
   }, {
     key: "render",
@@ -30139,24 +30139,42 @@ function (_Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(MenuItem).call(this, props));
 
     _defineProperty(_assertThisInitialized(_this), "handleClick", function () {
-      _this.props.onClick(_this.props.index);
+      _this.props.onClick(_this.props.index); // this.setState({clickedItem : !this.state.clickedItem});
+
     });
 
-    _this.state = {};
+    _this.state = {
+      clickedItem: false
+    };
     return _this;
   }
 
   _createClass(MenuItem, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.isFirefox = /Android.+Firefox\//.test(navigator.userAgent);
+    }
+  }, {
     key: "render",
     value: function render() {
       return _react.default.createElement("div", {
         onClick: this.handleClick,
         className: "menu-item"
-      }, _react.default.createElement("div", {
+      }, !this.isFirefox ? _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("div", {
         className: "menu-item-bg"
       }), _react.default.createElement("div", {
         className: "menu-item-bg"
+      })) : _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("div", {
+        style: {
+          transform: "scaleX(1)"
+        },
+        className: "menu-item-bg"
       }), _react.default.createElement("div", {
+        style: {
+          transform: "scaleX(1)"
+        },
+        className: "menu-item-bg"
+      })), _react.default.createElement("div", {
         className: this.props.MINClasses
       }, " ", _react.default.createElement("span", null, this.props.name), " "));
     }
@@ -30229,7 +30247,7 @@ function (_Component) {
           _this.setState({
             clicked: !_this.state.clicked
           });
-        }, 1550);
+        }, 1850);
       });
     });
 
@@ -41870,7 +41888,7 @@ function (_Component) {
           bar.classList.remove("animateSkillBar");
         }
       });
-      window.addEventListener('scroll', function () {
+      document.querySelector('body').addEventListener('scroll', function () {
         // console.log('you scrolled me');
         barsWrapper.forEach(function (bw) {
           if (bw.getBoundingClientRect().top <= window.innerHeight && bw.getBoundingClientRect().top > 0) {
@@ -41958,7 +41976,7 @@ function (_Component) {
           y: -90
         },
         heading: "SKILLS",
-        subHeading: 'My tools'
+        subHeading: 'Stuff I love'
       }), _react.default.createElement("div", {
         className: "skills-block"
       }, _react.default.createElement("div", {
@@ -44030,7 +44048,7 @@ function (_Component) {
     value: function render() {
       var _this2 = this;
 
-      return _react.default.createElement("div", {
+      return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("div", {
         className: "section"
       }, _react.default.createElement("div", {
         className: "inner-section"
@@ -44099,7 +44117,7 @@ function (_Component) {
         className: "lets-talk-bg"
       }, "Let's Talk"), _react.default.createElement("div", {
         className: "contact-form-wrapper"
-      }, _react.default.createElement("div", {
+      }, !this.state.mobileView ? _react.default.createElement("div", {
         className: "fields"
       }, this.state.name.length > 0 && _react.default.createElement("span", {
         onClick: function onClick() {
@@ -44119,7 +44137,27 @@ function (_Component) {
         }
       }, _react.default.createElement("i", {
         className: "fas fa-comment-dots"
-      }))), _react.default.createElement("form", {
+      }))) : this.state.name.length || this.state.email.length || this.state.message.length ? _react.default.createElement("div", {
+        className: "fields"
+      }, this.state.name.length > 0 && _react.default.createElement("span", {
+        onClick: function onClick() {
+          _this2.handleFieldIconClick(1);
+        }
+      }, _react.default.createElement("i", {
+        className: "fas fa-user"
+      })), this.state.email.length > 0 && _react.default.createElement("span", {
+        onClick: function onClick() {
+          _this2.handleFieldIconClick(2);
+        }
+      }, _react.default.createElement("i", {
+        className: "fas fa-envelope"
+      })), this.state.message.length > 0 && _react.default.createElement("span", {
+        onClick: function onClick() {
+          _this2.handleFieldIconClick(3);
+        }
+      }, _react.default.createElement("i", {
+        className: "fas fa-comment-dots"
+      }))) : "", _react.default.createElement("form", {
         className: "contact-form"
       }, this.state.step === 1 && _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("label", {
         htmlFor: "name"
@@ -44154,6 +44192,7 @@ function (_Component) {
       }, "Invalid Email") : _react.default.createElement("span", {
         className: "status okay"
       }, "Looks Fine")), _react.default.createElement("input", {
+        autoFocus: true,
         value: this.state.email,
         className: this.state.emailErr ? "err" : "",
         onChange: this.handleChange,
@@ -44174,6 +44213,7 @@ function (_Component) {
       }, "Message too short") : _react.default.createElement("span", {
         className: "status okay"
       }, "Looks Fine")), _react.default.createElement("textarea", {
+        autoFocus: true,
         value: this.state.message,
         className: this.state.msgErr ? "err" : "",
         onChange: this.handleChange,
@@ -44197,7 +44237,7 @@ function (_Component) {
         className: "not-sent"
       }, "SENDING"), " ", _react.default.createElement("span", {
         className: "sent"
-      }, "SENT"), " "))))))));
+      }, "SENT"), " ")))))))));
     }
   }]);
 
@@ -78733,7 +78773,7 @@ function (_Component) {
     key: "render",
     value: function render() {
       return _react.default.createElement("div", {
-        class: "m-background"
+        className: "m-background"
       }, _react.default.createElement("div", {
         className: "uh"
       }, _react.default.createElement("div", {
@@ -78839,7 +78879,7 @@ function (_Component) {
       var text3 = "JATIN";
       var t1 = text1.length;
       var t2 = text2.length + t1;
-      return _react.default.createElement("div", {
+      return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("div", {
         className: "section home"
       }, this.state.mobileView ? _react.default.createElement(_mBackground.default, null) : _react.default.createElement(_background.default, null), _react.default.createElement("div", {
         className: "intro"
@@ -78852,7 +78892,7 @@ function (_Component) {
         }
       }, text1.split("").map(function (t, i) {
         var style = {
-          animationDelay: "".concat(i / 10, "s")
+          animationDelay: "".concat(i / 15, "s")
         };
         return _react.default.createElement("span", {
           style: style
@@ -78862,7 +78902,7 @@ function (_Component) {
       }, text2.split("").map(function (t, i) {
         i += t1;
         var style = {
-          animationDelay: "".concat(i / 10, "s")
+          animationDelay: "".concat(i / 15, "s")
         };
         return _react.default.createElement("span", {
           style: style
@@ -78870,7 +78910,7 @@ function (_Component) {
       }), _react.default.createElement("span", null, "\xA0"), text3.split("").map(function (t, i) {
         i += t2;
         var style = {
-          animationDelay: "".concat(i / 10, "s")
+          animationDelay: "".concat(i / 15, "s")
         };
         return _react.default.createElement("span", {
           style: style
@@ -78965,7 +79005,7 @@ function (_Component) {
         "aria-label": ""
       }, _react.default.createElement("i", {
         className: "fab fa-linkedin-in"
-      })))));
+      }))))));
     }
   }]);
 
@@ -79498,7 +79538,442 @@ var _svg = _interopRequireDefault(require("./svg"));
 var _footer = _interopRequireDefault(require("./footer"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-},{"./about":"components/about.js","./blog":"components/blog.js","./contact":"components/contact.js","./home":"components/home.js","./work":"components/work.js","./projects":"components/projects.js","./svg":"components/svg.js","./footer":"components/footer.js"}],"components/helper/scrollToTop.js":[function(require,module,exports) {
+},{"./about":"components/about.js","./blog":"components/blog.js","./contact":"components/contact.js","./home":"components/home.js","./work":"components/work.js","./projects":"components/projects.js","./svg":"components/svg.js","./footer":"components/footer.js"}],"../node_modules/smoothscroll-polyfill/dist/smoothscroll.js":[function(require,module,exports) {
+/* smoothscroll v0.4.4 - 2019 - Dustan Kasten, Jeremias Menichelli - MIT License */
+(function () {
+  'use strict';
+
+  // polyfill
+  function polyfill() {
+    // aliases
+    var w = window;
+    var d = document;
+
+    // return if scroll behavior is supported and polyfill is not forced
+    if (
+      'scrollBehavior' in d.documentElement.style &&
+      w.__forceSmoothScrollPolyfill__ !== true
+    ) {
+      return;
+    }
+
+    // globals
+    var Element = w.HTMLElement || w.Element;
+    var SCROLL_TIME = 468;
+
+    // object gathering original scroll methods
+    var original = {
+      scroll: w.scroll || w.scrollTo,
+      scrollBy: w.scrollBy,
+      elementScroll: Element.prototype.scroll || scrollElement,
+      scrollIntoView: Element.prototype.scrollIntoView
+    };
+
+    // define timing method
+    var now =
+      w.performance && w.performance.now
+        ? w.performance.now.bind(w.performance)
+        : Date.now;
+
+    /**
+     * indicates if a the current browser is made by Microsoft
+     * @method isMicrosoftBrowser
+     * @param {String} userAgent
+     * @returns {Boolean}
+     */
+    function isMicrosoftBrowser(userAgent) {
+      var userAgentPatterns = ['MSIE ', 'Trident/', 'Edge/'];
+
+      return new RegExp(userAgentPatterns.join('|')).test(userAgent);
+    }
+
+    /*
+     * IE has rounding bug rounding down clientHeight and clientWidth and
+     * rounding up scrollHeight and scrollWidth causing false positives
+     * on hasScrollableSpace
+     */
+    var ROUNDING_TOLERANCE = isMicrosoftBrowser(w.navigator.userAgent) ? 1 : 0;
+
+    /**
+     * changes scroll position inside an element
+     * @method scrollElement
+     * @param {Number} x
+     * @param {Number} y
+     * @returns {undefined}
+     */
+    function scrollElement(x, y) {
+      this.scrollLeft = x;
+      this.scrollTop = y;
+    }
+
+    /**
+     * returns result of applying ease math function to a number
+     * @method ease
+     * @param {Number} k
+     * @returns {Number}
+     */
+    function ease(k) {
+      return 0.5 * (1 - Math.cos(Math.PI * k));
+    }
+
+    /**
+     * indicates if a smooth behavior should be applied
+     * @method shouldBailOut
+     * @param {Number|Object} firstArg
+     * @returns {Boolean}
+     */
+    function shouldBailOut(firstArg) {
+      if (
+        firstArg === null ||
+        typeof firstArg !== 'object' ||
+        firstArg.behavior === undefined ||
+        firstArg.behavior === 'auto' ||
+        firstArg.behavior === 'instant'
+      ) {
+        // first argument is not an object/null
+        // or behavior is auto, instant or undefined
+        return true;
+      }
+
+      if (typeof firstArg === 'object' && firstArg.behavior === 'smooth') {
+        // first argument is an object and behavior is smooth
+        return false;
+      }
+
+      // throw error when behavior is not supported
+      throw new TypeError(
+        'behavior member of ScrollOptions ' +
+          firstArg.behavior +
+          ' is not a valid value for enumeration ScrollBehavior.'
+      );
+    }
+
+    /**
+     * indicates if an element has scrollable space in the provided axis
+     * @method hasScrollableSpace
+     * @param {Node} el
+     * @param {String} axis
+     * @returns {Boolean}
+     */
+    function hasScrollableSpace(el, axis) {
+      if (axis === 'Y') {
+        return el.clientHeight + ROUNDING_TOLERANCE < el.scrollHeight;
+      }
+
+      if (axis === 'X') {
+        return el.clientWidth + ROUNDING_TOLERANCE < el.scrollWidth;
+      }
+    }
+
+    /**
+     * indicates if an element has a scrollable overflow property in the axis
+     * @method canOverflow
+     * @param {Node} el
+     * @param {String} axis
+     * @returns {Boolean}
+     */
+    function canOverflow(el, axis) {
+      var overflowValue = w.getComputedStyle(el, null)['overflow' + axis];
+
+      return overflowValue === 'auto' || overflowValue === 'scroll';
+    }
+
+    /**
+     * indicates if an element can be scrolled in either axis
+     * @method isScrollable
+     * @param {Node} el
+     * @param {String} axis
+     * @returns {Boolean}
+     */
+    function isScrollable(el) {
+      var isScrollableY = hasScrollableSpace(el, 'Y') && canOverflow(el, 'Y');
+      var isScrollableX = hasScrollableSpace(el, 'X') && canOverflow(el, 'X');
+
+      return isScrollableY || isScrollableX;
+    }
+
+    /**
+     * finds scrollable parent of an element
+     * @method findScrollableParent
+     * @param {Node} el
+     * @returns {Node} el
+     */
+    function findScrollableParent(el) {
+      while (el !== d.body && isScrollable(el) === false) {
+        el = el.parentNode || el.host;
+      }
+
+      return el;
+    }
+
+    /**
+     * self invoked function that, given a context, steps through scrolling
+     * @method step
+     * @param {Object} context
+     * @returns {undefined}
+     */
+    function step(context) {
+      var time = now();
+      var value;
+      var currentX;
+      var currentY;
+      var elapsed = (time - context.startTime) / SCROLL_TIME;
+
+      // avoid elapsed times higher than one
+      elapsed = elapsed > 1 ? 1 : elapsed;
+
+      // apply easing to elapsed time
+      value = ease(elapsed);
+
+      currentX = context.startX + (context.x - context.startX) * value;
+      currentY = context.startY + (context.y - context.startY) * value;
+
+      context.method.call(context.scrollable, currentX, currentY);
+
+      // scroll more if we have not reached our destination
+      if (currentX !== context.x || currentY !== context.y) {
+        w.requestAnimationFrame(step.bind(w, context));
+      }
+    }
+
+    /**
+     * scrolls window or element with a smooth behavior
+     * @method smoothScroll
+     * @param {Object|Node} el
+     * @param {Number} x
+     * @param {Number} y
+     * @returns {undefined}
+     */
+    function smoothScroll(el, x, y) {
+      var scrollable;
+      var startX;
+      var startY;
+      var method;
+      var startTime = now();
+
+      // define scroll context
+      if (el === d.body) {
+        scrollable = w;
+        startX = w.scrollX || w.pageXOffset;
+        startY = w.scrollY || w.pageYOffset;
+        method = original.scroll;
+      } else {
+        scrollable = el;
+        startX = el.scrollLeft;
+        startY = el.scrollTop;
+        method = scrollElement;
+      }
+
+      // scroll looping over a frame
+      step({
+        scrollable: scrollable,
+        method: method,
+        startTime: startTime,
+        startX: startX,
+        startY: startY,
+        x: x,
+        y: y
+      });
+    }
+
+    // ORIGINAL METHODS OVERRIDES
+    // w.scroll and w.scrollTo
+    w.scroll = w.scrollTo = function() {
+      // avoid action when no arguments are passed
+      if (arguments[0] === undefined) {
+        return;
+      }
+
+      // avoid smooth behavior if not required
+      if (shouldBailOut(arguments[0]) === true) {
+        original.scroll.call(
+          w,
+          arguments[0].left !== undefined
+            ? arguments[0].left
+            : typeof arguments[0] !== 'object'
+              ? arguments[0]
+              : w.scrollX || w.pageXOffset,
+          // use top prop, second argument if present or fallback to scrollY
+          arguments[0].top !== undefined
+            ? arguments[0].top
+            : arguments[1] !== undefined
+              ? arguments[1]
+              : w.scrollY || w.pageYOffset
+        );
+
+        return;
+      }
+
+      // LET THE SMOOTHNESS BEGIN!
+      smoothScroll.call(
+        w,
+        d.body,
+        arguments[0].left !== undefined
+          ? ~~arguments[0].left
+          : w.scrollX || w.pageXOffset,
+        arguments[0].top !== undefined
+          ? ~~arguments[0].top
+          : w.scrollY || w.pageYOffset
+      );
+    };
+
+    // w.scrollBy
+    w.scrollBy = function() {
+      // avoid action when no arguments are passed
+      if (arguments[0] === undefined) {
+        return;
+      }
+
+      // avoid smooth behavior if not required
+      if (shouldBailOut(arguments[0])) {
+        original.scrollBy.call(
+          w,
+          arguments[0].left !== undefined
+            ? arguments[0].left
+            : typeof arguments[0] !== 'object' ? arguments[0] : 0,
+          arguments[0].top !== undefined
+            ? arguments[0].top
+            : arguments[1] !== undefined ? arguments[1] : 0
+        );
+
+        return;
+      }
+
+      // LET THE SMOOTHNESS BEGIN!
+      smoothScroll.call(
+        w,
+        d.body,
+        ~~arguments[0].left + (w.scrollX || w.pageXOffset),
+        ~~arguments[0].top + (w.scrollY || w.pageYOffset)
+      );
+    };
+
+    // Element.prototype.scroll and Element.prototype.scrollTo
+    Element.prototype.scroll = Element.prototype.scrollTo = function() {
+      // avoid action when no arguments are passed
+      if (arguments[0] === undefined) {
+        return;
+      }
+
+      // avoid smooth behavior if not required
+      if (shouldBailOut(arguments[0]) === true) {
+        // if one number is passed, throw error to match Firefox implementation
+        if (typeof arguments[0] === 'number' && arguments[1] === undefined) {
+          throw new SyntaxError('Value could not be converted');
+        }
+
+        original.elementScroll.call(
+          this,
+          // use left prop, first number argument or fallback to scrollLeft
+          arguments[0].left !== undefined
+            ? ~~arguments[0].left
+            : typeof arguments[0] !== 'object' ? ~~arguments[0] : this.scrollLeft,
+          // use top prop, second argument or fallback to scrollTop
+          arguments[0].top !== undefined
+            ? ~~arguments[0].top
+            : arguments[1] !== undefined ? ~~arguments[1] : this.scrollTop
+        );
+
+        return;
+      }
+
+      var left = arguments[0].left;
+      var top = arguments[0].top;
+
+      // LET THE SMOOTHNESS BEGIN!
+      smoothScroll.call(
+        this,
+        this,
+        typeof left === 'undefined' ? this.scrollLeft : ~~left,
+        typeof top === 'undefined' ? this.scrollTop : ~~top
+      );
+    };
+
+    // Element.prototype.scrollBy
+    Element.prototype.scrollBy = function() {
+      // avoid action when no arguments are passed
+      if (arguments[0] === undefined) {
+        return;
+      }
+
+      // avoid smooth behavior if not required
+      if (shouldBailOut(arguments[0]) === true) {
+        original.elementScroll.call(
+          this,
+          arguments[0].left !== undefined
+            ? ~~arguments[0].left + this.scrollLeft
+            : ~~arguments[0] + this.scrollLeft,
+          arguments[0].top !== undefined
+            ? ~~arguments[0].top + this.scrollTop
+            : ~~arguments[1] + this.scrollTop
+        );
+
+        return;
+      }
+
+      this.scroll({
+        left: ~~arguments[0].left + this.scrollLeft,
+        top: ~~arguments[0].top + this.scrollTop,
+        behavior: arguments[0].behavior
+      });
+    };
+
+    // Element.prototype.scrollIntoView
+    Element.prototype.scrollIntoView = function() {
+      // avoid smooth behavior if not required
+      if (shouldBailOut(arguments[0]) === true) {
+        original.scrollIntoView.call(
+          this,
+          arguments[0] === undefined ? true : arguments[0]
+        );
+
+        return;
+      }
+
+      // LET THE SMOOTHNESS BEGIN!
+      var scrollableParent = findScrollableParent(this);
+      var parentRects = scrollableParent.getBoundingClientRect();
+      var clientRects = this.getBoundingClientRect();
+
+      if (scrollableParent !== d.body) {
+        // reveal element inside parent
+        smoothScroll.call(
+          this,
+          scrollableParent,
+          scrollableParent.scrollLeft + clientRects.left - parentRects.left,
+          scrollableParent.scrollTop + clientRects.top - parentRects.top
+        );
+
+        // reveal parent in viewport unless is fixed
+        if (w.getComputedStyle(scrollableParent).position !== 'fixed') {
+          w.scrollBy({
+            left: parentRects.left,
+            top: parentRects.top,
+            behavior: 'smooth'
+          });
+        }
+      } else {
+        // reveal element in viewport
+        w.scrollBy({
+          left: clientRects.left,
+          top: clientRects.top,
+          behavior: 'smooth'
+        });
+      }
+    };
+  }
+
+  if (typeof exports === 'object' && typeof module !== 'undefined') {
+    // commonjs
+    module.exports = { polyfill: polyfill };
+  } else {
+    // global
+    polyfill();
+  }
+
+}());
+
+},{}],"components/helper/scrollToTop.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -79509,6 +79984,10 @@ exports.default = void 0;
 var _react = _interopRequireWildcard(require("react"));
 
 var _reactRouterDom = require("react-router-dom");
+
+var _smoothscrollPolyfill = _interopRequireDefault(require("smoothscroll-polyfill"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
@@ -79544,8 +80023,10 @@ function (_Component) {
   _createClass(ScrollToTop, [{
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps) {
+      _smoothscrollPolyfill.default.polyfill();
+
       if (this.props.location !== prevProps.location) {
-        window.scrollTo(0, 0);
+        document.body.scrollTo(0, 0);
       }
     }
   }, {
@@ -79561,7 +80042,7 @@ function (_Component) {
 var _default = (0, _reactRouterDom.withRouter)(ScrollToTop);
 
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js"}],"css/cursor.scss":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","smoothscroll-polyfill":"../node_modules/smoothscroll-polyfill/dist/smoothscroll.js"}],"css/cursor.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -79577,6 +80058,8 @@ exports.default = void 0;
 var _react = _interopRequireWildcard(require("react"));
 
 require("../../css/cursor.scss");
+
+var _reactRouterDom = require("react-router-dom");
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
@@ -79612,6 +80095,19 @@ function (_Component) {
   _createClass(Cursor, [{
     key: "componentDidMount",
     value: function componentDidMount() {
+      var _this = this;
+
+      var prev = "";
+      var curr = "";
+      setInterval(function () {
+        curr = _this.props.history.location.pathname;
+
+        if (prev !== curr) {
+          cursor.setupEventListeners();
+        }
+
+        prev = curr;
+      }, 100);
       var cursor = {
         delay: 8,
         _x: 0,
@@ -79629,10 +80125,9 @@ function (_Component) {
           this.setupEventListeners();
           this.animateDotOutline();
         },
-        setupEventListeners: function setupEventListeners() {
-          var self = this; // Anchor hovering
-
-          document.querySelectorAll('a, span').forEach(function (el) {
+        targetAnchorAndSpan: function targetAnchorAndSpan(self) {
+          var AnchorAndSpan = document.querySelectorAll('a, span');
+          AnchorAndSpan.forEach(function (el) {
             el.addEventListener('mouseover', function () {
               self.cursorEnlarged = true;
               self.toggleCursorSize();
@@ -79641,7 +80136,12 @@ function (_Component) {
               self.cursorEnlarged = false;
               self.toggleCursorSize();
             });
-          }); // Click events
+          });
+        },
+        setupEventListeners: function setupEventListeners() {
+          var self = this; // Anchor hovering
+
+          this.targetAnchorAndSpan(self); // Click events
 
           document.addEventListener('mousedown', function () {
             self.cursorEnlarged = true;
@@ -79692,7 +80192,7 @@ function (_Component) {
             self.$outline.style.transform = 'translate(-50%, -50%) scale(1.5)';
             self.$outline.style.backgroundColor = "rgba(255, 255, 255, 0.2)";
           } else {
-            self.$outline.style.backgroundColor = "rgba(255, 255, 255, 0.3)";
+            self.$outline.style.backgroundColor = "rgba(255, 255, 255, 0.4)";
             self.$dot.style.transform = 'translate(-50%, -50%) scale(1)';
             self.$outline.style.transform = 'translate(-50%, -50%) scale(1)';
           }
@@ -79725,8 +80225,10 @@ function (_Component) {
   return Cursor;
 }(_react.Component);
 
-exports.default = Cursor;
-},{"react":"../node_modules/react/index.js","../../css/cursor.scss":"css/cursor.scss"}],"app.js":[function(require,module,exports) {
+var _default = (0, _reactRouterDom.withRouter)(Cursor);
+
+exports.default = _default;
+},{"react":"../node_modules/react/index.js","../../css/cursor.scss":"css/cursor.scss","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js"}],"app.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -79814,7 +80316,7 @@ function (_Component) {
         exact: true,
         path: "/contact",
         component: _index.Contact
-      }))), !this.isMobile && _react.default.createElement(_cursor.default, null));
+      }), !this.isMobile && _react.default.createElement(_cursor.default, null))));
     }
   }]);
 
@@ -79864,7 +80366,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63080" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63203" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

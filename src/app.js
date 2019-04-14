@@ -25,9 +25,9 @@ export default class App extends Component {
             <Route exact path="/projects" component={Projects}></Route>
             <Route exact path="/blog" component={Blog}></Route>
             <Route exact path="/contact" component={Contact}></Route>
+            {!this.isMobile && <Cursor />}
           </Router>
         </div>
-        {!this.isMobile && <Cursor />}
       </>
     )
   }

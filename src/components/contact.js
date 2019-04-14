@@ -155,7 +155,8 @@ export default class Contact extends Component {
 
   render() {
     return (
-      <div className="section">
+      <>
+        <div className="section">
         <div className="inner-section">
           <div className="sub-section">
             <div className="inner-sub-section">
@@ -190,11 +191,21 @@ export default class Contact extends Component {
             <div className="inner-sub-section">
               <div className="lets-talk-bg">Let's Talk</div>
               <div className="contact-form-wrapper">
-                <div className="fields">
-                  {this.state.name.length > 0 && <span onClick={() => { this.handleFieldIconClick(1) }}><i className="fas fa-user"></i></span>}
-                  {this.state.email.length > 0 && <span onClick={() => { this.handleFieldIconClick(2) }}><i className="fas fa-envelope"></i></span>}
-                  {this.state.message.length > 0 && <span onClick={() => { this.handleFieldIconClick(3) }}><i className="fas fa-comment-dots"></i></span>}
-                </div>
+               {
+                 !this.state.mobileView ? (
+                  <div className="fields">
+                    {this.state.name.length > 0 && <span onClick={() => { this.handleFieldIconClick(1) }}><i className="fas fa-user"></i></span>}
+                    {this.state.email.length > 0 && <span onClick={() => { this.handleFieldIconClick(2) }}><i className="fas fa-envelope"></i></span>}
+                    {this.state.message.length > 0 && <span onClick={() => { this.handleFieldIconClick(3) }}><i className="fas fa-comment-dots"></i></span>}
+                  </div>
+                 ) : this.state.name.length || this.state.email.length || this.state.message.length ? (
+                  <div className="fields">
+                    {this.state.name.length > 0 && <span onClick={() => { this.handleFieldIconClick(1) }}><i className="fas fa-user"></i></span>}
+                    {this.state.email.length > 0 && <span onClick={() => { this.handleFieldIconClick(2) }}><i className="fas fa-envelope"></i></span>}
+                    {this.state.message.length > 0 && <span onClick={() => { this.handleFieldIconClick(3) }}><i className="fas fa-comment-dots"></i></span>}
+                  </div>
+                 ) : ""
+               }
                 <form className="contact-form">
                   {
                     this.state.step === 1 && (
@@ -217,7 +228,7 @@ export default class Contact extends Component {
                           <div className="status-container" >
                             {!this.state.email.length ? (<span className="status empty">Field is empty</span>) : !this.state.isactive ? (<span className="error status" >Invalid Email</span>) : (<span className="status okay">Looks Fine</span>)}
                           </div>
-                          <input value={this.state.email} className={this.state.emailErr ? "err" : ""} onChange={this.handleChange} type="text" id="email" name="email" placeholder="What's your email" />
+                          <input autoFocus value={this.state.email} className={this.state.emailErr ? "err" : ""} onChange={this.handleChange} type="text" id="email" name="email" placeholder="What's your email" />
                         </div>
                       </>
                     )
@@ -230,7 +241,7 @@ export default class Contact extends Component {
                           <div className="status-container">
                             {!this.state.message.length ? (<span className="status empty">Field is empty</span>) : !this.state.isactive ? (<span className="error status" >Message too short</span>) : (<span className="status okay">Looks Fine</span>)}
                           </div>
-                          <textarea value={this.state.message} className={this.state.msgErr ? "err" : ""} onChange={this.handleChange} rows="1" type="text" id="message" name="message" placeholder="Wanna leave a message ?"></textarea>
+                          <textarea autoFocus value={this.state.message} className={this.state.msgErr ? "err" : ""} onChange={this.handleChange} rows="1" type="text" id="message" name="message" placeholder="Wanna leave a message ?"></textarea>
                         </div>
                       </>
                     )
@@ -252,6 +263,7 @@ export default class Contact extends Component {
           </div>
         </div>
       </div>
+      </>
     )
   }
 }

@@ -8,21 +8,21 @@ import { workImg } from './helper/data-uri';
 
 export default class Work extends Component {
 
-  constructor(props){
+  constructor(props) {
     super(props);
-    this.state = {breakLine : window.innerWidth <= 1024}
+    this.state = { breakLine: window.innerWidth <= 1024 }
   }
 
-  componentDidMount(){
-    window.addEventListener('resize',this.resize);
+  componentDidMount() {
+    window.addEventListener('resize', this.resize);
   }
 
-  componentWillUnmount(){
-    window.removeEventListener('resize',this.resize);
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.resize);
   }
 
-  resize = () =>{
-    window.innerWidth <= 1024 ? this.setState({breakLine : true}) : this.setState({breakLine : false});
+  resize = () => {
+    window.innerWidth <= 1024 ? this.setState({ breakLine: true }) : this.setState({ breakLine: false });
   }
 
   render() {
@@ -31,9 +31,9 @@ export default class Work extends Component {
         <div className="section">
 
           <div className="inner-section">
-            
+
             <div className="sub-section">
-              
+
               <div className="image-container">
                 <div className="image-border">
                   <div className="image">
@@ -57,7 +57,7 @@ export default class Work extends Component {
 
             </div>
           </div>
-          
+
           <div className="inner-section">
             <Heading repair={{ y: -80 }} heading={"EXPERIENCE"} subHeading={'Time - Great Teacher'} />
             <div className="block">
@@ -65,7 +65,7 @@ export default class Work extends Component {
               {
                 works.map((w, i) => (
                   <div key={"w" + i} className="block-item">
-                    <div className="item-heading">{w.place} {this.state.breakLine && <br/>} <span>{w.date}</span>
+                    <div className="item-heading">{w.place} {this.state.breakLine && <br />} <span>{w.date}</span>
                       {w.link !== "" && <a target="_blank" href={w.link}><i className="fas fa-link"></i></a>}
                     </div>
                     <div className="item-content"> <span className="hglt-red">{w.designation}</span> </div>

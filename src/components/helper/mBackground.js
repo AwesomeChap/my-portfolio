@@ -7,7 +7,7 @@ export default class MBackground extends Component{
   }
   render(){
     return(
-      <div class="m-background">
+      <div className="m-background">
         <div className="uh">
           <div className="m-bg"></div>
           <div className="m-bg"></div>

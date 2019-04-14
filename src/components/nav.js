@@ -44,11 +44,11 @@ class Nav extends Component {
     // setTimeout(()=>{
     //   this.props.history.push('/contact');
     // },1000);
-    window.addEventListener("scroll", this.handleScroll);
+    document.body.addEventListener("scroll", this.handleScroll);
   }
 
   componentWillUnmount() {
-    window.removeEventListener("scroll", this.handleScroll);
+    document.body.removeEventListener("scroll", this.handleScroll);
   }
 
   handleClick = () => {

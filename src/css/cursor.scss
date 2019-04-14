@@ -1,4 +1,4 @@
-$primary-light: rgba(255, 255, 255, 0.3);
+$primary-light: rgba(255, 255, 255, 0.4);
 $primary: #fff;
 
 .cursor-dot,
@@ -9,11 +9,8 @@ $primary: #fff;
     top: 50%;
     left: 50%;
     border-radius: 50%;
-    opacity: 0;
+    opacity: 0; 
     transform: translate(-50%, -50%);
-    transition: opacity 0.3s ease-in-out,
-                transform 0.3s ease-in-out,
-                background-color 0.3s ease-in-out;
 }
 
 .cursor-dot {
@@ -21,6 +18,8 @@ $primary: #fff;
     width: $size;
     height: $size;
     background-color: $primary;
+    transition: opacity 0.3s ease-in-out,
+                transform 0.3s ease-in-out;
 }
 
 .cursor-dot-outline {
@@ -28,4 +27,7 @@ $primary: #fff;
     width: $size;
     height: $size;
     background-color: $primary-light;
+    transition: opacity 0.3s ease-in-out,
+                transform 0.3s ease-in-out,
+                background-color 0.3s ease-in-out;
 }

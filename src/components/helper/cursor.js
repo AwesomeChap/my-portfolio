@@ -1,11 +1,25 @@
 import React, { Component } from 'react';
 import '../../css/cursor.scss';
+import { withRouter } from 'react-router-dom';
 
-export default class Cursor extends Component {
+class Cursor extends Component {
   constructor() {
-    super()
+    super();
   }
+
   componentDidMount() {
+
+    let prev = "";
+    let curr = "";
+
+    setInterval(() => {
+      curr = this.props.history.location.pathname;
+      if (prev !== curr) {
+        cursor.setupEventListeners();
+      }
+      prev = curr;
+    }, 100);
+
     var cursor = {
       delay: 8,
       _x: 0,
@@ -26,11 +40,9 @@ export default class Cursor extends Component {
         this.animateDotOutline();
       },
 
-      setupEventListeners: function () {
-        var self = this;
-
-        // Anchor hovering
-        document.querySelectorAll('a, span').forEach(function (el) {
+      targetAnchorAndSpan: (self) => {
+        let AnchorAndSpan = document.querySelectorAll('a, span')
+        AnchorAndSpan.forEach(function (el) {
           el.addEventListener('mouseover', function () {
             self.cursorEnlarged = true;
             self.toggleCursorSize();
@@ -40,6 +52,13 @@ export default class Cursor extends Component {
             self.toggleCursorSize();
           });
         });
+      },
+
+      setupEventListeners: function () {
+        var self = this;
+
+        // Anchor hovering
+        this.targetAnchorAndSpan(self);
 
         // Click events
         document.addEventListener('mousedown', function () {
@@ -99,9 +118,10 @@ export default class Cursor extends Component {
           self.$outline.style.transform = 'translate(-50%, -50%) scale(1.5)';
           self.$outline.style.backgroundColor = "rgba(255, 255, 255, 0.2)";
         } else {
-          self.$outline.style.backgroundColor = "rgba(255, 255, 255, 0.3)";
+          self.$outline.style.backgroundColor = "rgba(255, 255, 255, 0.4)";
           self.$dot.style.transform = 'translate(-50%, -50%) scale(1)';
-          self.$outline.style.transform = 'translate(-50%, -50%) scale(1)';        }
+          self.$outline.style.transform = 'translate(-50%, -50%) scale(1)';
+        }
       },
 
       toggleCursorVisibility: function () {
@@ -128,3 +148,5 @@ export default class Cursor extends Component {
     )
   }
 }
+
+export default withRouter(Cursor);

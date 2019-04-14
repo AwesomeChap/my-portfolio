@@ -25,7 +25,7 @@ export default class NavMobile extends Component {
       console.log("you clicked ",this.state.selected);
       setTimeout(() => {
         this.setState({clicked:!this.state.clicked});
-      }, 1550);
+      }, 1850);
     });
   }
 
@@ -36,6 +36,7 @@ export default class NavMobile extends Component {
   }
 
   render() {
+    
     const navBgClasses = this.state.selected ? "shrink-nav-bar-bg nav-bar-bg" : "nav-bar-bg";   
     const menuClasses = this.state.clicked ? "open-menu" : "close-menu";
     const hamburgerClasses = this.state.clicked ? "close" : this.state.clicked === 0 ? "" : "ham";
@@ -78,7 +79,6 @@ export default class NavMobile extends Component {
       <>
         <div className="nav-m">
           <NavLink className="nav-logo-m" exact to="/">
-            {/* <div className="name-logo">JATIN KUMAR</div> */}
             <Svg width={this.state.svgWidth} id="logo" />
           </NavLink>
           <div onClick={this.handleClick} id="hamburger" className={hamburgerClasses}>

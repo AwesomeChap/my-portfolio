@@ -89,6 +89,7 @@
     justify-content: center;
     align-items: center;
     margin-right: 10px;
+    color: #fff;
     
     &:nth-child(1){
       background-color: rgb(0, 95, 184);
@@ -275,20 +276,20 @@
 
 .fields{
   height: 5vh;
-  display: inline-flex;
+  display: flex;
   flex-wrap: wrap;
-  margin: -10vh 0 5vh 0;
+  margin: -10vh 0 10vh 0;
   span{
     display: inline-block; 
     color: #fff;
     width:5vh;
     height: 5vh;
     background-color: #ff0d2d;
-    box-shadow: 0 0 10px #000000;
+    box-shadow: 0 0 5px #000000;
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 50%;
+    border-radius: 5px;
     margin: 0 2vh;
     transform: scale(0);
     animation: field-span 0.3s 0.3s forwards;
@@ -370,11 +371,13 @@
 @media only screen and (max-width : 479px){
 
   .fields{
-    
-    margin: 0 0 30px 0;
+    margin: 0 0 30px 0;    
+    width: 100%;
+    justify-content: center;
     span{
       width:30px;
       height: 30px;
+      border-radius: 5px;
       box-shadow: 0 0 5px #000;
       i{
         font-size:14px; 
@@ -393,25 +396,26 @@
       }
     } 
   }
+
+  .contact-form-wrapper{
+    align-items: flex-start;
+  }
   
   .contact-form{
-    height: 200px;
+    height: 150px;
     label{
       font-size: 24px;
     }
 
-    .input-container{
-      margin: 4vw 0;
-    }
-
     input, textarea{
+      width: 100%;
       font-size: 16px;
       padding: 8px 15px;
       border-bottom: 1px solid;
     }
 
     .buttons .btn{
-      font-size: 16px;
+      font-size: 20px;
     }
 
     .status-container{

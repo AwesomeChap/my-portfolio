@@ -42,7 +42,7 @@ export default class About extends Component {
       }
     });
 
-    window.addEventListener('scroll', function () {
+    document.querySelector('body').addEventListener('scroll', function () {
 
       // console.log('you scrolled me');
 
@@ -132,7 +132,7 @@ export default class About extends Component {
           </div>
 
           <div className="inner-section">
-            <Heading repair={{ y: -90 }} heading={"SKILLS"} subHeading={'My tools'} />
+            <Heading repair={{ y: -90 }} heading={"SKILLS"} subHeading={'Stuff I love'} />
             <div className="skills-block">
               <div className="set">
                 {getSkillsSet(set1)}

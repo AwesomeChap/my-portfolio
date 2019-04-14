@@ -4,6 +4,7 @@ $font-normal : 24px;
 
 
 .section{
+  height: 100%;
   max-height: 100%;
   width: 100%;
   display: flex;
@@ -56,8 +57,8 @@ $font-normal : 24px;
     animation: rotateCW 10s linear infinite;
 
     .image{
-      width:90%;
-      height:90%;
+      width:92%;
+      height:92%;
       background: #222;
       border-radius: 50%;
       animation: rotateCW 10s linear infinite reverse;
@@ -318,11 +319,11 @@ $font-normal : 24px;
     }
     .m-bg:nth-child(1){
       height:35vh;
-      background: #111;
+      background: #131313;
     }
     .m-bg:nth-child(2){
       height:20vh;
-      background: #0a0a0a;
+      background: #0f0f0f;
     }
   }
 
@@ -337,11 +338,11 @@ $font-normal : 24px;
     }
     .m-bg:nth-child(1){
       height:35vh;
-      background: #101010;
+      background: #131313;
     }
     .m-bg:nth-child(2){
       height:20vh;
-      background: #0a0a0a;
+      background: #0f0f0f;
     }
   }
 }
@@ -457,17 +458,18 @@ $font-normal : 24px;
 @media only screen and (max-width: 479px){
   .inner-sub-section{
     &:nth-child(2){
-      height: 400px;
+      height: auto;
+      padding-top: 40px;
     }
   }
 
   .image-container{
     display: flex;
-    height: 40vh;
+    height: 38vh;
     .image-border{
-      border-width: 5px;
-      width:35vh;
-      height: 35vh;
+      border-width: 6px;
+      width:32vh;
+      height: 32vh;
     }
   }
   .hglt-red{
