@@ -160,15 +160,6 @@ export default class Contact extends Component {
       <>
         <MetaTags>
           <title>Contact - Jatin Kumar</title>
-          {/* <meta name="apple-mobile-web-app-title" content="Contact - Jatin Kumar" />
-          <meta name="application-name" content="Jatin Kumar Portfolio" />
-          <meta name="description" content="I am always up for cool projects that creates a difference. So in case you have one and wanna talk about it or just say hi,fill the awesome form or just drop me a message at my email,jatin@jatinkumar.tech and ~let's talk" />
-          <meta property="og:title" content="Contact Jatin Kumar" />
-          <meta property="og:image" content={portfolio} />
-          <meta property="og:type" content="website" />
-          <meta property="og:site_name" content="Jatin Kumar" />
-          <meta property="og:url" content="jatinkumar.tech/contact" />
-          <meta property="og:description" content="I am always up for cool projects that creates a difference. So in case you have one and wanna talk about it or just say hi,fill the awesome form or just drop me a message at my email,jatin@jatinkumar.tech and ~let's talk" /> */}
         </MetaTags>
         <div className="section">
         <div className="inner-section">
