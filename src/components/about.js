@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Heading from './helper/heading';
+import Mouse from './helper/mouse';
 import Footer from './footer';
 import MetaTags from 'react-meta-tags';
 import portfolio from '../images/portfolio.PNG';
@@ -162,6 +163,7 @@ export default class About extends Component {
           </div>
 
         </div>
+        <Mouse/>
         <Footer />
       </>
     )

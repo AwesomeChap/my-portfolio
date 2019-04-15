@@ -7,6 +7,7 @@ import { works } from './helper/data';
 import { workImg } from './helper/data-uri';
 import MetaTags from 'react-meta-tags';
 import portfolio from '../images/portfolio.PNG';
+import Mouse from './helper/mouse';
 
 export default class Work extends Component {
 
@@ -86,6 +87,7 @@ export default class Work extends Component {
             </div>
           </div>
         </div>
+        <Mouse/>
         <Footer />
       </>
     )

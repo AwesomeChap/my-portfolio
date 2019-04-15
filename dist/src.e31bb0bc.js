@@ -41412,7 +41412,109 @@ function (_Component) {
 }(_react.Component);
 
 exports.default = Heading;
-},{"react":"../node_modules/react/index.js","../../css/heading.scss":"css/heading.scss","gsap":"../node_modules/gsap/index.js"}],"css/footer.scss":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","../../css/heading.scss":"css/heading.scss","gsap":"../node_modules/gsap/index.js"}],"css/mouse.scss":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"components/helper/mouse.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireWildcard(require("react"));
+
+require("../../css/mouse.scss");
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var Mouse =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(Mouse, _Component);
+
+  function Mouse(props) {
+    var _this;
+
+    _classCallCheck(this, Mouse);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Mouse).call(this, props));
+
+    _defineProperty(_assertThisInitialized(_this), "handleScroll", function () {
+      if (document.body.scrollTop > 20) {
+        document.querySelector('.mouse').style.opacity = 0;
+      } else {
+        document.querySelector('.mouse').style.opacity = 1;
+      }
+
+      document.querySelector(".scrollbar").style.width = document.body.scrollTop / (document.body.scrollHeight - window.innerHeight) * 100 + "%";
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleClick", function () {
+      var pageHeight = window.innerHeight * 0.9;
+      document.body.style.scrollBehavior = "smooth";
+      setTimeout(function () {
+        document.body.scrollBy(0, pageHeight);
+        document.body.style.scrollBehavior = "auto";
+      }, 10);
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "componentWillUnmount", void 0);
+
+    return _this;
+  }
+
+  _createClass(Mouse, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      document.body.addEventListener('scroll', this.handleScroll);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("div", {
+        class: "mouse"
+      }, _react.default.createElement("div", {
+        onClick: this.handleClick,
+        class: "mouse-icon"
+      }, _react.default.createElement("span", {
+        class: "mouse-wheel"
+      }))), _react.default.createElement("div", {
+        className: "scrollbar-wrapper"
+      }, _react.default.createElement("div", {
+        className: "scrollbar"
+      })));
+    }
+  }]);
+
+  return Mouse;
+}(_react.Component);
+
+exports.default = Mouse;
+},{"react":"../node_modules/react/index.js","../../css/mouse.scss":"css/mouse.scss"}],"css/footer.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -42188,6 +42290,8 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _heading = _interopRequireDefault(require("./helper/heading"));
 
+var _mouse = _interopRequireDefault(require("./helper/mouse"));
+
 var _footer = _interopRequireDefault(require("./footer"));
 
 var _reactMetaTags = _interopRequireDefault(require("react-meta-tags"));
@@ -42393,7 +42497,7 @@ function (_Component) {
         className: "item-heading"
       }, "WebQuicky, BPIT ", this.state.breakLine && _react.default.createElement("br", null), " ", _react.default.createElement("span", null, "April,10 2018")), _react.default.createElement("div", {
         className: "item-content"
-      }, "Our Team Came at ", _react.default.createElement("span", null, "2 Position")))))), _react.default.createElement(_footer.default, null));
+      }, "Our Team Came at ", _react.default.createElement("span", null, "2 Position")))))), _react.default.createElement(_mouse.default, null), _react.default.createElement(_footer.default, null));
     }
   }]);
 
@@ -42401,7 +42505,7 @@ function (_Component) {
 }(_react.Component);
 
 exports.default = About;
-},{"react":"../node_modules/react/index.js","./helper/heading":"components/helper/heading.js","./footer":"components/footer.js","react-meta-tags":"../node_modules/react-meta-tags/lib/index.js","../images/portfolio.PNG":"images/portfolio.PNG","./helper/data":"components/helper/data.js","./helper/data-uri":"components/helper/data-uri.js"}],"css/styles.scss":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","./helper/heading":"components/helper/heading.js","./helper/mouse":"components/helper/mouse.js","./footer":"components/footer.js","react-meta-tags":"../node_modules/react-meta-tags/lib/index.js","../images/portfolio.PNG":"images/portfolio.PNG","./helper/data":"components/helper/data.js","./helper/data-uri":"components/helper/data-uri.js"}],"css/styles.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -79517,6 +79621,8 @@ var _reactMetaTags = _interopRequireDefault(require("react-meta-tags"));
 
 var _portfolio = _interopRequireDefault(require("../images/portfolio.PNG"));
 
+var _mouse = _interopRequireDefault(require("./helper/mouse"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
@@ -79637,7 +79743,7 @@ function (_Component) {
             className: "block-li"
           }, resp);
         })));
-      })))), _react.default.createElement(_footer.default, null));
+      })))), _react.default.createElement(_mouse.default, null), _react.default.createElement(_footer.default, null));
     }
   }]);
 
@@ -79645,7 +79751,7 @@ function (_Component) {
 }(_react.Component);
 
 exports.default = Work;
-},{"react":"../node_modules/react/index.js","./helper/heading":"components/helper/heading.js","./helper/expand":"components/helper/expand.js","./footer":"components/footer.js","../css/pages.scss":"css/pages.scss","./helper/data":"components/helper/data.js","./helper/data-uri":"components/helper/data-uri.js","react-meta-tags":"../node_modules/react-meta-tags/lib/index.js","../images/portfolio.PNG":"images/portfolio.PNG"}],"css/projects.scss":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","./helper/heading":"components/helper/heading.js","./helper/expand":"components/helper/expand.js","./footer":"components/footer.js","../css/pages.scss":"css/pages.scss","./helper/data":"components/helper/data.js","./helper/data-uri":"components/helper/data-uri.js","react-meta-tags":"../node_modules/react-meta-tags/lib/index.js","../images/portfolio.PNG":"images/portfolio.PNG","./helper/mouse":"components/helper/mouse.js"}],"css/projects.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -79799,6 +79905,8 @@ var _footer = _interopRequireDefault(require("./footer"));
 
 var _data = require("./helper/data");
 
+var _mouse = _interopRequireDefault(require("./helper/mouse"));
+
 var _projectList = _interopRequireDefault(require("./helper/project-list"));
 
 var _dataUri = require("./helper/data-uri");
@@ -79944,7 +80052,7 @@ function (_Component) {
         className: "projects-container"
       }, _react.default.createElement(_projectList.default, {
         filter: this.state.selectedFilter
-      }))))), _react.default.createElement(_footer.default, null));
+      }))))), _react.default.createElement(_mouse.default, null), _react.default.createElement(_footer.default, null));
     }
   }]);
 
@@ -79952,7 +80060,7 @@ function (_Component) {
 }(_react.Component);
 
 exports.default = Projects;
-},{"react":"../node_modules/react/index.js","./helper/heading":"components/helper/heading.js","./helper/expand":"components/helper/expand.js","./footer":"components/footer.js","./helper/data":"components/helper/data.js","./helper/project-list":"components/helper/project-list.js","./helper/data-uri":"components/helper/data-uri.js","../css/projects.scss":"css/projects.scss","react-meta-tags":"../node_modules/react-meta-tags/lib/index.js","../images/portfolio.PNG":"images/portfolio.PNG"}],"components/index.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","./helper/heading":"components/helper/heading.js","./helper/expand":"components/helper/expand.js","./footer":"components/footer.js","./helper/data":"components/helper/data.js","./helper/mouse":"components/helper/mouse.js","./helper/project-list":"components/helper/project-list.js","./helper/data-uri":"components/helper/data-uri.js","../css/projects.scss":"css/projects.scss","react-meta-tags":"../node_modules/react-meta-tags/lib/index.js","../images/portfolio.PNG":"images/portfolio.PNG"}],"components/index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -80852,7 +80960,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49723" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50325" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -4,6 +4,7 @@ import Expand from './helper/expand';
 import Footer from './footer';
 import { keywords } from './helper/data';
 import { projects } from './helper/data';
+import Mouse from './helper/mouse';
 import ProjectList from './helper/project-list';
 import { projectImg } from './helper/data-uri';
 import '../css/projects.scss'
@@ -108,6 +109,7 @@ export default class Projects extends Component {
             </div>
           </div>
         </div>
+        <Mouse/>
         <Footer />
       </>
     )

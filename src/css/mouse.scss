@@ -1,0 +1,67 @@
+.mouse{
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  margin-bottom: 5vh;
+  text-align: center;
+  transition: all 0.3s;
+}
+.mouse-icon{
+  display: inline-block;
+   width: 25px;
+   height: 45px;
+   border: 2px solid white;
+   border-radius: 15px;
+   cursor: pointer;
+   position: relative;
+   text-align: center;
+}
+.mouse-wheel{
+  height: 8px;
+  margin: 6px auto;
+  display: block;
+  width: 4px;
+  background-color: white;
+  border-radius: 50%;
+  animation: 1.6s ease infinite wheel-up-down;
+}
+@keyframes wheel-up-down {
+	0% {
+	    transform: translateY(0);
+	    opacity: 0;
+	}
+	30% {
+	    opacity: 1;
+	}
+	100% {
+	    transform: translateY(10px);
+	    opacity: 0;
+	}
+}
+
+.scrollbar-wrapper{
+  z-index: 2;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 10px;
+  background-color: #171717;
+
+  .scrollbar{
+    position: absolute;
+    top:0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+    background-color: #777;
+  }
+}
+
+@media only screen and (max-width: 768px){
+  .mouse{
+    display: none;
+  }
+  .scrollbar-wrapper{
+    height: 5px;
+  }
+}
