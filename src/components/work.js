@@ -32,7 +32,7 @@ export default class Work extends Component {
       <>
         <MetaTags>
           <title>Work - Jatin Kumar</title>
-          <meta name="apple-mobile-web-app-title" content="Work - Jatin Kumar" />
+          {/* <meta name="apple-mobile-web-app-title" content="Work - Jatin Kumar" />
           <meta name="application-name" content="Jatin Kumar Portfolio" />
           <meta name="description" content="I always love to learn new technologies and like even more, when I get the chance to apply them. I have been doing Fullstack Web development for almost 2 years now. Till date my most work experience came from contribution to small startups and college technical festivals" />
           <meta property="og:title" content="Work Jatin Kumar" />
@@ -40,7 +40,7 @@ export default class Work extends Component {
           <meta property="og:type" content="website" />
           <meta property="og:site_name" content="Jatin Kumar" />
           <meta property="og:url" content="jatinkumar.tech/work" />
-          <meta property="og:description" content="I always love to learn new technologies and like even more, when I get the chance to apply them. I have been doing Fullstack Web development for almost 2 years now. Till date my most work experience came from contribution to small startups and college technical festivals" />
+          <meta property="og:description" content="I always love to learn new technologies and like even more, when I get the chance to apply them. I have been doing Fullstack Web development for almost 2 years now. Till date my most work experience came from contribution to small startups and college technical festivals" /> */}
         </MetaTags>
         <div className="section">
 

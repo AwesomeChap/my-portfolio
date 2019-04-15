@@ -103,7 +103,7 @@ export default class About extends Component {
       <>
         <MetaTags>
           <title>About - Jatin Kumar</title>
-          <meta name="apple-mobile-web-app-title" content="About - Jatin Kumar" />
+          {/* <meta name="apple-mobile-web-app-title" content="About - Jatin Kumar" />
           <meta name="application-name" content="Jatin Kumar Portfolio" />
           <meta name="description" content="Hi. there my name is Jatin Kumar from new delhi who likes to mix code and creativity. I wordk accross full javascript stack mainly MERN stack. I am currently in my 2nd year of B.tech which I am persuing from USICT, GGSIPU" />
           <meta property="og:title" content="About Jatin Kumar" />
@@ -111,7 +111,7 @@ export default class About extends Component {
           <meta property="og:type" content="website" />
           <meta property="og:site_name" content="Jatin Kumar" />
           <meta property="og:url" content="jatinkumar.tech/about" />
-          <meta property="og:description" content="Hi. there my name is Jatin Kumar from new delhi who likes to mix code and creativity. I wordk accross full javascript stack mainly MERN stack. I am currently in my 2nd year of B.tech which I am persuing from USICT, GGSIPU" />
+          <meta property="og:description" content="Hi. there my name is Jatin Kumar from new delhi who likes to mix code and creativity. I wordk accross full javascript stack mainly MERN stack. I am currently in my 2nd year of B.tech which I am persuing from USICT, GGSIPU" /> */}
         </MetaTags>
         <div className="section">
 

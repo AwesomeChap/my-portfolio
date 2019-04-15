@@ -42330,34 +42330,7 @@ function (_Component) {
         });
       };
 
-      return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_reactMetaTags.default, null, _react.default.createElement("title", null, "About - Jatin Kumar"), _react.default.createElement("meta", {
-        name: "apple-mobile-web-app-title",
-        content: "About - Jatin Kumar"
-      }), _react.default.createElement("meta", {
-        name: "application-name",
-        content: "Jatin Kumar Portfolio"
-      }), _react.default.createElement("meta", {
-        name: "description",
-        content: "Hi. there my name is Jatin Kumar from new delhi who likes to mix code and creativity. I wordk accross full javascript stack mainly MERN stack. I am currently in my 2nd year of B.tech which I am persuing from USICT, GGSIPU"
-      }), _react.default.createElement("meta", {
-        property: "og:title",
-        content: "About Jatin Kumar"
-      }), _react.default.createElement("meta", {
-        property: "og:image",
-        content: _portfolio.default
-      }), _react.default.createElement("meta", {
-        property: "og:type",
-        content: "website"
-      }), _react.default.createElement("meta", {
-        property: "og:site_name",
-        content: "Jatin Kumar"
-      }), _react.default.createElement("meta", {
-        property: "og:url",
-        content: "jatinkumar.tech/about"
-      }), _react.default.createElement("meta", {
-        property: "og:description",
-        content: "Hi. there my name is Jatin Kumar from new delhi who likes to mix code and creativity. I wordk accross full javascript stack mainly MERN stack. I am currently in my 2nd year of B.tech which I am persuing from USICT, GGSIPU"
-      })), _react.default.createElement("div", {
+      return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_reactMetaTags.default, null, _react.default.createElement("title", null, "About - Jatin Kumar")), _react.default.createElement("div", {
         className: "section"
       }, _react.default.createElement("div", {
         className: "inner-section"
@@ -44467,34 +44440,7 @@ function (_Component) {
     value: function render() {
       var _this2 = this;
 
-      return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_reactMetaTags.default, null, _react.default.createElement("title", null, "Contact - Jatin Kumar"), _react.default.createElement("meta", {
-        name: "apple-mobile-web-app-title",
-        content: "Contact - Jatin Kumar"
-      }), _react.default.createElement("meta", {
-        name: "application-name",
-        content: "Jatin Kumar Portfolio"
-      }), _react.default.createElement("meta", {
-        name: "description",
-        content: "I am always up for cool projects that creates a difference. So in case you have one and wanna talk about it or just say hi,fill the awesome form or just drop me a message at my email,jatin@jatinkumar.tech and ~let's talk"
-      }), _react.default.createElement("meta", {
-        property: "og:title",
-        content: "Contact Jatin Kumar"
-      }), _react.default.createElement("meta", {
-        property: "og:image",
-        content: _portfolio.default
-      }), _react.default.createElement("meta", {
-        property: "og:type",
-        content: "website"
-      }), _react.default.createElement("meta", {
-        property: "og:site_name",
-        content: "Jatin Kumar"
-      }), _react.default.createElement("meta", {
-        property: "og:url",
-        content: "jatinkumar.tech/contact"
-      }), _react.default.createElement("meta", {
-        property: "og:description",
-        content: "I am always up for cool projects that creates a difference. So in case you have one and wanna talk about it or just say hi,fill the awesome form or just drop me a message at my email,jatin@jatinkumar.tech and ~let's talk"
-      })), _react.default.createElement("div", {
+      return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_reactMetaTags.default, null, _react.default.createElement("title", null, "Contact - Jatin Kumar")), _react.default.createElement("div", {
         className: "section"
       }, _react.default.createElement("div", {
         className: "inner-section"
@@ -79296,6 +79242,9 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+var shareUrl = "http://www.jatinkumar.tech";
+var title = "Portfolio - Jatin Kumar";
+
 var Home =
 /*#__PURE__*/
 function (_Component) {
@@ -79340,34 +79289,7 @@ function (_Component) {
       var t0 = 0.7;
       var t1 = text1.length / 15 + t0;
       var t2 = text2.length / 15 + t1;
-      return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_reactMetaTags.default, null, _react.default.createElement("title", null, "Jatin Kumar"), _react.default.createElement("meta", {
-        name: "apple-mobile-web-app-title",
-        content: "Jatin Kumar"
-      }), _react.default.createElement("meta", {
-        name: "application-name",
-        content: "Jatin Kumar Portfolio"
-      }), _react.default.createElement("meta", {
-        name: "description",
-        content: "It is a Web Portfolio of Jatin Kumar"
-      }), _react.default.createElement("meta", {
-        property: "og:title",
-        content: "Jatin Kumar Portfolio"
-      }), _react.default.createElement("meta", {
-        property: "og:image",
-        content: _portfolio.default
-      }), _react.default.createElement("meta", {
-        property: "og:type",
-        content: "website"
-      }), _react.default.createElement("meta", {
-        property: "og:site_name",
-        content: "Jatin Kumar"
-      }), _react.default.createElement("meta", {
-        property: "og:url",
-        content: "jatinkumar.tech"
-      }), _react.default.createElement("meta", {
-        property: "og:description",
-        content: "It is a Web Portfolio of Jatin Kumar"
-      })), _react.default.createElement("div", {
+      return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_reactMetaTags.default, null, _react.default.createElement("title", null, "Jatin Kumar")), _react.default.createElement("div", {
         className: "section home"
       }, this.state.mobileView ? _react.default.createElement(_mBackground.default, null) : _react.default.createElement(_background.default, null), _react.default.createElement("div", {
         className: "intro"
@@ -79455,7 +79377,7 @@ function (_Component) {
             shared: !_this2.state.shared
           });
         },
-        href: "https://facebook.com/sharer/sharer.php?u=http%3A%2F%2Fjatinkumar.tech",
+        href: "https://www.facebook.com/sharer/sharer.php?u=http://jatinkumar.tech",
         target: "_blank",
         rel: "noopener",
         "aria-label": ""
@@ -79485,6 +79407,18 @@ function (_Component) {
         "aria-label": ""
       }, _react.default.createElement("i", {
         className: "fab fa-twitter"
+      })), _react.default.createElement("a", {
+        onClick: function onClick() {
+          _this2.setState({
+            shared: !_this2.state.shared
+          });
+        },
+        href: "https://api.whatsapp.com/send?text=Portfolio - Jatin Kumar http://www.jatinkumar.tech",
+        target: "_blank",
+        rel: "noopener",
+        "aria-label": "Share on WhatsApp"
+      }, _react.default.createElement("i", {
+        className: "fab fa-whatsapp"
       }))))));
     }
   }]);
@@ -79648,34 +79582,7 @@ function (_Component) {
     value: function render() {
       var _this2 = this;
 
-      return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_reactMetaTags.default, null, _react.default.createElement("title", null, "Work - Jatin Kumar"), _react.default.createElement("meta", {
-        name: "apple-mobile-web-app-title",
-        content: "Work - Jatin Kumar"
-      }), _react.default.createElement("meta", {
-        name: "application-name",
-        content: "Jatin Kumar Portfolio"
-      }), _react.default.createElement("meta", {
-        name: "description",
-        content: "I always love to learn new technologies and like even more, when I get the chance to apply them. I have been doing Fullstack Web development for almost 2 years now. Till date my most work experience came from contribution to small startups and college technical festivals"
-      }), _react.default.createElement("meta", {
-        property: "og:title",
-        content: "Work Jatin Kumar"
-      }), _react.default.createElement("meta", {
-        property: "og:image",
-        content: _portfolio.default
-      }), _react.default.createElement("meta", {
-        property: "og:type",
-        content: "website"
-      }), _react.default.createElement("meta", {
-        property: "og:site_name",
-        content: "Jatin Kumar"
-      }), _react.default.createElement("meta", {
-        property: "og:url",
-        content: "jatinkumar.tech/work"
-      }), _react.default.createElement("meta", {
-        property: "og:description",
-        content: "I always love to learn new technologies and like even more, when I get the chance to apply them. I have been doing Fullstack Web development for almost 2 years now. Till date my most work experience came from contribution to small startups and college technical festivals"
-      })), _react.default.createElement("div", {
+      return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_reactMetaTags.default, null, _react.default.createElement("title", null, "Work - Jatin Kumar")), _react.default.createElement("div", {
         className: "section"
       }, _react.default.createElement("div", {
         className: "inner-section"
@@ -79995,34 +79902,7 @@ function (_Component) {
         }, kw);
       });
 
-      return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_reactMetaTags.default, null, _react.default.createElement("title", null, "Projects - Jatin Kumar"), _react.default.createElement("meta", {
-        name: "apple-mobile-web-app-title",
-        content: "Projects - Jatin Kumar"
-      }), _react.default.createElement("meta", {
-        name: "application-name",
-        content: "Jatin Kumar Portfolio"
-      }), _react.default.createElement("meta", {
-        name: "description",
-        content: "Projects matter a lot for me. As they are great medium by which I can explore a technology or framework and check it's pros and limits at the same time.They also make learning new skills very easy and enjoyable a you mostly are working on something that you like and enjoy"
-      }), _react.default.createElement("meta", {
-        property: "og:title",
-        content: "Projects Jatin Kumar"
-      }), _react.default.createElement("meta", {
-        property: "og:image",
-        content: _portfolio.default
-      }), _react.default.createElement("meta", {
-        property: "og:type",
-        content: "website"
-      }), _react.default.createElement("meta", {
-        property: "og:site_name",
-        content: "Jatin Kumar"
-      }), _react.default.createElement("meta", {
-        property: "og:url",
-        content: "jatinkumar.tech/projects"
-      }), _react.default.createElement("meta", {
-        property: "og:description",
-        content: "Projects matter a lot for me. As they are great medium by which I can explore a technology or framework and check it's pros and limits at the same time.They also make learning new skills very easy and enjoyable as you mostly are working on something that you like and enjoy"
-      })), _react.default.createElement("div", {
+      return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_reactMetaTags.default, null, _react.default.createElement("title", null, "Projects - Jatin Kumar")), _react.default.createElement("div", {
         className: "section"
       }, _react.default.createElement("div", {
         className: "inner-section"
@@ -80972,7 +80852,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59997" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49723" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

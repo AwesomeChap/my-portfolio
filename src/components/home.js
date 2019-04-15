@@ -6,6 +6,9 @@ import MBackground from './helper/mBackground';
 import MetaTags from 'react-meta-tags';
 import portfolio from '../images/portfolio.PNG';
 
+const shareUrl = "http://www.jatinkumar.tech";
+const title = "Portfolio - Jatin Kumar"
+
 export default class Home extends Component {
 
   constructor(props) {
@@ -37,15 +40,23 @@ export default class Home extends Component {
       <>
         <MetaTags>
           <title>Jatin Kumar</title>
-          <meta name="apple-mobile-web-app-title" content="Jatin Kumar" />
-          <meta name="application-name" content="Jatin Kumar Portfolio" />
+          {/* <meta name="title" content="Portfolio - Jatin Kumar" />
           <meta name="description" content="It is a Web Portfolio of Jatin Kumar" />
+          <meta property="fb:app_id" content="161134417887112" />
           <meta property="og:title" content="Jatin Kumar Portfolio" />
-          <meta property="og:image" content={portfolio} />
+          <meta property="og:description" content="It is a Web Portfolio of Jatin Kumar" />
+          <meta property="og:image:url" content="http://www.jatinkumar.tech/portfolio.81482cd6.PNG" />
+          <meta property="og:image:type" content="image/png" />
+          <meta property="og:image:width" content="400" />
+          <meta property="og:image:height" content="300" />
           <meta property="og:type" content="website" />
           <meta property="og:site_name" content="Jatin Kumar" />
-          <meta property="og:url" content="jatinkumar.tech" />
-          <meta property="og:description" content="It is a Web Portfolio of Jatin Kumar" />
+          <meta property="og:url" content="http://www.jatinkumar.tech" />
+
+          <meta name="twitter:card" content="summary" />
+          <meta name="twitter:site" content="@jatink99" />
+          <meta name="twitter:creator" content="@jatink99" />
+          <meta name="twitter:image" content="http://jatinkumar.tech/portfolio.81482cd6.PNG" /> */}
         </MetaTags>
         <div className="section home">
           {this.state.mobileView ? <MBackground /> : <Background />}
@@ -95,7 +106,7 @@ export default class Home extends Component {
                   <div className="share-buttons">
 
                     <a onClick={() => { this.setState({ shared: !this.state.shared }) }}
-                      href="https://facebook.com/sharer/sharer.php?u=http%3A%2F%2Fjatinkumar.tech"
+                      href="https://www.facebook.com/sharer/sharer.php?u=http://jatinkumar.tech"
                       target="_blank" rel="noopener" aria-label=""
                     >
                       <i className="fab fa-facebook-f"></i>
@@ -109,9 +120,9 @@ export default class Home extends Component {
                       <i className="fab fa-twitter"></i>
                     </a>
 
-                    {/* <a onClick={() => { this.setState({ shared: !this.state.shared }) }} href="whatsapp://send?text=Web based portfolio of Jatin Kumar which displays various things like Projects, Skills, Work Experience, etc." target="_blank" rel="noopener" aria-label="Share on WhatsApp">
+                    <a onClick={() => { this.setState({ shared: !this.state.shared }) }} href="https://api.whatsapp.com/send?text=Portfolio - Jatin Kumar http://www.jatinkumar.tech" target="_blank" rel="noopener" aria-label="Share on WhatsApp">
                       <i className="fab fa-whatsapp"></i>
-                    </a> */}
+                    </a>
 
                   </div>
                 </div>
