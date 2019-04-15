@@ -5,6 +5,8 @@ import Footer from './footer';
 import '../css/pages.scss';
 import { works } from './helper/data';
 import { workImg } from './helper/data-uri';
+import MetaTags from 'react-meta-tags';
+import portfolio from '../images/portfolio.PNG';
 
 export default class Work extends Component {
 
@@ -28,6 +30,18 @@ export default class Work extends Component {
   render() {
     return (
       <>
+        <MetaTags>
+          <title>Work - Jatin Kumar</title>
+          <meta name="apple-mobile-web-app-title" content="Work - Jatin Kumar" />
+          <meta name="application-name" content="Jatin Kumar Portfolio" />
+          <meta name="description" content="I always love to learn new technologies and like even more, when I get the chance to apply them. I have been doing Fullstack Web development for almost 2 years now. Till date my most work experience came from contribution to small startups and college technical festivals" />
+          <meta property="og:title" content="Work Jatin Kumar" />
+          <meta property="og:image" content={portfolio} />
+          <meta property="og:type" content="website" />
+          <meta property="og:site_name" content="Jatin Kumar" />
+          <meta property="og:url" content="jatinkumar.tech/work" />
+          <meta property="og:description" content="I always love to learn new technologies and like even more, when I get the chance to apply them. I have been doing Fullstack Web development for almost 2 years now. Till date my most work experience came from contribution to small startups and college technical festivals" />
+        </MetaTags>
         <div className="section">
 
           <div className="inner-section">

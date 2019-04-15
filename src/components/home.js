@@ -3,6 +3,8 @@ import Background from './helper/background';
 import '../css/pages.scss';
 import '../css/home.scss';
 import MBackground from './helper/mBackground';
+import MetaTags from 'react-meta-tags';
+import portfolio from '../images/portfolio.PNG';
 
 export default class Home extends Component {
 
@@ -33,6 +35,18 @@ export default class Home extends Component {
 
     return (
       <>
+        <MetaTags>
+          <title>Jatin Kumar</title>
+          <meta name="apple-mobile-web-app-title" content="Jatin Kumar" />
+          <meta name="application-name" content="Jatin Kumar Portfolio" />
+          <meta name="description" content="It is a Web Portfolio of Jatin Kumar" />
+          <meta property="og:title" content="Jatin Kumar Portfolio" />
+          <meta property="og:image" content={portfolio} />
+          <meta property="og:type" content="website" />
+          <meta property="og:site_name" content="Jatin Kumar" />
+          <meta property="og:url" content="jatinkumar.tech" />
+          <meta property="og:description" content="It is a Web Portfolio of Jatin Kumar" />
+        </MetaTags>
         <div className="section home">
           {this.state.mobileView ? <MBackground /> : <Background />}
           <div className="intro">
