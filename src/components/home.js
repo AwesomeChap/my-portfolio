@@ -112,15 +112,24 @@ export default class Home extends Component {
                       <i className="fab fa-facebook-f"></i>
                     </a>
 
-                    <a onClick={() => { this.setState({ shared: !this.state.shared }) }} href="https://www.linkedin.com/shareArticle?mini=true&amp;url=http%3A%2F%2Fjatinkumar.tech&amp;title=Portfolio of Jatin Kumar.&amp;summary=It is web based portfolio website of Jatin Kumar which shares various things like Projects, Skills, Work Experience, etc.&amp;source=http%3A%2F%2Fjatinkumar.tech" target="_blank" rel="noopener" aria-label="">
+                    <a onClick={() => { this.setState({ shared: !this.state.shared }) }}
+                      href="https://www.linkedin.com/shareArticle?mini=true&amp;url=http%3A%2F%2Fjatinkumar.tech&amp;title=Jatin Kumar. FullStack (MERN) Web Dev, Web Designer.&amp;summary=Jatin Kumar, who likes to mix code and creativity, I basically Work across full javascript stack mainly MERN. I am currently in my 2nd Year which I am pursuing from USICT, GGSIPU.&amp;source=http%3A%2F%2Fjatinkumar.tech"
+                      target="_blank" rel="noopener" aria-label=""
+                    >
                       <i className="fab fa-linkedin-in"></i>
                     </a>
 
-                    <a onClick={() => { this.setState({ shared: !this.state.shared }) }} href="https://twitter.com/intent/tweet/?text=Just saw the awesome portfolio of jatin, and couldn't resist without sharing it, you can view it live here. &amp;url=http%3A%2F%2Fjatinkumar.tech" target="_blank" rel="noopener" aria-label="">
+                    <a onClick={() => { this.setState({ shared: !this.state.shared }) }}
+                      href="https://twitter.com/intent/tweet/?text=http://www.jatinkumar.tech Web Portfolio of a FullStack (MERN) Web Developer, Web Designer @jatink99"
+                      target="_blank" rel="noopener" aria-label=""
+                    >
                       <i className="fab fa-twitter"></i>
                     </a>
 
-                    <a onClick={() => { this.setState({ shared: !this.state.shared }) }} href="https://api.whatsapp.com/send?text=Portfolio - Jatin Kumar http://www.jatinkumar.tech" target="_blank" rel="noopener" aria-label="Share on WhatsApp">
+                    <a onClick={() => { this.setState({ shared: !this.state.shared }) }}
+                      href="https://api.whatsapp.com/send?text=Portfolio - Jatin Kumar http://www.jatinkumar.tech"
+                      target="_blank" rel="noopener" aria-label="Share on WhatsApp"
+                    >
                       <i className="fab fa-whatsapp"></i>
                     </a>
 

@@ -79389,7 +79389,7 @@ function (_Component) {
             shared: !_this2.state.shared
           });
         },
-        href: "https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Fjatinkumar.tech&title=Portfolio of Jatin Kumar.&summary=It is web based portfolio website of Jatin Kumar which shares various things like Projects, Skills, Work Experience, etc.&source=http%3A%2F%2Fjatinkumar.tech",
+        href: "https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Fjatinkumar.tech&title=Jatin Kumar. FullStack (MERN) Web Dev, Web Designer.&summary=Jatin Kumar, who likes to mix code and creativity, I basically Work across full javascript stack mainly MERN. I am currently in my 2nd Year which I am pursuing from USICT, GGSIPU.&source=http%3A%2F%2Fjatinkumar.tech",
         target: "_blank",
         rel: "noopener",
         "aria-label": ""
@@ -79401,7 +79401,7 @@ function (_Component) {
             shared: !_this2.state.shared
           });
         },
-        href: "https://twitter.com/intent/tweet/?text=Just saw the awesome portfolio of jatin, and couldn't resist without sharing it, you can view it live here. &url=http%3A%2F%2Fjatinkumar.tech",
+        href: "https://twitter.com/intent/tweet/?text=http://www.jatinkumar.tech Web Portfolio of a FullStack (MERN) Web Developer, Web Designer @jatink99",
         target: "_blank",
         rel: "noopener",
         "aria-label": ""
