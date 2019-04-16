@@ -5,6 +5,7 @@ import '../css/home.scss';
 import MBackground from './helper/mBackground';
 import MetaTags from 'react-meta-tags';
 import portfolio from '../images/portfolio.PNG';
+import resume from '../../resume.pdf';
 
 const shareUrl = "http://www.jatinkumar.tech";
 const title = "Portfolio - Jatin Kumar"
@@ -98,45 +99,53 @@ export default class Home extends Component {
               <a className="it" target="_blank" href="https://twitter.com/jatink99"><i className="fab fa-twitter"></i></a>
             </div>
           </div>
-          {
-            !this.state.shared ? (
-              <div onClick={() => { this.setState({ shared: !this.state.shared }) }} className="love">SHARE WITH <span>❤</span></div>
-            ) : (
-                <div className="love">
-                  <div className="share-buttons">
 
-                    <a onClick={() => { this.setState({ shared: !this.state.shared }) }}
-                      href="https://www.facebook.com/sharer/sharer.php?u=http://jatinkumar.tech"
-                      target="_blank" rel="noopener" aria-label=""
-                    >
-                      <i className="fab fa-facebook-f"></i>
-                    </a>
-
-                    <a onClick={() => { this.setState({ shared: !this.state.shared }) }}
-                      href="https://www.linkedin.com/shareArticle?mini=true&amp;url=http%3A%2F%2Fjatinkumar.tech&amp;title=Jatin Kumar. FullStack (MERN) Web Dev, Web Designer.&amp;summary=Jatin Kumar, who likes to mix code and creativity, I basically Work across full javascript stack mainly MERN. I am currently in my 2nd Year which I am pursuing from USICT, GGSIPU.&amp;source=http%3A%2F%2Fjatinkumar.tech"
-                      target="_blank" rel="noopener" aria-label=""
-                    >
-                      <i className="fab fa-linkedin-in"></i>
-                    </a>
-
-                    <a onClick={() => { this.setState({ shared: !this.state.shared }) }}
-                      href="https://twitter.com/intent/tweet/?text=http://www.jatinkumar.tech Web Portfolio of a FullStack (MERN) Web Developer, Web Designer @jatink99"
-                      target="_blank" rel="noopener" aria-label=""
-                    >
-                      <i className="fab fa-twitter"></i>
-                    </a>
-
-                    <a onClick={() => { this.setState({ shared: !this.state.shared }) }}
-                      href="https://api.whatsapp.com/send?text=Portfolio - Jatin Kumar http://www.jatinkumar.tech"
-                      target="_blank" rel="noopener" aria-label="Share on WhatsApp"
-                    >
-                      <i className="fab fa-whatsapp"></i>
-                    </a>
-
-                  </div>
+          <div className="love-wrapper">
+            {
+              !this.state.shared ? (
+                <div onClick={() => { this.setState({ shared: !this.state.shared }) }} className="love">
+                  SHARE WITH <span>❤</span>
                 </div>
-              )
-          }
+              ) : (
+                  <div className="love">
+                    <div className="share-buttons">
+
+                      <a onClick={() => { this.setState({ shared: !this.state.shared }) }}
+                        href="https://www.facebook.com/sharer/sharer.php?u=http://jatinkumar.tech"
+                        target="_blank" rel="noopener" aria-label=""
+                      >
+                        <i className="fab fa-facebook-f"></i>
+                      </a>
+
+                      <a onClick={() => { this.setState({ shared: !this.state.shared }) }}
+                        href="https://www.linkedin.com/shareArticle?mini=true&amp;url=http%3A%2F%2Fjatinkumar.tech&amp;title=Jatin Kumar. FullStack (MERN) Web Dev, Web Designer.&amp;summary=Jatin Kumar, who likes to mix code and creativity, I basically Work across full javascript stack mainly MERN. I am currently in my 2nd Year which I am pursuing from USICT, GGSIPU.&amp;source=http%3A%2F%2Fjatinkumar.tech"
+                        target="_blank" rel="noopener" aria-label=""
+                      >
+                        <i className="fab fa-linkedin-in"></i>
+                      </a>
+
+                      <a onClick={() => { this.setState({ shared: !this.state.shared }) }}
+                        href="https://twitter.com/intent/tweet/?text=http://www.jatinkumar.tech Web Portfolio of a FullStack (MERN) Web Developer, Web Designer @jatink99"
+                        target="_blank" rel="noopener" aria-label=""
+                      >
+                        <i className="fab fa-twitter"></i>
+                      </a>
+
+                      <a onClick={() => { this.setState({ shared: !this.state.shared }) }}
+                        href="https://api.whatsapp.com/send?text=Portfolio - Jatin Kumar http://www.jatinkumar.tech"
+                        target="_blank" rel="noopener" aria-label="Share on WhatsApp"
+                      >
+                        <i className="fab fa-whatsapp"></i>
+                      </a>
+
+                    </div>
+                  </div>
+                )
+            }
+            <a className="download" href={resume} target="_blank">
+              RESUME
+            </a>
+          </div>
         </div>
       </>
     )

@@ -92,17 +92,43 @@ $ease-out : cubic-bezier(0.19, 1, 0.22, 1);
 }
 }
 
-
-.love{
-  border-radius: 10px;
+.love-wrapper{
   position: absolute;
   align-self: flex-start;
   bottom: 0;
-  margin: 0 0 40px 40px;
+  margin: 0 0 20px 20px;
+}
+
+.download{
+  position: relative;
+  border-radius: 10px;
+  margin-left: 10px;
   height: 40px;
   display: inline-flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
+  color: #fff;
+  opacity: 0;
+  // font-family: Futura;
+  // font-size: 20px;
+  animation: love 0.5s 1.6s forwards;
+  backface-visibility: hidden;
+  padding: 10px 20px;
+  text-decoration: none;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+
+.love{
+  position: relative;
+  border-radius: 10px;
+  height: 40px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  // font-family: Futura;
+  // font-size: 20px;
   cursor: pointer;
   color: #fff;
   opacity: 0;
@@ -245,10 +271,6 @@ $ease-out : cubic-bezier(0.19, 1, 0.22, 1);
       font-size: 80px;
     }
   }
-
-  // .love{
-  //   margin: 0 0 25px 25px;
-  // }
 }
 
 @media only screen and (max-width: 767px){
@@ -284,14 +306,21 @@ $ease-out : cubic-bezier(0.19, 1, 0.22, 1);
     }
   }
 
-  .love{
-    margin: 0;
+  .love-wrapper{
+    margin:0px;
     font-size: 14px;
-    transform: translate(5%, 120%);
+    transform: translate(2%, 115%);
     bottom:100%;
+  }
+
+  .love{
     height: 30px;
     padding: 10px 10px;
-    transition: all 1s;
+  }
+
+  .download{
+    height: 30px;
+    padding: 10px 10px;
   }
 
   .share-buttons {
