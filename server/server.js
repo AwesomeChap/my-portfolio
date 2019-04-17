@@ -47,7 +47,7 @@ app.post('/send', (req, res) => {
   const mail = {
     from: name,
     to: USER_ID,
-    subject: 'New Message from Protfolio Contact Form',
+    subject: 'New Message from Contact Form',
     text: content
   }
 
