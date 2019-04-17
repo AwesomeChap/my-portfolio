@@ -33,6 +33,11 @@ export default class Work extends Component {
       <>
         <MetaTags>
           <title>Work - Jatin Kumar</title>
+          <meta name="description" content="I always love to learn new technologies and like even more,
+                    when I get the chance to apply them. I have been doing Fullstack
+                    Web development for almost 2 years now. Till date my most work
+                    experience came from contribution to small startups and college
+                    technical festivals"/>
         </MetaTags>
         <div className="section">
 
