@@ -48,7 +48,7 @@ app.post('/send', (req, res) => {
     from: name,
     to: USER_ID,
     subject: 'New Message from Protfolio Contact Form',
-    text: message
+    text: content
   }
 
   transporter.sendMail(mail, (err, data) => {
