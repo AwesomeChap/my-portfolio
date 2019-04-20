@@ -41465,9 +41465,11 @@ function (_Component) {
 
     _defineProperty(_assertThisInitialized(_this), "handleScroll", function () {
       if (document.body.scrollTop > 20) {
-        document.querySelector('.mouse').style.opacity = 0;
+        document.getElementById('mouse').style.opacity = 0;
+        document.getElementById('mouse').style.visibility = "hidden";
       } else {
-        document.querySelector('.mouse').style.opacity = 1;
+        document.getElementById('mouse').style.opacity = 1;
+        document.getElementById('mouse').style.visibility = "visible";
       }
 
       document.querySelector(".scrollbar").style.width = document.body.scrollTop / (document.body.scrollHeight - window.innerHeight) * 100 + "%";
@@ -41491,12 +41493,16 @@ function (_Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       document.body.addEventListener('scroll', this.handleScroll);
+
+      if (/Edge/.test(navigator.userAgent)) {
+        document.getElementById('mouse').style.display = 'none';
+      }
     }
   }, {
     key: "render",
     value: function render() {
       return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("div", {
-        class: "mouse"
+        id: "mouse"
       }, _react.default.createElement("div", {
         onClick: this.handleClick,
         class: "mouse-icon"
@@ -44545,7 +44551,10 @@ function (_Component) {
     value: function render() {
       var _this2 = this;
 
-      return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_reactMetaTags.default, null, _react.default.createElement("title", null, "Contact - Jatin Kumar")), _react.default.createElement("div", {
+      return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_reactMetaTags.default, null, _react.default.createElement("title", null, "Contact - Jatin Kumar"), _react.default.createElement("meta", {
+        name: "description",
+        content: "I am always up for cool projects that creates a difference. So in case you have one and wanna talk about it or just say hi, fill the awesome form or just drop me a message at my email Jatin Kumar and ~let's talk"
+      })), _react.default.createElement("div", {
         className: "section"
       }, _react.default.createElement("div", {
         className: "inner-section"
@@ -79699,7 +79708,10 @@ function (_Component) {
     value: function render() {
       var _this2 = this;
 
-      return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_reactMetaTags.default, null, _react.default.createElement("title", null, "Work - Jatin Kumar")), _react.default.createElement("div", {
+      return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_reactMetaTags.default, null, _react.default.createElement("title", null, "Work - Jatin Kumar"), _react.default.createElement("meta", {
+        name: "description",
+        content: "I always love to learn new technologies and like even more,\r when I get the chance to apply them. I have been doing Fullstack\r Web development for almost 2 years now. Till date my most work\r experience came from contribution to small startups and college\r technical festivals"
+      })), _react.default.createElement("div", {
         className: "section"
       }, _react.default.createElement("div", {
         className: "inner-section"
@@ -80021,7 +80033,10 @@ function (_Component) {
         }, kw);
       });
 
-      return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_reactMetaTags.default, null, _react.default.createElement("title", null, "Projects - Jatin Kumar")), _react.default.createElement("div", {
+      return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_reactMetaTags.default, null, _react.default.createElement("title", null, "Projects - Jatin Kumar"), _react.default.createElement("meta", {
+        name: "description",
+        content: "Projects matter a lot for me. As they are great medium by which I can\r explore a technology or framework and check it's pros and limits at the\r same time.They also make learning new skills very easy and enjoyable as\r you mostly are working on something that you like and enjoy"
+      })), _react.default.createElement("div", {
         className: "section"
       }, _react.default.createElement("div", {
         className: "inner-section"
@@ -80971,7 +80986,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58437" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64099" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

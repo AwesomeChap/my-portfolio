@@ -1,4 +1,4 @@
-.mouse{
+#mouse{
   position: absolute;
   width: 100%;
   bottom: 0;
@@ -6,6 +6,7 @@
   text-align: center;
   transition: all 0.3s;
 }
+
 .mouse-icon{
   display: inline-block;
    width: 25px;
@@ -58,7 +59,7 @@
 }
 
 @media only screen and (max-width: 768px){
-  .mouse{
+  #mouse{
     display: none;
   }
   .scrollbar-wrapper{

@@ -6,6 +6,11 @@ const nodemailer = require('nodemailer');
 const dotenv = require('dotenv');
 const result = dotenv.config();
 
+var http = require("http");
+setInterval(function() {
+    http.get("http://jatinkumar.herokuapp.com");
+}, 1800000); // every 5 minutes (300000)
+
 const { USER_ID, USER_PWD } = result.parsed;
 // console.log(USER_ID, USER_PWD);
 

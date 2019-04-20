@@ -6,28 +6,33 @@ export default class Mouse extends Component {
     super(props);
   }
 
-  componentDidMount(){
-    document.body.addEventListener('scroll',this.handleScroll);
+  componentDidMount() {
+    document.body.addEventListener('scroll', this.handleScroll);
+    if (/Edge/.test(navigator.userAgent)) {
+      document.getElementById('mouse').style.display = 'none';
+    }
   }
 
   handleScroll = () => {
-    if(document.body.scrollTop > 20){
-      document.querySelector('.mouse').style.opacity = 0;
+    if (document.body.scrollTop > 20) {
+      document.getElementById('mouse').style.opacity = 0;
+      document.getElementById('mouse').style.visibility = "hidden";
     }
-    else{
-      document.querySelector('.mouse').style.opacity = 1;
+    else {
+      document.getElementById('mouse').style.opacity = 1;
+      document.getElementById('mouse').style.visibility = "visible";
     }
 
-    document.querySelector(".scrollbar").style.width = (document.body.scrollTop/(document.body.scrollHeight - window.innerHeight))*100 + "%";
-  } 
+    document.querySelector(".scrollbar").style.width = (document.body.scrollTop / (document.body.scrollHeight - window.innerHeight)) * 100 + "%";
+  }
 
   handleClick = () => {
-    let pageHeight = window.innerHeight*0.9;
+    let pageHeight = window.innerHeight * 0.9;
     document.body.style.scrollBehavior = "smooth";
-    setTimeout(()=>{
+    setTimeout(() => {
       document.body.scrollBy(0, pageHeight);
       document.body.style.scrollBehavior = "auto";
-    },10);
+    }, 10);
   }
 
   componentWillUnmount
@@ -35,8 +40,8 @@ export default class Mouse extends Component {
   render() {
     return (
       <>
-        <div class="mouse">
-          <div onClick={this.handleClick}  class="mouse-icon">
+        <div id="mouse">
+          <div onClick={this.handleClick} class="mouse-icon">
             <span class="mouse-wheel"></span>
           </div>
         </div>

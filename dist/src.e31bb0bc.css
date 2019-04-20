@@ -1164,20 +1164,20 @@
   -webkit-animation: fadeInItem 0.5s cubic-bezier(0.17, 0.89, 0.26, 1) forwards;
           animation: fadeInItem 0.5s cubic-bezier(0.17, 0.89, 0.26, 1) forwards; }
   .fadeIn-menu-item:nth-child(1) {
-    -webkit-animation-delay: .5s;
-            animation-delay: .5s; }
-  .fadeIn-menu-item:nth-child(2) {
-    -webkit-animation-delay: .45s;
-            animation-delay: .45s; }
-  .fadeIn-menu-item:nth-child(3) {
-    -webkit-animation-delay: .4s;
-            animation-delay: .4s; }
-  .fadeIn-menu-item:nth-child(4) {
     -webkit-animation-delay: .35s;
             animation-delay: .35s; }
-  .fadeIn-menu-item:nth-child(5) {
+  .fadeIn-menu-item:nth-child(2) {
     -webkit-animation-delay: .3s;
             animation-delay: .3s; }
+  .fadeIn-menu-item:nth-child(3) {
+    -webkit-animation-delay: .25s;
+            animation-delay: .25s; }
+  .fadeIn-menu-item:nth-child(4) {
+    -webkit-animation-delay: .2s;
+            animation-delay: .2s; }
+  .fadeIn-menu-item:nth-child(5) {
+    -webkit-animation-delay: .15s;
+            animation-delay: .15s; }
 
 @-webkit-keyframes fadeInItem {
   to {
@@ -1296,7 +1296,7 @@
     font-size: 4vw;
     box-shadow: 0 0 5px #000; } }
 
-.mouse {
+#mouse {
   position: absolute;
   width: 100%;
   bottom: 0;
@@ -1364,7 +1364,7 @@
     background-color: #777; }
 
 @media only screen and (max-width: 768px) {
-  .mouse {
+  #mouse {
     display: none; }
   .scrollbar-wrapper {
     height: 5px; } }
@@ -1929,7 +1929,7 @@ body {
     text-decoration: none;
     color: #fff;
     margin: 0 10px;
-    font-size: 22px;
+    font-size: 18px;
     border-radius: 50%;
     width: 40px;
     height: 40px;
@@ -1980,7 +1980,7 @@ body {
   -ms-flex-item-align: start;
       align-self: flex-start;
   bottom: 0;
-  margin: 0 0 20px 20px; }
+  margin: 0 0 15px 10px; }
 
 .download {
   position: relative;
@@ -2002,7 +2002,7 @@ body {
           backface-visibility: hidden;
   padding: 10px 20px;
   text-decoration: none;
-  background-color: rgba(255, 255, 255, 0.1); }
+  background-color: rgba(255, 255, 255, 0.07); }
 
 .love {
   position: relative;
@@ -2022,7 +2022,7 @@ body {
   -webkit-backface-visibility: hidden;
           backface-visibility: hidden;
   padding: 10px 20px;
-  background: rgba(255, 255, 255, 0.1); }
+  background: rgba(255, 255, 255, 0.07); }
   .love span {
     margin-left: 10px;
     transition: all 0.3s; }
@@ -2184,7 +2184,7 @@ body {
     margin: 0 7px;
     width: 35px;
     height: 35px;
-    font-size: 18px; } }
+    font-size: 16px; } }
 
 @media only screen and (max-width: 479px) {
   .follow-container a {
