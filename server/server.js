@@ -51,7 +51,7 @@ app.post('/send', (req, res) => {
 
   const mail = {
     from: name,
-    to: USER_ID,
+    to: "jatin@jatinkumar.tech",
     subject: 'New Message from Contact Form',
     text: content
   }
