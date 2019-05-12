@@ -172,6 +172,7 @@ $font-normal : 24px;
             opacity: 0;
             width: 30%;
             display: flex;
+            visibility: hidden;
             height: 33%;
             justify-content: space-around;
             align-items: center;
@@ -259,6 +260,7 @@ $font-normal : 24px;
             transition: all 0.3s 0.65s;
           }
           .pd3{
+            visibility: visible;
             transform: translateY(0);
             opacity: 1;
             transition: all 0.3s 0.8s;

@@ -19,6 +19,7 @@ export default class App extends Component {
           <Router>
             <ScrollToTop><NavBar /></ScrollToTop>
             <NavBarMobile />
+            
             <Route exact path="/" component={Home}></Route>
             <Route exact path="/about" component={About}></Route>
             <Route exact path="/work" component={Work}></Route>

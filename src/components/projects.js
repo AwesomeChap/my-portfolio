@@ -5,6 +5,7 @@ import Footer from './footer';
 import { keywords } from './helper/data';
 import { projects } from './helper/data';
 import Mouse from './helper/mouse';
+import ScrollTopButton from './helper/scrollTopButton';
 import ProjectList from './helper/project-list';
 import { projectImg } from './helper/data-uri';
 import '../css/projects.scss'
@@ -114,6 +115,7 @@ export default class Projects extends Component {
           </div>
         </div>
         <Mouse/>
+        <ScrollTopButton />
         <Footer />
       </>
     )

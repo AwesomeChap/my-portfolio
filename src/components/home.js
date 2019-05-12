@@ -5,7 +5,7 @@ import '../css/home.scss';
 import MBackground from './helper/mBackground';
 import MetaTags from 'react-meta-tags';
 import portfolio from '../images/portfolio.PNG';
-import resume from '../../resume.pdf';
+import resume from '../../resume-updated.pdf';
 
 const shareUrl = "http://www.jatinkumar.tech";
 const title = "Portfolio - Jatin Kumar"

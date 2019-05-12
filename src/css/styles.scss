@@ -13,13 +13,13 @@ html,body {
 }
 
 html{
-  overflow-y: auto;
+  overflow-y: hidden;
 } 
 
 body{
   scroll-behavior: auto;
   // scroll-behavior: smooth;
-  overflow-y:visible;
+  overflow-y:scroll;
   background: #171717;
   color: #ccc;
   font-family: 'Quicksand', sans-serif;
@@ -56,3 +56,26 @@ body{
   background: #555; 
 }
 
+.scroll-top-button{
+  position: fixed;
+  z-index: 2;
+  bottom: 0;
+  left : 0;
+  margin: 10px;
+  height: 60px;
+  width: 60px;
+  background: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  font-size: 50px;
+  transform: translateX(-70px) rotate(180deg);
+  transition: all 0.5s;
+  text-decoration: none;
+  // opacity: 0;
+
+  i{
+    -webkit-text-stroke: 6px #000;
+  }
+}

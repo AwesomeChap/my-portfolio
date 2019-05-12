@@ -1478,11 +1478,11 @@ html, body {
   outline: none; }
 
 html {
-  overflow-y: auto; }
+  overflow-y: hidden; }
 
 body {
   scroll-behavior: auto;
-  overflow-y: visible;
+  overflow-y: scroll;
   background: #171717;
   color: #ccc;
   font-family: 'Quicksand', sans-serif;
@@ -1513,6 +1513,30 @@ body {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #555; }
+
+.scroll-top-button {
+  position: fixed;
+  z-index: 2;
+  bottom: 0;
+  left: 0;
+  margin: 10px;
+  height: 60px;
+  width: 60px;
+  background: #000;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: center;
+      justify-content: center;
+  -ms-flex-align: center;
+      align-items: center;
+  border-radius: 50%;
+  font-size: 50px;
+  -webkit-transform: translateX(-70px) rotate(180deg);
+          transform: translateX(-70px) rotate(180deg);
+  transition: all 0.5s;
+  text-decoration: none; }
+  .scroll-top-button i {
+    -webkit-text-stroke: 6px #000; }
 
 .sub-heading {
   font-family: Futura, 'sans-serif';
@@ -2346,6 +2370,7 @@ body {
             width: 30%;
             display: -ms-flexbox;
             display: flex;
+            visibility: hidden;
             height: 33%;
             -ms-flex-pack: distribute;
                 justify-content: space-around;
@@ -2423,6 +2448,7 @@ body {
       opacity: 1;
       transition: all 0.3s 0.65s; }
     .projects-container .project-wrapper:hover .project-info .project-details .pd3 {
+      visibility: visible;
       -webkit-transform: translateY(0);
               transform: translateY(0);
       opacity: 1;

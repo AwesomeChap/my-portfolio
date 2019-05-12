@@ -6,6 +6,7 @@ import MetaTags from 'react-meta-tags';
 import portfolio from '../images/portfolio.PNG';
 import { set1, set2 } from './helper/data';
 import { aboutImg } from './helper/data-uri';
+import ScrollTopButton from './helper/scrollTopButton';
 
 export default class About extends Component {
   constructor(props) {
@@ -164,6 +165,7 @@ export default class About extends Component {
 
         </div>
         <Mouse/>
+        <ScrollTopButton/>
         <Footer />
       </>
     )

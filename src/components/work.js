@@ -8,6 +8,7 @@ import { workImg } from './helper/data-uri';
 import MetaTags from 'react-meta-tags';
 import portfolio from '../images/portfolio.PNG';
 import Mouse from './helper/mouse';
+import ScrollTopButton from './helper/scrollTopButton';
 
 export default class Work extends Component {
 
@@ -92,6 +93,7 @@ export default class Work extends Component {
             </div>
           </div>
         </div>
+        <ScrollTopButton/>
         <Mouse/>
         <Footer />
       </>
