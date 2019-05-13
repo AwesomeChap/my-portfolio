@@ -41464,11 +41464,13 @@ function (_Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Mouse).call(this, props));
 
     _defineProperty(_assertThisInitialized(_this), "handleScroll", function () {
-      if (document.body.scrollTop > 20) {// document.getElementById('mouse').style.opacity = 0;
-        // document.getElementById('mouse').style.visibility = "hidden";
-      } else {// document.getElementById('mouse').style.opacity = 1;
-          // document.getElementById('mouse').style.visibility = "visible";
-        }
+      if (document.body.scrollTop > 20) {
+        document.getElementById('mouse').style.opacity = 0;
+        document.getElementById('mouse').style.visibility = "hidden";
+      } else {
+        document.getElementById('mouse').style.opacity = 1;
+        document.getElementById('mouse').style.visibility = "visible";
+      }
 
       document.querySelector(".scrollbar").style.width = document.body.scrollTop / (document.body.scrollHeight - window.innerHeight) * 100 + "%";
     });
@@ -42096,23 +42098,23 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var _default = _meta_tags.default;
 exports.default = _default;
 },{"./meta_tags_context":"../node_modules/react-meta-tags/lib/meta_tags_context.js","./meta_tags":"../node_modules/react-meta-tags/lib/meta_tags.js","./react_title":"../node_modules/react-meta-tags/lib/react_title.js"}],"images/portfolio.PNG":[function(require,module,exports) {
-module.exports = "/8c285984b1048aec8d81fcd681482cd6.PNG";
+module.exports = "/portfolio.81482cd6.PNG";
 },{}],"images/chat.PNG":[function(require,module,exports) {
-module.exports = "/a7ae44c4adb943d8d14bc9cacedde65a.PNG";
+module.exports = "/chat.cedde65a.PNG";
 },{}],"images/sp.png":[function(require,module,exports) {
-module.exports = "/bf97514c7d93a83860c875c5aff756aa.png";
+module.exports = "/sp.aff756aa.png";
 },{}],"images/order_me.PNG":[function(require,module,exports) {
-module.exports = "/8399d9c0bb8a16a87c075040f4171f11.PNG";
+module.exports = "/order_me.f4171f11.PNG";
 },{}],"images/time-tracker.PNG":[function(require,module,exports) {
-module.exports = "/16e22e748e1d43055b9efa0e0b9ea5c4.PNG";
+module.exports = "/time-tracker.0b9ea5c4.PNG";
 },{}],"images/10_pieces.PNG":[function(require,module,exports) {
-module.exports = "/b9afe4c986df5a57617e29c9c8ba626a.PNG";
+module.exports = "/10_pieces.c8ba626a.PNG";
 },{}],"images/chem_assis.png":[function(require,module,exports) {
-module.exports = "/3cd82d2f5af307764084bf92d7ec2af8.png";
+module.exports = "/chem_assis.d7ec2af8.png";
 },{}],"images/sample.PNG":[function(require,module,exports) {
-module.exports = "/79921e7c06d5d0d43fd9e1612aec3b69.PNG";
+module.exports = "/sample.2aec3b69.PNG";
 },{}],"images/tcp.png":[function(require,module,exports) {
-module.exports = "/880c97a671aac0221dd651a8d12e4ce8.png";
+module.exports = "/tcp.d12e4ce8.png";
 },{}],"components/helper/data.js":[function(require,module,exports) {
 "use strict";
 
@@ -81090,7 +81092,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59549" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52019" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
