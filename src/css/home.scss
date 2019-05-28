@@ -83,13 +83,13 @@ $ease-out : cubic-bezier(0.19, 1, 0.22, 1);
       animation-delay: 0.1s;
     }
   }
+}
 
-  @keyframes fadeInRight{
+@keyframes fadeInRight{
   to{
     transform: translate(0,0);
     opacity: 1;
   }
-}
 }
 
 .love-wrapper{
@@ -111,9 +111,10 @@ $ease-out : cubic-bezier(0.19, 1, 0.22, 1);
   cursor: pointer;
   color: #fff;
   opacity: 0;
+  transform:  translate(0,-30%);
+  animation: fadeInRight 0.3s 2.5s forwards;
   // font-family: Futura;
   // font-size: 20px;
-  animation: love 0.5s 1.6s forwards;
   backface-visibility: hidden;
   padding: 10px 20px;
   text-decoration: none;
@@ -133,7 +134,8 @@ $ease-out : cubic-bezier(0.19, 1, 0.22, 1);
   cursor: pointer;
   color: #fff;
   opacity: 0;
-  animation: love 0.5s 1.5s forwards;
+  transform:  translate(0,-30%);
+  animation: fadeInRight 0.3s 2.6s forwards;
   backface-visibility: hidden;
   padding: 10px 20px;
   background: rgba(255, 255, 255, 0.07);
@@ -150,6 +152,13 @@ $ease-out : cubic-bezier(0.19, 1, 0.22, 1);
     }
     span{
       color: #ff0d2d;
+    }
+  }
+
+  @keyframes fadeInRight{
+    to{
+      transform: translate(0,0);
+      opacity: 1;
     }
   }
 }
@@ -188,6 +197,10 @@ $ease-out : cubic-bezier(0.19, 1, 0.22, 1);
 
   .if{
     background-color: rgb(0, 75, 146);
+  }
+
+  .im{
+    background-color: #070707;
   }
 
   .ig{
@@ -239,6 +252,10 @@ $ease-out : cubic-bezier(0.19, 1, 0.22, 1);
 
     &:nth-child(5){
       animation-delay: 2s;
+    }
+
+    &:nth-child(6){
+      animation-delay: 2.05s;
     }
 
     i{
@@ -298,7 +315,7 @@ $ease-out : cubic-bezier(0.19, 1, 0.22, 1);
     overflow: hidden;
     box-shadow: none;
     a{
-      margin:0 0 12px 5px;
+      margin:0 0 17px 4px;
       overflow: hidden;
       transform: translate(0,50%);
       font-size: 22px;
@@ -335,11 +352,19 @@ $ease-out : cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 @media only screen and (max-width: 479px){
+  .love, .download{
+    border-radius: 6px;
+  }
+
+  .download{
+    margin-left: 7px;
+  }
+
   .follow-container{
     a{
       font-size: 20px;
-      height: 45px;
-      width: 45px;
+      height: 43px;
+      width: 43px;
     }
   }
   

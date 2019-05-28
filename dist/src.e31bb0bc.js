@@ -79412,8 +79412,8 @@ function (_Component) {
 }(_react.Component);
 
 exports.default = MBackground;
-},{"react":"../node_modules/react/index.js"}],"../resume-updated.pdf":[function(require,module,exports) {
-module.exports = "/resume-updated.8b34aad8.pdf";
+},{"react":"../node_modules/react/index.js"}],"../resume-latest.pdf":[function(require,module,exports) {
+module.exports = "/resume-latest.a45c43c6.pdf";
 },{}],"components/home.js":[function(require,module,exports) {
 "use strict";
 
@@ -79436,7 +79436,7 @@ var _reactMetaTags = _interopRequireDefault(require("react-meta-tags"));
 
 var _portfolio = _interopRequireDefault(require("../images/portfolio.PNG"));
 
-var _resumeUpdated = _interopRequireDefault(require("../../resume-updated.pdf"));
+var _resumeLatest = _interopRequireDefault(require("../../resume-latest.pdf"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -79557,6 +79557,12 @@ function (_Component) {
       }, _react.default.createElement("i", {
         className: "fab fa-facebook-f"
       })), _react.default.createElement("a", {
+        className: "im",
+        target: "_blank",
+        href: "https://medium.com/@jatin15011999"
+      }, _react.default.createElement("i", {
+        class: "fab fa-medium-m"
+      })), _react.default.createElement("a", {
         className: "ig",
         target: "_blank",
         href: "https://github.com/AwesomeChap"
@@ -79643,7 +79649,7 @@ function (_Component) {
         className: "fab fa-whatsapp"
       })))), _react.default.createElement("a", {
         className: "download",
-        href: _resumeUpdated.default,
+        href: _resumeLatest.default,
         target: "_blank"
       }, "RESUME"))));
     }
@@ -79653,7 +79659,7 @@ function (_Component) {
 }(_react.Component);
 
 exports.default = Home;
-},{"react":"../node_modules/react/index.js","./helper/background":"components/helper/background.js","../css/pages.scss":"css/pages.scss","../css/home.scss":"css/home.scss","./helper/mBackground":"components/helper/mBackground.js","react-meta-tags":"../node_modules/react-meta-tags/lib/index.js","../images/portfolio.PNG":"images/portfolio.PNG","../../resume-updated.pdf":"../resume-updated.pdf"}],"components/helper/expand.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","./helper/background":"components/helper/background.js","../css/pages.scss":"css/pages.scss","../css/home.scss":"css/home.scss","./helper/mBackground":"components/helper/mBackground.js","react-meta-tags":"../node_modules/react-meta-tags/lib/index.js","../images/portfolio.PNG":"images/portfolio.PNG","../../resume-latest.pdf":"../resume-latest.pdf"}],"components/helper/expand.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -81092,7 +81098,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52019" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50178" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
