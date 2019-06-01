@@ -90,7 +90,7 @@ export const works = [
   }
 ]
 
-export const keywords = ['Show All','Web','React','CSS', 'SCSS', 'SVG', 'Animations', 'Node','SEO','Web Sockets', 'MongoDB', 'GraphQL', 'Mobile', 'ReactNative', 'C++', 'NASM'];
+export const keywords = ['Show All','Web','React', 'Redux', 'MapBox', 'Fastify', 'CSS', 'SCSS', 'SVG', 'Animations', 'Node','SEO','Web Sockets', 'MongoDB', 'GraphQL', 'Mobile', 'ReactNative', 'C++', 'NASM'];
 
 import roomChatImg from '../../images/chat.PNG';
 import superMarketImg from '../../images/sp.png';
@@ -99,6 +99,8 @@ import timeTrackerImg from '../../images/time-tracker.PNG';
 import PiecesImage from '../../images/10_pieces.PNG';
 import chemAssisImage from '../../images/chem_assis.png';
 import sample from '../../images/sample.PNG';
+import imur from './../../images/imur.PNG';
+import emenu from '../../images/e-menu.png';
 import portfolio from '../../images/portfolio.PNG';
 import tcp from '../../images/tcp.png';
 
@@ -111,14 +113,14 @@ export const projects = [
     gitUrl : '',
     desc : 'This is My portfolio website'
   },
-  // {
-  //   name : 'Blog',
-  //   imgUrl : sample,
-  //   keywords : ['Web', 'React', 'SCSS', 'SVG', 'Animations', 'Node'],
-  //   link : '',
-  //   gitUrl : '',
-  //   desc : 'This is my blog'
-  // },
+  {
+    name : 'React Interactive Maps',
+    imgUrl : imur,
+    keywords : ['Web', 'React', 'SCSS', 'MapBox', 'Node'],
+    link : 'https://react-interactive-maps-demo.herokuapp.com',
+    gitUrl : 'https://github.com/AwesomeChap/Interactive-Maps-In-React',
+    desc : 'This application demonstrates how can we generate Interactive Maps in React'
+  },
   {
     name : 'SuperMarket FoodInfo',
     imgUrl : superMarketImg,
@@ -126,6 +128,14 @@ export const projects = [
     link: 'https://supermarket-foodinfo.herokuapp.com/',
     gitUrl : 'https://github.com/AwesomeChap/supermarket',
     desc : "A WebApp that let's you see important details of selected food items and then compare it's with others"
+  },
+  {
+    name : 'Fastify React Editable Menu',
+    imgUrl : emenu,
+    keywords : ['Web', 'React', 'Redux', 'CSS', 'Fastify', 'MongoDB', 'Node'],
+    link : 'https://e-menu-v1.herokuapp.com',
+    gitUrl : 'https://github.com/AwesomeChap/Fastify-React-E-Menu',
+    desc : 'It is an Editable menu in which you can create, modify and delete items'
   },
   {
     name : 'Time Tracker',    

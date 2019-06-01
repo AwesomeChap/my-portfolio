@@ -42113,6 +42113,10 @@ module.exports = "/10_pieces.c8ba626a.PNG";
 module.exports = "/chem_assis.d7ec2af8.png";
 },{}],"images/sample.PNG":[function(require,module,exports) {
 module.exports = "/sample.2aec3b69.PNG";
+},{}],"images/imur.PNG":[function(require,module,exports) {
+module.exports = "/imur.5a326794.PNG";
+},{}],"images/e-menu.png":[function(require,module,exports) {
+module.exports = "/e-menu.9c9b72c3.png";
 },{}],"images/tcp.png":[function(require,module,exports) {
 module.exports = "/tcp.d12e4ce8.png";
 },{}],"components/helper/data.js":[function(require,module,exports) {
@@ -42136,6 +42140,10 @@ var _pieces = _interopRequireDefault(require("../../images/10_pieces.PNG"));
 var _chem_assis = _interopRequireDefault(require("../../images/chem_assis.png"));
 
 var _sample = _interopRequireDefault(require("../../images/sample.PNG"));
+
+var _imur = _interopRequireDefault(require("./../../images/imur.PNG"));
+
+var _eMenu = _interopRequireDefault(require("../../images/e-menu.png"));
 
 var _portfolio = _interopRequireDefault(require("../../images/portfolio.PNG"));
 
@@ -42203,7 +42211,7 @@ var works = [{
   rspbs: ["Wrote vareity ofJQuery and CSS animations", "improved previous base template", "Designed logo", "Connected Frontend and Backend"]
 }];
 exports.works = works;
-var keywords = ['Show All', 'Web', 'React', 'CSS', 'SCSS', 'SVG', 'Animations', 'Node', 'SEO', 'Web Sockets', 'MongoDB', 'GraphQL', 'Mobile', 'ReactNative', 'C++', 'NASM'];
+var keywords = ['Show All', 'Web', 'React', 'Redux', 'MapBox', 'Fastify', 'CSS', 'SCSS', 'SVG', 'Animations', 'Node', 'SEO', 'Web Sockets', 'MongoDB', 'GraphQL', 'Mobile', 'ReactNative', 'C++', 'NASM'];
 exports.keywords = keywords;
 var projects = [{
   name: 'Portfolio',
@@ -42212,21 +42220,27 @@ var projects = [{
   link: 'http://www.jatinkumar.tech/',
   gitUrl: '',
   desc: 'This is My portfolio website'
-}, // {
-//   name : 'Blog',
-//   imgUrl : sample,
-//   keywords : ['Web', 'React', 'SCSS', 'SVG', 'Animations', 'Node'],
-//   link : '',
-//   gitUrl : '',
-//   desc : 'This is my blog'
-// },
-{
+}, {
+  name: 'React Interactive Maps',
+  imgUrl: _imur.default,
+  keywords: ['Web', 'React', 'SCSS', 'MapBox', 'Node'],
+  link: 'https://react-interactive-maps-demo.herokuapp.com',
+  gitUrl: 'https://github.com/AwesomeChap/Interactive-Maps-In-React',
+  desc: 'This application demonstrates how can we generate Interactive Maps in React'
+}, {
   name: 'SuperMarket FoodInfo',
   imgUrl: _sp.default,
   keywords: ['Web', 'SCSS', 'Node', 'React', 'MongoDB'],
   link: 'https://supermarket-foodinfo.herokuapp.com/',
   gitUrl: 'https://github.com/AwesomeChap/supermarket',
   desc: "A WebApp that let's you see important details of selected food items and then compare it's with others"
+}, {
+  name: 'Fastify React Editable Menu',
+  imgUrl: _eMenu.default,
+  keywords: ['Web', 'React', 'Redux', 'CSS', 'Fastify', 'MongoDB', 'Node'],
+  link: 'https://e-menu-v1.herokuapp.com',
+  gitUrl: 'https://github.com/AwesomeChap/Fastify-React-E-Menu',
+  desc: 'It is an Editable menu in which you can create, modify and delete items'
 }, {
   name: 'Time Tracker',
   imgUrl: _timeTracker.default,
@@ -42271,7 +42285,7 @@ var projects = [{
   desc: "An application made using assembly language, converting blank file to ordered sentences"
 }];
 exports.projects = projects;
-},{"../../images/chat.PNG":"images/chat.PNG","../../images/sp.png":"images/sp.png","../../images/order_me.PNG":"images/order_me.PNG","../../images/time-tracker.PNG":"images/time-tracker.PNG","../../images/10_pieces.PNG":"images/10_pieces.PNG","../../images/chem_assis.png":"images/chem_assis.png","../../images/sample.PNG":"images/sample.PNG","../../images/portfolio.PNG":"images/portfolio.PNG","../../images/tcp.png":"images/tcp.png"}],"components/helper/data-uri.js":[function(require,module,exports) {
+},{"../../images/chat.PNG":"images/chat.PNG","../../images/sp.png":"images/sp.png","../../images/order_me.PNG":"images/order_me.PNG","../../images/time-tracker.PNG":"images/time-tracker.PNG","../../images/10_pieces.PNG":"images/10_pieces.PNG","../../images/chem_assis.png":"images/chem_assis.png","../../images/sample.PNG":"images/sample.PNG","./../../images/imur.PNG":"images/imur.PNG","../../images/e-menu.png":"images/e-menu.png","../../images/portfolio.PNG":"images/portfolio.PNG","../../images/tcp.png":"images/tcp.png"}],"components/helper/data-uri.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -81098,7 +81112,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50178" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65306" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
