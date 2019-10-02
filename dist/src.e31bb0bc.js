@@ -79426,8 +79426,8 @@ function (_Component) {
 }(_react.Component);
 
 exports.default = MBackground;
-},{"react":"../node_modules/react/index.js"}],"../resume-latest.pdf":[function(require,module,exports) {
-module.exports = "/resume-latest.a45c43c6.pdf";
+},{"react":"../node_modules/react/index.js"}],"../resume-10-19.pdf":[function(require,module,exports) {
+module.exports = "/resume-10-19.e5c9f8a0.pdf";
 },{}],"components/home.js":[function(require,module,exports) {
 "use strict";
 
@@ -79450,7 +79450,7 @@ var _reactMetaTags = _interopRequireDefault(require("react-meta-tags"));
 
 var _portfolio = _interopRequireDefault(require("../images/portfolio.PNG"));
 
-var _resumeLatest = _interopRequireDefault(require("../../resume-latest.pdf"));
+var _resume = _interopRequireDefault(require("../../resume-10-19.pdf"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -79663,7 +79663,7 @@ function (_Component) {
         className: "fab fa-whatsapp"
       })))), _react.default.createElement("a", {
         className: "download",
-        href: _resumeLatest.default,
+        href: _resume.default,
         target: "_blank"
       }, "RESUME"))));
     }
@@ -79673,7 +79673,7 @@ function (_Component) {
 }(_react.Component);
 
 exports.default = Home;
-},{"react":"../node_modules/react/index.js","./helper/background":"components/helper/background.js","../css/pages.scss":"css/pages.scss","../css/home.scss":"css/home.scss","./helper/mBackground":"components/helper/mBackground.js","react-meta-tags":"../node_modules/react-meta-tags/lib/index.js","../images/portfolio.PNG":"images/portfolio.PNG","../../resume-latest.pdf":"../resume-latest.pdf"}],"components/helper/expand.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","./helper/background":"components/helper/background.js","../css/pages.scss":"css/pages.scss","../css/home.scss":"css/home.scss","./helper/mBackground":"components/helper/mBackground.js","react-meta-tags":"../node_modules/react-meta-tags/lib/index.js","../images/portfolio.PNG":"images/portfolio.PNG","../../resume-10-19.pdf":"../resume-10-19.pdf"}],"components/helper/expand.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -81112,7 +81112,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65306" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62339" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
