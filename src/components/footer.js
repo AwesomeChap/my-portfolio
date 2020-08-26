@@ -22,7 +22,7 @@ export default class Footer extends Component{
             <a className="if" target="_blank" href="https://www.facebook.com/J4TINKUMAR"><i className="fab fa-facebook-f"></i></a>
             <a className="ig" target="_blank" href="https://github.com/AwesomeChap"><i className="fab fa-github"></i></a>
             <a className="il" target="_blank" href="https://www.linkedin.com/in/-jatin-kumar/"><i className="fab fa-linkedin-in"></i></a>
-            <a className="it" target="_blank" href="https://twitter.com/jatink99"><i className="fab fa-twitter"></i></a>
+            <a className="ii" target="_blank" href="https://www.instagram.com/jatin_1501/"><i className="fab fa-instagram"></i></a>
           </div>
           <div>Copyright &copy; 2019, Jatin Kumar. All Rights Reserved</div>
         </div>

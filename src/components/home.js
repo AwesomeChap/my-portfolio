@@ -5,10 +5,10 @@ import '../css/home.scss';
 import MBackground from './helper/mBackground';
 import MetaTags from 'react-meta-tags';
 import portfolio from '../images/portfolio.PNG';
-import resume from '../../resume-10-19.pdf';
+import resume from '../../resume-08-20.pdf';
 
 const shareUrl = "http://www.jatinkumar.tech";
-const title = "Portfolio - Jatin Kumar"
+const title = "Portfolio - Jatin Kumar";
 
 export default class Home extends Component {
 
@@ -93,11 +93,11 @@ export default class Home extends Component {
             <small className="follow-me">Follow me</small>
             <div className="follow-container">
               <a className="if" target="_blank" href="https://www.facebook.com/J4TINKUMAR"><i className="fab fa-facebook-f"></i></a>
+              <a className="il" target="_blank" href="https://www.linkedin.com/in/-jatin-kumar/"><i className="fab fa-linkedin-in"></i></a>
+              <a className="ii" target="_blank" href="https://www.instagram.com/jatin_1501/"><i className="fab fa-instagram"></i></a>
               <a className="im" target="_blank" href="https://medium.com/@jatin15011999"><i class="fab fa-medium-m"></i></a>
               <a className="ig" target="_blank" href="https://github.com/AwesomeChap"><i className="fab fa-github"></i></a>
               <a className="iy" target="_blank" href="https://www.youtube.com/channel/UCWOv0PVApOlYYk56d0pU57g"><i className="fab fa-youtube"></i></a>
-              <a className="il" target="_blank" href="https://www.linkedin.com/in/-jatin-kumar/"><i className="fab fa-linkedin-in"></i></a>
-              <a className="it" target="_blank" href="https://twitter.com/jatink99"><i className="fab fa-twitter"></i></a>
             </div>
           </div>
 
@@ -108,39 +108,43 @@ export default class Home extends Component {
                   SHARE WITH <span>❤</span>
                 </div>
               ) : (
-                <div className="love">
-                  <div className="share-buttons">
+                  <div className="love">
+                    <div className="share-buttons">
 
-                    <a onClick={() => { this.setState({ shared: !this.state.shared }) }}
-                      href="https://www.facebook.com/sharer/sharer.php?u=http://jatinkumar.tech"
-                      target="_blank" rel="noopener" aria-label=""
-                    >
-                      <i className="fab fa-facebook-f"></i>
-                    </a>
+                      <a onClick={() => { this.setState({ shared: !this.state.shared }) }}
+                        href="https://www.facebook.com/sharer/sharer.php?u=http://jatinkumar.tech"
+                        target="_blank" rel="noopener" aria-label=""
+                      >
+                        <i className="fab fa-facebook-f"></i>
+                      </a>
 
-                    <a onClick={() => { this.setState({ shared: !this.state.shared }) }}
-                      href="https://www.linkedin.com/shareArticle?mini=true&amp;url=http%3A%2F%2Fjatinkumar.tech&amp;title=Jatin Kumar. FullStack (MERN) Web Dev, Web Designer.&amp;summary=Jatin Kumar, who likes to mix code and creativity, I basically Work across full javascript stack mainly MERN. I am currently in my 2nd Year which I am pursuing from USICT, GGSIPU.&amp;source=http%3A%2F%2Fjatinkumar.tech"
-                      target="_blank" rel="noopener" aria-label=""
-                    >
-                      <i className="fab fa-linkedin-in"></i>
-                    </a>
+                      <a onClick={() => { this.setState({ shared: !this.state.shared }) }}
+                        href="https://www.linkedin.com/shareArticle?mini=true&amp;url=http%3A%2F%2Fjatinkumar.tech&amp;title=Jatin Kumar. FullStack (MERN) Web Dev, Web Designer.&amp;summary=Jatin Kumar, who likes to mix code and creativity, I basically Work across full javascript stack mainly MERN. I am currently in my 2nd Year which I am pursuing from USICT, GGSIPU.&amp;source=http%3A%2F%2Fjatinkumar.tech"
+                        target="_blank" rel="noopener" aria-label=""
+                      >
+                        <i className="fab fa-linkedin-in"></i>
+                      </a>
 
-                    <a onClick={() => { this.setState({ shared: !this.state.shared }) }}
-                      href="https://twitter.com/intent/tweet/?text=http://www.jatinkumar.tech Web Portfolio of a FullStack (MERN) Web Developer, Web Designer @jatink99"
-                      target="_blank" rel="noopener" aria-label=""
-                    >
-                      <i className="fab fa-twitter"></i>
-                    </a>
+                      <a onClick={() => { this.setState({ shared: !this.state.shared }) }}
+                        href="https://twitter.com/intent/tweet/?text=http://www.jatinkumar.tech Web Portfolio of a FullStack (MERN) Web Developer, Web Designer @jatink99"
+                        target="_blank" rel="noopener" aria-label=""
+                      >
+                        <i className="fab fa-twitter"></i>
+                      </a>
 
-                    <a onClick={() => { this.setState({ shared: !this.state.shared }) }}
-                      href="https://api.whatsapp.com/send?text=Portfolio - Jatin Kumar http://www.jatinkumar.tech"
-                      target="_blank" rel="noopener" aria-label="Share on WhatsApp"
-                    >
-                      <i className="fab fa-whatsapp"></i>
-                    </a>
+                      <a onClick={() => { this.setState({ shared: !this.state.shared }) }}
+                        href="https://api.whatsapp.com/send?text=Portfolio - Jatin Kumar http://www.jatinkumar.tech"
+                        target="_blank" rel="noopener" aria-label="Share on WhatsApp"
+                      >
+                        <i className="fab fa-whatsapp"></i>
+                      </a>
 
+                      <a class="hide-share-buttons-btn" onClick={() => { this.setState({ shared: !this.state.shared }) }}>
+                        <i class="fas fa-times"></i>
+                      </a>
+
+                    </div>
                   </div>
-                </div>
                 )
             }
             <a className="download" href={resume} target="_blank">

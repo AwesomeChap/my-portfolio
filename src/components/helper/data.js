@@ -52,6 +52,40 @@ export const set2 = [
 
 
 export const works = [
+
+  {
+    place : "FINDOLOGIC GmbH",
+    date : "Feb 2020 - Present",
+    link : "http://findologic.com/",
+    designation : "Software Developer",
+    rspbs : [
+      "Usually work on the front-end part of their shopping assistant",
+      "Write the necessary tests",
+    ]
+  },
+  {
+    place : "Google Season of Docs, Hydra Ecosystem",
+    date : "Sep,1 2019 - Nov,22 2018",
+    link : "",
+    designation : "Student Developer and Technical Writer",
+    rspbs : [
+      "Was among 50 selected candidates from entire world.",
+      "Fixed Navigation issues in their website.",
+      "Fixed Documentation bugs."
+    ]
+  },
+  {
+    place : "Leena AI Pvt Ltd.",
+    date : "June,7 2019 - Aug,7 2019",
+    link : "https://leena.ai/",
+    designation : "React Intern",
+    rspbs : [
+      "Understood architecture of backend APIs of bot",
+      "Implemented custom webviews for calender integration for bot channels.",
+      "Implemented cong management dashboard for bot channels.",
+      "Implemented component design system.",
+    ]
+  },
   {
     place : "INFOX, Techspace USICT",
     date : "Sep,1 2018 - Oct,26 2018",
@@ -65,29 +99,29 @@ export const works = [
       "Work in multidisciplinary team"
     ]
   },
-  {
-    place : "Web Masters, Techspace USICT",
-    date : "Oct,28 2018",
-    link : "",
-    designation : "Organiser & Co-Judge",
-    rspbs : [
-      "Monitered Progress of participants",
-      "Provided Guidence in Pre-event discussion",
-      "Judged considering all equal"
-    ]
-  },
-  {
-    place : "Delhipreneurs",
-    date : "July,1 2018 - Dec,15 2018",
-    link : "",
-    designation : "Web Developer",
-    rspbs : [
-      "Wrote vareity ofJQuery and CSS animations",
-      "improved previous base template",
-      "Designed logo",
-      "Connected Frontend and Backend"
-    ]
-  }
+  // {
+  //   place : "Web Masters, Techspace USICT",
+  //   date : "Oct,28 2018",
+  //   link : "",
+  //   designation : "Organiser & Co-Judge",
+  //   rspbs : [
+  //     "Monitered Progress of participants",
+  //     "Provided Guidence in Pre-event discussion",
+  //     "Judged considering all equal"
+  //   ]
+  // },
+  // {
+  //   place : "Delhipreneurs",
+  //   date : "July,1 2018 - Dec,15 2018",
+  //   link : "",
+  //   designation : "Web Developer",
+  //   rspbs : [
+  //     "Wrote vareity ofJQuery and CSS animations",
+  //     "improved previous base template",
+  //     "Designed logo",
+  //     "Connected Frontend and Backend"
+  //   ]
+  // }
 ]
 
 export const keywords = ['Show All','Web','React', 'Redux', 'MapBox', 'Fastify', 'CSS', 'SCSS', 'SVG', 'Animations', 'Node','SEO','Web Sockets', 'MongoDB', 'GraphQL', 'Mobile', 'ReactNative', 'C++', 'NASM'];
