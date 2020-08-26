@@ -5,7 +5,7 @@ import Footer from './footer';
 import MetaTags from 'react-meta-tags';
 import portfolio from '../images/portfolio.PNG';
 import { set1, set2 } from './helper/data';
-import { aboutImg } from './helper/data-uri';
+import { newAboutImg } from './helper/data-uri';
 import ScrollTopButton from './helper/scrollTopButton';
 
 export default class About extends Component {
@@ -114,7 +114,7 @@ export default class About extends Component {
               <div className="image-container">
                 <div className="image-border">
                   <div className="image">
-                    <img className="about-img" src={aboutImg} alt="" />
+                    <img className="about-img" src={newAboutImg} alt="" />
                   </div>
                 </div>
               </div>

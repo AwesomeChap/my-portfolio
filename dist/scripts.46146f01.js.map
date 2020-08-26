@@ -1,0 +1,1 @@
+{"version":3,"sources":["scripts/scripts.js"],"names":["window","addEventListener","event"],"mappings":";AAAAA,OAAOC,iBAAiB,mBAAmB,SAASC","file":"scripts.46146f01.js","sourceRoot":"../src","sourcesContent":["window.addEventListener('DOMContentLoaded',function(event){\n  //not required till now ;)\n})\n"]}
