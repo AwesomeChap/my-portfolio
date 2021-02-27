@@ -1,0 +1,262 @@
+$red : #ff0d2d;
+$eio : cubic-bezier(0.77, 0, 0.175, 1);
+$e-bounce : cubic-bezier(0.175, 0.885, 0.32, 1.275);
+$eio : cubic-bezier(.17,.89,.26,1);
+$ham-d : 0.6s;
+
+.nav-m{
+  display: none;
+  position: fixed;
+  bottom:0;
+  right:0;
+  margin: 10px;
+  border-radius: 50%;
+  z-index: 4;
+  background-color: #000;
+  box-sizing: border-box;
+}
+
+.nav-logo-m{
+  display: none;
+}
+
+
+#hamburger{
+  // background: rgba(17, 17, 17, 0.795);
+  // background: #444;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  height: 60px;
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: all 0.3s;
+}
+
+.bar{
+  position: absolute;
+  display: block;
+  height: 0px;
+  border: 0.5px solid #fff;
+  background-color: #ddd;
+  transition: all 0.3s;
+  width:100%;
+}
+
+.bar2{
+  transform: scaleX(0.85);
+  opacity: 1;
+}
+
+.bar1{
+  transform: translateY(-15px) scaleX(0.5) rotate(0);
+}
+
+.bar3{
+  transform: translateY(15px) scaleX(0.5) rotate(0);
+}
+
+.close{
+  .bar{
+    height: 0px;
+    border: 1.5px solid $red;
+    background-color: $red;
+  }
+  .bar1{
+    animation:  close-bar1 $ham-d $e-bounce forwards;
+  }
+  @keyframes close-bar1 {
+    50%{
+      transform: translateY(0) scale(0.5) rotate(0);
+    }
+    100%{
+      transform: translateY(0) scale(0.6) rotate(135deg);
+    }
+  }
+  
+  .bar2{
+    animation: close-bar2 $ham-d $e-bounce forwards;
+  }
+  @keyframes close-bar2 {
+    50%{
+      transform: scaleX(0.7);
+      opacity: 0;
+    }
+    100%{
+      transform: scaleX(0.7);
+      opacity: 0;
+    }
+  }
+  .bar3{
+    animation: close-bar3 $ham-d $e-bounce forwards;
+  }
+  @keyframes close-bar3 {
+    50%{
+      transform: translateY(0) scale(0.5) rotate(0);
+    }
+    100%{
+      transform: translateY(0) scale(0.6) rotate(45deg);
+    }
+  }
+}
+
+.ham{
+  .bar1{
+    transform: translateY(0) scale(0.6) rotate(135deg);
+    animation: ham1 $ham-d $e-bounce forwards,;
+  }
+  @keyframes ham1 {
+    50%{
+      transform: translateY(0) scale(0.5) rotate(0);
+    }
+    100%{
+      transform: translateY(-15px) scaleX(0.5) rotate(0);
+    }
+  }
+  .bar2{
+    transform: scaleX(0.7);
+    opacity: 0;
+    animation: ham2 $ham-d $e-bounce forwards;
+  }
+  @keyframes ham2 {
+    50%{
+      opacity: 1;
+      transform: scaleX(0.5);
+    }
+    100%{
+      opacity: 1;
+      transform: scaleX(0.85);
+    }
+  }
+  .bar3{
+    transform: translateY(0) scale(0.6) rotate(45deg);
+    animation: ham3 $ham-d $e-bounce forwards;
+  }
+  @keyframes ham3 {
+    50%{
+      transform: translateY(0) scale(0.5) rotate(0);
+    }
+    100%{
+      transform: translateY(15px) scaleX(0.5) rotate(0);
+    }
+  }
+}
+
+@media only screen and (max-width: 767px) {
+
+  #hamburger{
+    // transform-origin: right center; 
+    transform: scale(0.8);
+  }
+}
+
+@media only screen and (max-width: 479px) {
+  
+}
+
+// ---------------------------------------------------------------
+
+#menu-wrapper{
+  position: fixed;
+  // display: none;
+  top:0;
+  left:0;
+  min-width: 100%;
+  z-index: 3;
+  height: 100%;
+  max-height: 100%;
+  background-color: #0a0a0a;
+  box-sizing: border-box;
+  transform-origin: top center;
+  overflow: hidden;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+}
+
+.open-menu{
+  transform: scaleY(1);
+  transition:  transform 0.3s;
+}
+
+.close-menu{
+  transform: scaleY(0);
+  transition:  transform 0.3s 0.4s;
+}
+
+.selected-m-nav-item{
+  div{
+    color: #fff;
+  }
+}
+
+.fadeIn-menu-item{
+  transform:translate(0,-150%);
+  opacity: 0;
+  animation: fadeInItem .5s $eio forwards;
+
+  &:nth-child(1){
+    animation-delay: .35s;
+  }
+
+  &:nth-child(2){
+    animation-delay: .3s;
+  }
+
+  &:nth-child(3){
+    animation-delay: .25s;
+  }
+
+  &:nth-child(4){
+    animation-delay: .2s;
+  }
+
+  &:nth-child(5){
+    animation-delay: .15s;
+  }
+} 
+
+@keyframes fadeInItem{
+  to{
+    transform:translate(0,0);
+    opacity: 1;
+  }
+}
+
+.fadeOut-menu-item{
+  transform:translate(0,0);
+  opacity: 1;
+  animation: fadeOutItem .1s .3s $eio forwards;
+}
+
+@keyframes fadeOutItem{
+  to{
+    // transform:translate(0,-150%);
+    opacity: 0;
+  }
+}
+
+@keyframes pageTransition{
+  to{
+    transform: scaleX(0);
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  /* For desktop: */
+  .nav-m{
+    display:inline-block;
+  }
+  #menu-wrapper{
+    display:flex;
+  }
+}
+
+@media only screen and (max-width: 479px){
+  .menu-item-name span{
+    font-size:8vw;
+  }
+}

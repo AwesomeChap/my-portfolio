@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../../css/styles.scss'
+import '../../styles/main.scss'
 
 export default class ScrollTopButton extends Component {
   componentDidMount() {
@@ -32,7 +32,7 @@ export default class ScrollTopButton extends Component {
 
   render() {
     return (
-      <div onClick={this.handleClick} className="scroll-top-button"><i class="fas fa-angle-up"></i></div>
+      <div onClick={this.handleClick} className="scroll-top-button"><i className="fas fa-angle-up"></i></div>
     );
   }
 } 

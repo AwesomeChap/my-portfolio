@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import '../../css/heading.scss';
+import '../../styles/heading.scss';
 import {TweenLite} from 'gsap';
 
 export default class Heading extends Component {

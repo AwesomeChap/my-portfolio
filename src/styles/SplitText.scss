@@ -1,0 +1,40 @@
+.menu-item {
+    font-family: Futura;
+    text-decoration: none;
+    font-size: 8vw;
+    color: #999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    .split {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        overflow: hidden;
+        transform: translate(-50%, -50%);
+    }
+    .upper-split {
+        clip-path: polygon(0 65%, 100% 30%, 100% 0, 0 0);
+    }
+    .upper-split-move {
+        animation: upper-split-move 0.1s forwards;
+    }
+    @keyframes upper-split-move {
+        to {
+            transform: translate(-51%, -52%);
+        }
+    }
+    .lower-split {
+        clip-path: polygon(0 65%, 100% 30%, 100% 100%, 0 100%);
+    }
+    .lower-split-move {
+        animation: lower-split-move 0.1s forwards;
+    }
+    @keyframes lower-split-move {
+        to {
+            transform: translate(-49%, -48%);
+        }
+    }
+}

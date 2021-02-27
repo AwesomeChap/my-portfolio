@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../../css/cursor.scss';
+import '../../styles/cursor.scss';
 import { withRouter } from 'react-router-dom';
 
 class Cursor extends Component {

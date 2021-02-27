@@ -15,7 +15,7 @@ const { USER_ID, USER_PWD } = result.parsed;
 // console.log(USER_ID, USER_PWD);
 
 const transport = {
-  host: 'smtp.gmail.com',
+  host: 'smtp.gmail.com', 
   auth: {
     user: USER_ID,
     pass: USER_PWD
@@ -47,7 +47,6 @@ app.get('*', (req, res) => {
 app.post('/send', (req, res) => {
   const { name, email, message } = req.body;
   const content = `name: ${name} \nemail: ${email} \nmessage: ${message} `;
-  console.log(content);
 
   const mail = {
     from: name,

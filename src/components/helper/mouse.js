@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../../css/mouse.scss'
+import '../../styles/mouse.scss'
 
 export default class Mouse extends Component {
   constructor(props) {
@@ -41,8 +41,8 @@ export default class Mouse extends Component {
     return (
       <>
         <div id="mouse">
-          <div onClick={this.handleClick} class="mouse-icon">
-            <span class="mouse-wheel"></span>
+          <div onClick={this.handleClick} className="mouse-icon">
+            <span className="mouse-wheel"></span>
           </div>
         </div>
         <div className="scrollbar-wrapper">
