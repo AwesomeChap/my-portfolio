@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Background from './helper/background';
+import EyesToLogoTransition from "./helper/EyesToLogoTransition";
 import '../styles/pages.scss';
 import '../styles/home.scss';
 import MBackground from './helper/MBackground';
@@ -95,6 +96,8 @@ export default () => {
           </div>
         </div>
 
+        <EyesToLogoTransition/>
+
         <div className="love-wrapper">
           {
             !shared ? (
@@ -143,7 +146,7 @@ export default () => {
           }
           <a className="download" href={resume} target="_blank">
             RESUME
-            </a>
+          </a>
         </div>
       </div>
     </>

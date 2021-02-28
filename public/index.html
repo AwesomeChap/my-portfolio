@@ -16,8 +16,8 @@
 </head>
 
 <body>
-  <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="0" height="0" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
-    viewBox="0 0 974 278" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" version="1.1" 
+    viewBox="0 0 974 278" >
     <defs>
       <clipPath id="id1">
         <path d="M87 95c0,-5 45,129 45,129 88,1 168,6 239,18l7 -26c-100,-43 -199,-113 -291,-121z" />
@@ -115,12 +115,12 @@
     const d = 1000;
     const m_i = 75;
     setTimeout(() => {
-      var morph1 = KUTE.fromTo('#left-eye-brow-copy', { path: '#left-eye-brow-copy' }, { path: '#j1' }, {easing: easing_fn, duration: d,morphIndex: m_i}).start();
-      var morph2 = KUTE.fromTo('#left-eye-open-copy', { path: '#left-eye-open-copy' }, { path: '#j2' }, {easing: easing_fn, duration: d,morphIndex: m_i}).start();
-      var morph3 = KUTE.fromTo('#left-eye-open-clone-copy', { path: '#left-eye-open-clone-copy' }, { path: '#j3' }, {easing: easing_fn, duration: d,morphIndex: m_i}).start();
-      var morph4 = KUTE.fromTo('#right-eye-brow-copy', { path: '#right-eye-brow-copy' }, { path: '#k1' }, {easing: easing_fn, duration: d,morphIndex: m_i}).start();
-      var morph3 = KUTE.fromTo('#right-eye-open-copy', { path: '#right-eye-open-copy' }, { path: '#k2' }, {easing: easing_fn, duration: d,morphIndex: m_i}).start();
-      var morph4 = KUTE.fromTo('#right-eye-open-clone-copy', { path: '#right-eye-open-clone-copy' }, { path: '#k3' }, {easing: easing_fn, duration: d,morphIndex: m_i}).start();
+      KUTE.fromTo('#left-eye-brow-copy', { path: '#left-eye-brow-copy' }, { path: '#j1' }, {easing: easing_fn, duration: d,morphIndex: m_i}).start();
+      KUTE.fromTo('#left-eye-open-copy', { path: '#left-eye-open-copy' }, { path: '#j2' }, {easing: easing_fn, duration: d,morphIndex: m_i}).start();
+      KUTE.fromTo('#left-eye-open-clone-copy', { path: '#left-eye-open-clone-copy' }, { path: '#j3' }, {easing: easing_fn, duration: d,morphIndex: m_i}).start();
+      KUTE.fromTo('#right-eye-brow-copy', { path: '#right-eye-brow-copy' }, { path: '#k1' }, {easing: easing_fn, duration: d,morphIndex: m_i}).start();
+      KUTE.fromTo('#right-eye-open-copy', { path: '#right-eye-open-copy' }, { path: '#k2' }, {easing: easing_fn, duration: d,morphIndex: m_i}).start();
+      KUTE.fromTo('#right-eye-open-clone-copy', { path: '#right-eye-open-clone-copy' }, { path: '#k3' }, {easing: easing_fn, duration: d,morphIndex: m_i}).start();
     }, 4700);
   </script>
 </body>

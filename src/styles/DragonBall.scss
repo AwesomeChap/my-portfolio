@@ -1,0 +1,113 @@
+$main: #FAB637;
+$secondary: #FFF467;
+$star-main: #AA2A1D;
+
+:root {
+  font-size: 24px;
+  @media screen and (max-width: 465px) {
+    font-size: 20px;
+  }
+  @media screen and (max-width: 385px) {
+    font-size: 16px;
+  }
+}
+
+// Dragon Ball
+.dragon-ball {
+  height: 18rem;
+  width: 18rem;
+  background: $main;
+  border-radius: 100%;
+  border: .53em solid $secondary;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  &:before, &:after {
+    content: '';
+    position: absolute;
+    border-radius: 100%;
+    background: transparent;
+    z-index: 100;
+  }
+  &:before {
+    top: -1.1em;
+    right: 0;
+    height: 15.6em;
+    width: 14.45em;
+    box-shadow: -3em 0em 1em 1em #F8A42A;
+    z-index: 50;
+  }
+  &:after {
+    top: -2.5em;
+    right: -4em;
+    height: 13.6em;
+    width: 12.45em;
+    box-shadow: -3em 0em 4em 4em #F9AE31;
+  }
+  &__oval-shadow {
+    position: absolute;
+    top: 3.1em;
+    right: .743em;
+    height: 3.9em;
+    width: 1.8em;
+    border-radius: 100%;
+    background: $secondary;
+    transform: rotate(-25deg);
+    z-index: 500;
+  }
+  &__star-container {
+    position: relative;
+    width: 7.4rem;
+    height: 5.28rem;
+    padding: 0;
+    transform: rotate(-18deg);
+    z-index: 1000;
+  }
+  &__btm-shadow {
+    position: absolute;
+    height: 15.6em;
+    width: 18.45em;
+    top: 0;
+    right: 0;
+    border-radius: 100%;
+    background: transparent;
+    box-shadow: 0em 3em 1em 2em hsl(23, 64%, 40%);
+    z-index: 200;
+  }
+}
+
+.star {
+  margin: 0;
+  position: absolute;
+  height: 0em;
+  width: 0em;
+  border-bottom: .8em solid $star-main;
+  border-right: 1.2em solid transparent;
+  border-left: 1.2em solid transparent;
+  transform: rotate(35deg);
+  &:before, &:after {
+    content: '';
+    position: absolute;
+  }
+  &:before {
+    border-bottom: .85em solid $star-main;
+    border-right: 1.45em solid transparent;
+    border-left: .95em solid transparent;
+    left: -1.3em;
+    transform: rotate(-65deg)
+  }
+  &:after {
+    border-bottom: .90em solid $star-main;
+    border-right: .40em solid transparent;
+    border-left: .40em solid transparent;
+    transform: rotate(-33deg);
+    left: -.83em;
+    top: -.58em;
+  }
+  &__top-left { top: 0; left: 0; }
+  &__top-right { top: 0; right: 0; }
+  &__btm-left { bottom: 0; left: 0; }
+  &__btm-right { bottom: 0; right: 0; }
+}

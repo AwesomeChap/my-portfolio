@@ -18,6 +18,8 @@
     "express": "^4.16.4",
     "gsap": "^2.1.2",
     "h": "^0.1.0",
+    "ku": "^0.2.0",
+    "kute.js": "^2.1.0",
     "nodemailer": "^6.1.0",
     "normalize.css": "^8.0.1",
     "postcss-modules": "^1.4.1",
@@ -33,7 +35,9 @@
     "smoothscroll-polyfill": "^0.4.4",
     "st": "^1.2.2",
     "three": "^0.103.0",
-    "three-orbit-controls": "^82.1.0"
+    "three-orbit-controls": "^82.1.0",
+    "v": "^0.3.0",
+    "vivus": "^0.4.5"
   },
   "devDependencies": {
     "@babel/core": "^7.4.0",
@@ -42,6 +46,7 @@
     "node-sass": "^4.11.0",
     "nodemon": "^2.0.7",
     "parcel-bundler": "^1.12.3",
+    "prop-types": "^15.7.2",
     "sass": "^1.26.10"
   }
 }
