@@ -268,64 +268,6 @@ $font-normal: 24px;
   background-image: radial-gradient(#333, #000);
 }
 
-.m-background {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100vh;
-  max-height: 100%;
-  width: 100%;
-  z-index: -1;
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
-
-  .uf,
-  .lf {
-    width: 100%;
-    height: 100vh;
-    max-height: 100%;
-  }
-
-  .uh {
-    position: relative;
-    .m-bg {
-      position: absolute;
-      width: 100%;
-      top: 0;
-      left: 0;
-      clip-path: polygon(100% 0, 0% 100%, 0 0);
-    }
-    .m-bg:nth-child(1) {
-      height: 35vh;
-      background: #131313;
-    }
-    .m-bg:nth-child(2) {
-      height: 20vh;
-      background: #0f0f0f;
-    }
-  }
-
-  .lh {
-    position: relative;
-    .m-bg {
-      position: absolute;
-      width: 100%;
-      bottom: 0;
-      right: 0;
-      clip-path: polygon(100% 0, 0% 100%, 100% 100%);
-    }
-    .m-bg:nth-child(1) {
-      height: 35vh;
-      background: #131313;
-    }
-    .m-bg:nth-child(2) {
-      height: 20vh;
-      background: #0f0f0f;
-    }
-  }
-}
-
 .inner-sub-section {
   height: 100%;
   width: 50%;

@@ -4,7 +4,7 @@ import '../styles/main.scss';
 export default () => {
   return(
     <div className="exp">
-      Nothing here ;)
+      Future Blogs!
     </div>
   )
 }

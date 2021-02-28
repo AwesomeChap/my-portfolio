@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import Heading from './helper/heading';
-import Footer from './Footer';
+import Heading from './helper/Headings';
+import Footer from './helper/Footer';
 import { keywords } from './helper/data';
 import { projects } from './helper/data';
-import Mouse from './helper/mouse';
-import ScrollTopButton from './helper/scrollTopButton';
+import Mouse from './helper/Mouse';
+import ScrollTopButton from './helper/ScrollTopButton';
 import ProjectList from './helper/ProjectList';
 import { projectImg } from './helper/data-uri';
 import '../styles/projects.scss'

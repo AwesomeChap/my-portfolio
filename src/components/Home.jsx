@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Background from './helper/background';
 import '../styles/pages.scss';
 import '../styles/home.scss';
-import MBackground from './helper/mBackground';
+import MBackground from './helper/MBackground';
 import MetaTags from 'react-meta-tags';
 import portfolioImg from '../images/portfolio.PNG';
 import resume from '../../resume-08-20.pdf';

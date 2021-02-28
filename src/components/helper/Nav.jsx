@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Svg from './LogoSvg';
 import { NavLink, withRouter } from 'react-router-dom';
-import '../styles/nav.scss';
-import '../styles/pages.scss';
+import '../../styles/nav.scss';
+import '../../styles/pages.scss';
 
 const Nav = (props) => {
   const [clicked, setClicked] = useState(0);

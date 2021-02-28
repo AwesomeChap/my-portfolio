@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import Heading from './helper/heading';
-import Footer from './Footer';
+import Heading from './helper/Headings';
+import Footer from './helper/Footer';
 import '../styles/pages.scss';
 import { works } from './helper/data';
 import { workImg } from './helper/data-uri';
 import MetaTags from 'react-meta-tags';
-import Mouse from './helper/mouse';
-import ScrollTopButton from './helper/scrollTopButton';
+import Mouse from './helper/Mouse';
+import ScrollTopButton from './helper/ScrollTopButton';
 
 export default () => {
   return (

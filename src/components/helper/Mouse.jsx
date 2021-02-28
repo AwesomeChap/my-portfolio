@@ -1,19 +1,17 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import '../../styles/mouse.scss'
 
-export default class Mouse extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  componentDidMount() {
-    document.body.addEventListener('scroll', this.handleScroll);
+export default () => {
+  useEffect(() => {
+    document.body.addEventListener('scroll', handleScroll);
     if (/Edge/.test(navigator.userAgent)) {
       document.getElementById('mouse').style.display = 'none';
     }
-  }
 
-  handleScroll = () => {
+    return () => document.body.removeEventListener('scroll', handleScroll);
+  })
+
+  const handleScroll = () => {
     if (document.body.scrollTop > 20) {
       document.getElementById('mouse').style.opacity = 0;
       document.getElementById('mouse').style.visibility = "hidden";
@@ -26,7 +24,7 @@ export default class Mouse extends Component {
     document.querySelector(".scrollbar").style.width = (document.body.scrollTop / (document.body.scrollHeight - window.innerHeight)) * 100 + "%";
   }
 
-  handleClick = () => {
+  const handleClick = () => {
     let pageHeight = window.innerHeight * 0.9;
     document.body.style.scrollBehavior = "smooth";
     setTimeout(() => {
@@ -35,20 +33,16 @@ export default class Mouse extends Component {
     }, 10);
   }
 
-  componentWillUnmount
-
-  render() {
-    return (
-      <>
-        <div id="mouse">
-          <div onClick={this.handleClick} className="mouse-icon">
-            <span className="mouse-wheel"></span>
-          </div>
+  return (
+    <>
+      <div id="mouse">
+        <div onClick={handleClick} className="mouse-icon">
+          <span className="mouse-wheel"></span>
         </div>
-        <div className="scrollbar-wrapper">
-          <div className="scrollbar"></div>
-        </div>
-      </>
-    )
-  }
+      </div>
+      <div className="scrollbar-wrapper">
+        <div className="scrollbar"></div>
+      </div>
+    </>
+  )
 }

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { NavLink, withRouter } from 'react-router-dom';
 import Svg from './LogoSvg';
-import SplitText from './helper/SplitText';
-import '../styles/NavMobile.scss';
+import SplitText from './SplitText';
+import '../../styles/NavMobile.scss';
 
-
+const ROUTES = ['/', '/about', '/work', '/projects', '/contact'];
 
 const NavMobile = (props) => {
   const [clicked, setClicked] = useState(0);
@@ -13,18 +13,21 @@ const NavMobile = (props) => {
 
   useEffect(() => {
     window.innerWidth <= 476 ? setSvgWidth(50) : window.innerWidth <= 767 ? setSvgWidth(65) : false;
-    const routes = ['/', '/about', '/work', '/projects', '/contact'];
-    routes.forEach((r,i)=>{
-      if(r === props.history.location.pathname) {
-        setSelected(i+1);
-        return i+1; 
-      };
+    ROUTES.forEach((route, routeIndex)=>{
+      if(route === props.history.location.pathname) {
+        setSelected(routeIndex + 1);
+        return routeIndex + 1; 
+      }
     });
   })
 
   useEffect(() => {
     setClicked(!clicked);
   }, [selected])
+
+  useEffect(() => {
+
+  }, [clicked]);
 
   const handleSelect = (index) => {
     setSelected(index);

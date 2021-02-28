@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/svg.scss';
+import '../../styles/svg.scss';
 
 const svg =  ({fill="rgb(255, 13, 45)",stroke="#111", strokeWidth="1.5", width="80"}) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={width} version="1.1" viewBox="0 0 170 110">

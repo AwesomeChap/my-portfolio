@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import Heading from './helper/heading';
-import Mouse from './helper/mouse'; 
-import Footer from './Footer';
+import Heading from './helper/Headings';
+import Mouse from './helper/Mouse'; 
+import Footer from './helper/Footer';
 import ExpandText from "./helper/ExpandText";
 import MetaTags from 'react-meta-tags';
 import { set1, set2 } from './helper/data';
 import { newAboutImg } from './helper/data-uri';
-import ScrollTopButton from './helper/scrollTopButton';
+import ScrollTopButton from './helper/ScrollTopButton';
 
 export default () => {
   const [breakline, setBreakline] = useState(undefined);

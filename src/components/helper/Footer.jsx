@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import '../styles/footer.scss';
+import '../../styles/footer.scss';
 
 export default () => {
   const [mobileView, setMobileView] = useState(undefined);
