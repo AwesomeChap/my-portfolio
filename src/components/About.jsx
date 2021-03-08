@@ -8,18 +8,17 @@ import { set1, set2 } from './helper/data';
 import { newAboutImg } from './helper/data-uri';
 import ScrollTopButton from './helper/ScrollTopButton';
 
-export default () => {
+export default (props) => {
   const [breakline, setBreakline] = useState(undefined);
 
   useEffect(() => {
     setBreakline(window - innerWidth <= 767);
-    
     animateSkillBars();
-
     document.querySelector('body').addEventListener("scroll", animateSkillBars);
-    
-    window.addEventListener("resize", onWindowResize);
+  
+    props.trackPageView();
 
+    window.addEventListener("resize", onWindowResize);
     return () => {
       window.removeEventListener("resize", onWindowResize);
     }

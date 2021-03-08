@@ -12,13 +12,15 @@ import MetaTags from 'react-meta-tags';
 
 const DEFAULT_FILTER = "Show All";
 
-export default () => {
+export default (props) => {
   const [selectedFilter, setSelectedFilter] = useState(DEFAULT_FILTER);
   const [noOfProjects, setNoOfProjects] = useState(0);
 
   useEffect(() => {
     let looped = false;
     let count = 0;
+
+    props.trackPageView();
 
     projects.forEach((project, i) => {
       if (project.keywords.indexOf(selectedFilter) !== -1) count++;

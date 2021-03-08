@@ -5,7 +5,7 @@ import '../styles/contact.scss';
 import axios from 'axios';
 import MetaTags from 'react-meta-tags';
 
-export default () => {
+export default (props) => {
   const [step, setStep] = useState(1);
   const [content, setContent] = useState({ name: "", email: "", message: "" });
   const [isActive, setIsActive] = useState(false);
@@ -18,6 +18,7 @@ export default () => {
 
   useEffect(() => {
     setMobileView(window.innerWidth < 479);
+    props.trackPageView();
     window.addEventListener('resize', onWindowResize);
     return () => {
       window.removeEventListener('resize', onWindowResize);

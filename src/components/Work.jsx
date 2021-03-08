@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import Heading from './helper/Headings';
 import Footer from './helper/Footer';
 import '../styles/pages.scss';
@@ -8,7 +8,11 @@ import MetaTags from 'react-meta-tags';
 import Mouse from './helper/Mouse';
 import ScrollTopButton from './helper/ScrollTopButton';
 
-export default () => {
+export default (props) => {
+  useEffect(() => {
+    props.trackPageView();
+  })
+
   return (
     <>
       <MetaTags>

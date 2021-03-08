@@ -27,6 +27,7 @@
     "rea": "0.0.1",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
+    "react-ga": "^3.3.0",
     "react-helmet": "^5.2.0",
     "react-meta-tags": "^0.7.4",
     "react-r": "^2.0.0-rc02",
@@ -42,10 +43,11 @@
   "devDependencies": {
     "@babel/core": "^7.4.0",
     "@babel/plugin-proposal-class-properties": "^7.4.0",
+    "@babel/plugin-transform-runtime": "^7.13.9",
     "autoprefixer": "^9.5.1",
     "node-sass": "^4.11.0",
     "nodemon": "^2.0.7",
-    "parcel-bundler": "^1.12.3",
+    "parcel-bundler": "1.12.3",
     "prop-types": "^15.7.2",
     "sass": "^1.26.10"
   }

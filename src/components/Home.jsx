@@ -10,12 +10,13 @@ import resume from '../../resume-08-20.pdf';
 
 const title = "Portfolio - Jatin Kumar";
 
-export default () => {
+export default (props) => {
   const [mobileView, setMobileView] = useState(undefined);
   const [shared, setShared] = useState(undefined);
 
   useEffect(() => {
     setMobileView(window.innerWidth <= 479);
+    props.trackPageView();
     window.addEventListener('resize', onWindowResize);
     return () => {
       window.removeEventListener('resize', onWindowResize);
@@ -96,7 +97,7 @@ export default () => {
           </div>
         </div>
 
-        <EyesToLogoTransition/>
+        <EyesToLogoTransition trackClickEvent={props.trackClickEvent}/>
 
         <div className="love-wrapper">
           {
@@ -144,7 +145,7 @@ export default () => {
                 </div>
               )
           }
-          <a className="download" href={resume} target="_blank">
+          <a className="download" onClick={() => props.trackClickEvent("Anchor", "View resumé")} href={resume} target="_blank">
             RESUME
           </a>
         </div>

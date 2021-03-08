@@ -1,18 +1,17 @@
 import React from "react"
 import "../../styles/DragonBall.scss"
 
-export default () => {
+export default (props) => {
+
+    const onClick = () => props.onClick();
+
     return (
-        <div class="dragon-ball">
-            <div class="dragon-ball__oval-shadow"></div>
-            <div class="dragon-ball__star-container">
-                <div className="star star-center"></div>
-                {/* <div class="star star__top-left"></div>
-                <div class="star star__top-right"></div>
-                <div class="star star__btm-left"></div>
-                <div class="star star__btm-right"></div> */}
+        <div onClick={onClick} className="dragon-ball">
+            <div className="dragon-ball__oval-shadow"></div>
+            <div className="dragon-ball__star-container">
+                <i className="fas fa-star star"></i>
             </div>
-            <div class="dragon-ball__btm-shadow"></div>
+            <div className="dragon-ball__btm-shadow"></div>
         </div>
     )
-}
+} 
