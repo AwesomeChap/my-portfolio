@@ -1,10 +1,10 @@
-import About from './about';
-import Blog from './blog';
-import Contact from './contact';
-import Home from './home';
-import Work from './work';
-import Projects from './projects';
-import Svg from './svg';
-import Footer from './footer';
+import About from './About';
+import Blog from './Blog';
+import Contact from './Contact';
+import Home from './Home';
+import Work from './Work';
+import Projects from './Projects';
+import Svg from './helper/LogoSvg';
+import Footer from './helper/Footer';
 
 export {About, Blog, Contact, Home, Work, Projects, Svg, Footer};

@@ -18,6 +18,8 @@
     "express": "^4.16.4",
     "gsap": "^2.1.2",
     "h": "^0.1.0",
+    "ku": "^0.2.0",
+    "kute.js": "^2.1.0",
     "nodemailer": "^6.1.0",
     "normalize.css": "^8.0.1",
     "postcss-modules": "^1.4.1",
@@ -25,6 +27,7 @@
     "rea": "0.0.1",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
+    "react-ga": "^3.3.0",
     "react-helmet": "^5.2.0",
     "react-meta-tags": "^0.7.4",
     "react-r": "^2.0.0-rc02",
@@ -33,14 +36,19 @@
     "smoothscroll-polyfill": "^0.4.4",
     "st": "^1.2.2",
     "three": "^0.103.0",
-    "three-orbit-controls": "^82.1.0"
+    "three-orbit-controls": "^82.1.0",
+    "v": "^0.3.0",
+    "vivus": "^0.4.5"
   },
   "devDependencies": {
     "@babel/core": "^7.4.0",
     "@babel/plugin-proposal-class-properties": "^7.4.0",
+    "@babel/plugin-transform-runtime": "^7.13.9",
     "autoprefixer": "^9.5.1",
     "node-sass": "^4.11.0",
-    "parcel-bundler": "^1.12.3",
+    "nodemon": "^2.0.7",
+    "parcel-bundler": "1.12.3",
+    "prop-types": "^15.7.2",
     "sass": "^1.26.10"
   }
 }

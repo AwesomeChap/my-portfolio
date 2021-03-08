@@ -1,0 +1,117 @@
+$main: #FAB637;
+$secondary: #FFF467;
+$star-main: #AA2A1D;
+
+:root {
+  font-size: 3px;
+  @media screen and (max-width: 476px) {
+    font-size: 2.4px;
+
+    .dragon-ball {
+      top: 10px;
+      right: 10px
+    }
+  }
+}
+
+.dragon-ball {
+  height: 18rem;
+  width: 18rem;
+  background: $main;
+  border-radius: 100%;
+  box-sizing: border-box;
+  position: absolute;
+  bottom: 15px;
+  right: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  opacity: 0;
+  transform: scale(0.5);
+  animation: dragonball-anim 0.4s 0.3s cubic-bezier(0.68, -0.6, 0.32, 1.6) forwards;
+  &:before, &:after {
+    content: '';
+    position: absolute;
+    border-radius: 100%;
+    background: transparent;
+    z-index: 1;
+  }
+  &:before {
+    top: -1.1em;
+    right: 0;
+    height: 15.6em;
+    width: 14.45em;
+    box-shadow: -3em 0em 1em 1em #e39524;
+    z-index: 0;
+  }
+  &:after {
+    top: -2.5em;
+    right: -4em;
+    height: 13.6em;
+    width: 12.45em;
+    box-shadow: -3em 0em 4em 4em#F8A42A;
+    transition: transform .3s;
+  }
+  &__oval-shadow {
+    position: absolute;
+    top: 3.1em;
+    right: .743em;
+    height: 3.9em;
+    width: 1.8em;
+    border-radius: 100%;
+    background: $secondary;
+    transform: rotate(-25deg) scale(1) translateX(0);
+    z-index: 2;
+    transition: transform .3s;
+  }
+  &__star-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    top:0;
+    left:0;
+    z-index: 2;
+  }
+  &__btm-shadow {
+    position: absolute;
+    height: 15.6em;
+    width: 18.45em;
+    top: 0;
+    right: 0;
+    border-radius: 100%;
+    background: transparent;
+    box-shadow: 0em 3em 1em 2em hsl(23, 64%, 40%);
+    z-index: 2;
+    transition: transform .3s;
+  }
+
+  @keyframes dragonball-anim {
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .star {
+    margin: 0;
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    font-size: 5rem;
+    color: $star-main;
+  }
+
+  &:hover {
+    &:after{
+      transform: scale(1.5);
+    }
+    .dragon-ball__btm-shadow {
+      transform: translateY(3px) rotate(30deg);
+    }
+    .dragon-ball__oval-shadow {
+      transform: rotate(-25deg) translateX(-4px) scale(2);
+    }
+  }
+}

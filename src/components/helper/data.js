@@ -1,3 +1,14 @@
+import roomChatImg from '../../images/chat.PNG';
+import superMarketImg from '../../images/sp.png';
+import orderMeImg from '../../images/order_me.PNG';
+import timeTrackerImg from '../../images/time-tracker.PNG';
+import PiecesImage from '../../images/10_pieces.PNG';
+import chemAssisImage from '../../images/chem_assis.png';
+import imur from './../../images/imur.PNG';
+import emenu from '../../images/e-menu.png';
+import portfolio from '../../images/portfolio.PNG';
+import tcp from '../../images/tcp.png';
+
 export const set1 = [
   {
     name : 'React',
@@ -125,18 +136,6 @@ export const works = [
 ]
 
 export const keywords = ['Show All','Web','React', 'Redux', 'MapBox', 'Fastify', 'CSS', 'SCSS', 'SVG', 'Animations', 'Node','SEO','Web Sockets', 'MongoDB', 'GraphQL', 'Mobile', 'ReactNative', 'C++', 'NASM'];
-
-import roomChatImg from '../../images/chat.PNG';
-import superMarketImg from '../../images/sp.png';
-import orderMeImg from '../../images/order_me.PNG';
-import timeTrackerImg from '../../images/time-tracker.PNG';
-import PiecesImage from '../../images/10_pieces.PNG';
-import chemAssisImage from '../../images/chem_assis.png';
-import sample from '../../images/sample.PNG';
-import imur from './../../images/imur.PNG';
-import emenu from '../../images/e-menu.png';
-import portfolio from '../../images/portfolio.PNG';
-import tcp from '../../images/tcp.png';
 
 export const projects = [
   {

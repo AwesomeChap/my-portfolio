@@ -1,0 +1,69 @@
+.m-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    max-height: 100%;
+    width: 100%;
+    z-index: -1;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+
+    .uh,
+    .lh {
+        .m-bg {
+            transform: scaleY(0);
+            animation: mBgAnimaiton 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            &:nth-child(2) {
+                animation-delay: 0.2s;
+            }
+        }
+    }
+
+    @keyframes mBgAnimaiton {
+        to {
+            transform: scaleY(1);
+        }
+    }
+
+    .uh {
+        position: relative;
+        .m-bg {
+            position: absolute;
+            width: 100%;
+            top: 0;
+            left: 0;
+            clip-path: polygon(100% 0, 0% 100%, 0 0);
+            transform-origin: top;
+        }
+        .m-bg:nth-child(1) {
+            height: 35vh;
+            background: #131313;
+        }
+        .m-bg:nth-child(2) {
+            height: 20vh;
+            background: #0f0f0f;
+        }
+    }
+
+    .lh {
+        position: relative;
+        .m-bg {
+            position: absolute;
+            width: 100%;
+            bottom: 0;
+            right: 0;
+            clip-path: polygon(100% 0, 0% 100%, 100% 100%);
+            transform-origin: bottom;
+        }
+        .m-bg:nth-child(1) {
+            height: 35vh;
+            background: #131313;
+        }
+        .m-bg:nth-child(2) {
+            height: 20vh;
+            background: #0f0f0f;
+        }
+    }
+}

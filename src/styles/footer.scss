@@ -1,0 +1,120 @@
+.footer{
+  height: 50vh;
+  font-size: 20px;
+  // background-color: #171717;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  color: #777;
+
+  .sub-footer{
+    align-items: center;
+    width:100%;
+    height: 80%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+
+    .footer-header{
+      font-family: Futura;
+      font-size: 28px;
+    }
+
+    span{
+      font-weight: 900;
+      color: #999;
+    }
+
+    .social-icons{
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      margin: 2vh 0;
+
+      a{
+        position: relative;
+        text-decoration: none;
+        color: #fff;
+        font-size: 20px;
+        height: 40px;
+        width: 40px;
+        margin: 0 7px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        background-color: #333;
+        overflow: hidden;
+        z-index: 1;
+
+        &.if:after{
+          background-color: rgba(0, 95, 184, 0.61);
+        }
+
+        &.ig:after{
+          background-color: #000;
+        }
+
+        &.il:after{
+          background-color: rgba(0, 132, 255, 0.61);
+        }
+
+        &.it:after{
+          background-color: #00aeed;
+        }
+ 
+        &.ii:after{
+          background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%);
+        }
+
+        &:after{
+          content: "";
+          position: absolute;
+          top:0;
+          left:0;
+          width: 100%;
+          height: 100%;
+          transform-origin: bottom left;
+          transform: scaleY(0);
+          z-index: -1;
+          transition: all 0.3s;
+        }
+
+        &:hover{
+          color: #fff;
+          &:after{
+            transform: scaleY(1);
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1224px){
+  .footer{
+    font-size: 18px;
+    .sub-footer{
+      .footer-header{
+        font-size: 24px;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 479px){
+  .footer{
+    font-size: 13px;
+    .sub-footer{
+      .footer-header{
+        font-size: 8vw;
+      }
+      .social-icons a{
+        width:35px;
+        height: 35px;
+        font-size: 17px;
+      }
+    }
+  }
+}
