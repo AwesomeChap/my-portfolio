@@ -56,7 +56,7 @@ export default (props) => {
         <meta name="description" content="Projects matter a lot for me. As they are great medium by which I can
                   explore a technology or framework and check it's pros and limits at the
                   same time.They also make learning new skills very easy and enjoyable as
-                  you mostly are working on something that you like and enjoy"/>
+                  you mostly are working on something that you love and enjoy."/>
       </MetaTags>
       <div className="section">
 
@@ -79,7 +79,7 @@ export default (props) => {
                   Projects matter a lot for me. As they are great medium by which I can
                   explore a technology or framework and check it's pros and limits at the
                   same time.They also make learning new skills very easy and enjoyable as
-                  you mostly are working on something that you like and enjoy
+                  you mostly are working on something that you love and enjoy.
                 </div>
               </div>
             </div>

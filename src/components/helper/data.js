@@ -45,7 +45,7 @@ export const set2 = [
     value : '75'
   },
   {
-    name : 'GraphQL',
+    name : 'Vue',
     value : '75'
   },{
     name : 'C++',

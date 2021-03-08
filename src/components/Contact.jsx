@@ -147,7 +147,7 @@ export default (props) => {
     <>
       <MetaTags>
         <title>Contact - Jatin Kumar</title>
-        <meta name="description" content="I am always up for cool projects that creates a difference. So in case you have one and wanna talk about it or just say hi, fill the awesome form or just drop me a message at my email Jatin Kumar and ~let's talk" />
+        <meta name="description" content="I am always up for cool projects that could create a difference. So in case you have one and wanna talk about it or just say hi, fill the awesome form or just drop me a message at my email Jatin Kumar and ~let's talk" />
       </MetaTags>
       <div className="section">
         <div className="inner-section">

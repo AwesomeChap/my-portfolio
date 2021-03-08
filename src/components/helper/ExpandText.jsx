@@ -24,8 +24,8 @@ export default (props) => {
   })
   return (
     <div className={expandTextClasses} onClick={() => setShouldExpand(!shouldExpand)}>
-      {text}&nbsp;
-      <a target="blank" href={`https://google.com/search?q=${terms.join("+")}`}><i className="fas fa-external-link-alt"></i></a>
+      {text}
+      <a target="blank" href={`https://google.com/search?q=${terms.join("+")}`}>&nbsp;<i className="fas fa-external-link-alt"></i></a>
     </div>
   );
 }

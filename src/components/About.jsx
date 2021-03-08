@@ -71,6 +71,28 @@ export default (props) => {
     })
   )
 
+  const semester = () => {
+      const currentDate = new Date();
+      const semStartDate = new Date(2021,2,1);
+      let months = (currentDate.getFullYear() - semStartDate.getFullYear()) * 12;
+      months -= semStartDate.getMonth();
+      months += currentDate.getMonth();
+
+      if(months < 0) months = 0;
+      
+      const sem = months/6 + 1;
+
+      switch(sem){
+        case 1: return "1st";
+        case 2: return "2nd";
+        case 3: return "3rd";
+        case 4: return "4th";
+        case 5: return "5th";
+        case 6: return "final";
+        default: return "";
+      }
+  }
+
   return (
     <>
       <MetaTags>
@@ -94,11 +116,10 @@ export default (props) => {
               <div>
                 <Heading heading={"ABOUT ME"} subHeading={'A brief introduction'} />
                 <div className="text">
-                  Hi there, My name is Jatin Kumar from New Delhi, who likes to mix code and creativity.
-                  I work across full Javascript Stack mainly <ExpandText terms={['MongoDB', 'Express', 'React', 'Node']} />  stack. 
-                   I am currently in my 2nd year of B.tech which I am persuing from <span className="hglt">USICT</span>, GGSIPU
-                  In my free time I like to play cricket and spread gained knowledge by means of youtube
-                  videos and blogs.
+                  Hi there, I am Jatin Kumar from New Delhi, who likes to mix code and creativity.
+                  I am always up for learning something new. I am currently in my {semester()} Semester of <span className="hglt">Bachelor Informatik</span> which I am pursuing from
+                  &nbsp;<ExpandText terms={['Paris', 'Lodron', 'Universität', 'Salzburg']} />.
+                  In my free time I like to play cricket, make drawings, go for a walk and watch science fiction movies.
               </div>
               </div>
             </div>
