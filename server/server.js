@@ -11,16 +11,21 @@ setInterval(function() {
     http.get("http://jatinkumar.herokuapp.com");
 }, 1800000); // every 5 minutes (300000)
 
-const { USER_ID, USER_PWD } = result.parsed;
-// console.log(USER_ID, USER_PWD);
+const { USER_ID, CLIENT_ID, CLIENT_SECRET, REFRESH_TOKEN, ACCESS_TOKEN } = result.parsed;
 
 const transport = {
   host: 'smtp.gmail.com', 
+  port: 465,
+  secure: true,
   auth: {
+    type: "OAuth2",
     user: USER_ID,
-    pass: USER_PWD
+    clientId: CLIENT_ID,
+    clientSecret: CLIENT_SECRET,
+    refreshToken: REFRESH_TOKEN,
+    accessToken: ACCESS_TOKEN
   }
-}
+} 
 
 const transporter = nodemailer.createTransport(transport);
 
