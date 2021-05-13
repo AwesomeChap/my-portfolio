@@ -80,7 +80,7 @@ export default (props) => {
 
       if(months < 0) months = 0;
       
-      const sem = months/6 + 1;
+      const sem = parseInt(months/6) + 1;
 
       switch(sem){
         case 1: return "1st";
