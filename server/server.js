@@ -11,7 +11,13 @@ setInterval(function() {
     http.get("http://jatinkumar.herokuapp.com");
 }, 1800000); // every 5 minutes (300000)
 
-const { USER_ID, CLIENT_ID, CLIENT_SECRET, REFRESH_TOKEN, ACCESS_TOKEN } = result.parsed;
+const {
+  USER_ID,
+  CLIENT_ID,
+  CLIENT_SECRET,
+  REFRESH_TOKEN,
+  ACCESS_TOKEN
+} = result.parsed || process.env;
 
 const transport = {
   host: 'smtp.gmail.com', 
@@ -45,10 +51,6 @@ app.use(express.static(path.join(__dirname, '..', 'dist')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(publicPath, 'index.html'))
-});
-
 app.post('/send', (req, res) => {
   const { name, email, message } = req.body;
   const content = `name: ${name} \nemail: ${email} \nmessage: ${message} `;
@@ -72,6 +74,10 @@ app.post('/send', (req, res) => {
     }
   })
 })
+
+app.get('/{*splat}', (req, res) => {
+  res.sendFile(path.join(publicPath, 'index.html'))
+});
 
 app.listen(port, () => {
   console.log(`App listening on port ${port}`)

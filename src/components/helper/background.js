@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import * as THREE from 'three';
-let OrbitControls = require('three-orbit-controls')(THREE);
+import createOrbitControls from 'three-orbit-controls';
+
+const OrbitControls = createOrbitControls(THREE);
 
 const WHITE = {
   mainColor: 0x000,
