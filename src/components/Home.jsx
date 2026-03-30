@@ -1,18 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import Background from './helper/background';
 import EyesToLogoTransition from "./helper/EyesToLogoTransition";
+import ShareWithLove from './helper/ShareWithLove';
 import '../styles/pages.scss';
 import '../styles/home.scss';
 import MBackground from './helper/MBackground';
 import MetaTags from 'react-meta-tags';
 import portfolioImg from '../images/portfolio.PNG';
-import resume from '../../resume-08-20.pdf';
 
 const title = "Portfolio - Jatin Kumar";
 
 export default (props) => {
   const [mobileView, setMobileView] = useState(undefined);
-  const [shared, setShared] = useState(undefined);
 
   useEffect(() => {
     setMobileView(window.innerWidth <= 479);
@@ -99,56 +98,7 @@ export default (props) => {
 
         <EyesToLogoTransition trackClickEvent={props.trackClickEvent}/>
 
-        <div className="love-wrapper">
-          {
-            !shared ? (
-              <div onClick={() => setShared(!shared)} className="love">
-                SHARE WITH <span>❤</span>
-              </div>
-            ) : (
-                <div className="love">
-                  <div className="share-buttons">
-
-                    <a onClick={() => setShared(!shared)}
-                      href="https://www.facebook.com/sharer/sharer.php?u=http://jatinkumar.tech"
-                      target="_blank" rel="noopener" aria-label=""
-                    >
-                      <i className="fab fa-facebook-f"></i>
-                    </a>
-
-                    <a onClick={() => setShared(!shared)}
-                      href="https://www.linkedin.com/shareArticle?mini=true&amp;url=http%3A%2F%2Fjatinkumar.tech&amp;title=Jatin Kumar. FullStack (MERN) Web Dev, Web Designer.&amp;summary=Jatin Kumar, who likes to mix code and creativity, I basically Work across full javascript stack mainly MERN. I am currently in my 2nd Year which I am pursuing from USICT, GGSIPU.&amp;source=http%3A%2F%2Fjatinkumar.tech"
-                      target="_blank" rel="noopener" aria-label=""
-                    >
-                      <i className="fab fa-linkedin-in"></i>
-                    </a>
-
-                    <a onClick={() => setShared(!shared)}
-                      href="https://twitter.com/intent/tweet/?text=http://www.jatinkumar.tech Web Portfolio of a FullStack (MERN) Web Developer, Web Designer @jatink99"
-                      target="_blank" rel="noopener" aria-label=""
-                    >
-                      <i className="fab fa-twitter"></i>
-                    </a>
-
-                    <a onClick={() => setShared(!shared)}
-                      href="https://api.whatsapp.com/send?text=Portfolio - Jatin Kumar http://www.jatinkumar.tech"
-                      target="_blank" rel="noopener" aria-label="Share on WhatsApp"
-                    >
-                      <i className="fab fa-whatsapp"></i>
-                    </a>
-
-                    <a className="hide-share-buttons-btn" onClick={() => setShared(!shared)}>
-                      <i className="fas fa-times"></i>
-                    </a>
-
-                  </div>
-                </div>
-              )
-          }
-          <a className="download" onClick={() => props.trackClickEvent("Anchor", "View resumé")} href={resume} target="_blank">
-            RESUME
-          </a>
-        </div>
+        <ShareWithLove trackClickEvent={props.trackClickEvent} />
       </div>
     </>
   )
