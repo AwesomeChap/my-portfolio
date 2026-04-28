@@ -15,6 +15,8 @@ const SHARE_ICON_FADE_MS = 360;
 const SHARE_ICON_COUNT = 4;
 const SHARE_ICON_ENTER_DELAY_MS = 120;
 const SHARE_ICON_LEAVE_DELAY_MS = 90;
+const SHARE_ICON_TRANSLATE_PX = 22;
+const SHARE_ICON_MOVE_MS = 320;
 const SHARE_BAR_COLLAPSE_MS = 560;
 const SHARE_LABEL_FADE_MS = 320;
 const SHARE_LABEL_FADE_IN_DELAY_MS = 20;
@@ -79,7 +81,7 @@ const SHARE_D_HEART_A = sharePathD(SHARE_SPEC_HEART_A);
 const SHARE_D_HEART_B = sharePathD(SHARE_SPEC_HEART_B);
 
 const linkBase =
-  'box-border shrink-0 self-center no-underline text-white rounded-full inline-flex justify-center items-center h-[34px] w-[34px] mx-[10px] text-[18px] [transition:opacity_0.25s_cubic-bezier(0.77,0,0.175,1),transform_0.25s_cubic-bezier(0.77,0,0.175,1)] max-[767px]:mx-[7px] max-[767px]:h-[30px] max-[767px]:w-[30px] max-[767px]:text-[16px] [&_i]:ml-[3px]';
+  'box-border shrink-0 self-center no-underline text-white rounded-full inline-flex justify-center items-center h-[34px] w-[34px] mx-[10px] text-[18px] max-[767px]:mx-[7px] max-[767px]:h-[30px] max-[767px]:w-[30px] max-[767px]:text-[16px] [&_i]:ml-[3px]';
 
 function iconLinkClass(shareIconsReady, shareOpen, shareClosingIcons, visibleBg) {
   return cx(
@@ -300,24 +302,28 @@ export default function ShareWithLove({ trackClickEvent }) {
 
   const shareIconsMounted = shareIconsReady || shareClosingIcons;
   const iconLinkStyle = (index) => {
+    const transitionBase = `transform ${SHARE_ICON_MOVE_MS}ms ${NAV_EIO}, opacity ${SHARE_ICON_MOVE_MS}ms ${NAV_EIO}`;
     if (shareIconsReady) {
       return {
         transitionDelay: `${SHARE_ICON_ENTER_DELAY_MS + index * SHARE_ICON_STAGGER_MS}ms`,
+        transition: transitionBase,
         opacity: 1,
-        transform: 'translateX(0)',
+        transform: 'translate3d(0,0,0)',
       };
     }
     if (shareClosingIcons) {
       return {
         transitionDelay: `${SHARE_ICON_LEAVE_DELAY_MS + (SHARE_ICON_COUNT - 1 - index) * SHARE_ICON_STAGGER_MS}ms`,
+        transition: transitionBase,
         opacity: 0,
-        transform: 'translateX(15px)',
+        transform: `translate3d(${SHARE_ICON_TRANSLATE_PX}px,0,0)`,
       };
     }
     return {
       transitionDelay: '0ms',
+      transition: transitionBase,
       opacity: 0,
-      transform: shareOpen ? 'translateX(15px)' : 'translateX(15px)',
+      transform: `translate3d(${SHARE_ICON_TRANSLATE_PX}px,0,0)`,
     };
   };
 

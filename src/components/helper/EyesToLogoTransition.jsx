@@ -12,10 +12,12 @@ export default (props) => {
     const MORPH_DELAY = 4700;
     const DURATION = 1000;
     const MORPH_INDEX = 75;
-    const TOTAL_ANIM_DURATION = 8000;
+    const COUNTDOWN_DURATION = 8000;
+    const TOTAL_ANIM_DURATION = COUNTDOWN_DURATION + 250;
 
     useEffect(() => {
         if (show) {
+            document.body.classList.add("eyes-active");
             new Vivus("my-svg", { type: "sync", duration: 50, 
             // animTimingFunction: Vivus.EASE 
         });
@@ -33,6 +35,9 @@ export default (props) => {
                 setShow(false);
             }, TOTAL_ANIM_DURATION)
         }
+        return () => {
+            document.body.classList.remove("eyes-active");
+        };
     }, [show])
 
     const onDBClick = () => {

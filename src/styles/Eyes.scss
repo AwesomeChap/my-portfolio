@@ -4,10 +4,11 @@ $red: #ff0d2d;
     position: absolute;
     top: 0;
     right: 0;
-    font-size: initial;
-    height: 2.5em;
-    width: 2.5em;
-    margin: 1em;
+    z-index: 30;
+    height: 40px;
+    width: 40px;
+    margin: 16px;
+    cursor: pointer;
 
     .cross {
         position: absolute;
@@ -46,7 +47,7 @@ $red: #ff0d2d;
         circle {
             stroke-dasharray: 113px;
             stroke-dashoffset: 0px;
-            stroke-width: 4px;
+            stroke-width: 3px;
             fill: none;
             stroke: #222;
         }
@@ -83,7 +84,7 @@ $red: #ff0d2d;
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 5;
+    z-index: 1200;
     height: 100%;
     width: 100%;
     display: flex;

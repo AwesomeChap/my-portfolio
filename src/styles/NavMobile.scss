@@ -260,3 +260,11 @@ $ham-d : 0.6s;
     font-size:8vw;
   }
 }
+
+body.eyes-active {
+  .nav-m,
+  #menu-wrapper {
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+}

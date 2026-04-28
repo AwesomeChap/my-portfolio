@@ -353,3 +353,11 @@ $nav-bg : #272727;
     }
   }
 }
+
+body.eyes-active {
+  .nav-bar,
+  .black-screen {
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+}
