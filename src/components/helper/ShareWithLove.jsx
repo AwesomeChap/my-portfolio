@@ -344,7 +344,7 @@ export default function ShareWithLove({ trackClickEvent }) {
   return (
     <div
       className={cx(
-        'share-with-love absolute bottom-0 z-10 mb-[15px] ml-[10px] max-[767px]:ml-0 box-border inline-flex flex-row items-center justify-start gap-[10px] self-start',
+        'share-with-love absolute bottom-0 z-10 ml-[10px] max-[767px]:ml-0 box-border inline-flex flex-row items-center justify-start gap-[10px] self-start',
         'max-[767px]:gap-[7px] max-[767px]:text-[14px]',
       )}
     >
