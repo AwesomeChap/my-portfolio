@@ -13,10 +13,7 @@ setInterval(function() {
 
 const {
   USER_ID,
-  CLIENT_ID,
-  CLIENT_SECRET,
-  REFRESH_TOKEN,
-  ACCESS_TOKEN
+  APP_PASSWORD
 } = result.parsed || process.env;
 
 const transport = {
@@ -24,12 +21,8 @@ const transport = {
   port: 465,
   secure: true,
   auth: {
-    type: "OAuth2",
     user: USER_ID,
-    clientId: CLIENT_ID,
-    clientSecret: CLIENT_SECRET,
-    refreshToken: REFRESH_TOKEN,
-    accessToken: ACCESS_TOKEN
+    pass: APP_PASSWORD
   }
 } 
 
