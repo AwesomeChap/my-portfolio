@@ -1,5 +1,7 @@
 $red : #ff0d2d;
 $ease-out : cubic-bezier(0.19, 1, 0.22, 1);
+/* Same horizontal inset as `.follow-container-wrapper` on mobile */
+$home-mobile-side-inset: 10px;
 
 /* Trap .background (z-index: -1) inside this stacking context so it stays above body #171717 */
 .home{
@@ -7,6 +9,18 @@ $ease-out : cubic-bezier(0.19, 1, 0.22, 1);
   letter-spacing: 0.2em;
   position: relative;
   z-index: 0;
+}
+
+/* Mobile placement for ShareWithLove — SCSS wins over utility order/purge issues */
+.share-with-love {
+  @media only screen and (max-width: 767px) {
+    left: $home-mobile-side-inset !important;
+    top: calc(26px + env(safe-area-inset-top, 0px)) !important;
+    right: auto !important;
+    bottom: auto !important;
+    margin: 0 !important;
+    z-index: 30 !important;
+  }
 }
 
 .intro{
@@ -190,8 +204,9 @@ $ease-out : cubic-bezier(0.19, 1, 0.22, 1);
 
   .follow-container-wrapper{
     top:100%;
-    right: 100%;
-    transform: translate(100%,-100%);
+    left: $home-mobile-side-inset;
+    right: auto;
+    transform: translate(0,-100%);
   }
 
   .follow-me{

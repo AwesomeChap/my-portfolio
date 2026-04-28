@@ -344,20 +344,25 @@ export default function ShareWithLove({ trackClickEvent }) {
   return (
     <div
       className={cx(
-        'absolute bottom-0 z-10 mb-[15px] ml-[10px] box-border inline-flex flex-row items-center justify-start gap-[10px] self-start',
-        'max-[767px]:bottom-full max-[767px]:mb-0 max-[767px]:translate-x-[2%] max-[767px]:translate-y-[115%] max-[767px]:gap-[7px] max-[767px]:text-[14px]',
+        'share-with-love absolute bottom-0 z-10 mb-[15px] ml-[10px] max-[767px]:ml-0 box-border inline-flex flex-row items-center justify-start gap-[10px] self-start',
+        'max-[767px]:gap-[7px] max-[767px]:text-[14px]',
       )}
     >
       <a
         className={cx(
-          'animate-resume-enter relative ml-0 box-border inline-flex h-[48px] min-h-[48px] cursor-pointer items-center justify-center self-center rounded-[10px] border-none bg-white/[0.07] px-[20px] py-[10px] text-center text-[16px] tracking-[0.1em] text-white no-underline opacity-0 outline-none [backface-visibility:hidden] [transform:translate(0,-30%)] max-[767px]:h-[42px] max-[767px]:min-h-[42px] max-[767px]:px-[12px] max-[479px]:ml-[7px] max-[479px]:rounded-[6px]',
+          'animate-resume-enter relative ml-0 box-border inline-flex h-[48px] min-h-[48px] cursor-pointer items-center justify-center self-center rounded-[10px] border-none bg-white/[0.07] px-[20px] py-[10px] text-center text-[16px] tracking-[0.1em] text-white no-underline opacity-0 outline-none [backface-visibility:hidden] [transform:translate(0,-30%)] max-[767px]:h-[42px] max-[767px]:min-h-[42px] max-[767px]:w-[42px] max-[767px]:min-w-[42px] max-[767px]:px-0 max-[767px]:tracking-normal max-[479px]:rounded-[6px]',
         )}
+        aria-label="View resumé"
         onClick={() => trackClickEvent('Anchor', 'View resumé')}
         href={resume}
         target="_blank"
         rel="noopener noreferrer"
       >
-        RESUME
+        <span className="max-[767px]:hidden">RESUME</span>
+        <i
+          className="fas fa-file-alt hidden text-[20px] leading-none max-[767px]:inline-block"
+          aria-hidden
+        />
       </a>
       <div
         className={cx(

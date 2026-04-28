@@ -87,9 +87,8 @@ export default (props) => {
         <div className="follow-container-wrapper">
           <small className="follow-me">Follow me</small>
           <div className="follow-container">
-            <a className="if" target="_blank" href="https://www.facebook.com/J4TINKUMAR"><i className="fab fa-facebook-f"></i></a>
             <a className="il" target="_blank" href="https://www.linkedin.com/in/-jatin-kumar/"><i className="fab fa-linkedin-in"></i></a>
-            <a className="ii" target="_blank" href="https://www.instagram.com/jatin_1501/"><i className="fab fa-instagram"></i></a>
+            <a className="ii" target="_blank" href="https://www.instagram.com/jatin.shots/"><i className="fab fa-instagram"></i></a>
             <a className="im" target="_blank" href="https://medium.com/@jatin15011999"><i className="fab fa-medium-m"></i></a>
             <a className="ig" target="_blank" href="https://github.com/AwesomeChap"><i className="fab fa-github"></i></a>
             <a className="iy" target="_blank" href="https://www.youtube.com/channel/UCWOv0PVApOlYYk56d0pU57g"><i className="fab fa-youtube"></i></a>
