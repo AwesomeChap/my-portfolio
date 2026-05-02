@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { NavLink, withRouter } from 'react-router-dom';
-import Svg from './LogoSvg';
 import SplitText from './SplitText';
 import '../../styles/NavMobile.scss';
 
@@ -12,7 +11,7 @@ const NavMobile = (props) => {
   const [svgWidth, setSvgWidth] = useState(undefined);
 
   useEffect(() => {
-    window.innerWidth <= 476 ? setSvgWidth(50) : window.innerWidth <= 767 ? setSvgWidth(65) : false;
+    window.innerWidth <= 476 ? setSvgWidth(58) : window.innerWidth <= 767 ? setSvgWidth(78) : false;
     ROUTES.forEach((route, routeIndex)=>{
       if(route === props.history.location.pathname) {
         setSelected(routeIndex + 1);
@@ -63,7 +62,12 @@ const NavMobile = (props) => {
       <>
         <div className="nav-m">
           <NavLink className="nav-logo-m" exact to="/">
-            <Svg width={svgWidth} id="logo" />
+            <img
+              className="nav-logo-m__img"
+              src={`${import.meta.env.BASE_URL}logo.png`}
+              alt="Jatin Kumar"
+              style={{ width: svgWidth || 78, height: 'auto' }}
+            />
           </NavLink>
           <div onClick={handleClick} id="hamburger" className={hamburgerClasses}>
             <div className="bar bar1"></div>

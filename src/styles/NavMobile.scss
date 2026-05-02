@@ -18,6 +18,13 @@ $ham-d : 0.6s;
 
 .nav-logo-m{
   display: none;
+  line-height: 0;
+}
+
+.nav-logo-m__img {
+  display: block;
+  height: auto;
+  vertical-align: top;
 }
 
 
@@ -249,6 +256,9 @@ $ham-d : 0.6s;
   /* For desktop: */
   .nav-m{
     display:inline-block;
+  }
+  .nav-logo-m {
+    display: inline-block;
   }
   #menu-wrapper{
     display:flex;

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import Svg from './LogoSvg';
 import { NavLink, withRouter } from 'react-router-dom';
 import '../../styles/nav.scss';
 import '../../styles/pages.scss';
@@ -57,7 +56,12 @@ const Nav = (props) => {
       <div className="nav-bar" >
         <div className="nav-left">
           <NavLink data-to="/" className="nav-logo" activeClassName="selected" exact to="/">
-            <Svg data-to="/" id="logo" />
+            <img
+              data-to="/"
+              className="nav-logo__img"
+              src={`${import.meta.env.BASE_URL}logo.png`}
+              alt="Jatin Kumar"
+            />
           </NavLink>
         </div>
         <div className="nav-right-wrapper">
