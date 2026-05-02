@@ -389,7 +389,7 @@ export default function ShareWithLove({ trackClickEvent }) {
         >
           <span
             className={cx(
-              'max-w-[200px] whitespace-nowrap text-[16px] leading-none tracking-[0.1em] [transition:opacity_0.25s_cubic-bezier(0.77,0,0.175,1),transform_0.25s_cubic-bezier(0.77,0,0.175,1)]',
+              'pl-[5.5px] max-[767px]:pl-[6.5px] max-w-[200px] whitespace-nowrap text-[16px] leading-none tracking-[0.1em] [transition:opacity_0.25s_cubic-bezier(0.77,0,0.175,1),transform_0.25s_cubic-bezier(0.77,0,0.175,1)]',
               shareLabelVisible
                 ? 'translate-x-0 opacity-100'
                 : 'pointer-events-none translate-x-[12px] opacity-0',
