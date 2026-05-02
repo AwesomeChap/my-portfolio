@@ -25,8 +25,66 @@ $home-mobile-side-inset: 10px;
 
 .intro{
   position: absolute;
+  left: 0;
+  right: 0;
+  width: 100%;
+  box-sizing: border-box;
   top: 50%;
   transform: translateY(-50%);
+}
+
+/* Match Home.jsx `mobileView` (width <= 479): center the intro block; lines stay left-aligned. */
+@media only screen and (max-width: 479px) {
+  .intro .content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: fit-content;
+    max-width: calc(100% - #{2 * $home-mobile-side-inset});
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+  }
+}
+
+/* Full-viewport Codrops-style distortion + sr-only heading (see DistortedPixelsHero.jsx) */
+.distorted-intro-title__sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.distorted-pixels-hero {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+  pointer-events: none;
+
+  canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    pointer-events: auto;
+  }
+}
+
+.intro--distorted-desktop {
+  pointer-events: none;
+  min-height: 288px;
+}
+
+@media only screen and (max-width: 1024px) {
+  .intro--distorted-desktop {
+    min-height: 220px;
+  }
 }
 
 .intro-text{

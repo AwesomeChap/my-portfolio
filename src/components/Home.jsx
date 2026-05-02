@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import LiquidGradientBackground from './helper/LiquidGradientBackground';
 import EyesToLogoTransition from "./helper/EyesToLogoTransition";
 import ShareWithLove from './helper/ShareWithLove';
+import DistortedPixelsHero from './helper/DistortedPixelsHero';
 import '../styles/pages.scss';
 import '../styles/home.scss';
 import MBackground from './helper/MBackground';
@@ -57,31 +58,38 @@ export default (props) => {
       </MetaTags>
       <div className="section home">
         {mobileView ? <MBackground /> : <LiquidGradientBackground />}
-        <div className="intro">
+        {mobileView === false ? <DistortedPixelsHero /> : null}
+        <div className={`intro ${mobileView === false ? 'intro--distorted-desktop' : ''}`}>
           <div className="content">
-            <div className="intro-text" style={{ color: "#777" }}>
-              {
-                text1.split("").map((t, i) => {
-                  let style = { animationDelay: `${t0 + i / 15}s` };
-                  return <span style={style} key={`intro-text-${t}-${i}`}>{t}</span>
-                })
-              }
-            </div>
-            <div className="intro-text" >
-              {
-                text2.split("").map((t, i) => {
-                  let style = { animationDelay: `${t1 + i / 15}s` };
-                  return <span style={style} key={`intro-text-${t}-${i}`}>{t}</span>
-                })
-              }
-              <span>&nbsp;</span>
-              {
-                text3.split("").map((t, i) => {
-                  let style = { animationDelay: `${t2 + i / 15}s` };
-                  return <span style={style} key={`intro-text-${t}-${i}`}>{t}</span>
-                })
-              }
-            </div>
+            {mobileView === false ? (
+              <h1 className="distorted-intro-title__sr">HELLO. I&apos;M JATIN</h1>
+            ) : (
+              <>
+                <div className="intro-text" style={{ color: "#777" }}>
+                  {
+                    text1.split("").map((t, i) => {
+                      let style = { animationDelay: `${t0 + i / 15}s` };
+                      return <span style={style} key={`intro-text-${t}-${i}`}>{t}</span>
+                    })
+                  }
+                </div>
+                <div className="intro-text" >
+                  {
+                    text2.split("").map((t, i) => {
+                      let style = { animationDelay: `${t1 + i / 15}s` };
+                      return <span style={style} key={`intro-text-${t}-${i}`}>{t}</span>
+                    })
+                  }
+                  <span>&nbsp;</span>
+                  {
+                    text3.split("").map((t, i) => {
+                      let style = { animationDelay: `${t2 + i / 15}s` };
+                      return <span style={style} key={`intro-text-${t}-${i}`}>{t}</span>
+                    })
+                  }
+                </div>
+              </>
+            )}
           </div>
         </div>
         <div className="follow-container-wrapper">
