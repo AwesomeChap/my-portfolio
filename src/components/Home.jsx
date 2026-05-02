@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Background from './helper/background';
+import LiquidGradientBackground from './helper/LiquidGradientBackground';
 import EyesToLogoTransition from "./helper/EyesToLogoTransition";
 import ShareWithLove from './helper/ShareWithLove';
 import '../styles/pages.scss';
@@ -56,7 +56,7 @@ export default (props) => {
         <meta name="twitter:image" content={portfolioImg} />
       </MetaTags>
       <div className="section home">
-        {mobileView ? <MBackground /> : <Background />}
+        {mobileView ? <MBackground /> : <LiquidGradientBackground />}
         <div className="intro">
           <div className="content">
             <div className="intro-text" style={{ color: "#777" }}>

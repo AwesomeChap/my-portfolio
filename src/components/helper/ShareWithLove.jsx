@@ -17,7 +17,8 @@ const SHARE_ICON_ENTER_DELAY_MS = 120;
 const SHARE_ICON_LEAVE_DELAY_MS = 90;
 const SHARE_ICON_TRANSLATE_PX = -16;
 const SHARE_ICON_MOVE_MS = 320;
-const SHARE_BAR_COLLAPSE_MS = 560;
+/** Wait after close before fading “SHARE WITH” back in (all breakpoints — same path as desktop for smooth width). */
+const SHARE_LABEL_REOPEN_MS = 360;
 const SHARE_LABEL_FADE_MS = 320;
 const SHARE_LABEL_FADE_IN_DELAY_MS = 20;
 const SHARE_ICONS_AFTER_LABEL_MS = SHARE_LABEL_FADE_MS + SHARE_LABEL_COLLAPSE_MS + 5;
@@ -81,7 +82,7 @@ const SHARE_D_HEART_A = sharePathD(SHARE_SPEC_HEART_A);
 const SHARE_D_HEART_B = sharePathD(SHARE_SPEC_HEART_B);
 
 const linkBase =
-  'box-border shrink-0 self-center no-underline text-white rounded-full inline-flex justify-center items-center h-[34px] w-[34px] mx-[10px] text-[18px] max-[767px]:mx-[7px] max-[767px]:h-[30px] max-[767px]:w-[30px] max-[767px]:text-[16px] [&_i]:ml-[3px]';
+  'box-border shrink-0 self-center no-underline text-white rounded-full inline-flex justify-center items-center h-[34px] w-[34px] mx-[10px] text-[18px] [&_i]:ml-[3px]';
 
 function iconLinkClass(shareIconsReady, shareOpen, shareClosingIcons, visibleBg) {
   return cx(
@@ -231,17 +232,18 @@ export default function ShareWithLove({ trackClickEvent }) {
       setShareClosingIcons(false);
       setShareIconsReady(false);
       setShareOpen(false);
-      setShareLabelCollapsed(false);
       clearTimer(labelRevealTimerRef);
       clearTimer(labelCollapseTimerRef);
       clearTimer(labelFadeInTimerRef);
+
+      setShareLabelCollapsed(false);
       labelRevealTimerRef.current = window.setTimeout(() => {
         labelFadeInTimerRef.current = window.setTimeout(() => {
           setShareLabelVisible(true);
           labelFadeInTimerRef.current = null;
         }, SHARE_LABEL_FADE_IN_DELAY_MS);
         labelRevealTimerRef.current = null;
-      }, SHARE_BAR_COLLAPSE_MS);
+      }, SHARE_LABEL_REOPEN_MS);
     };
     const startIconExit = () => {
       if (!shareIconsReady) {
@@ -333,24 +335,21 @@ export default function ShareWithLove({ trackClickEvent }) {
       : LINKS_TRANSITION_COLLAPSE_FAST;
 
   const shareBarMaxW = cx(
-    !shareOpen && 'max-w-[248px] max-[767px]:max-w-[210px]',
-    shareOpen && !shareIconsReady && !shareLabelCollapsed && 'max-w-[248px] max-[767px]:max-w-[210px]',
-    shareOpen && !shareIconsReady && shareLabelCollapsed && 'max-w-[82px] max-[767px]:max-w-[66px]',
-    shareOpen &&
-      shareIconsMounted &&
-      'max-w-[420px] max-[767px]:max-w-[min(96vw,380px)]',
+    !shareOpen && 'max-w-[248px]',
+    shareOpen && !shareIconsReady && !shareLabelCollapsed && 'max-w-[248px]',
+    shareOpen && !shareIconsReady && shareLabelCollapsed && 'max-w-[82px]',
+    shareOpen && shareIconsMounted && 'max-w-[420px]',
   );
 
   return (
     <div
       className={cx(
         'share-with-love absolute bottom-0 z-10 ml-[10px] max-[767px]:ml-0 box-border inline-flex flex-row items-center justify-start gap-[10px] self-start',
-        'max-[767px]:gap-[7px] max-[767px]:text-[14px]',
       )}
     >
       <a
         className={cx(
-          'animate-resume-enter relative ml-0 box-border inline-flex h-[48px] min-h-[48px] cursor-pointer items-center justify-center self-center rounded-[10px] border-none bg-white/[0.07] px-[20px] py-[10px] text-center text-[16px] tracking-[0.1em] text-white no-underline opacity-0 outline-none [backface-visibility:hidden] [transform:translate(0,-30%)] max-[767px]:h-[42px] max-[767px]:min-h-[42px] max-[767px]:w-[42px] max-[767px]:min-w-[42px] max-[767px]:px-0 max-[767px]:tracking-normal max-[479px]:rounded-[6px]',
+          'animate-resume-enter relative ml-0 box-border inline-flex h-[48px] min-h-[48px] cursor-pointer items-center justify-center self-center rounded-[10px] border-none bg-white/[0.07] px-[20px] py-[10px] text-center text-[16px] tracking-[0.1em] text-white no-underline opacity-0 outline-none [backface-visibility:hidden] [transform:translate(0,-30%)] max-[479px]:h-[42px] max-[479px]:min-h-[42px] max-[479px]:w-[42px] max-[479px]:min-w-[42px] max-[479px]:px-0 max-[479px]:tracking-normal max-[479px]:rounded-[6px]',
         )}
         aria-label="View resumé"
         onClick={() => trackClickEvent('Anchor', 'View resumé')}
@@ -358,15 +357,15 @@ export default function ShareWithLove({ trackClickEvent }) {
         target="_blank"
         rel="noopener noreferrer"
       >
-        <span className="max-[767px]:hidden">RESUME</span>
+        <span className="max-[479px]:hidden">RESUME</span>
         <i
-          className="fas fa-file-alt hidden text-[20px] leading-none max-[767px]:inline-block"
+          className="fas fa-file-alt hidden text-[20px] leading-none max-[479px]:inline-block"
           aria-hidden
         />
       </a>
       <div
         className={cx(
-          'animate-share-enter relative box-border inline-flex h-[48px] min-h-[48px] flex-row items-center overflow-hidden rounded-[10px] bg-white/[0.07] pl-[18px] pr-[56px] opacity-0 outline-none [backface-visibility:hidden] [transform:translate(0,-30%)] [transition:max-width_0.56s_cubic-bezier(0.77,0,0.175,1)] max-[767px]:h-[42px] max-[767px]:min-h-[42px] max-[767px]:pl-[10px] max-[767px]:pr-[48px] max-[479px]:rounded-[6px]',
+          'animate-share-enter relative box-border inline-flex h-[48px] min-h-[48px] flex-row items-center overflow-hidden rounded-[10px] bg-white/[0.07] pl-[18px] pr-[56px] opacity-0 outline-none [backface-visibility:hidden] [transform:translate(0,-30%)] [transition:max-width_0.56s_cubic-bezier(0.77,0,0.175,1)] max-[479px]:rounded-[6px] max-[479px]:hidden',
           shareBarMaxW,
         )}
         aria-expanded={shareOpen}
@@ -374,7 +373,9 @@ export default function ShareWithLove({ trackClickEvent }) {
         <div
           className={cx(
             'box-border flex min-h-0 min-w-0 shrink-0 cursor-pointer flex-row items-center justify-center gap-[10px] overflow-hidden p-0 text-[16px] text-white outline-none select-none [transition:max-width_0.5s_cubic-bezier(0.77,0,0.175,1),width_0.5s_cubic-bezier(0.77,0,0.175,1),margin_0.5s_cubic-bezier(0.77,0,0.175,1),padding_0.5s_cubic-bezier(0.77,0,0.175,1)]',
-            shareLabelCollapsed || shareIconsReady ? 'max-w-0' : 'max-w-[220px]',
+            shareLabelCollapsed || shareIconsReady
+              ? 'max-w-0'
+              : 'max-w-[220px]',
             shareOpen && 'pointer-events-none cursor-default',
             (!shareLabelVisible || shareIconsReady) && 'pointer-events-none m-0 p-0',
           )}
@@ -389,7 +390,7 @@ export default function ShareWithLove({ trackClickEvent }) {
         >
           <span
             className={cx(
-              'pl-[5.5px] max-[767px]:pl-[6.5px] max-w-[200px] whitespace-nowrap text-[16px] leading-none tracking-[0.1em] [transition:opacity_0.25s_cubic-bezier(0.77,0,0.175,1),transform_0.25s_cubic-bezier(0.77,0,0.175,1)]',
+              'pl-[5.5px] max-w-[200px] whitespace-nowrap text-[16px] leading-none tracking-[0.1em] [transition:opacity_0.25s_cubic-bezier(0.77,0,0.175,1),transform_0.25s_cubic-bezier(0.77,0,0.175,1)]',
               shareLabelVisible
                 ? 'translate-x-0 opacity-100'
                 : 'pointer-events-none translate-x-[12px] opacity-0',
@@ -428,7 +429,7 @@ export default function ShareWithLove({ trackClickEvent }) {
         </div>
         <button
           type="button"
-          className="absolute inset-y-0 right-[8px] z-[25] box-border inline-flex h-[40px] w-[40px] min-w-[40px] cursor-pointer items-center justify-center self-center border-0 bg-transparent p-0 text-[#ff0d2d] outline-none [-webkit-tap-highlight-color:transparent] max-[767px]:right-[6px] max-[767px]:h-[40px] max-[767px]:w-[40px] max-[767px]:min-w-[40px]"
+          className="absolute inset-y-0 right-[8px] z-[25] box-border inline-flex h-[40px] w-[40px] min-w-[40px] cursor-pointer items-center justify-center self-center border-0 bg-transparent p-0 text-[#ff0d2d] outline-none [-webkit-tap-highlight-color:transparent]"
           aria-label={shareOpen ? 'Close share options' : 'Open share options'}
           tabIndex={shareOpen ? 0 : -1}
           onMouseDown={(e) => e.stopPropagation()}
@@ -439,7 +440,7 @@ export default function ShareWithLove({ trackClickEvent }) {
           }}
         >
           <svg
-            className="block h-[29px] w-[29px] shrink-0 overflow-visible max-[767px]:h-[27px] max-[767px]:w-[27px]"
+            className="block h-[29px] w-[29px] shrink-0 overflow-visible"
             viewBox="0 0 24 24"
             focusable="false"
             aria-hidden
