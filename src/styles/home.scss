@@ -11,8 +11,12 @@ $home-mobile-side-inset: 10px;
   z-index: 0;
 }
 
-/* Mobile placement for ShareWithLove — SCSS wins over utility order/purge issues */
+/* Share + follow use the same edge inset as nav logo / resume row (`$home-mobile-side-inset`). */
 .share-with-love {
+  @media only screen and (min-width: 768px) {
+    margin-bottom: $home-mobile-side-inset;
+  }
+  /* Mobile placement for ShareWithLove — SCSS wins over utility order/purge issues */
   @media only screen and (max-width: 767px) {
     left: $home-mobile-side-inset !important;
     top: calc(26px + env(safe-area-inset-top, 0px)) !important;
@@ -66,13 +70,14 @@ $home-mobile-side-inset: 10px;
   width: 100vw;
   height: 100vh;
   z-index: 1;
+  /* Wrapper + canvas must not capture hits — mouse is read on `window` in DistortedPixelsHero.jsx */
   pointer-events: none;
 
   canvas {
     display: block;
     width: 100%;
     height: 100%;
-    pointer-events: auto;
+    pointer-events: none;
   }
 }
 
@@ -130,6 +135,9 @@ $home-mobile-side-inset: 10px;
   display: inline-flex;
   flex-direction: column;
   justify-content: flex-end;
+  margin-right: $home-mobile-side-inset;
+  z-index: 5;
+  pointer-events: auto;
 }
 
 .follow-me{
@@ -139,6 +147,21 @@ $home-mobile-side-inset: 10px;
   margin-bottom: 6px;
   opacity: 0;
   animation: love 0.5s 1.5s forwards;
+}
+
+/* Stable column width so link hover (width/padding) does not shift the “Follow me” label. */
+@media only screen and (min-width: 768px) {
+  .follow-container-wrapper {
+    width: 168px;
+    align-items: flex-end;
+    box-sizing: border-box;
+  }
+
+  .follow-me {
+    width: 100%;
+    text-align: right;
+    box-sizing: border-box;
+  }
 }
 
 .follow-container{

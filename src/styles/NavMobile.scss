@@ -16,18 +16,6 @@ $ham-d : 0.6s;
   box-sizing: border-box;
 }
 
-.nav-logo-m{
-  display: none;
-  line-height: 0;
-}
-
-.nav-logo-m__img {
-  display: block;
-  height: auto;
-  vertical-align: top;
-}
-
-
 #hamburger{
   // background: rgba(17, 17, 17, 0.795);
   // background: #444;
@@ -256,9 +244,6 @@ $ham-d : 0.6s;
   /* For desktop: */
   .nav-m{
     display:inline-block;
-  }
-  .nav-logo-m {
-    display: inline-block;
   }
   #menu-wrapper{
     display:flex;

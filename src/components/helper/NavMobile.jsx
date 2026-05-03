@@ -8,10 +8,8 @@ const ROUTES = ['/', '/about', '/work', '/projects', '/contact'];
 const NavMobile = (props) => {
   const [clicked, setClicked] = useState(0);
   const [selected, setSelected] = useState(false);
-  const [svgWidth, setSvgWidth] = useState(undefined);
 
   useEffect(() => {
-    window.innerWidth <= 476 ? setSvgWidth(58) : window.innerWidth <= 767 ? setSvgWidth(78) : false;
     ROUTES.forEach((route, routeIndex)=>{
       if(route === props.history.location.pathname) {
         setSelected(routeIndex + 1);
@@ -61,14 +59,6 @@ const NavMobile = (props) => {
     return (
       <>
         <div className="nav-m">
-          <NavLink className="nav-logo-m" exact to="/">
-            <img
-              className="nav-logo-m__img"
-              src={`${import.meta.env.BASE_URL}logo.png`}
-              alt="Jatin Kumar"
-              style={{ width: svgWidth || 78, height: 'auto' }}
-            />
-          </NavLink>
           <div onClick={handleClick} id="hamburger" className={hamburgerClasses}>
             <div className="bar bar1"></div>
             <div className="bar bar2"></div>
