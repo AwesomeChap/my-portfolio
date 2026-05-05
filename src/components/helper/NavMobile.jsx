@@ -58,7 +58,7 @@ const NavMobile = (props) => {
     return (
       <>
         <div className="nav-m">
-          <div onClick={handleClick} id="hamburger" className={hamburgerClasses}>
+          <div onClick={handleClick} id="hamburger" className={hamburgerClasses} title="Menu">
             <div className="bar bar1"></div>
             <div className="bar bar2"></div>
             <div className="bar bar3"></div>

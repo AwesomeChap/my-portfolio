@@ -15,6 +15,16 @@ $star-main: #AA2A1D;
 }
 
 .dragon-ball {
+  appearance: none;
+  -webkit-appearance: none;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  font: inherit;
+  line-height: 1;
+  text-align: inherit;
+  color: inherit;
+  cursor: pointer;
   height: 18rem;
   width: 18rem;
   background: $main;

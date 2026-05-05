@@ -50,11 +50,11 @@ export default (props) => {
             {!show && <DragonBall onClick={onDBClick} />}
             {show && (
                 <div className="eyes-container">
-                    <div onClick={() => setShow(!show)} className="hide-eyes">
+                    <button type="button" onClick={() => setShow(!show)} className="hide-eyes" aria-label="Close animation">
                         <div className="cross"/>
                         <svg><circle r="18" cx="20" cy="20"></circle></svg>
                         <svg className="countdown"><circle r="18" cx="20" cy="20"></circle></svg>
-                    </div>
+                    </button>
                     <LogoSvgOutline />
                     <EyesSvg />
                 </div>

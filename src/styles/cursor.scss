@@ -1,33 +1,59 @@
-$primary-light: rgba(255, 255, 255, 0.4);
-$primary: #fff;
+$cursor-core: rgba(255, 255, 255, 0.94);
+$cursor-ring: rgba(255, 255, 255, 0.45);
+$cursor-ring-active: rgba(255, 255, 255, 0.8);
 
 .cursor-dot,
 .cursor-dot-outline {
-    pointer-events: none;
-    position: fixed;
-    z-index: 100;
-    top: 50%;
-    left: 50%;
-    border-radius: 50%;
-    opacity: 0; 
-    transform: translate(-50%, -50%);
+  pointer-events: none;
+  position: fixed;
+  z-index: 100;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  mix-blend-mode: difference;
+  transition: opacity 0.22s ease, transform 0.22s ease, background-color 0.22s ease, border-color 0.22s ease;
+}
+
+.cursor-dot.is-hidden,
+.cursor-dot-outline.is-hidden {
+  opacity: 0;
+}
+
+.cursor-dot:not(.is-hidden),
+.cursor-dot-outline:not(.is-hidden) {
+  opacity: 1;
 }
 
 .cursor-dot {
-    $size: 8px;
-    width: $size;
-    height: $size;
-    background-color: $primary;
-    transition: opacity 0.3s ease-in-out,
-                transform 0.3s ease-in-out;
+  $size: 6px;
+  width: $size;
+  height: $size;
+  background-color: #fff;
+  box-shadow: none;
+}
+
+.cursor-dot.is-active {
+  transform: translate(-50%, -50%) scale(0.8);
 }
 
 .cursor-dot-outline {
-    $size: 40px;
-    width: $size;
-    height: $size;
-    background-color: $primary-light;
-    transition: opacity 0.3s ease-in-out,
-                transform 0.3s ease-in-out,
-                background-color 0.3s ease-in-out;
+  $size: 28px;
+  width: $size;
+  height: $size;
+  border: 1px solid #fff;
+  background-color: transparent;
+}
+
+.cursor-dot-outline.is-active {
+  transform: translate(-50%, -50%) scale(1.35);
+  border-color: #fff;
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+@media (hover: none), (pointer: coarse) {
+  .cursor-dot,
+  .cursor-dot-outline {
+    display: none;
+  }
 }

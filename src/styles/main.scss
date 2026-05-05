@@ -12,6 +12,18 @@ html,body,#root {
   outline: none;
 }
 
+a:focus-visible:not(.share-link),
+button:focus-visible,
+[role="button"]:focus-visible {
+  outline: 2px solid #ff0d2d;
+  outline-offset: 2px;
+}
+
+a.share-link:focus,
+a.share-link:focus-visible {
+  outline: none;
+}
+
 html{
   overflow-y: hidden;
 } 

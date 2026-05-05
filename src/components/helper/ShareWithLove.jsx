@@ -82,11 +82,12 @@ const SHARE_D_HEART_A = sharePathD(SHARE_SPEC_HEART_A);
 const SHARE_D_HEART_B = sharePathD(SHARE_SPEC_HEART_B);
 
 const linkBase =
-  'box-border shrink-0 self-center no-underline text-white rounded-full inline-flex justify-center items-center h-[34px] w-[34px] mx-[10px] text-[18px] [&_i]:ml-[3px]';
+  'share-link box-border shrink-0 self-center no-underline text-white rounded-full inline-flex justify-center items-center h-[34px] w-[34px] mx-[10px] text-[18px] [&_i]:ml-[3px]';
 
 function iconLinkClass(shareIconsReady, shareOpen, shareClosingIcons, visibleBg) {
   return cx(
     linkBase,
+    'focus-visible:outline-none focus-visible:[box-shadow:inset_0_0_0_2px_#ff0d2d]',
     (shareIconsReady || shareClosingIcons) && visibleBg,
   );
 }
@@ -368,29 +369,30 @@ export default function ShareWithLove({ trackClickEvent }) {
           'animate-share-enter relative box-border inline-flex h-[48px] min-h-[48px] flex-row items-center overflow-hidden rounded-[5px] border-none bg-[rgba(46,46,46,0.34)] [backdrop-filter:blur(16px)_saturate(140%)] [-webkit-backdrop-filter:blur(16px)_saturate(140%)] shadow-[0_10px_30px_rgba(0,0,0,0.24),0_2px_10px_rgba(0,0,0,0.2)] pl-[18px] pr-[56px] opacity-0 outline-none [font-family:Futura] [backface-visibility:hidden] [transform:translate(0,-30%)] [transition:max-width_0.56s_cubic-bezier(0.77,0,0.175,1)] max-[479px]:rounded-[5px] max-[479px]:hidden',
           shareBarMaxW,
         )}
-        aria-expanded={shareOpen}
       >
+        <button
+          type="button"
+          className={cx(
+            'absolute inset-0 z-[20] border-0 bg-transparent p-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#ff0d2d] focus-visible:outline-offset-[-2px]',
+            shareOpen && 'pointer-events-none',
+          )}
+          aria-label="Open share options"
+          tabIndex={shareOpen ? -1 : 0}
+          onClick={() => !shareOpen && openShare()}
+        />
         <div
           className={cx(
-            'box-border flex min-h-0 min-w-0 shrink-0 cursor-pointer flex-row items-center justify-center gap-[10px] overflow-hidden p-0 text-[16px] text-white outline-none select-none [transition:max-width_0.5s_cubic-bezier(0.77,0,0.175,1),width_0.5s_cubic-bezier(0.77,0,0.175,1),margin_0.5s_cubic-bezier(0.77,0,0.175,1),padding_0.5s_cubic-bezier(0.77,0,0.175,1)]',
+            'box-border flex min-h-0 min-w-0 shrink-0 flex-row items-center justify-center gap-[10px] overflow-hidden border-0 bg-transparent p-0 text-[16px] text-white outline-none select-none [font-family:Futura] [transition:max-width_0.5s_cubic-bezier(0.77,0,0.175,1),width_0.5s_cubic-bezier(0.77,0,0.175,1),margin_0.5s_cubic-bezier(0.77,0,0.175,1),padding_0.5s_cubic-bezier(0.77,0,0.175,1)]',
             shareLabelCollapsed || shareIconsReady
               ? 'max-w-0'
               : 'max-w-[220px]',
-            shareOpen && 'pointer-events-none cursor-default',
+            shareOpen && 'pointer-events-none',
             (!shareLabelVisible || shareIconsReady) && 'pointer-events-none m-0 p-0',
           )}
-          tabIndex={!shareOpen ? 0 : -1}
-          onClick={() => !shareOpen && openShare()}
-          onKeyDown={(e) => {
-            if (!shareOpen && (e.key === 'Enter' || e.key === ' ')) {
-              e.preventDefault();
-              openShare();
-            }
-          }}
         >
           <span
             className={cx(
-              'pl-[5.5px] max-w-[200px] whitespace-nowrap text-[16px] leading-none tracking-[0.1em] [transition:opacity_0.25s_cubic-bezier(0.77,0,0.175,1),transform_0.25s_cubic-bezier(0.77,0,0.175,1)]',
+              'pl-[5.5px] max-w-[200px] whitespace-nowrap text-[16px] leading-none tracking-[0.1em] [font-family:Futura] [transition:opacity_0.25s_cubic-bezier(0.77,0,0.175,1),transform_0.25s_cubic-bezier(0.77,0,0.175,1)]',
               shareLabelVisible
                 ? 'translate-x-0 opacity-100'
                 : 'pointer-events-none translate-x-[12px] opacity-0',
@@ -414,6 +416,7 @@ export default function ShareWithLove({ trackClickEvent }) {
               href={link.href}
               target="_blank"
               rel="noopener noreferrer"
+              tabIndex={shareIconsReady ? 0 : -1}
               className={iconLinkClass(
                 shareIconsReady,
                 shareOpen,
@@ -429,7 +432,7 @@ export default function ShareWithLove({ trackClickEvent }) {
         </div>
         <button
           type="button"
-          className="absolute inset-y-0 right-[8px] z-[25] box-border inline-flex h-[40px] w-[40px] min-w-[40px] cursor-pointer items-center justify-center self-center border-0 bg-transparent p-0 text-[#ff0d2d] outline-none [-webkit-tap-highlight-color:transparent]"
+          className="absolute inset-y-0 right-[8px] z-[25] box-border inline-flex h-[40px] w-[40px] min-w-[40px] cursor-pointer items-center justify-center self-center border-0 bg-transparent p-0 text-[#ff0d2d] outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#ff0d2d] focus-visible:outline-offset-[2px] [-webkit-tap-highlight-color:transparent]"
           aria-label={shareOpen ? 'Close share options' : 'Open share options'}
           tabIndex={shareOpen ? 0 : -1}
           onMouseDown={(e) => e.stopPropagation()}

@@ -88,7 +88,7 @@ const Nav = (props) => {
 
       <div className="nav-bar">
         <div className="nav-left">
-          <NavLink data-to="/" className="nav-logo" activeClassName="selected" exact to="/">
+          <NavLink data-to="/" className="nav-logo" activeClassName="selected" exact to="/" title="Jatin Kumar">
             <img
               data-to="/"
               className="nav-logo__img"
@@ -120,7 +120,7 @@ const Nav = (props) => {
                       activeClassName="selected"
                       exact
                       to={item.to}
-                      tabIndex={isMenuOpen ? 0 : -1}
+                      tabIndex={clicked === true ? 0 : -1}
                     >
                       <span className="nav-item-text">{item.label}</span>
                     </NavLink>
@@ -134,6 +134,7 @@ const Nav = (props) => {
                 aria-expanded={isMenuOpen}
                 aria-controls="nav-primary-panel"
                 aria-label={isMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+                title={isMenuOpen ? 'Close menu' : 'Menu'}
               >
                 <div className={hamClasses} aria-hidden>
                   <div className="line line1" />

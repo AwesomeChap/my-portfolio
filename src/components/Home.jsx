@@ -108,9 +108,8 @@ export default (props) => {
           </div>
         </div>
 
-        <EyesToLogoTransition trackClickEvent={props.trackClickEvent}/>
-
         <ShareWithLove trackClickEvent={props.trackClickEvent} />
+        <EyesToLogoTransition trackClickEvent={props.trackClickEvent}/>
       </div>
     </>
   )
