@@ -13,9 +13,11 @@ const title = "Portfolio - Jatin Kumar";
 
 export default (props) => {
   const [mobileView, setMobileView] = useState(undefined);
+  const [tabletView, setTabletView] = useState(undefined);
 
   useEffect(() => {
     setMobileView(window.innerWidth <= 479);
+    setTabletView(window.innerWidth <= 1024);
     props.trackPageView();
     window.addEventListener('resize', onWindowResize);
     return () => {
@@ -25,7 +27,10 @@ export default (props) => {
 
   const onWindowResize = () => {
     setMobileView(window.innerWidth <= 479);
+    setTabletView(window.innerWidth <= 1024);
   }
+
+  const useDistortedHero = mobileView === false && tabletView === false;
 
   const text1 = "HELLO.";
   const text2 = "I'M";
@@ -58,10 +63,10 @@ export default (props) => {
       </MetaTags>
       <div className="section home">
         {mobileView ? <MBackground /> : <LiquidGradientBackground />}
-        {mobileView === false ? <DistortedPixelsHero /> : null}
-        <div className={`intro ${mobileView === false ? 'intro--distorted-desktop' : ''}`}>
+        {useDistortedHero ? <DistortedPixelsHero /> : null}
+        <div className={`intro ${useDistortedHero ? 'intro--distorted-desktop' : ''}`}>
           <div className="content">
-            {mobileView === false ? (
+            {useDistortedHero ? (
               <h1 className="distorted-intro-title__sr">HELLO. I&apos;M JATIN</h1>
             ) : (
               <>

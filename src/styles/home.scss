@@ -139,8 +139,9 @@ $home-mobile-side-inset: 10px;
 
 .follow-me{
   display: inline-block;
-  font-size: 12px;
-  letter-spacing: 0em;
+  font-family: Futura, sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.015em;
   margin-bottom: 6px;
   opacity: 0;
   animation: love 0.5s 1.5s forwards;
@@ -202,12 +203,12 @@ $home-mobile-side-inset: 10px;
     text-decoration: none;
     position: relative;
     box-sizing: border-box;
-    width:60px;
-    height: 60px;
+    width:52px;
+    height: 52px;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 28px;
+    font-size: 24px;
     transition: all cubic-bezier(0.075, 0.82, 0.165, 1) 0.6s;
     animation: follow-span 0.3s forwards;
 
@@ -287,10 +288,10 @@ $home-mobile-side-inset: 10px;
     transform: translate(0,-100%);
   }
 
-  .follow-me{
-    letter-spacing: 0.1em;
-    margin-left: 5px;
-  }
+  // .follow-me{
+  //   letter-spacing: 0.1em;
+  //   margin-left: 5px;
+  // }
 
   .follow-container{
     flex-direction: row;
