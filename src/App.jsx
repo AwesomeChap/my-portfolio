@@ -41,7 +41,9 @@ export default () => {
     <>
       <div className="router-wrapper">
         <Router>
-          <ScrollToTop>{isBiggerScreenDevice ? <NavBar /> : <NavBarMobile />}</ScrollToTop>
+          <ScrollToTop>
+            {isBiggerScreenDevice ? <NavBar /> : <NavBarMobile />}
+          </ScrollToTop>
           <Route exact path="/" render={(props) => <Home {...props} trackPageView={trackPageView} trackClickEvent={trackClickEvent} />}></Route>
           <Route exact path="/about" render={(props) => <About {...props} trackPageView={trackPageView} />}></Route>
           <Route exact path="/work" render={(props) => <Work {...props} trackPageView={trackPageView} />}></Route>

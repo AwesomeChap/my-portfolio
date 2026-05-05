@@ -57,7 +57,7 @@ function drawIntroCanvas(width, height, dpr) {
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
   ctx.clearRect(0, 0, width, height);
 
-  ctx.font = `400 ${fontSize}px ${INTRO_FONT_FAMILY}`;
+  ctx.font = `900 ${fontSize}px ${INTRO_FONT_FAMILY}`;
   ctx.textAlign = 'left';
   ctx.textBaseline = 'middle';
   try {

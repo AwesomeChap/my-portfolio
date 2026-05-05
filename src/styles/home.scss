@@ -11,12 +11,8 @@ $home-mobile-side-inset: 10px;
   z-index: 0;
 }
 
-/* Share + follow use the same edge inset as nav logo / resume row (`$home-mobile-side-inset`). */
+/* Mobile placement for ShareWithLove — SCSS wins over utility order/purge issues */
 .share-with-love {
-  @media only screen and (min-width: 768px) {
-    margin-bottom: $home-mobile-side-inset;
-  }
-  /* Mobile placement for ShareWithLove — SCSS wins over utility order/purge issues */
   @media only screen and (max-width: 767px) {
     left: $home-mobile-side-inset !important;
     top: calc(26px + env(safe-area-inset-top, 0px)) !important;
@@ -95,6 +91,7 @@ $home-mobile-side-inset: 10px;
 .intro-text{
   position: relative;
   font-family: Futura;
+  font-weight: 900;
   overflow: hidden;
   span{
     font-size: 110px;

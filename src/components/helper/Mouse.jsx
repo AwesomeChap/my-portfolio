@@ -2,27 +2,53 @@ import React, { useEffect } from 'react';
 import '../../styles/mouse.scss'
 
 export default () => {
+  const getScrollTop = () => (
+    window.scrollY
+    || document.documentElement.scrollTop
+    || document.body.scrollTop
+    || 0
+  );
+
   useEffect(() => {
     document.body.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     if (/Edge/.test(navigator.userAgent)) {
-      document.getElementById('mouse').style.display = 'none';
+      const mouseElement = document.getElementById('mouse');
+      if (mouseElement) {
+        mouseElement.style.display = 'none';
+      }
     }
+    handleScroll();
 
-    return () => document.body.removeEventListener('scroll', handleScroll);
-  })
+    return () => {
+      document.body.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   const handleScroll = () => {
-    if (document.body.scrollTop > 20) {
-      document.getElementById('mouse').style.opacity = 0;
-      document.getElementById('mouse').style.visibility = "hidden";
+    const scrollTop = getScrollTop();
+    const mouseElement = document.getElementById('mouse');
+    const scrollbarElement = document.querySelector('.scrollbar');
+    const maxScroll = Math.max(
+      document.documentElement.scrollHeight,
+      document.body.scrollHeight,
+    ) - window.innerHeight;
+
+    if (!mouseElement || !scrollbarElement) return;
+
+    if (scrollTop > 20) {
+      mouseElement.style.opacity = 0;
+      mouseElement.style.visibility = 'hidden';
     }
     else {
-      document.getElementById('mouse').style.opacity = 1;
-      document.getElementById('mouse').style.visibility = "visible";
+      mouseElement.style.opacity = 1;
+      mouseElement.style.visibility = 'visible';
     }
 
-    document.querySelector(".scrollbar").style.width = (document.body.scrollTop / (document.body.scrollHeight - window.innerHeight)) * 100 + "%";
-  }
+    const widthPercent = maxScroll > 0 ? (scrollTop / maxScroll) * 100 : 0;
+    scrollbarElement.style.width = `${widthPercent}%`;
+  };
 
   const handleClick = () => {
     let pageHeight = window.innerHeight * 0.9;
@@ -31,7 +57,7 @@ export default () => {
       document.body.scrollBy(0, pageHeight);
       document.body.style.scrollBehavior = "auto";
     }, 10);
-  }
+  };
 
   return (
     <>
@@ -44,5 +70,5 @@ export default () => {
         <div className="scrollbar"></div>
       </div>
     </>
-  )
-}
+  );
+};

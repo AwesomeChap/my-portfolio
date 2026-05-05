@@ -1,90 +1,152 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { NavLink, withRouter } from 'react-router-dom';
 import '../../styles/nav.scss';
 import '../../styles/pages.scss';
 
+const TIMEOUT_DELAY = 700;
+
+const NAV_LINKS = [
+  { to: '/', label: 'Home' },
+  { to: '/about', label: 'About Me' },
+  { to: '/work', label: 'Work' },
+  { to: '/projects', label: 'Projects' },
+  { to: '/contact', label: 'Contact' },
+];
+
 const Nav = (props) => {
   const [clicked, setClicked] = useState(0);
   const [navLinkClicked, setNavLinkClicked] = useState(false);
-
-  const TIMEOUT_DELAY = 700;
+  const lastScrollTopRef = useRef(0);
 
   useEffect(() => {
-    document.body.addEventListener("scroll", onWindowScroll);
-    return () => {
-      document.body.removeEventListener("scroll", onWindowScroll);
-    }
-  })
+    if (clicked === 0) return undefined;
+    const isHomePage = props.location.pathname === '/';
+    lastScrollTopRef.current = window.pageYOffset || 0;
 
-  const handleExpLink = (e) => {
-    setTimeout(() => {
-      history.push('/contact')
-    }, 2000)
-  }
+    const closeNavOnScroll = () => {
+      if (isHomePage) {
+        const nextScrollTop = window.pageYOffset || 0;
+        if (nextScrollTop === lastScrollTopRef.current) return;
+        lastScrollTopRef.current = nextScrollTop;
+      }
+      setClicked(false);
+    };
+
+    const closeNavOnScrollIntent = () => {
+      if (isHomePage) return;
+      setClicked(false);
+    };
+
+    window.addEventListener('scroll', closeNavOnScroll, { passive: true });
+    document.addEventListener('scroll', closeNavOnScroll, { passive: true });
+    document.body.addEventListener('scroll', closeNavOnScroll, { passive: true });
+    window.addEventListener('wheel', closeNavOnScrollIntent, { passive: true });
+    window.addEventListener('touchmove', closeNavOnScrollIntent, { passive: true });
+
+    return () => {
+      window.removeEventListener('scroll', closeNavOnScroll);
+      document.removeEventListener('scroll', closeNavOnScroll);
+      document.body.removeEventListener('scroll', closeNavOnScroll);
+      window.removeEventListener('wheel', closeNavOnScrollIntent);
+      window.removeEventListener('touchmove', closeNavOnScrollIntent);
+    };
+  }, [clicked, props.location.pathname]);
 
   const handleNavLinkClick = (e) => {
     setNavLinkClicked(true);
-    const { to } = e.target.dataset;
+    const to = e.currentTarget.getAttribute('data-to');
     if (clicked !== 0) {
       setClicked(false);
-      e.preventDefault()
-
+      e.preventDefault();
       setTimeout(() => {
         props.history.push(to);
         setNavLinkClicked(false);
       }, TIMEOUT_DELAY);
     }
-  }
+  };
 
-  const onWindowScroll = () => {
-    if (clicked !== 0) {
-      setClicked(false);
-    }
-  }
-
-  const handleClick = () => {
+  const handleToggleMenu = () => {
     setClicked(!clicked);
-  }
+  };
 
-  const hamClasses = clicked ? "ham-1 close-1" : clicked === 0 ? "ham-1" : "ham-1 start-1";
-  const navItemClasses = clicked ? "nav-item nav-item-open" : clicked === 0 ? "nav-item" : "nav-item nav-item-close";
-  const navRightInnerClasses = clicked ? "nav-right-inner nav-right-inner-open" : clicked === 0 ? "nav-right-inner" : "nav-right-inner nav-right-inner-close";
+  const hamClasses =
+    clicked ? 'ham-1 close-1' : clicked === 0 ? 'ham-1' : 'ham-1 start-1';
+  const navItemClasses =
+    clicked ? 'nav-item nav-item-open'
+      : clicked === 0 ? 'nav-item'
+        : 'nav-item nav-item-close';
+  const navRightSurfaceModifier =
+    clicked === true ? 'nav-right-surface--open'
+      : clicked === false ? 'nav-right-surface--close'
+        : '';
+
+  const isMenuOpen = clicked === true;
+
   return (
     <>
-      {navLinkClicked ? (<div className="black-screen in" />) : (<div className="black-screen out" />)}
+      {navLinkClicked ? <div className="black-screen in" /> : <div className="black-screen out" />}
 
-      <div className="nav-bar" >
+      <div className="nav-bar">
         <div className="nav-left">
           <NavLink data-to="/" className="nav-logo" activeClassName="selected" exact to="/">
             <img
               data-to="/"
               className="nav-logo__img"
-              src={`${import.meta.env.BASE_URL}logo.png`}
+              src={`${import.meta.env.BASE_URL}logo_minimalist.svg`}
               alt="Jatin Kumar"
             />
           </NavLink>
         </div>
+
         <div className="nav-right-wrapper">
           <div className="nav-right">
-            <div className={navRightInnerClasses}>
-              <NavLink data-to="/" onClick={handleNavLinkClick} className={navItemClasses} activeClassName="selected" exact to="/"><span data-to="/" className="nav-item-span-1">Home</span></NavLink>
-              <NavLink data-to="/about" onClick={handleNavLinkClick} className={navItemClasses} activeClassName="selected" exact to="/about"><span data-to="/about" className="nav-item-span-2">About Me</span></NavLink>
-              <NavLink data-to="/work" onClick={handleNavLinkClick} className={navItemClasses} activeClassName="selected" exact to="/work"><span data-to="/work" className="nav-item-span-3">Work</span></NavLink>
-              <NavLink data-to="/projects" onClick={handleNavLinkClick} className={navItemClasses} activeClassName="selected" exact to="/projects"><span data-to="/projects" className="nav-item-span-4">Projects</span></NavLink>
-              {/* <NavLink data-to="/blog" onClick={handleNavLinkClick} className={navItemClasses} activeClassName="selected" exact to="/blog"><span data-to="/blog" className="nav-item-span-5">Blog</span></NavLink> */}
-              <NavLink data-to="/contact" onClick={handleNavLinkClick} className={navItemClasses} activeClassName="selected" exact to="/contact"><span data-to="/contact" className="nav-item-span-6">Contact</span></NavLink>
-            </div>
-            <div onClick={handleClick} className="ham-hide-wrapper">
-              <div className={hamClasses}>
-                <div className="line line1"></div>
-                <div className="line line2"></div>
-                <div className="line line3"></div>
+            <div
+              className={`nav-right-surface${navRightSurfaceModifier ? ` ${navRightSurfaceModifier}` : ''}`}
+            >
+              <div className="nav-right-expandable">
+                <div
+                  id="nav-primary-panel"
+                  className="nav-right-inner"
+                  role="navigation"
+                  aria-label="Site sections"
+                  aria-hidden={!isMenuOpen}
+                >
+                  {NAV_LINKS.map((item) => (
+                    <NavLink
+                      key={item.to}
+                      data-to={item.to}
+                      onClick={handleNavLinkClick}
+                      className={navItemClasses}
+                      activeClassName="selected"
+                      exact
+                      to={item.to}
+                      tabIndex={isMenuOpen ? 0 : -1}
+                    >
+                      <span className="nav-item-text">{item.label}</span>
+                    </NavLink>
+                  ))}
+                </div>
               </div>
+              <button
+                type="button"
+                className="ham-hide-wrapper"
+                onClick={handleToggleMenu}
+                aria-expanded={isMenuOpen}
+                aria-controls="nav-primary-panel"
+                aria-label={isMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+              >
+                <div className={hamClasses} aria-hidden>
+                  <div className="line line1" />
+                  <div className="line line2" />
+                  <div className="line line3" />
+                </div>
+              </button>
             </div>
           </div>
         </div>
-      </div></>
-  )
-}
+      </div>
+    </>
+  );
+};
 
 export default withRouter(Nav);

@@ -1,5 +1,6 @@
 .sub-heading{
   font-family: Futura, 'sans-serif';
+  font-weight: 900;
   font-size: 36px;
   color: #999;
   margin-top:5vh;
@@ -36,6 +37,7 @@
       margin-left: 10px;
       font-size: 12px;
       font-family: Futura, 'sans-serif';
+      font-weight: 900;
     }
 
     &::after{
@@ -116,6 +118,7 @@
   position: absolute;
   font-size: 30vh;
   font-family: Futura;
+  font-weight: 900;
   color: #171717;
 }
 
@@ -157,6 +160,7 @@
 
   label, .buttons{
     font-family: Futura, 'sans-serif';
+    font-weight: 900;
   }
 
   .input-container{
@@ -206,6 +210,7 @@
       border:none;
       font-size: 28px;
       font-family: Futura, 'sans-serif';
+      font-weight: 900;
       letter-spacing: 0.1em;
       color: #fff;
       background-color: #555;

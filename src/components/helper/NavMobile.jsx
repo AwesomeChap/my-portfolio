@@ -10,13 +10,12 @@ const NavMobile = (props) => {
   const [selected, setSelected] = useState(false);
 
   useEffect(() => {
-    ROUTES.forEach((route, routeIndex)=>{
-      if(route === props.history.location.pathname) {
+    ROUTES.forEach((route, routeIndex) => {
+      if (route === props.history.location.pathname) {
         setSelected(routeIndex + 1);
-        return routeIndex + 1; 
       }
     });
-  })
+  });
 
   useEffect(() => {
     setClicked(!clicked);
