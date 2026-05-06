@@ -6,31 +6,40 @@ import { projects } from './helper/data';
 import Mouse from './helper/Mouse';
 import ScrollTopButton from './helper/ScrollTopButton';
 import ProjectList from './helper/ProjectList';
-import dataUri from './helper/data-uri.json';
-import '../styles/projects.scss'
+import projectsHeroImg from '../images/projects-hero.png';
+import '../styles/pages.scss';
+import '../styles/projects.scss';
 import MetaTags from 'react-meta-tags';
+import DistortedPixelsPortrait from './helper/DistortedPixelsPortrait';
 
 const DEFAULT_FILTER = "Show All";
+
+const ProjectsHeroPhoto = ({ src, alt }) => (
+  <div className="about-pixel">
+    <img src={src} alt={alt} className="about-pixel__photo" />
+  </div>
+);
 
 export default (props) => {
   const [selectedFilter, setSelectedFilter] = useState(DEFAULT_FILTER);
   const [noOfProjects, setNoOfProjects] = useState(0);
+  const [tabletView, setTabletView] = useState(undefined);
 
   useEffect(() => {
-    let looped = false;
-    let count = 0;
-
+    setTabletView(window.innerWidth <= 1024);
     props.trackPageView();
+    const onResize = () => setTabletView(window.innerWidth <= 1024);
+    window.addEventListener('resize', onResize);
+    return () => window.removeEventListener('resize', onResize);
+  }, []);
 
-    projects.forEach((project, i) => {
-      if (project.keywords.indexOf(selectedFilter) !== -1) count++;
-      if (i === projects.length - 1) looped = true;
+  useEffect(() => {
+    let count = 0;
+    projects.forEach((project) => {
+      if (project.keywords.indexOf(selectedFilter) !== -1) count += 1;
     });
-
-    if (looped) {
-      setNoOfProjects(count);
-    }
-  }, [selectedFilter])
+    setNoOfProjects(count);
+  }, [selectedFilter]);
 
   const checkItem = (item) => selectedFilter !== item;
 
@@ -49,6 +58,8 @@ export default (props) => {
     return <div key={`keyword-${index}-${kw}`} onClick={handleClick} data-name={kw} className={classes}>{kw}</div>
   });
 
+  const useDistortedHero = tabletView === false;
+
   return (
     <>
       <MetaTags>
@@ -58,17 +69,19 @@ export default (props) => {
                   same time.They also make learning new skills very easy and enjoyable as
                   you mostly are working on something that you love and enjoy."/>
       </MetaTags>
-      <div className="section">
+      <div className="section section-work">
 
         <div className="inner-section">
 
           <div className="sub-section">
 
             <div className="image-container">
-              <div className="image-border">
-                <div className="image">
-                  <img src={dataUri.projectImg} alt="" />
-                </div>
+              <div className="image">
+                {useDistortedHero ? (
+                  <DistortedPixelsPortrait src={projectsHeroImg} alt="Developer desk with laptop and dual monitors" />
+                ) : (
+                  <ProjectsHeroPhoto src={projectsHeroImg} alt="Developer desk with laptop and dual monitors" />
+                )}
               </div>
             </div>
 

@@ -17,8 +17,9 @@ $red: #ff0d2d;
   padding-bottom: 0;
 }
 
-/* About-page specific typography/surface polish */
-.section-about {
+/* About + Work: shared typography, hero band, glass cards, links */
+.section-about,
+.section-work {
   position: relative;
 
   .inner-section {
@@ -53,8 +54,65 @@ $red: #ff0d2d;
     word-break: break-word;
   }
 
-  .skill-wrapper,
   .block-items-wrapper {
+    font-size: 22px;
+  }
+
+  .block-items-wrapper .block-item {
+    background: rgba(46, 46, 46, 0.34);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.24), 0 2px 10px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(16px) saturate(140%);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+
+    .item-heading {
+      margin-bottom: 0.875rem;
+      letter-spacing: 0.015em;
+    }
+  }
+
+  .hglt,
+  .block-items-wrapper .block-item .item-heading span,
+  .block-items-wrapper .block-item .item-content span {
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .block-items-wrapper .block-item .item-heading span {
+    color: #666;
+  }
+
+  .block-items-wrapper .block-item .item-content span {
+    padding: 2px 8px;
+    color: #fff;
+  }
+
+  a {
+    display: inline;
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.9);
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    padding: 0 1px 0.08em;
+    background: linear-gradient(0deg, $red, $red) 0 100% / 100% 2px no-repeat;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+    transition: color 0.25s ease, background-size 0.25s ease;
+
+    &:hover,
+    &:focus-visible {
+      color: #fff;
+      background: linear-gradient(
+          0deg,
+          rgba(255, 13, 45, 0.58),
+          rgba(255, 13, 45, 0.58)
+        )
+        0 100% / 100% 52% no-repeat;
+    }
+  }
+}
+
+.section-about {
+  .skill-wrapper {
     font-size: 22px;
   }
 
@@ -87,64 +145,14 @@ $red: #ff0d2d;
     }
   }
 
-  .block-items-wrapper .block-item {
-    background: rgba(46, 46, 46, 0.34);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.24), 0 2px 10px rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(16px) saturate(140%);
-    -webkit-backdrop-filter: blur(16px) saturate(140%);
-
-    .item-heading {
-      margin-bottom: 0.875rem;
-      letter-spacing: 0.015em;
-    }
-  }
-
-  /* Remove gray highlight chips from About content. */
-  .hglt,
-  .block-items-wrapper .block-item .item-heading span,
-  .block-items-wrapper .block-item .item-content span {
-    background: transparent;
-    box-shadow: none;
-  }
-
-  .block-items-wrapper .block-item .item-heading span {
-    color: #666;
-  }
-
-  .block-items-wrapper .block-item .item-content span {
-    padding: 2px 8px;
-    color: #fff;
-  }
-
-  /* Highlight treatment across About page: italic for non-link highlights. */
   span:not(a span) {
     font-style: italic;
   }
+}
 
-  /* Link accent: inline so text can wrap; clone decoration = underline per line. */
-  a {
-    display: inline;
-    text-decoration: none;
-    color: rgba(255, 255, 255, 0.9);
-    overflow-wrap: anywhere;
-    word-break: break-word;
-    padding: 0 1px 0.08em;
-    background: linear-gradient(0deg, $red, $red) 0 100% / 100% 2px no-repeat;
-    box-decoration-break: clone;
-    -webkit-box-decoration-break: clone;
-    transition: color 0.25s ease, background-size 0.25s ease;
-
-    &:hover,
-    &:focus-visible {
-      color: #fff;
-      background: linear-gradient(
-          0deg,
-          rgba(255, 13, 45, 0.58),
-          rgba(255, 13, 45, 0.58)
-        )
-        0 100% / 100% 52% no-repeat;
-    }
-  }
+/* Work hero: monochrome to match site gray / red accent (Projects keeps full color) */
+.work-page .image-container .image {
+  filter: grayscale(1) contrast(1.08) brightness(1.02);
 }
 
 .inner-section {
@@ -432,9 +440,15 @@ $red: #ff0d2d;
 }
 
 @media only screen and (max-width: 1224px) {
-  .section-about {
+  .section-about,
+  .section-work {
     .text,
-    .block-items-wrapper,
+    .block-items-wrapper {
+      font-size: 18px;
+    }
+  }
+
+  .section-about {
     .skill-wrapper {
       font-size: 18px;
     }
@@ -552,12 +566,19 @@ $red: #ff0d2d;
 }
 
 @media only screen and (max-width: 479px) {
-  .section-about {
+  .section-about,
+  .section-work {
     .text {
       line-height: 1.76;
       letter-spacing: 0.005em;
     }
 
+    .block-items-wrapper .block-item {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  .section-about {
     .skills-block {
       row-gap: 1rem;
     }
@@ -569,10 +590,6 @@ $red: #ff0d2d;
         font-size: 16px;
         margin: 0;
       }
-    }
-
-    .block-items-wrapper .block-item {
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     }
   }
 

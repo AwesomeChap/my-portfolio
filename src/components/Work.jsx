@@ -1,17 +1,38 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Heading from './helper/Headings';
 import Footer from './helper/Footer';
 import '../styles/pages.scss';
 import { works } from './helper/data';
-import dataUri from './helper/data-uri.json';
+import workHeroImg from '../images/work-hero.png';
 import MetaTags from 'react-meta-tags';
 import Mouse from './helper/Mouse';
 import ScrollTopButton from './helper/ScrollTopButton';
+import DistortedPixelsPortrait from './helper/DistortedPixelsPortrait';
+
+const WorkHeroPhoto = ({ src, alt }) => (
+  <div className="about-pixel">
+    <img src={src} alt={alt} className="about-pixel__photo" />
+  </div>
+);
 
 export default (props) => {
+  const [breakline, setBreakline] = useState(undefined);
+  const [tabletView, setTabletView] = useState(undefined);
+
   useEffect(() => {
+    setBreakline(window.innerWidth <= 767);
+    setTabletView(window.innerWidth <= 1024);
     props.trackPageView();
-  })
+    window.addEventListener('resize', onWindowResize);
+    return () => window.removeEventListener('resize', onWindowResize);
+  }, []);
+
+  const onWindowResize = () => {
+    setBreakline(window.innerWidth <= 767);
+    setTabletView(window.innerWidth <= 1024);
+  };
+
+  const useDistortedHero = tabletView === false;
 
   return (
     <>
@@ -23,14 +44,16 @@ export default (props) => {
                   experience came from contribution to small startups and college
                   technical festivals"/>
       </MetaTags>
-      <div className="section">
+      <div className="section section-work work-page">
         <div className="inner-section">
           <div className="sub-section">
             <div className="image-container">
-              <div className="image-border">
-                <div className="image">
-                  <img src={dataUri.workImg} alt="" />
-                </div>
+              <div className="image">
+                {useDistortedHero ? (
+                  <DistortedPixelsPortrait src={workHeroImg} alt="Developer desk with laptop and dual monitors" />
+                ) : (
+                  <WorkHeroPhoto src={workHeroImg} alt="Developer desk with laptop and dual monitors" />
+                )}
               </div>
             </div>
             <div className="text-container">
@@ -49,19 +72,27 @@ export default (props) => {
         </div>
         <div className="inner-section">
           <Heading repair={{ y: -80 }} heading={"EXPERIENCE"} subHeading={'Time - A Great Teacher'} />
-          <div className="block">
+          <div className="block-items-wrapper">
             {
               works.map((work, i) => (
                 <div key={"work" + i} className="block-item">
-                  <div className="item-heading">{work.place} 
-                    <br />
+                  <div className="item-heading">
+                    {work.place}
+                    {breakline && <br />}
+                    {' '}
                     <span>{work.date}</span>
-                    {work.link !== "" && <a target="_blank" href={work.link}><i className="fas fa-external-link-alt"></i></a>}
+                    {work.link !== "" && (
+                      <a target="_blank" rel="noopener noreferrer" href={work.link}>
+                        <i className="fas fa-external-link-alt"></i>
+                      </a>
+                    )}
                   </div>
-                  <div className="item-content"> <span className="hglt-red">{work.designation}</span> </div>
+                  <div className="item-content">
+                    <span>{work.designation}</span>
+                  </div>
                   <ul className="block-ul">
-                    {work.rspbs.map((resp, i) => (
-                      <li key={"block-li" + i} className="block-li">{resp}</li>
+                    {work.rspbs.map((resp, j) => (
+                      <li key={"block-li" + i + "-" + j} className="block-li">{resp}</li>
                     ))}
                   </ul>
                 </div>
@@ -70,8 +101,8 @@ export default (props) => {
           </div>
         </div>
       </div>
-      <ScrollTopButton />
       <Mouse />
+      <ScrollTopButton />
       <Footer />
     </>
   )
