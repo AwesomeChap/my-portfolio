@@ -3,9 +3,12 @@ import * as THREE from 'three';
 
 /**
  * Desktop: full-viewport transparent WebGL over the liquid gradient — only the intro
- * title is drawn (canvas texture). Same DataTexture distortion + pixelated entry (uReveal)
- * as Codrops-style demos, without a photo background.
+ * title is drawn (canvas texture). DataTexture distortion + mosaic reveal; mosaic count
+ * is higher than stock Codrops so blocks read finer on large viewports.
  */
+
+/** Mosaic divisions at reveal start (higher = finer blocks). */
+const HERO_MOSAIC_MAX = 112;
 
 const VERTEX_SHADER = `
 varying vec2 vUv;
@@ -25,9 +28,9 @@ uniform float uReveal;
 varying vec2 vUv;
 void main() {
   float r = clamp(uReveal, 0.0, 1.0);
-  float mosaic = max(1.0, floor(mix(48.0, 1.0, pow(r, 0.62))));
+  float mosaic = max(1.0, floor(mix(${HERO_MOSAIC_MAX}.0, 1.0, pow(r, 0.56))));
   vec2 cell = floor(vUv * mosaic) / mosaic;
-  vec2 uvUse = mix(cell, vUv, smoothstep(0.5, 1.0, r));
+  vec2 uvUse = mix(cell, vUv, smoothstep(0.28, 0.91, r));
   vec2 newUV = (uvUse - vec2(0.5)) * resolution.zw + vec2(0.5);
   vec4 offset = texture2D(uDataTexture, vUv);
   vec4 tex = texture2D(uTexture, newUV - uDistortionStrength * offset.rg);
@@ -92,11 +95,11 @@ function easeOutCubic(t) {
 }
 
 const SETTINGS = {
-  grid: 50,
-  mouse: 0.25,
-  strength: 0.11,
-  relaxation: 0.9,
-  distortion: 0.02,
+  grid: 64,
+  mouse: 0.21,
+  strength: 0.086,
+  relaxation: 0.92,
+  distortion: 0.013,
 };
 
 const REVEAL_DELAY_MS = 320;
