@@ -14,7 +14,7 @@
   }
 }
 
-/* ScrollToTop adds this during route change (~380ms) — tuck cue behind content */
+/* ScrollToTop adds this during route change — tuck cue behind content */
 body.page-transitioning #mouse {
   opacity: 0;
   visibility: hidden;

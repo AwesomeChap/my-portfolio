@@ -1,10 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { NavLink, withRouter } from 'react-router-dom';
-import { beginPageTransition } from './pageTransition';
+import { beginPageTransition, getNavPushDelay, isPixelTransitionEnabled } from './pageTransition';
 import '../../styles/nav.scss';
 import '../../styles/pages.scss';
-
-const TIMEOUT_DELAY = 700;
 
 const NAV_LINKS = [
   { to: '/', label: 'Home' },
@@ -18,7 +16,16 @@ const Nav = (props) => {
   const [clicked, setClicked] = useState(0);
   const [navLinkClicked, setNavLinkClicked] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [reducedMotion, setReducedMotion] = useState(false);
   const lastScrollTopRef = useRef(0);
+
+  useEffect(() => {
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+    setReducedMotion(mq.matches);
+    const onChange = () => setReducedMotion(mq.matches);
+    mq.addEventListener('change', onChange);
+    return () => mq.removeEventListener('change', onChange);
+  }, []);
 
   useEffect(() => {
     const resolveScrollContainer = () => {
@@ -129,10 +136,11 @@ const Nav = (props) => {
     if (clicked !== 0) {
       setClicked(false);
       e.preventDefault();
+      const delay = getNavPushDelay();
       setTimeout(() => {
         props.history.push(to);
         setNavLinkClicked(false);
-      }, TIMEOUT_DELAY);
+      }, delay);
     }
   };
 
@@ -157,9 +165,18 @@ const Nav = (props) => {
     to === '/' ? props.location.pathname === '/' : props.location.pathname === to
   );
 
+  /* GSAP pixel curtain replaces the horizontal wipe when enabled (see PixelTransitionOverlay). */
+  const showBlackScreen = reducedMotion || !isPixelTransitionEnabled();
+
   return (
     <>
-      {navLinkClicked ? <div className="black-screen in" /> : <div className="black-screen out" />}
+      {showBlackScreen ? (
+        navLinkClicked ? (
+          <div className={`black-screen in${reducedMotion ? ' black-screen--reduced' : ''}`} />
+        ) : (
+          <div className={`black-screen out${reducedMotion ? ' black-screen--reduced' : ''}`} />
+        )
+      ) : null}
 
       <div className="nav-bar">
         <div className="nav-left">

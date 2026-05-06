@@ -3,8 +3,9 @@ import { Route, BrowserRouter as Router } from 'react-router-dom'
 import NavBar from './components/helper/Nav';
 import NavBarMobile from './components/helper/NavMobile';
 import LiquidGradientBackground from './components/helper/LiquidGradientBackground';
-import { About, Blog, Contact, Home, Work, Projects, Footer } from './components/index';
+import { About, Blog, Contact, Home, Work, Projects, PageTransitionDemo } from './components/index';
 import ScrollToTop from './components/helper/ScrollToTop';
+import PixelTransitionOverlay from './components/helper/PixelTransitionOverlay';
 import Cursor from './components/helper/cursor';
 import ReactGa from "react-ga";
 
@@ -47,12 +48,16 @@ export default () => {
             <ScrollToTop>
               {isBiggerScreenDevice ? <NavBar /> : <NavBarMobile />}
             </ScrollToTop>
+            {isBiggerScreenDevice ? <PixelTransitionOverlay /> : null}
+            <div id="route-outlet">
             <Route exact path="/" render={(props) => <Home {...props} trackPageView={trackPageView} trackClickEvent={trackClickEvent} />}></Route>
             <Route exact path="/about" render={(props) => <About {...props} trackPageView={trackPageView} />}></Route>
             <Route exact path="/work" render={(props) => <Work {...props} trackPageView={trackPageView} />}></Route>
             <Route exact path="/projects" render={(props) => <Projects {...props} trackPageView={trackPageView} />}></Route>
             <Route exact path="/blog" render={(props) => <Blog {...props} trackPageView={trackPageView} />}></Route>
             <Route exact path="/contact" render={(props) => <Contact {...props} trackPageView={trackPageView} />}></Route>
+            <Route exact path="/transition-demo" render={(props) => <PageTransitionDemo {...props} trackPageView={trackPageView} />}></Route>
+            </div>
             {isBiggerScreenDevice && <Cursor />}
           </Router>
         </div>

@@ -1,9 +1,11 @@
 import React, { useEffect, useRef } from 'react';
 import { withRouter } from 'react-router-dom';
 import smoothscroll from 'smoothscroll-polyfill';
-
-/** Hide fixed scroll cue (#mouse) while route swap is in progress */
-const PAGE_TRANSITION_MS = 380;
+import {
+  getPageTransitionClearMs,
+  isPageTransitionActiveViewport,
+  prefersReducedMotion,
+} from './pageTransition';
 
 /** html is overflow:hidden; body/#root often carry scroll — reset every candidate */
 function scrollRouteToTop() {
@@ -39,6 +41,7 @@ function scrollRouteToTop() {
 
 const ScrollToTop = (props) => {
   const skipTransitionClassRef = useRef(true);
+  const skipOutletEnterRef = useRef(true);
 
   useEffect(() => {
     smoothscroll.polyfill();
@@ -50,15 +53,37 @@ const ScrollToTop = (props) => {
   }, [props.location.pathname, props.location.search]);
 
   useEffect(() => {
+    if (skipOutletEnterRef.current) {
+      skipOutletEnterRef.current = false;
+      return undefined;
+    }
+
+    const outlet = document.getElementById('route-outlet');
+    if (!outlet || !isPageTransitionActiveViewport() || prefersReducedMotion()) return undefined;
+
+    outlet.classList.remove('route-outlet--enter');
+    void outlet.offsetWidth;
+    outlet.classList.add('route-outlet--enter');
+    const animId = window.setTimeout(() => {
+      outlet.classList.remove('route-outlet--enter');
+    }, 480);
+
+    return () => window.clearTimeout(animId);
+  }, [props.location.pathname, props.location.search]);
+
+  useEffect(() => {
     if (skipTransitionClassRef.current) {
       skipTransitionClassRef.current = false;
       return undefined;
     }
 
+    if (!isPageTransitionActiveViewport()) return undefined;
+
     document.body.classList.add('page-transitioning');
+    const ms = getPageTransitionClearMs();
     const timeoutId = window.setTimeout(() => {
-      document.body.classList.remove('page-transitioning');
-    }, PAGE_TRANSITION_MS);
+      document.body.classList.remove('page-transitioning', 'page-transition--pixel');
+    }, Math.max(0, ms));
 
     return () => {
       window.clearTimeout(timeoutId);
