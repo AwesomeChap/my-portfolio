@@ -187,11 +187,11 @@ $red: #ff0d2d;
     background: transparent;
     box-shadow: none;
     transition: none;
-    overflow: hidden;
-    box-shadow:
-      0 0 0 1px rgba(255, 255, 255, 0.1),
-      0 14px 28px rgba(0, 0, 0, 0.34);
-    background: #1a1a1a;
+    overflow: visible;
+
+    &:has(.about-pixel) {
+      border-radius: 0;
+    }
 
     .about-img,
     img {
@@ -202,7 +202,40 @@ $red: #ff0d2d;
     }
 
     .about-img {
-      filter: saturate(1.04) contrast(1.05);
+      filter: saturate(1.08) contrast(1.12);
+      image-rendering: pixelated;
+      image-rendering: crisp-edges;
+    }
+
+    .about-img--pixel {
+      display: block;
+      filter: none;
+      image-rendering: pixelated;
+      image-rendering: crisp-edges;
+    }
+
+    .about-pixel {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+      border-radius: 0;
+      isolation: isolate;
+    }
+
+    .about-pixel--distorted .about-pixel__canvas {
+      pointer-events: none;
+    }
+
+    .about-pixel__canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+      image-rendering: pixelated;
+      image-rendering: crisp-edges;
+      filter:
+        drop-shadow(0 0 0 1px rgba(255, 255, 255, 0.1))
+        drop-shadow(0 14px 28px rgba(0, 0, 0, 0.34));
     }
 
   }
@@ -548,7 +581,7 @@ $red: #ff0d2d;
     .image {
       width: min(76vw, 320px);
       padding: 0;
-      border-radius: 50%;
+      border-radius: 0;
     }
   }
   .hglt-red {
