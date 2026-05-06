@@ -14,6 +14,17 @@
   }
 }
 
+/* ScrollToTop adds this during route change (~380ms) — tuck cue behind content */
+body.page-transitioning #mouse {
+  opacity: 0;
+  visibility: hidden;
+  z-index: -1;
+
+  .scroll-cue {
+    pointer-events: none;
+  }
+}
+
 .scroll-cue {
   display: inline-flex;
   align-items: center;

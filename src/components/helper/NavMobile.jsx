@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { NavLink, withRouter } from 'react-router-dom';
 import SplitText from './SplitText';
+import { beginPageTransition } from './pageTransition';
 import '../../styles/NavMobile.scss';
 
 const ROUTES = ['/', '/about', '/work', '/projects', '/contact'];
@@ -34,7 +35,9 @@ const NavMobile = (props) => {
       e.preventDefault();
       setSelected(index);
       setClicked(false);
+      return;
     }
+    beginPageTransition();
   }
 
   const handleClick = () => {

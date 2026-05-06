@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { NavLink, withRouter } from 'react-router-dom';
+import { beginPageTransition } from './pageTransition';
 import '../../styles/nav.scss';
 import '../../styles/pages.scss';
 
@@ -123,6 +124,8 @@ const Nav = (props) => {
       return;
     }
 
+    beginPageTransition();
+
     if (clicked !== 0) {
       setClicked(false);
       e.preventDefault();
@@ -160,7 +163,15 @@ const Nav = (props) => {
 
       <div className="nav-bar">
         <div className="nav-left">
-          <NavLink data-to="/" className="nav-logo" activeClassName="selected" exact to="/" title="Jatin Kumar">
+          <NavLink
+            data-to="/"
+            className="nav-logo"
+            activeClassName="selected"
+            exact
+            to="/"
+            title="Jatin Kumar"
+            onClick={handleNavLinkClick}
+          >
             <img
               data-to="/"
               className="nav-logo__img"
