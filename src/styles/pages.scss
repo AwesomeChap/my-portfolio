@@ -227,12 +227,21 @@ $red: #ff0d2d;
       pointer-events: none;
     }
 
+    .about-pixel__photo {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      filter:
+        drop-shadow(0 0 0 1px rgba(255, 255, 255, 0.1))
+        drop-shadow(0 14px 28px rgba(0, 0, 0, 0.34));
+    }
+
     .about-pixel__canvas {
       display: block;
       width: 100%;
       height: 100%;
-      image-rendering: pixelated;
-      image-rendering: crisp-edges;
       filter:
         drop-shadow(0 0 0 1px rgba(255, 255, 255, 0.1))
         drop-shadow(0 14px 28px rgba(0, 0, 0, 0.34));

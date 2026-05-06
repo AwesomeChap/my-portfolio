@@ -3,7 +3,7 @@ import Heading from './helper/Headings';
 import Footer from './helper/Footer';
 import '../styles/pages.scss';
 import { works } from './helper/data';
-import { workImg } from './helper/data-uri';
+import dataUri from './helper/data-uri.json';
 import MetaTags from 'react-meta-tags';
 import Mouse from './helper/Mouse';
 import ScrollTopButton from './helper/ScrollTopButton';
@@ -29,7 +29,7 @@ export default (props) => {
             <div className="image-container">
               <div className="image-border">
                 <div className="image">
-                  <img src={workImg} alt="" />
+                  <img src={dataUri.workImg} alt="" />
                 </div>
               </div>
             </div>

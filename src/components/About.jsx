@@ -1,142 +1,19 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import Heading from './helper/Headings';
 import Mouse from './helper/Mouse'; 
 import Footer from './helper/Footer';
 import MetaTags from 'react-meta-tags';
 import { set1, set2 } from './helper/data';
-import { newAboutImg } from './helper/data-uri';
+import aboutImg from '../images/about-me.png';
 import ScrollTopButton from './helper/ScrollTopButton';
 import DistortedPixelsPortrait from './helper/DistortedPixelsPortrait';
 
-/** Crisp pixelated portrait: high-res downsample + nearest-neighbor upscale (DPR-aware). */
-const PixelatedPortrait = ({ src, alt }) => {
-  const canvasRef = useRef(null);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return undefined;
-
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return undefined;
-
-    const img = new Image();
-    img.decoding = 'async';
-    img.src = src;
-
-    let rafId = 0;
-    let resizeObserver;
-
-    const drawCover = (targetCtx, targetW, targetH) => {
-      const iw = img.naturalWidth || 1;
-      const ih = img.naturalHeight || 1;
-      const scale = Math.max(targetW / iw, targetH / ih);
-      const drawW = iw * scale;
-      const drawH = ih * scale;
-      const drawX = (targetW - drawW) / 2;
-      const drawY = 0;
-      targetCtx.drawImage(img, drawX, drawY, drawW, drawH);
-    };
-
-    const draw = () => {
-      if (!img.complete || !img.naturalWidth) return;
-
-      const rect = canvas.getBoundingClientRect();
-      const cssSize = Math.max(1, Math.round(Math.min(rect.width, rect.height)));
-      if (!cssSize) return;
-
-      const dpr = Math.min(window.devicePixelRatio || 1, 2.5);
-      const buf = Math.max(1, Math.round(cssSize * dpr));
-
-      if (canvas.width !== buf || canvas.height !== buf) {
-        canvas.width = buf;
-        canvas.height = buf;
-      }
-      canvas.style.width = `${cssSize}px`;
-      canvas.style.height = `${cssSize}px`;
-
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      ctx.imageSmoothingEnabled = false;
-
-      // Macro-pixel size (~4.5–6.75 CSS px per block): slightly lower res than before.
-      const blockCss = Math.max(4, Math.min(6.75, cssSize / 76));
-      const sampleSize = Math.max(56, Math.round(cssSize / blockCss));
-
-      const low = document.createElement('canvas');
-      low.width = sampleSize;
-      low.height = sampleSize;
-      const lowCtx = low.getContext('2d');
-      if (!lowCtx) return;
-      lowCtx.imageSmoothingEnabled = true;
-      lowCtx.imageSmoothingQuality = 'high';
-      drawCover(lowCtx, sampleSize, sampleSize);
-
-      ctx.clearRect(0, 0, cssSize, cssSize);
-
-      // Pixel-aligned circular silhouette: only whole macro-cells inside the circle
-      // (no smooth crop slicing through blocks).
-      const cx = cssSize / 2;
-      const cy = cssSize / 2;
-      const r = cssSize / 2;
-
-      for (let j = 0; j < sampleSize; j += 1) {
-        for (let i = 0; i < sampleSize; i += 1) {
-          const x0 = Math.round((i * cssSize) / sampleSize);
-          const x1 = Math.round(((i + 1) * cssSize) / sampleSize);
-          const y0 = Math.round((j * cssSize) / sampleSize);
-          const y1 = Math.round(((j + 1) * cssSize) / sampleSize);
-          const px = (x0 + x1) / 2;
-          const py = (y0 + y1) / 2;
-          const dist = Math.hypot(px - cx, py - cy);
-          if (dist > r) continue;
-
-          const dw = x1 - x0;
-          const dh = y1 - y0;
-          if (dw < 1 || dh < 1) continue;
-
-          const edgeStart = r * 0.78;
-          let alpha = 1;
-          if (dist > edgeStart) {
-            const t = (dist - edgeStart) / (r - edgeStart);
-            alpha = 1 - t * t * 0.82;
-          }
-          if (alpha < 0.04) continue;
-
-          ctx.save();
-          ctx.globalAlpha = alpha;
-          ctx.drawImage(low, i, j, 1, 1, x0, y0, dw, dh);
-          ctx.restore();
-        }
-      }
-    };
-
-    const queue = () => {
-      cancelAnimationFrame(rafId);
-      rafId = requestAnimationFrame(draw);
-    };
-
-    img.onload = queue;
-    if (img.complete) queue();
-
-    if (window.ResizeObserver) {
-      resizeObserver = new ResizeObserver(queue);
-      if (canvas.parentElement) resizeObserver.observe(canvas.parentElement);
-    } else {
-      window.addEventListener('resize', queue);
-    }
-
-    return () => {
-      cancelAnimationFrame(rafId);
-      if (resizeObserver) resizeObserver.disconnect();
-      else window.removeEventListener('resize', queue);
-    };
-  }, [src]);
-
-  return (
-    <div className="about-pixel" role="img" aria-label={alt}>
-      <canvas ref={canvasRef} className="about-pixel__canvas" />
-    </div>
-  );
-};
+/** Smooth square photo fallback (tablet / mobile) — no canvas pixelation. */
+const AboutPortraitPhoto = ({ src, alt }) => (
+  <div className="about-pixel">
+    <img src={src} alt={alt} className="about-pixel__photo" />
+  </div>
+);
 
 export default (props) => {
   const [breakline, setBreakline] = useState(undefined);
@@ -235,9 +112,9 @@ export default (props) => {
             <div className="image-container">
               <div className="image">
                 {useDistortedPortrait ? (
-                  <DistortedPixelsPortrait src={newAboutImg} alt="Jatin Kumar portrait" />
+                  <DistortedPixelsPortrait src={aboutImg} alt="Jatin Kumar portrait" />
                 ) : (
-                  <PixelatedPortrait src={newAboutImg} alt="Jatin Kumar portrait" />
+                  <AboutPortraitPhoto src={aboutImg} alt="Jatin Kumar portrait" />
                 )}
               </div>
             </div>

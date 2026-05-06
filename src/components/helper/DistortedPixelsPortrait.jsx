@@ -2,9 +2,17 @@ import React, { useRef, useEffect } from 'react';
 import * as THREE from 'three';
 
 /**
- * Same DataTexture distortion + shader mosaic as DistortedPixelsHero (home),
- * but the texture is the About pixelated portrait (2D canvas → Texture).
+ * DataTexture distortion + mosaic. Unlike the hero, the portrait keeps visible
+ * macro-blocks after reveal (hero ends at mosaic 1 = fully smooth, so changing
+ * “48 vs 18” there was invisible at rest).
  */
+
+/** Mosaic grid at start of reveal (higher = smaller blocks). */
+const PORTRAIT_MOSAIC_START = 56;
+/** Mosaic grid once reveal finishes — higher = finer “pixels” but still visibly gridded. */
+const PORTRAIT_MOSAIC_END = 32;
+/** 0..1: blend toward smooth UVs at full reveal (higher = softer / smaller-looking blocks). */
+const PORTRAIT_MOSAIC_BLEND_AT_REST = 0.62;
 
 const VERTEX_SHADER = `
 varying vec2 vUv;
@@ -24,9 +32,10 @@ uniform float uReveal;
 varying vec2 vUv;
 void main() {
   float r = clamp(uReveal, 0.0, 1.0);
-  float mosaic = max(1.0, floor(mix(48.0, 1.0, pow(r, 0.62))));
+  float mosaic = max(2.0, floor(mix(${PORTRAIT_MOSAIC_START}.0, ${PORTRAIT_MOSAIC_END}.0, pow(r, 0.62))));
   vec2 cell = floor(vUv * mosaic) / mosaic;
-  vec2 uvUse = mix(cell, vUv, smoothstep(0.5, 1.0, r));
+  float revealBlend = smoothstep(0.5, 1.0, r) * ${PORTRAIT_MOSAIC_BLEND_AT_REST};
+  vec2 uvUse = mix(cell, vUv, revealBlend);
   vec2 newUV = (uvUse - vec2(0.5)) * resolution.zw + vec2(0.5);
   vec4 offset = texture2D(uDataTexture, vUv);
   vec4 tex = texture2D(uTexture, newUV - uDistortionStrength * offset.rg);
@@ -51,72 +60,27 @@ const SETTINGS = {
   distortion: 0.02,
 };
 
-const REVEAL_DELAY_MS = 200;
-const REVEAL_DURATION_MS = 1000;
+const REVEAL_DELAY_MS = 320;
+const REVEAL_DURATION_MS = 1200;
 
-function drawPixelatedPortraitToCanvas(ctx, img, cssSize) {
+/** ~8% overscan so UV distortion at borders samples real pixels (less clamp banding). */
+const TEXTURE_BLEED = 1.085;
+
+function drawSmoothSquarePortraitToCanvas(ctx, img, cssSize) {
   if (!img.complete || !img.naturalWidth) return;
 
-  const drawCover = (targetCtx, targetW, targetH) => {
-    const iw = img.naturalWidth || 1;
-    const ih = img.naturalHeight || 1;
-    const scale = Math.max(targetW / iw, targetH / ih);
-    const drawW = iw * scale;
-    const drawH = ih * scale;
-    const drawX = (targetW - drawW) / 2;
-    const drawY = 0;
-    targetCtx.drawImage(img, drawX, drawY, drawW, drawH);
-  };
+  const iw = img.naturalWidth || 1;
+  const ih = img.naturalHeight || 1;
+  const scale = Math.max(cssSize / iw, cssSize / ih) * TEXTURE_BLEED;
+  const drawW = iw * scale;
+  const drawH = ih * scale;
+  const drawX = (cssSize - drawW) / 2;
+  const drawY = 0;
 
-  ctx.imageSmoothingEnabled = false;
-
-  const blockCss = Math.max(4, Math.min(6.75, cssSize / 76));
-  const sampleSize = Math.max(56, Math.round(cssSize / blockCss));
-
-  const low = document.createElement('canvas');
-  low.width = sampleSize;
-  low.height = sampleSize;
-  const lowCtx = low.getContext('2d');
-  if (!lowCtx) return;
-  lowCtx.imageSmoothingEnabled = true;
-  lowCtx.imageSmoothingQuality = 'high';
-  drawCover(lowCtx, sampleSize, sampleSize);
-
+  ctx.imageSmoothingEnabled = true;
+  ctx.imageSmoothingQuality = 'high';
   ctx.clearRect(0, 0, cssSize, cssSize);
-
-  const cx = cssSize / 2;
-  const cy = cssSize / 2;
-  const r = cssSize / 2;
-
-  for (let j = 0; j < sampleSize; j += 1) {
-    for (let i = 0; i < sampleSize; i += 1) {
-      const x0 = Math.round((i * cssSize) / sampleSize);
-      const x1 = Math.round(((i + 1) * cssSize) / sampleSize);
-      const y0 = Math.round((j * cssSize) / sampleSize);
-      const y1 = Math.round(((j + 1) * cssSize) / sampleSize);
-      const px = (x0 + x1) / 2;
-      const py = (y0 + y1) / 2;
-      const dist = Math.hypot(px - cx, py - cy);
-      if (dist > r) continue;
-
-      const dw = x1 - x0;
-      const dh = y1 - y0;
-      if (dw < 1 || dh < 1) continue;
-
-      const edgeStart = r * 0.78;
-      let alpha = 1;
-      if (dist > edgeStart) {
-        const t = (dist - edgeStart) / (r - edgeStart);
-        alpha = 1 - t * t * 0.82;
-      }
-      if (alpha < 0.04) continue;
-
-      ctx.save();
-      ctx.globalAlpha = alpha;
-      ctx.drawImage(low, i, j, 1, 1, x0, y0, dw, dh);
-      ctx.restore();
-    }
-  }
+  ctx.drawImage(img, drawX, drawY, drawW, drawH);
 }
 
 function createPortraitSketch(container, src) {
@@ -192,13 +156,15 @@ function createPortraitSketch(container, src) {
 
     sourceCanvas.width = cssSize;
     sourceCanvas.height = cssSize;
-    drawPixelatedPortraitToCanvas(sourceCtx, img, cssSize);
+    drawSmoothSquarePortraitToCanvas(sourceCtx, img, cssSize);
 
     if (canvasTex) canvasTex.dispose();
     canvasTex = new THREE.Texture(sourceCanvas);
     canvasTex.needsUpdate = true;
     canvasTex.minFilter = THREE.LinearFilter;
     canvasTex.magFilter = THREE.LinearFilter;
+    canvasTex.wrapS = THREE.ClampToEdgeWrapping;
+    canvasTex.wrapT = THREE.ClampToEdgeWrapping;
     if (material) material.uniforms.uTexture.value = canvasTex;
   }
 

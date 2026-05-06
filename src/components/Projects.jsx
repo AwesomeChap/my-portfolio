@@ -6,7 +6,7 @@ import { projects } from './helper/data';
 import Mouse from './helper/Mouse';
 import ScrollTopButton from './helper/ScrollTopButton';
 import ProjectList from './helper/ProjectList';
-import { projectImg } from './helper/data-uri';
+import dataUri from './helper/data-uri.json';
 import '../styles/projects.scss'
 import MetaTags from 'react-meta-tags';
 
@@ -67,7 +67,7 @@ export default (props) => {
             <div className="image-container">
               <div className="image-border">
                 <div className="image">
-                  <img src={projectImg} alt="" />
+                  <img src={dataUri.projectImg} alt="" />
                 </div>
               </div>
             </div>
