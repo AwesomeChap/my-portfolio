@@ -29,6 +29,14 @@ const NavMobile = (props) => {
     setSelected(index);
   }
 
+  const handleNavItemClick = (e, route, index) => {
+    if (props.location.pathname === route) {
+      e.preventDefault();
+      setSelected(index);
+      setClicked(false);
+    }
+  }
+
   const handleClick = () => {
     setClicked(!clicked);
   }
@@ -45,14 +53,35 @@ const NavMobile = (props) => {
       'CONTACT']; 
 
     const navLnks = menu_items.map((name, i) => {
+      const isCurrent = props.location.pathname === routes[i];
       return (
-        <NavLink key={i} activeClassName="selected-m-nav-item" className={MINClasses} exact to={routes[i]}
-        >
-          <SplitText 
-            onClick={handleSelect} index={i + 1} 
-            selected={selected} name={name}
-          />
-        </NavLink>
+        isCurrent ? (
+          <span
+            key={i}
+            className={`${MINClasses} selected-m-nav-item`}
+            aria-current="page"
+            onClick={() => setClicked(false)}
+          >
+            <SplitText
+              onClick={handleSelect} index={i + 1}
+              selected={selected} name={name}
+            />
+          </span>
+        ) : (
+          <NavLink
+            key={i}
+            activeClassName="selected-m-nav-item"
+            className={MINClasses}
+            exact
+            to={routes[i]}
+            onClick={(e) => handleNavItemClick(e, routes[i], i + 1)}
+          >
+            <SplitText
+              onClick={handleSelect} index={i + 1}
+              selected={selected} name={name}
+            />
+          </NavLink>
+        )
       );
     })
     return (

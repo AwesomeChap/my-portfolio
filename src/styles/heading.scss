@@ -4,11 +4,8 @@ $red : #ff0d2d;
   position: relative;
   display: inline-block;
   font-family: Futura;
-  font-weight: 900;
-  padding: 10px 20px;
-  // margin-top:10vh;
-  margin-bottom:80px;
-  box-sizing: border-box;
+  padding: 0.75rem 1.25rem;
+  margin-bottom: 5rem;
 }
 
 .heading-bg{
@@ -17,82 +14,69 @@ $red : #ff0d2d;
   left: 0;
   width:100%;
   height: 100%;
-  background: #222;
-  box-shadow: 0 0 10px #000;
+  background: rgba(46, 46, 46, 0.34);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.24), 0 2px 10px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
 }
 
 .heading{
   color: #ddd;
-  font-size:72px;
+  font-size: 4.5rem;
   position: relative;
-  transform: translate(0%,0%);
-  font-family: Futura;
   font-weight: 900;
 }
 
 .desc{
   display: inline-block;
-  padding: 3px 10px;
-  margin-top:-5px;
+  padding: 0.25rem 0.5rem;
   background: $red;
-  box-shadow: 0 0 10px #000;
+  box-shadow: 0 0 0.63rem #000;
   position: absolute;
+  left: 1.25rem;
+  top: 100%;
+  transform: translateY(-50%);
   color: #ddd;
-  font-size: 28px;
+  font-size: 1.75rem;
+  line-height: 1;
+  font-weight: 700;
 }
+
 
 @media only screen and (max-width: 1224px) {
   .heading-block{
-    padding:16px;
-    margin-bottom:40px;
+    padding: 1rem;
+    margin-bottom: 3.5rem;
   }
 
   .heading{
-    font-size: 60px;
+    font-size: 3.75rem;
   }
 
   .desc{
-    padding: 3px 6px;
-    font-size: 24px;
-  }
-  
-}
-
-@media only screen and (max-width: 1224px) {
-  .heading-block{
-    padding:16px;
-    margin-bottom:40px;
-  }
-
-  .heading{
-    font-size: 60px;
-  }
-
-  .desc{
-    padding: 3px 6px;
-    font-size: 24px;
+    font-size: 1.5rem;
   }
   
 }
 
 @media only screen and (max-width: 479px) {
   .heading-block{
-    padding:3vw;
-    margin-bottom:5vw;
+    padding: 0.75rem;
+    margin-bottom: 3rem;
   }
 
   .heading-bg{
-    box-shadow: 0 0 5px #000;
+    box-shadow: 0 0 0.3rem #000;
   }
 
   .heading{
-    font-size: 10vw;
+    font-size: 2rem;
   }
 
   .desc{
-    padding: 2px 4px;
-    font-size: 4vw;
-    box-shadow: 0 0 5px #000;
+    padding: 0.2rem 0.3rem;
+    font-size: 1rem;
+    box-shadow: 0 0 0.3rem #000;
   }
   
 }

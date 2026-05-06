@@ -1,22 +1,155 @@
 $red: #ff0d2d;
-$eio: cubic-bezier(0.77, 0, 0.175, 1);
-$font-normal: 24px;
 
 .section {
-  height: 100%;
-  max-height: 100%;
+  height: auto;
+  max-height: none;
   width: 100%;
   display: flex;
   align-items: center;
   flex-direction: column;
-  margin-top: 10vh;
+  box-sizing: border-box;
+}
+
+/* Vertical rhythm: padding on section + gap between inner-sections (not .home). */
+.section:has(> .inner-section) {
+  gap: 6rem;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+/* About-page specific typography/surface polish */
+.section-about {
+  position: relative;
+
+  .inner-section {
+    width: min(78%, 1120px);
+  }
+
+  @media only screen and (min-width: 768px) {
+    > .inner-section:first-child {
+      height: 100vh;
+      min-height: 100vh;
+      flex: 0 0 100vh;
+      display: grid;
+      align-content: center;
+    }
+
+    > .inner-section:first-child .text-container .text {
+      padding: 0.75rem 1.25rem;
+      background: rgba(46, 46, 46, 0.34);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.24), 0 2px 10px rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(16px) saturate(140%);
+      -webkit-backdrop-filter: blur(16px) saturate(140%);
+    }
+  }
+
+  .text {
+    text-align: left;
+    line-height: 1.9;
+    color: rgba(221, 221, 221, 0.92);
+    font-size: 18px;
+    letter-spacing: 0.008em;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  .skill-wrapper,
+  .block-items-wrapper {
+    font-size: 22px;
+  }
+
+  .skills-block {
+    column-gap: 1rem;
+    row-gap: 1.75rem;
+  }
+
+  .skills-block .set {
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+
+    .skill-wrapper {
+      font-size: 18px;
+      margin: 0;
+    }
+
+    .skill {
+      font-weight: 500;
+      color: rgba(221, 221, 221, 0.9);
+    }
+
+    .proficiency {
+      background: rgba(46, 46, 46, 0.34);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.22), 0 1px 6px rgba(0, 0, 0, 0.18);
+      backdrop-filter: blur(10px) saturate(130%);
+      -webkit-backdrop-filter: blur(10px) saturate(130%);
+      overflow: hidden;
+    }
+  }
+
+  .block-items-wrapper .block-item {
+    background: rgba(46, 46, 46, 0.34);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.24), 0 2px 10px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(16px) saturate(140%);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+
+    .item-heading {
+      margin-bottom: 0.875rem;
+      letter-spacing: 0.015em;
+    }
+  }
+
+  /* Remove gray highlight chips from About content. */
+  .hglt,
+  .block-items-wrapper .block-item .item-heading span,
+  .block-items-wrapper .block-item .item-content span {
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .block-items-wrapper .block-item .item-heading span {
+    color: #666;
+  }
+
+  .block-items-wrapper .block-item .item-content span {
+    padding: 2px 8px;
+    color: #fff;
+  }
+
+  /* Highlight treatment across About page: italic for non-link highlights. */
+  span:not(a span) {
+    font-style: italic;
+  }
+
+  /* Link accent: inline so text can wrap; clone decoration = underline per line. */
+  a {
+    display: inline;
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.9);
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    padding: 0 1px 0.08em;
+    background: linear-gradient(0deg, $red, $red) 0 100% / 100% 2px no-repeat;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+    transition: color 0.25s ease, background-size 0.25s ease;
+
+    &:hover,
+    &:focus-visible {
+      color: #fff;
+      background: linear-gradient(
+          0deg,
+          rgba(255, 13, 45, 0.58),
+          rgba(255, 13, 45, 0.58)
+        )
+        0 100% / 100% 52% no-repeat;
+    }
+  }
 }
 
 .inner-section {
-  padding: 10vh 0;
+  padding: 0;
   width: 75%;
-  // position: relative;
-  // overflow: hidden;
 }
 
 .sub-section {
@@ -39,102 +172,87 @@ $font-normal: 24px;
   width: 40%;
   height: 100%;
   order: 1;
-  // min-width:30vw;
-  // height: 100%;
+  position: relative;
 
-  .image-border {
-    width: 28vw;
-    height: 28vw;
-    // box-sizing: border-box;
-    border: 10px solid #777;
-    border-top-color: transparent;
-    border-bottom-color: transparent;
+  .image {
+    position: relative;
+    width: min(28vw, 400px);
+    aspect-ratio: 1 / 1;
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-    animation: rotateCW 10s linear infinite;
+    padding: 0;
+    transform: none;
+    background: transparent;
+    box-shadow: none;
+    transition: none;
+    overflow: hidden;
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.1),
+      0 14px 28px rgba(0, 0, 0, 0.34);
+    background: #1a1a1a;
 
-    .image {
-      width: 92%;
-      height: 92%;
-      background: #222;
-      border-radius: 50%;
-      animation: rotateCW 10s linear infinite reverse;
-      overflow: hidden;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      box-shadow: 0 0 20px #000;
-
-      .about-img {
-        width: 100%;
-        height: 100%;
-      }
-
-      img {
-        width: 70%;
-        height: 70%;
-      }
+    .about-img,
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
     }
-  }
 
-  @keyframes rotateCW {
-    from {
-      transform: rotate(0deg);
+    .about-img {
+      filter: saturate(1.04) contrast(1.05);
     }
-    to {
-      transform: rotate(360deg);
-    }
+
   }
 }
 
 .sec-contact {
-  // border: 1px solid #333;
   box-sizing: border-box;
   width: 100%;
   height: 100%;
   display: flex;
   justify-content: center;
-  // align-items: center;
 }
 
 .sec2-contact {
-  padding: 1.3vw; //20px
-  // margin-top: 10vh;
+  padding: 1.25rem;
   &.ct {
     align-items: center;
   }
   .inner-section {
     width: 75%;
-    // margin-top:7vh;
-    // background: #151515;
   }
 }
 
-.block {
-  min-height: 20vh;
+.block-items-wrapper {
+  min-height: 12rem;
   width: 100%;
-  font-size: $font-normal;
   height: 100%;
   display: flex;
   flex-direction: column;
+  gap: 1.5rem;
+  overflow: visible;
 
   .block-ul {
     list-style: square;
   }
 
   .block-item {
-    margin: 2vh 0;
-    padding: 2vh;
-    background: #222;
-    box-shadow: 0 0 5px #000;
+    margin: 0;
+    padding: 1.25rem;
+    background: rgba(46, 46, 46, 0.34);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.24), 0 2px 10px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(16px) saturate(140%);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+    overflow: visible;
 
     .item-heading {
       font-family: Futura;
       font-weight: 900;
       font-size: 32px;
-      margin-bottom: 2vh;
+      margin-bottom: 1.25rem;
 
       span {
         color: #666;
@@ -143,7 +261,6 @@ $font-normal: 24px;
       }
 
       a {
-        // text-decoration: none;
         color: #aaa;
       }
 
@@ -160,10 +277,8 @@ $font-normal: 24px;
 
     .item-content {
       span {
-        // border:1px solid $red;
         color: #fff;
         padding: 2px 8px;
-        // box-shadow: 0 0 10px #000;
         background-color: #333;
       }
     }
@@ -172,9 +287,9 @@ $font-normal: 24px;
 
 .hglt {
   display: inline-block;
-  background: #333;
-  color: #ccc;
-  // border-bottom: 2px solid $red;
+  background: transparent;
+  color: #fff;
+  margin-right: 0.25em;
 }
 
 .hglt-red {
@@ -187,8 +302,6 @@ $font-normal: 24px;
 }
 
 .skills-block {
-  // background: green;
-  min-height: 50vh;
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -196,33 +309,26 @@ $font-normal: 24px;
   .set {
     width: 45%;
     height: 100%;
-    // margin: 2vh 0;
 
     .skill-wrapper {
-      margin: 4vh 0;
+      margin: 2.75rem 0;
       display: flex;
       align-items: center;
-      font-size: $font-normal;
       justify-content: space-between;
-
-      .skill {
-        // font-weight: 900;
-      }
 
       .proficiency {
         width: 60%;
         height: 9px;
         position: relative;
-        background-color: #333;
+        background: rgba(46, 46, 46, 0.34);
         transform-origin: right center;
         transform: scaleX(0);
-        // border-radius: 30px;
-        // overflow: hidden;
-        // border: 2px solid rgba(0, 0, 0, 0.486);
-        box-shadow: 0 0 5px #000;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.22), 0 1px 6px rgba(0, 0, 0, 0.18);
+        backdrop-filter: blur(10px) saturate(130%);
+        -webkit-backdrop-filter: blur(10px) saturate(130%);
+        overflow: hidden;
         .barValue {
           position: absolute;
-          // top:-20%;
           height: 100%;
           background-color: $red;
           transition: all 1s;
@@ -255,7 +361,6 @@ $font-normal: 24px;
 }
 
 .text {
-  font-size: $font-normal;
   text-align: justify;
 }
 
@@ -273,11 +378,11 @@ $font-normal: 24px;
   height: 100%;
   width: 50%;
 
-  margin-top: -3.5vh;
+  margin-top: -2rem;
 
   &:nth-child(2) {
-    margin-left: 5vh;
-    min-height: 70vh;
+    margin-left: 3rem;
+    min-height: 28rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -285,7 +390,23 @@ $font-normal: 24px;
 }
 
 @media only screen and (max-width: 1224px) {
-  .block,
+  .section-about {
+    .text,
+    .block-items-wrapper,
+    .skill-wrapper {
+      font-size: 18px;
+    }
+
+    .skills-block .set {
+
+      .skill-wrapper {
+        font-size: 18px;
+        margin: 0;
+      }
+    }
+  }
+
+  .block-items-wrapper,
   .skill-wrapper,
   .text {
     font-size: 20px;
@@ -297,16 +418,16 @@ $font-normal: 24px;
   }
 
   .inner-sub-section {
-    margin-top: 0vh;
+    margin-top: 0;
 
     &:nth-child(2) {
-      height: 50vh;
+      height: 20rem;
     }
   }
 
   .image-container {
-    .image-border {
-      border-width: 7px;
+    .image {
+      padding: 0;
     }
   }
 
@@ -322,6 +443,17 @@ $font-normal: 24px;
 }
 
 @media only screen and (max-width: 1024px) {
+  .section-about {
+    .skills-block {
+      .set {
+        &:not(:first-child) {
+          margin-top: 0;
+        }
+        gap: 1.75rem;
+      }
+    }
+  }
+
   .skills-block {
     flex-direction: column;
     justify-content: center;
@@ -329,7 +461,7 @@ $font-normal: 24px;
       width: 100%;
       margin: 0;
       .skill-wrapper {
-        margin-bottom: 0vh;
+        margin-bottom: 0;
         .proficiency {
           height: 8px;
         }
@@ -337,8 +469,10 @@ $font-normal: 24px;
     }
   }
 
-  .inner-section {
-    padding: 5vh 0;
+  .section:has(> .inner-section) {
+    gap: 4.5rem;
+    padding-top: 2.5rem;
+    padding-bottom: 0;
   }
 
   .sub-section {
@@ -349,7 +483,7 @@ $font-normal: 24px;
     width: 100%;
     &:nth-child(2) {
       min-height: 0;
-      margin-left: 0vh;
+      margin-left: 0;
     }
   }
 
@@ -359,24 +493,47 @@ $font-normal: 24px;
   }
   .image-container {
     display: none;
-    margin-top: 5vh;
+    margin-top: 2rem;
     width: 100%;
     order: 2;
 
-    .image-border {
-      width: 40vw;
-      height: 40vw;
+    .image {
+      width: min(56vw, 360px);
     }
   }
 }
 
 @media only screen and (max-width: 767px) {
   .section {
-    margin-top: 3vh;
+    margin-top: 1.5rem;
   }
 }
 
 @media only screen and (max-width: 479px) {
+  .section-about {
+    .text {
+      line-height: 1.76;
+      letter-spacing: 0.005em;
+    }
+
+    .skills-block {
+      row-gap: 1rem;
+    }
+
+    .skills-block .set {
+      gap: 1rem;
+
+      .skill-wrapper {
+        font-size: 16px;
+        margin: 0;
+      }
+    }
+
+    .block-items-wrapper .block-item {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+  }
+
   .inner-sub-section {
     &:nth-child(2) {
       height: auto;
@@ -386,11 +543,12 @@ $font-normal: 24px;
 
   .image-container {
     display: flex;
-    height: 38vh;
-    .image-border {
-      border-width: 6px;
-      width: 32vh;
-      height: 32vh;
+    height: auto;
+    margin-bottom: 1rem;
+    .image {
+      width: min(76vw, 320px);
+      padding: 0;
+      border-radius: 50%;
     }
   }
   .hglt-red {
@@ -400,9 +558,14 @@ $font-normal: 24px;
   .text {
     font-size: 16px;
   }
+  .section:has(> .inner-section) {
+    gap: 72px;
+    padding-top: 1.5rem;
+    padding-bottom: 0;
+  }
+
   .inner-section {
     width: 90%;
-    padding: 3vh 0;
   }
   .skills-block {
     flex-direction: column;
@@ -411,7 +574,7 @@ $font-normal: 24px;
       width: 100%;
       margin: 0;
       .skill-wrapper {
-        margin: 10px 0 0 0;
+        margin: 0;
         font-size: 16px;
         .proficiency {
           height: 6px;
@@ -419,7 +582,7 @@ $font-normal: 24px;
       }
     }
   }
-  .block,
+  .block-items-wrapper,
   .skill-wrapper {
     font-size: 16px;
     .block-item {

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import Heading from './helper/Headings';
 import Mouse from './helper/Mouse'; 
 import Footer from './helper/Footer';
-import ExpandText from "./helper/ExpandText";
 import MetaTags from 'react-meta-tags';
 import { set1, set2 } from './helper/data';
 import { newAboutImg } from './helper/data-uri';
@@ -12,49 +11,44 @@ export default (props) => {
   const [breakline, setBreakline] = useState(undefined);
 
   useEffect(() => {
-    setBreakline(window - innerWidth <= 767);
-    animateSkillBars();
-    document.querySelector('body').addEventListener("scroll", animateSkillBars);
-  
+    setBreakline(window.innerWidth <= 767);
     props.trackPageView();
 
     window.addEventListener("resize", onWindowResize);
     return () => {
       window.removeEventListener("resize", onWindowResize);
     }
-  })
+  }, [])
+
+  useEffect(() => {
+    /* Observe .skill-wrapper, not .proficiency: scaleX(0) on the bar track
+       shrinks its intersection geometry so lower rows may never hit the threshold. */
+    const rows = document.querySelectorAll("#about-skills .skill-wrapper");
+    if (!rows.length) return undefined;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const proficiency = entry.target.querySelector(".proficiency");
+          const bar = proficiency?.querySelector(".barValue");
+          if (entry.isIntersecting) {
+            if (proficiency) proficiency.classList.add("animateSkillBarWrapper");
+            if (bar) bar.classList.add("animateSkillBar");
+            return;
+          }
+          if (proficiency) proficiency.classList.remove("animateSkillBarWrapper");
+          if (bar) bar.classList.remove("animateSkillBar");
+        });
+      },
+      { threshold: 0.2, rootMargin: "0px 0px 12% 0px" }
+    );
+
+    rows.forEach((row) => observer.observe(row));
+    return () => observer.disconnect();
+  }, []);
 
   const onWindowResize = () => {
     setBreakline(window.innerWidth <= 767);
-  }
-
-  const animateSkillBars = (_className) => {
-    const bars = document.querySelectorAll(".barValue");
-    const barWrappers = document.querySelectorAll(".proficiency");
-
-    bars.forEach(bar => {
-      if (bar.getBoundingClientRect().top <= window.innerHeight && bar.getBoundingClientRect().top > 0) {
-        bar.classList.add("animateSkillBar");'MongoDB', 'Express', 'React', 'Node'
-      }
-      else if (bar.getBoundingClientRect().top >= window.innerHeight && bar.getBoundingClientRect().top > 0) {
-        bar.classList.remove("animateSkillBar");
-      }
-      if (bar.getBoundingClientRect().top < 0) {
-        bar.classList.remove("animateSkillBar");
-      }
-    });
-
-    barWrappers.forEach(bw => {
-      if (bw.getBoundingClientRect().top <= window.innerHeight && bw.getBoundingClientRect().top > 0) {
-        bw.classList.add("animateSkillBarWrapper");
-      }
-      else if (bw.getBoundingClientRect().top >= window.innerHeight && bw.getBoundingClientRect().top > 0) {
-        bw.classList.remove("animateSkillBarWrapper");
-      }
-      if (bw.getBoundingClientRect().top < 0) {
-        bw.classList.remove("animateSkillBarWrapper");
-      }
-    });
   }
 
   const getSkillsSet = (set) => (
@@ -98,27 +92,27 @@ export default (props) => {
       <MetaTags>
         <title>About - Jatin Kumar</title>
       </MetaTags>
-      <div className="section">
-
+      <div className="section section-about">
         <div className="inner-section">
 
           <div className="sub-section">
             <div className="image-container">
-              <div className="image-border">
-                <div className="image">
-                  <img className="about-img" src={newAboutImg} alt="" />
-                </div>
+              <div className="image">
+                <img className="about-img" src={newAboutImg} alt="" />
               </div>
             </div>
 
 
             <div className="text-container">
               <div>
-                <Heading heading={"ABOUT ME"} subHeading={'A brief introduction'} />
+                <Heading heading={"ABOUT ME"} subHeading={'Who am I?'} />
                 <div className="text">
                   Hi there, I am Jatin Kumar from New Delhi, who likes to mix code and creativity.
                   I am always up for learning something new. I am currently in my {semester()} Semester of <span className="hglt">Bachelor Informatik</span> which I am pursuing from
-                  &nbsp;<ExpandText terms={['Paris', 'Lodron', 'Universität', 'Salzburg']} />.
+                  &nbsp;
+                  <a href="https://www.plus.ac.at/" target="_blank" rel="noopener noreferrer">
+                    University of Salzburg
+                  </a>.
                   In my free time I like to play cricket, make drawings, go for a walk and watch science fiction movies.
               </div>
               </div>
@@ -128,8 +122,8 @@ export default (props) => {
 
         </div>
 
-        <div className="inner-section">
-          <Heading repair={{ y: -90 }} heading={"SKILLS"} subHeading={'Stuff I love'} />
+        <div className="inner-section" id="about-skills">
+          <Heading repair={{ y: -90 }} heading={"SKILLS"} subHeading={'My Stack'} />
           <div className="skills-block">
             <div className="set">
               {getSkillsSet(set1)}
@@ -142,14 +136,14 @@ export default (props) => {
 
         <div className="inner-section">
           <Heading repair={{ y: -190 }} heading={"ACHEIVEMENTS"} subHeading={'Some worthy payoffs'} />
-          <div className="block">
+          <div className="block-items-wrapper">
             <div className="block-item">
               <div className="item-heading">HackNSUT, NSUT {breakline && <br />} <span>March,31 2019</span></div>
-              <div className="item-content">Our Team Came at <span>1 Position</span></div>
+              <div className="item-content">Our Team Came at <span>1st Position</span></div>
             </div>
             <div className="block-item">
               <div className="item-heading">WebQuicky, BPIT {breakline && <br />} <span>April,10 2018</span></div>
-              <div className="item-content">Our Team Came at <span>2 Position</span></div>
+              <div className="item-content">Our Team Came at <span>2nd Position</span></div>
             </div>
           </div>
         </div>

@@ -399,6 +399,25 @@ void main() {
 }
 `;
 
+function resolveScrollContainer() {
+  const candidates = [
+    document.body,
+    document.documentElement,
+    document.scrollingElement,
+    document.getElementById('root'),
+    document.querySelector('.router-wrapper'),
+  ].filter(Boolean);
+
+  const seen = new Set();
+  for (const el of candidates) {
+    if (seen.has(el)) continue;
+    seen.add(el);
+    if (el.scrollHeight - el.clientHeight > 2) return el;
+  }
+
+  return document.scrollingElement || document.body;
+}
+
 function viewPlaneSize(camera) {
   const fovRad = (camera.fov * Math.PI) / 180;
   const height = Math.abs(camera.position.z * Math.tan(fovRad / 2) * 2);
@@ -475,6 +494,21 @@ export default function LiquidGradientBackground() {
     scene.add(mesh);
 
     mount.appendChild(renderer.domElement);
+    renderer.domElement.style.transition = 'opacity 120ms linear';
+
+    const updateScrollFade = () => {
+      // Fade by top visible route section progress.
+      const hostSection = document.querySelector('.section');
+      if (!hostSection) {
+        renderer.domElement.style.opacity = '1';
+        return;
+      }
+      const rect = hostSection.getBoundingClientRect();
+      const localScrolled = Math.max(0, -rect.top);
+      const fadeDistance = Math.max(window.innerHeight * 0.75, 280);
+      const opacity = 1 - Math.min(localScrolled / fadeDistance, 1);
+      renderer.domElement.style.opacity = `${opacity}`;
+    };
 
     /** Canvas is behind content (`z-index: -1`), so we listen on `window` and map to mount UVs. */
     const onPointerMove = (e) => {
@@ -502,6 +536,12 @@ export default function LiquidGradientBackground() {
 
     window.addEventListener('pointermove', onPointerMove, { passive: true });
     window.addEventListener('touchmove', onTouchMove, { passive: true });
+    window.addEventListener('scroll', updateScrollFade, { passive: true });
+    document.addEventListener('scroll', updateScrollFade, { passive: true });
+    document.documentElement.addEventListener('scroll', updateScrollFade, { passive: true });
+    document.body.addEventListener('scroll', updateScrollFade, { passive: true });
+    const root = document.getElementById('root');
+    if (root) root.addEventListener('scroll', updateScrollFade, { passive: true });
 
     const onResize = () => {
       if (!mountRef.current) return;
@@ -526,12 +566,18 @@ export default function LiquidGradientBackground() {
     };
 
     window.addEventListener('resize', onResize);
+    updateScrollFade();
     animate();
 
     return () => {
       window.removeEventListener('resize', onResize);
       window.removeEventListener('pointermove', onPointerMove);
       window.removeEventListener('touchmove', onTouchMove);
+      window.removeEventListener('scroll', updateScrollFade);
+      document.removeEventListener('scroll', updateScrollFade);
+      document.documentElement.removeEventListener('scroll', updateScrollFade);
+      document.body.removeEventListener('scroll', updateScrollFade);
+      if (root) root.removeEventListener('scroll', updateScrollFade);
       if (frameRef.current) cancelAnimationFrame(frameRef.current);
       if (mount.contains(renderer.domElement)) {
         mount.removeChild(renderer.domElement);
@@ -542,5 +588,5 @@ export default function LiquidGradientBackground() {
     };
   }, []);
 
-  return <div ref={mountRef} className="background" />;
+  return <div ref={mountRef} className="liquid-gradient-bg" />;
 }

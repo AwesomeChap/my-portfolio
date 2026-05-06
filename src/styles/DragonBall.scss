@@ -2,31 +2,20 @@ $main: #FAB637;
 $secondary: #FFF467;
 $star-main: #AA2A1D;
 
-:root {
-  font-size: 3px;
-  @media screen and (max-width: 479px) {
-    font-size: 2.4px;
-
-    .dragon-ball {
-      top: 10px;
-      right: 10px
-    }
-  }
-}
-
 .dragon-ball {
   appearance: none;
   -webkit-appearance: none;
   border: 0;
   margin: 0;
   padding: 0;
-  font: inherit;
+  font-family: inherit;
+  font-size: 3px;
   line-height: 1;
   text-align: inherit;
   color: inherit;
   cursor: pointer;
-  height: 18rem;
-  width: 18rem;
+  height: 18em;
+  width: 18em;
   background: $main;
   border-radius: 100%;
   box-sizing: border-box;
@@ -110,8 +99,14 @@ $star-main: #AA2A1D;
     top:50%;
     left:50%;
     transform: translate(-50%,-50%);
-    font-size: 5rem;
+    font-size: 5em;
     color: $star-main;
+  }
+
+  @media screen and (max-width: 479px) {
+    font-size: 2.4px;
+    top: 10px;
+    right: 10px;
   }
 
   &:hover {

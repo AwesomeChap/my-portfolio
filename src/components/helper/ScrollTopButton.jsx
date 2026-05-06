@@ -3,15 +3,18 @@ import '../../styles/ScrollTopButton.scss'
 
 export default () => {
   useEffect(() => {
-    document.body.addEventListener('scroll', handleScroll);
+    const scroller = document.scrollingElement || document.documentElement;
+    scroller.addEventListener('scroll', handleScroll);
     if (/Edge/.test(navigator.userAgent)) {
       document.querySelector('.scroll-top-button').style.display = 'none';
     }
-    return () => document.body.removeEventListener('scroll', handleScroll);
-  })
+    handleScroll();
+    return () => scroller.removeEventListener('scroll', handleScroll);
+  }, [])
 
   const handleScroll = () => {
-    if (document.body.scrollTop  <= 10) {
+    const scroller = document.scrollingElement || document.documentElement;
+    if (scroller.scrollTop <= 10) {
       document.querySelector('.scroll-top-button').style.transform = "translateX(-70px) rotate(180deg)";
     }
     else {
@@ -20,10 +23,11 @@ export default () => {
   }
 
   const handleClick = () => {
-    document.body.style.scrollBehavior = "smooth";
+    const scroller = document.scrollingElement || document.documentElement;
+    scroller.style.scrollBehavior = "smooth";
     setTimeout(() => {
-      document.body.scrollTo(0,0);
-      document.body.style.scrollBehavior = "auto";
+      scroller.scrollTo(0,0);
+      scroller.style.scrollBehavior = "auto";
     }, 10);
   }
 

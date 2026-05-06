@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import LiquidGradientBackground from './helper/LiquidGradientBackground';
 import EyesToLogoTransition from "./helper/EyesToLogoTransition";
 import ShareWithLove from './helper/ShareWithLove';
 import DistortedPixelsHero from './helper/DistortedPixelsHero';
@@ -23,7 +22,7 @@ export default (props) => {
     return () => {
       window.removeEventListener('resize', onWindowResize);
     }
-  })
+  }, [])
 
   const onWindowResize = () => {
     setMobileView(window.innerWidth <= 479);
@@ -62,7 +61,7 @@ export default (props) => {
         <meta name="twitter:image" content={portfolioImg} />
       </MetaTags>
       <div className="section home">
-        {mobileView ? <MBackground /> : <LiquidGradientBackground />}
+        {mobileView ? <MBackground /> : null}
         {useDistortedHero ? <DistortedPixelsHero /> : null}
         <div className={`intro ${useDistortedHero ? 'intro--distorted-desktop' : ''}`}>
           <div className="content">

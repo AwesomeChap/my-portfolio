@@ -16,7 +16,66 @@ const NAV_LINKS = [
 const Nav = (props) => {
   const [clicked, setClicked] = useState(0);
   const [navLinkClicked, setNavLinkClicked] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const lastScrollTopRef = useRef(0);
+
+  useEffect(() => {
+    const resolveScrollContainer = () => {
+      const root = document.getElementById('root');
+      const candidates = [
+        document.scrollingElement,
+        document.documentElement,
+        document.body,
+        root
+      ];
+
+      for (const el of candidates) {
+        if (!el) continue;
+        if (el.scrollHeight > el.clientHeight + 1) return el;
+      }
+
+      return document.scrollingElement || document.documentElement || document.body;
+    };
+
+    const getScrollTop = () => {
+      const el = resolveScrollContainer();
+      return Math.max(
+        window.scrollY || 0,
+        window.pageYOffset || 0,
+        document.documentElement?.scrollTop || 0,
+        document.body?.scrollTop || 0,
+        el ? el.scrollTop || 0 : 0
+      );
+    };
+
+    const updateScrolledState = () => {
+      setIsScrolled(getScrollTop() > 0);
+    };
+
+    const root = document.getElementById('root');
+    let pollId = null;
+
+    updateScrolledState();
+    window.addEventListener('scroll', updateScrolledState, { passive: true });
+    document.addEventListener('scroll', updateScrolledState, { passive: true });
+    document.documentElement.addEventListener('scroll', updateScrolledState, { passive: true });
+    document.body.addEventListener('scroll', updateScrolledState, { passive: true });
+    if (root) root.addEventListener('scroll', updateScrolledState, { passive: true });
+    window.addEventListener('wheel', updateScrolledState, { passive: true });
+    window.addEventListener('touchmove', updateScrolledState, { passive: true });
+    pollId = window.setInterval(updateScrolledState, 120);
+
+    return () => {
+      window.removeEventListener('scroll', updateScrolledState);
+      document.removeEventListener('scroll', updateScrolledState);
+      document.documentElement.removeEventListener('scroll', updateScrolledState);
+      document.body.removeEventListener('scroll', updateScrolledState);
+      if (root) root.removeEventListener('scroll', updateScrolledState);
+      window.removeEventListener('wheel', updateScrolledState);
+      window.removeEventListener('touchmove', updateScrolledState);
+      if (pollId) window.clearInterval(pollId);
+    };
+  }, []);
 
   useEffect(() => {
     if (clicked === 0) return undefined;
@@ -55,6 +114,15 @@ const Nav = (props) => {
   const handleNavLinkClick = (e) => {
     setNavLinkClicked(true);
     const to = e.currentTarget.getAttribute('data-to');
+    const isCurrentRoute = props.location.pathname === to;
+
+    if (isCurrentRoute) {
+      e.preventDefault();
+      setClicked(false);
+      setNavLinkClicked(false);
+      return;
+    }
+
     if (clicked !== 0) {
       setClicked(false);
       e.preventDefault();
@@ -79,8 +147,12 @@ const Nav = (props) => {
     clicked === true ? 'nav-right-surface--open'
       : clicked === false ? 'nav-right-surface--close'
         : '';
+  const navScrolledModifier = isScrolled ? 'nav-right-surface--opaque' : '';
 
   const isMenuOpen = clicked === true;
+  const isCurrentRoute = (to) => (
+    to === '/' ? props.location.pathname === '/' : props.location.pathname === to
+  );
 
   return (
     <>
@@ -101,7 +173,7 @@ const Nav = (props) => {
         <div className="nav-right-wrapper">
           <div className="nav-right">
             <div
-              className={`nav-right-surface${navRightSurfaceModifier ? ` ${navRightSurfaceModifier}` : ''}`}
+                className={`nav-right-surface${navRightSurfaceModifier ? ` ${navRightSurfaceModifier}` : ''}${navScrolledModifier ? ` ${navScrolledModifier}` : ''}`}
             >
               <div className="nav-right-expandable">
                 <div
@@ -112,18 +184,29 @@ const Nav = (props) => {
                   aria-hidden={!isMenuOpen}
                 >
                   {NAV_LINKS.map((item) => (
-                    <NavLink
-                      key={item.to}
-                      data-to={item.to}
-                      onClick={handleNavLinkClick}
-                      className={navItemClasses}
-                      activeClassName="selected"
-                      exact
-                      to={item.to}
-                      tabIndex={clicked === true ? 0 : -1}
-                    >
-                      <span className="nav-item-text">{item.label}</span>
-                    </NavLink>
+                    isCurrentRoute(item.to) ? (
+                      <span
+                        key={item.to}
+                        className={`${navItemClasses} selected`}
+                        aria-current="page"
+                        onClick={() => setClicked(false)}
+                      >
+                        <span className="nav-item-text">{item.label}</span>
+                      </span>
+                    ) : (
+                      <NavLink
+                        key={item.to}
+                        data-to={item.to}
+                        onClick={handleNavLinkClick}
+                        className={navItemClasses}
+                        activeClassName="selected"
+                        exact
+                        to={item.to}
+                        tabIndex={clicked === true ? 0 : -1}
+                      >
+                        <span className="nav-item-text">{item.label}</span>
+                      </NavLink>
+                    )
                   ))}
                 </div>
               </div>

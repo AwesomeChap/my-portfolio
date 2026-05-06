@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Route, BrowserRouter as Router } from 'react-router-dom'
 import NavBar from './components/helper/Nav';
 import NavBarMobile from './components/helper/NavMobile';
+import LiquidGradientBackground from './components/helper/LiquidGradientBackground';
 import { About, Blog, Contact, Home, Work, Projects, Footer } from './components/index';
 import ScrollToTop from './components/helper/ScrollToTop';
 import Cursor from './components/helper/cursor';
@@ -40,18 +41,21 @@ export default () => {
   return (
     <>
       <div className="router-wrapper">
-        <Router>
-          <ScrollToTop>
-            {isBiggerScreenDevice ? <NavBar /> : <NavBarMobile />}
-          </ScrollToTop>
-          <Route exact path="/" render={(props) => <Home {...props} trackPageView={trackPageView} trackClickEvent={trackClickEvent} />}></Route>
-          <Route exact path="/about" render={(props) => <About {...props} trackPageView={trackPageView} />}></Route>
-          <Route exact path="/work" render={(props) => <Work {...props} trackPageView={trackPageView} />}></Route>
-          <Route exact path="/projects" render={(props) => <Projects {...props} trackPageView={trackPageView} />}></Route>
-          <Route exact path="/blog" render={(props) => <Blog {...props} trackPageView={trackPageView} />}></Route>
-          <Route exact path="/contact" render={(props) => <Contact {...props} trackPageView={trackPageView} />}></Route>
-          {isBiggerScreenDevice && <Cursor />}
-        </Router>
+        {isBiggerScreenDevice ? <LiquidGradientBackground /> : null}
+        <div className="app-content-layer">
+          <Router>
+            <ScrollToTop>
+              {isBiggerScreenDevice ? <NavBar /> : <NavBarMobile />}
+            </ScrollToTop>
+            <Route exact path="/" render={(props) => <Home {...props} trackPageView={trackPageView} trackClickEvent={trackClickEvent} />}></Route>
+            <Route exact path="/about" render={(props) => <About {...props} trackPageView={trackPageView} />}></Route>
+            <Route exact path="/work" render={(props) => <Work {...props} trackPageView={trackPageView} />}></Route>
+            <Route exact path="/projects" render={(props) => <Projects {...props} trackPageView={trackPageView} />}></Route>
+            <Route exact path="/blog" render={(props) => <Blog {...props} trackPageView={trackPageView} />}></Route>
+            <Route exact path="/contact" render={(props) => <Contact {...props} trackPageView={trackPageView} />}></Route>
+            {isBiggerScreenDevice && <Cursor />}
+          </Router>
+        </div>
       </div>
     </>
   )
