@@ -4,7 +4,6 @@ import smoothscroll from 'smoothscroll-polyfill';
 import {
   getPageTransitionClearMs,
   isPageTransitionActiveViewport,
-  prefersReducedMotion,
 } from './pageTransition';
 
 /** html is overflow:hidden; body/#root often carry scroll — reset every candidate */
@@ -41,7 +40,6 @@ function scrollRouteToTop() {
 
 const ScrollToTop = (props) => {
   const skipTransitionClassRef = useRef(true);
-  const skipOutletEnterRef = useRef(true);
 
   useEffect(() => {
     smoothscroll.polyfill();
@@ -50,25 +48,6 @@ const ScrollToTop = (props) => {
       scrollRouteToTop();
     });
     return () => window.cancelAnimationFrame(id);
-  }, [props.location.pathname, props.location.search]);
-
-  useEffect(() => {
-    if (skipOutletEnterRef.current) {
-      skipOutletEnterRef.current = false;
-      return undefined;
-    }
-
-    const outlet = document.getElementById('route-outlet');
-    if (!outlet || !isPageTransitionActiveViewport() || prefersReducedMotion()) return undefined;
-
-    outlet.classList.remove('route-outlet--enter');
-    void outlet.offsetWidth;
-    outlet.classList.add('route-outlet--enter');
-    const animId = window.setTimeout(() => {
-      outlet.classList.remove('route-outlet--enter');
-    }, 480);
-
-    return () => window.clearTimeout(animId);
   }, [props.location.pathname, props.location.search]);
 
   useEffect(() => {

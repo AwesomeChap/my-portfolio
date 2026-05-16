@@ -14,6 +14,7 @@ module.exports = {
       animation: {
         'share-enter': 'share-appear 0.3s 2.55s forwards',
         'resume-enter': 'share-appear 0.3s 2.5s forwards',
+        'not-found-home-enter': 'share-appear 0.3s 1s forwards',
       },
     },
   },

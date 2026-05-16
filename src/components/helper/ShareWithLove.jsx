@@ -2,10 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import resume from '../../../resume-08-20.pdf';
 /* Pulls in Tailwind utilities only (preflight off in tailwind.config.cjs). Use px/[bracket] sizes — :root font-size is 3px for DragonBall. */
 import '../../styles/tailwind-share.css';
-
-function cx(...parts) {
-  return parts.filter(Boolean).join(' ');
-}
+import { cx, resumeGlassButtonClasses } from './glassCtaButton';
 
 /** Label exit timing — matches label transition max (~0.68s). */
 const SHARE_LABEL_COLLAPSE_MS = 500;
@@ -349,9 +346,7 @@ export default function ShareWithLove({ trackClickEvent }) {
       )}
     >
       <a
-        className={cx(
-          'animate-resume-enter relative ml-0 box-border inline-flex h-[48px] min-h-[48px] cursor-pointer items-center justify-center self-center rounded-[5px] border-none bg-[rgba(46,46,46,0.34)] [backdrop-filter:blur(16px)_saturate(140%)] [-webkit-backdrop-filter:blur(16px)_saturate(140%)] shadow-[0_10px_30px_rgba(0,0,0,0.24),0_2px_10px_rgba(0,0,0,0.2)] px-[20px] py-[10px] text-center text-[16px] tracking-[0.1em] text-white no-underline opacity-0 outline-none [font-family:Futura] [backface-visibility:hidden] [transform:translate(0,-30%)] max-[479px]:h-[42px] max-[479px]:min-h-[42px] max-[479px]:w-[42px] max-[479px]:min-w-[42px] max-[479px]:px-0 max-[479px]:tracking-normal max-[479px]:rounded-[5px]',
-        )}
+        className={resumeGlassButtonClasses()}
         aria-label="View resumé"
         onClick={() => trackClickEvent('Anchor', 'View resumé')}
         href={resume}
