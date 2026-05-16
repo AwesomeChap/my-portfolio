@@ -14,6 +14,22 @@ import DistortedPixelsPortrait from './helper/DistortedPixelsPortrait';
 
 const DEFAULT_FILTER = "Show All";
 
+/** Production: set true when the project grid is ready to ship. */
+const PROJECTS_LIST_LIVE = false;
+
+const DEV_PREVIEW_KEY = "portfolio_projects_list_preview";
+
+function isLocalDevHost() {
+  if (typeof window === "undefined") return false;
+  const host = window.location.hostname;
+  return (
+    host === "localhost" ||
+    host === "127.0.0.1" ||
+    host === "[::1]" ||
+    host.endsWith(".local")
+  );
+}
+
 const ProjectsHeroPhoto = ({ src, alt }) => (
   <div className="about-pixel">
     <img src={src} alt={alt} className="about-pixel__photo" />
@@ -24,13 +40,26 @@ export default (props) => {
   const [selectedFilter, setSelectedFilter] = useState(DEFAULT_FILTER);
   const [noOfProjects, setNoOfProjects] = useState(0);
   const [tabletView, setTabletView] = useState(undefined);
+  const [isLocalhost, setIsLocalhost] = useState(false);
+  const [devShowList, setDevShowList] = useState(false);
 
   useEffect(() => {
     setTabletView(window.innerWidth <= 1024);
     props.trackPageView();
     const onResize = () => setTabletView(window.innerWidth <= 1024);
-    window.addEventListener('resize', onResize);
-    return () => window.removeEventListener('resize', onResize);
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+
+  useEffect(() => {
+    const local = isLocalDevHost();
+    setIsLocalhost(local);
+    if (!local) return;
+    try {
+      setDevShowList(sessionStorage.getItem(DEV_PREVIEW_KEY) === "1");
+    } catch {
+      /* storage unavailable */
+    }
   }, []);
 
   useEffect(() => {
@@ -59,6 +88,18 @@ export default (props) => {
   });
 
   const useDistortedHero = tabletView === false;
+  const showProjectsList = isLocalhost ? devShowList : PROJECTS_LIST_LIVE;
+
+  const toggleDevPreview = () => {
+    const next = !devShowList;
+    setDevShowList(next);
+    try {
+      if (next) sessionStorage.setItem(DEV_PREVIEW_KEY, "1");
+      else sessionStorage.removeItem(DEV_PREVIEW_KEY);
+    } catch {
+      /* storage unavailable */
+    }
+  };
 
   return (
     <>
@@ -99,10 +140,11 @@ export default (props) => {
 
           </div>
         </div>
-        <div className="inner-section">
+        <div className="inner-section" id="projects-make" data-scroll-cue-target>
           <Heading repair={{ y: -90 }} heading={"WHAT I MAKE"} subHeading={'some cool ones'} />
-          <div className="block">
-            <div className="keywords">{kws}</div>
+          {showProjectsList ? (
+            <div className="block">
+              <div className="keywords">{kws}</div>
             {
               selectedFilter === "Show All" ? (
                 <div className="show-filters">Showing all projects. Use the filter to display them by skill or technology</div>
@@ -113,9 +155,48 @@ export default (props) => {
             <div className="projects-container">
               <ProjectList filter={selectedFilter} />
             </div>
-          </div>
+            </div>
+          ) : (
+            <div className="projects-maintenance" role="status" aria-live="polite">
+              <div className="projects-maintenance__ambient" aria-hidden="true" />
+              <div className="projects-maintenance__content">
+                <div className="projects-maintenance__loader" aria-hidden="true">
+                  {Array.from({ length: 8 }, (_, i) => (
+                    <span
+                      key={i}
+                      className="projects-maintenance__loader-cell"
+                      style={{ animationDelay: `${i * 0.14}s` }}
+                    />
+                  ))}
+                </div>
+                <p className="projects-maintenance__eyebrow">Maintenance in progress</p>
+                <p className="projects-maintenance__title">We&apos;ll be right back</p>
+                <p className="projects-maintenance__text">
+                  This section is still under construction. The project showcase will appear
+                  here once the pixel dust settles.
+                </p>
+                <div className="projects-maintenance__rule" aria-hidden="true" />
+              </div>
+            </div>
+          )}
         </div>
       </div>
+
+      {isLocalhost ? (
+        <div className="projects-dev-toggle">
+          <button
+            type="button"
+            className="projects-dev-toggle__btn"
+            onClick={toggleDevPreview}
+            aria-pressed={devShowList}
+          >
+            {devShowList
+              ? "Dev: showing project grid"
+              : "Dev: showing maintenance (prod view)"}
+          </button>
+        </div>
+      ) : null}
+
       <Mouse />
       <ScrollTopButton />
       <Footer />

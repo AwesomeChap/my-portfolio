@@ -139,7 +139,7 @@ export default (props) => {
 
         </div>
 
-        <div className="inner-section" id="about-skills">
+        <div className="inner-section" id="about-skills" data-scroll-cue-target>
           <Heading repair={{ y: -90 }} heading={"SKILLS"} subHeading={'My Stack'} />
           <div className="skills-block">
             <div className="set">

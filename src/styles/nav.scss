@@ -1,6 +1,5 @@
 @use "sass:list";
-
-$red : rgb(255, 13, 45);
+@use 'colors' as *;
 $eio : cubic-bezier(0.77, 0, 0.175, 1);
 $eo : cubic-bezier(0.165, 0.84, 0.44, 1);
 $nav-bg : #272727;
@@ -229,7 +228,7 @@ $nav-opaque-bg: #111111;
 
   &:focus-visible {
     outline: none;
-    box-shadow: inset 0 0 0 2px #ff0d2d;
+    box-shadow: inset 0 0 0 2px $red-brand;
   }
 
   .ham-1{
@@ -310,7 +309,7 @@ $nav-opaque-bg: #111111;
 
   .close-1{
     .line{
-      background-color: $red;
+      background-color: $red-brand;
       height: 2px;
     }
 

@@ -1,4 +1,4 @@
-$red: #ff0d2d;
+@use 'colors' as *;
 
 .section {
   height: auto;
@@ -93,7 +93,7 @@ $red: #ff0d2d;
     overflow-wrap: anywhere;
     word-break: break-word;
     padding: 0 1px 0.08em;
-    background: linear-gradient(0deg, $red, $red) 0 100% / 100% 2px no-repeat;
+    background: linear-gradient(0deg, $red-brand, $red-brand) 0 100% / 100% 2px no-repeat;
     box-decoration-break: clone;
     -webkit-box-decoration-break: clone;
     transition: color 0.25s ease, background-size 0.25s ease;
@@ -103,8 +103,8 @@ $red: #ff0d2d;
       color: #fff;
       background: linear-gradient(
           0deg,
-          rgba(255, 13, 45, 0.58),
-          rgba(255, 13, 45, 0.58)
+          $red-accent-soft,
+          $red-accent-soft
         )
         0 100% / 100% 52% no-repeat;
     }
@@ -320,7 +320,7 @@ $red: #ff0d2d;
         margin: 0 0.5em;
 
         &:hover {
-          color: $red;
+          color: $red-brand;
         }
       }
     }
@@ -345,10 +345,10 @@ $red: #ff0d2d;
 .hglt-red {
   display: inline-block;
   background-color: $red !important;
-  color: #ddd;
+  color: $red-on-pill !important;
   padding: 3px 6px;
-  box-shadow: 0 0 10px #000;
-  border-bottom: 5px solid #ff5e73;
+  box-shadow: $red-pill-shadow;
+  border-bottom: 5px solid $neon_red-light;
 }
 
 .skills-block {
@@ -380,7 +380,7 @@ $red: #ff0d2d;
         .barValue {
           position: absolute;
           height: 100%;
-          background-color: $red;
+          background-color: $red-brand;
           transition: all 1s;
           transform-origin: top left;
           transform: scaleX(0);

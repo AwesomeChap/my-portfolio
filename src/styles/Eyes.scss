@@ -1,4 +1,4 @@
-$red: #ff0d2d;
+@use 'colors' as *;
 
 .hide-eyes {
     appearance: none;
@@ -32,7 +32,7 @@ $red: #ff0d2d;
             height: 2px;
             top: 50%;
             left: 0;
-            background-color: $red;
+            background-color: $red-brand;
             transform-origin: center;
         }
 
@@ -63,7 +63,7 @@ $red: #ff0d2d;
 
         &.countdown {
             circle {
-                stroke: $red;
+                stroke: $red-brand;
                 animation: countdown var(--countdown-duration, 8s) linear forwards;
             }
         }
@@ -377,7 +377,7 @@ $red: #ff0d2d;
 
     @keyframes fill-logo {
         to {
-            fill: $red;
+            fill: $red-brand;
             stroke-width: 0;
         }
     }

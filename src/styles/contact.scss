@@ -1,3 +1,5 @@
+@use 'colors' as *;
+
 .sub-heading{
   font-family: Futura, 'sans-serif';
   font-weight: 900;
@@ -192,7 +194,7 @@
     border-bottom: 2px solid #777; 
 
     &.err{
-      border-bottom: 2px solid #ff0d2d;
+      border-bottom: 2px solid $red-brand;
     }
   }
 
@@ -215,6 +217,11 @@
       color: #fff;
       background-color: #555;
 
+      &.btn-active,
+      &:hover {
+        color: $red-on-pill;
+      }
+
       &::after{
         content:"";
         z-index: -1;
@@ -225,14 +232,15 @@
         height: 100%;
         transform-origin: bottom center;
         transform: scaleY(0);
-        background-color: #ff0d2d;
+        background-color: $red;
         transition: all 0.3s;
       }
     }
 
     .sending.btn{
       position: relative;
-      background-color: #ff0d2d;
+      background-color: $red;
+      color: $red-on-pill;
       overflow: hidden;
       animation: sending-btn 0.3s 2.8s forwards;
       &::after{
@@ -288,10 +296,10 @@
   span{
     font-size: 20px;
     display: inline-block; 
-    color: #fff;
+    color: $red-on-pill;
     width:5vh;
     height: 5vh;
-    background-color: #ff0d2d;
+    background-color: $red;
     box-shadow: 0 0 5px #000000;
     display: flex;
     justify-content: center;

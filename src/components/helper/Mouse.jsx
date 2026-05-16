@@ -94,12 +94,12 @@ export default () => {
     const el = resolveScrollContainer();
     const start = el.scrollTop || 0;
     const max = Math.max(0, el.scrollHeight - el.clientHeight);
-    const skillsSection = document.getElementById('about-skills');
+    const scrollTarget = document.querySelector('[data-scroll-cue-target]');
     let target = start;
 
-    if (skillsSection) {
+    if (scrollTarget) {
       const topGap = window.innerWidth <= 768 ? 28 : 50;
-      const rect = skillsSection.getBoundingClientRect();
+      const rect = scrollTarget.getBoundingClientRect();
       target = Math.min(Math.max(0, start + rect.top - topGap), max);
     } else {
       const delta = Math.round(window.innerHeight * 0.65);

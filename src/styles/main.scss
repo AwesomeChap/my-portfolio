@@ -1,3 +1,14 @@
+@use 'colors' as *;
+
+:root {
+  --theme-red: #{$red};
+  --theme-red-on-pill: #{$red-on-pill};
+  --theme-red-solid: #{$red-brand};
+  --theme-red-brand: #{$red-brand};
+  --theme-red-pill-shadow: #{$red-pill-shadow};
+  --neon-red: #{$neon_red};
+}
+
 #route-outlet {
   position: relative;
   z-index: 1;
@@ -21,7 +32,7 @@ html,body,#root {
 a:focus-visible:not(.share-link),
 button:focus-visible,
 [role="button"]:focus-visible {
-  outline: 2px solid #ff0d2d;
+  outline: 2px solid $red-brand;
   outline-offset: 2px;
 }
 

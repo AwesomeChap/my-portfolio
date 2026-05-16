@@ -1,3 +1,5 @@
+@use 'colors' as *;
+
 .footer{
   font-size: 20px;
   // background-color: #171717;
@@ -35,7 +37,7 @@
       overflow-wrap: anywhere;
       word-break: break-word;
       padding: 0 1px 0.08em;
-      background: linear-gradient(0deg, #ff0d2d, #ff0d2d) 0 100% / 100% 2px no-repeat;
+      background: linear-gradient(0deg, $red-brand, $red-brand) 0 100% / 100% 2px no-repeat;
       box-decoration-break: clone;
       -webkit-box-decoration-break: clone;
       transition: color 0.25s ease, background-size 0.25s ease;
@@ -45,8 +47,8 @@
         color: #fff;
         background: linear-gradient(
             0deg,
-            rgba(255, 13, 45, 0.58),
-            rgba(255, 13, 45, 0.58)
+            $red-accent-soft,
+            $red-accent-soft
           )
           0 100% / 100% 52% no-repeat;
       }

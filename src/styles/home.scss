@@ -1,4 +1,4 @@
-$red : #ff0d2d;
+@use 'colors' as *;
 $ease-out : cubic-bezier(0.19, 1, 0.22, 1);
 /* Same horizontal inset as `.follow-container-wrapper` on mobile */
 $home-mobile-side-inset: 10px;

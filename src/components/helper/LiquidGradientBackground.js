@@ -3,12 +3,12 @@ import * as THREE from 'three';
 
 /**
  * Liquid gradient (CodePen base: https://codepen.io/cameronknight/pen/ogxWmBP).
- * Accent red = UI #ff0d2d, scaled down for dark background strips.
+ * Accent red = theme $neon_red (#ff0d2d), scaled down for dark background strips.
  */
 const BRAND_RED = new THREE.Vector3(1, 13 / 255, 45 / 255);
 
 const SCHEME_1 = {
-  /** Darkened #ff0d2d at two strengths so bands don’t flatten */
+  /** Darkened neon_red at two strengths so bands don’t flatten */
   ACCENT_A: new THREE.Vector3(
     BRAND_RED.x * 0.31,
     BRAND_RED.y * 0.31,

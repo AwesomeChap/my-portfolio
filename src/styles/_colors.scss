@@ -1,0 +1,30 @@
+// -----------------------------------------------------------------------------
+// Brand reds
+// -----------------------------------------------------------------------------
+
+// Old theme red — flat neon accent from the original design (kept for reference).
+$neon_red: #ff0d2d;
+
+// Canonical hue: logo, links, skill bars, heart/close UI, strokes, focus rings.
+$red-brand: #ff0d2d;
+$red-solid: $red-brand;
+
+// Pill surfaces (heading subheads, maintenance, buttons) — same hue, soft fill.
+$red: rgba(255, 13, 45, 0.72);
+
+// Text on $red pill surfaces.
+$red-on-pill: rgba(255, 220, 225, 0.95);
+
+// Shadow paired with pill backgrounds.
+$red-pill-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.35);
+
+// Link hovers & soft washes (derived from $red-brand).
+$red-accent-soft: rgba(255, 13, 45, 0.58);
+$red-accent-medium: rgba(255, 13, 45, 0.55);
+$red-accent-muted: rgba(255, 13, 45, 0.45);
+$red-accent-dashed: rgba(255, 13, 45, 0.35);
+$red-accent-glow: rgba(255, 13, 45, 0.07);
+$red-accent-grid: rgba(255, 13, 45, 0.045);
+
+// Slightly lighter solid for emphasis borders (e.g. highlights).
+$neon_red-light: #ff5e73;

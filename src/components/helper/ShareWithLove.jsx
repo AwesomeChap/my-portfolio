@@ -84,7 +84,7 @@ const linkBase =
 function iconLinkClass(shareIconsReady, shareOpen, shareClosingIcons, visibleBg) {
   return cx(
     linkBase,
-    'focus-visible:outline-none focus-visible:[box-shadow:inset_0_0_0_2px_#ff0d2d]',
+    'focus-visible:outline-none focus-visible:[box-shadow:inset_0_0_0_2px_var(--theme-red-brand)]',
     (shareIconsReady || shareClosingIcons) && visibleBg,
   );
 }
@@ -368,7 +368,7 @@ export default function ShareWithLove({ trackClickEvent }) {
         <button
           type="button"
           className={cx(
-            'absolute inset-0 z-[20] border-0 bg-transparent p-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#ff0d2d] focus-visible:outline-offset-[-2px]',
+            'absolute inset-0 z-[20] border-0 bg-transparent p-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--theme-red-brand)] focus-visible:outline-offset-[-2px]',
             shareOpen && 'pointer-events-none',
           )}
           aria-label="Open share options"
@@ -427,7 +427,7 @@ export default function ShareWithLove({ trackClickEvent }) {
         </div>
         <button
           type="button"
-          className="absolute inset-y-0 right-[8px] z-[25] box-border inline-flex h-[40px] w-[40px] min-w-[40px] cursor-pointer items-center justify-center self-center border-0 bg-transparent p-0 text-[#ff0d2d] outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#ff0d2d] focus-visible:outline-offset-[2px] [-webkit-tap-highlight-color:transparent]"
+          className="absolute inset-y-0 right-[8px] z-[25] box-border inline-flex h-[40px] w-[40px] min-w-[40px] cursor-pointer items-center justify-center self-center border-0 bg-transparent p-0 text-[var(--theme-red-brand)] outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--theme-red-brand)] focus-visible:outline-offset-[2px] [-webkit-tap-highlight-color:transparent]"
           aria-label={shareOpen ? 'Close share options' : 'Open share options'}
           tabIndex={shareOpen ? 0 : -1}
           onMouseDown={(e) => e.stopPropagation()}
