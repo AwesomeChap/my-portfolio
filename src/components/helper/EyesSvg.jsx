@@ -3,8 +3,15 @@ import React from "react";
 export default () => {
     return (
         <div className="svg-box">
-            <svg id="my-svg" xmlns="http://www.w3.org/2000/svg" role="img" width="89.3939mm" height="25.5364mm" version="1.1"
-                viewBox="0 0 974 298">
+            <svg
+                id="my-svg"
+                className="eyes-animation-svg"
+                xmlns="http://www.w3.org/2000/svg"
+                role="img"
+                version="1.1"
+                viewBox="0 0 974 298"
+                preserveAspectRatio="xMidYMid meet"
+            >
 
                 <g id="eyes-2">
                     <path id="left-eye-brow-copy" className="logo-color eye-brow-final fill-white stroke-2" d="M440 224l-2 38c-117,3 -260,-201 -436,-158l47 -100c177,27 332,247 391,220z" />

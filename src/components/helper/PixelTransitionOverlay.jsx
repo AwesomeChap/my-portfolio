@@ -2,9 +2,7 @@ import React, { useRef, useEffect, useCallback } from 'react';
 import { withRouter } from 'react-router-dom';
 import gsap from 'gsap';
 import {
-  BLACK_SCREEN_MS,
   isPageTransitionActiveViewport,
-  isPixelTransitionEnabled,
   prefersReducedMotion,
 } from './pageTransition';
 import '../../styles/pixel-transition-overlay.scss';
@@ -44,7 +42,6 @@ function PixelTransitionOverlay({ location }) {
   const dprRef = useRef(1);
   const timelineRef = useRef(null);
   const pathnameRef = useRef(location.pathname);
-  const previewTimerRef = useRef(null);
 
   const resizeCanvas = useCallback(() => {
     const canvas = canvasRef.current;
@@ -67,8 +64,6 @@ function PixelTransitionOverlay({ location }) {
 
     const ctx = canvas.getContext('2d');
     const dpr = dprRef.current;
-    const w = canvas.width / dpr;
-    const h = canvas.height / dpr;
 
     ctx.setTransform(1, 0, 0, 1, 0, 0);
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -113,7 +108,10 @@ function PixelTransitionOverlay({ location }) {
 
   const runReveal = useCallback(() => {
     const fills = fillsRef.current;
-    if (!fills.length || !fills.some((f) => f.v > 0.02)) return;
+    if (!fills.length || !fills.some((f) => f.v > 0.02)) {
+      document.body.classList.remove('page-transitioning', 'page-transition--pixel');
+      return;
+    }
 
     killTimeline();
     timelineRef.current = gsap.to(fills, {
@@ -133,20 +131,11 @@ function PixelTransitionOverlay({ location }) {
   }, [draw, killTimeline]);
 
   const runCover = useCallback(() => {
-    if (
-      !isPageTransitionActiveViewport() ||
-      !isPixelTransitionEnabled() ||
-      prefersReducedMotion()
-    ) {
+    if (!isPageTransitionActiveViewport() || prefersReducedMotion()) {
       return;
     }
 
     killTimeline();
-    if (previewTimerRef.current) {
-      window.clearTimeout(previewTimerRef.current);
-      previewTimerRef.current = null;
-    }
-
     resetGrid();
     const fills = fillsRef.current;
 
@@ -167,29 +156,10 @@ function PixelTransitionOverlay({ location }) {
     runCover();
   }, [runCover]);
 
-  const onPreview = useCallback(
-    (e) => {
-      if (!isPageTransitionActiveViewport()) return;
-      const ms = e.detail?.durationMs ?? BLACK_SCREEN_MS;
-      document.body.classList.add('page-transitioning', 'page-transition--pixel');
-      runCover();
-      previewTimerRef.current = window.setTimeout(() => {
-        previewTimerRef.current = null;
-        runReveal();
-      }, ms);
-    },
-    [runCover, runReveal]
-  );
-
   useEffect(() => {
     window.addEventListener('portfolio-pixel-nav-start', onNavStart);
-    window.addEventListener('portfolio-pixel-preview', onPreview);
-    return () => {
-      window.removeEventListener('portfolio-pixel-nav-start', onNavStart);
-      window.removeEventListener('portfolio-pixel-preview', onPreview);
-      if (previewTimerRef.current) window.clearTimeout(previewTimerRef.current);
-    };
-  }, [onNavStart, onPreview]);
+    return () => window.removeEventListener('portfolio-pixel-nav-start', onNavStart);
+  }, [onNavStart]);
 
   useEffect(() => {
     const prev = pathnameRef.current;
@@ -219,7 +189,6 @@ function PixelTransitionOverlay({ location }) {
   useEffect(
     () => () => {
       killTimeline();
-      if (previewTimerRef.current) window.clearTimeout(previewTimerRef.current);
       document.body.classList.remove('page-transitioning', 'page-transition--pixel');
     },
     [killTimeline]

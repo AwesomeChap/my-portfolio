@@ -1,6 +1,0 @@
-/* Route outlet shell — no enter motion (avoids heading block sliding up on each route). */
-#route-outlet {
-  position: relative;
-  z-index: 1;
-  min-height: 0;
-}

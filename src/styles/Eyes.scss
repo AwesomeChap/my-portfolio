@@ -64,7 +64,7 @@ $red: #ff0d2d;
         &.countdown {
             circle {
                 stroke: $red;
-                animation: countdown 8s linear forwards;
+                animation: countdown var(--countdown-duration, 8s) linear forwards;
             }
         }
     }
@@ -100,6 +100,7 @@ $red: #ff0d2d;
     justify-content: center;
     align-items: center;
     background: #111;
+    animation: eyes-overlay-in 0.42s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 
     .stroke-2 {
         @include stroke-params;
@@ -130,6 +131,17 @@ $red: #ff0d2d;
         justify-content: center;
         align-items: center;
         flex-direction: column;
+        width: min(90vw, 17rem);
+        max-width: 100%;
+        max-height: min(36vh, 220px);
+        box-sizing: border-box;
+    }
+
+    .eyes-animation-svg {
+        display: block;
+        width: 100%;
+        height: auto;
+        max-height: inherit;
     }
 
     svg {
@@ -189,17 +201,6 @@ $red: #ff0d2d;
         to {
             transform: scaleY(0.9) rotate(360deg);
             opacity: 1;
-        }
-    }
-
-    @keyframes rotate-again {
-        from {
-            transform: scaleY(0.9) rotate(0deg);
-            /* opacity: 1; */
-        }
-        to {
-            transform: scaleY(0.9) rotate(10deg);
-            /* opacity: 0; */
         }
     }
 
@@ -379,5 +380,45 @@ $red: #ff0d2d;
             fill: $red;
             stroke-width: 0;
         }
+    }
+
+    &--reduced {
+        animation: eyes-overlay-in 0.2s ease-out forwards;
+
+        #my-svg,
+        #my-svg * {
+            animation-duration: 0.01ms !important;
+            animation-delay: 0ms !important;
+            transition-duration: 0.01ms !important;
+        }
+    }
+}
+
+@keyframes eyes-overlay-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@media only screen and (min-width: 1024px) {
+    .eyes-container .svg-box {
+        width: min(64vw, 24rem);
+        max-height: min(38vh, 240px);
+    }
+}
+
+@media only screen and (min-width: 1440px) {
+    .eyes-container .svg-box {
+        width: min(58vw, 27rem);
+        max-height: min(40vh, 260px);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .eyes-container {
+        animation-duration: 0.2s;
     }
 }

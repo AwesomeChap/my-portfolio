@@ -1,6 +1,6 @@
 /**
- * Single source of truth for route transition timing (aligned with `.black-screen`
- * in nav.scss and GSAP cover/reveal in PixelTransitionOverlay).
+ * Route transition timing (aligned with `.black-screen` in nav.scss
+ * and GSAP cover/reveal in PixelTransitionOverlay).
  */
 
 /** Delay before route commit — matches black-screen duration on desktop */
@@ -13,9 +13,6 @@ export const BLACK_SCREEN_MS = 460;
 export const PAGE_TRANSITION_CLEAR_MS = 640;
 
 export const PAGE_TRANSITION_CLEAR_REDUCED_MS = 120;
-
-/** Stored value `'0'` turns the pixel overlay off; unset / other = on (default). */
-const STORAGE_PIXEL = 'portfolio_pixel_transition';
 
 export function prefersReducedMotion() {
   if (typeof window === 'undefined') return false;
@@ -41,25 +38,6 @@ export function getPageTransitionClearMs() {
   return prefersReducedMotion() ? PAGE_TRANSITION_CLEAR_REDUCED_MS : PAGE_TRANSITION_CLEAR_MS;
 }
 
-export function isPixelTransitionEnabled() {
-  try {
-    if (typeof sessionStorage === 'undefined') return true;
-    return sessionStorage.getItem(STORAGE_PIXEL) !== '0';
-  } catch {
-    return true;
-  }
-}
-
-export function setPixelTransitionEnabled(enabled) {
-  try {
-    if (typeof sessionStorage === 'undefined') return;
-    if (enabled) sessionStorage.removeItem(STORAGE_PIXEL);
-    else sessionStorage.setItem(STORAGE_PIXEL, '0');
-  } catch {
-    /* storage may be unavailable */
-  }
-}
-
 /**
  * Call when SPA navigation is initiated (nav click). Syncs with ScrollToTop,
  * which clears `page-transitioning` shortly after the route commits.
@@ -68,35 +46,7 @@ export function beginPageTransition() {
   if (typeof document === 'undefined') return;
   if (!isPageTransitionActiveViewport()) return;
   document.body.classList.add('page-transitioning');
-  if (!isPixelTransitionEnabled() || prefersReducedMotion()) return;
+  if (prefersReducedMotion()) return;
   document.body.classList.add('page-transition--pixel');
   window.dispatchEvent(new CustomEvent('portfolio-pixel-nav-start'));
-}
-
-/**
- * Play the GSAP pixel curtain without changing routes (demo / preview).
- * Returns a cleanup function that cancels the fallback timer.
- */
-export function previewPixelTransition(durationMs = BLACK_SCREEN_MS) {
-  if (typeof document === 'undefined') return () => {};
-  if (!isPageTransitionActiveViewport()) return () => {};
-  const ms = prefersReducedMotion() ? PAGE_TRANSITION_CLEAR_REDUCED_MS : durationMs;
-  if (prefersReducedMotion()) {
-    document.body.classList.add('page-transitioning');
-    const id = window.setTimeout(() => {
-      document.body.classList.remove('page-transitioning', 'page-transition--pixel');
-    }, ms);
-    return () => {
-      window.clearTimeout(id);
-      document.body.classList.remove('page-transitioning', 'page-transition--pixel');
-    };
-  }
-  window.dispatchEvent(new CustomEvent('portfolio-pixel-preview', { detail: { durationMs: ms } }));
-  const fallbackId = window.setTimeout(() => {
-    document.body.classList.remove('page-transitioning', 'page-transition--pixel');
-  }, ms + 1200);
-  return () => {
-    window.clearTimeout(fallbackId);
-    document.body.classList.remove('page-transitioning', 'page-transition--pixel');
-  };
 }

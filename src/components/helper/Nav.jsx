@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { NavLink, withRouter } from 'react-router-dom';
-import { beginPageTransition, getNavPushDelay, isPixelTransitionEnabled } from './pageTransition';
+import { beginPageTransition, getNavPushDelay } from './pageTransition';
 import '../../styles/nav.scss';
 import '../../styles/pages.scss';
 
@@ -165,8 +165,8 @@ const Nav = (props) => {
     to === '/' ? props.location.pathname === '/' : props.location.pathname === to
   );
 
-  /* GSAP pixel curtain replaces the horizontal wipe when enabled (see PixelTransitionOverlay). */
-  const showBlackScreen = reducedMotion || !isPixelTransitionEnabled();
+  /* GSAP pixel curtain on desktop; black-screen wipe when reduced motion. */
+  const showBlackScreen = reducedMotion;
 
   return (
     <>

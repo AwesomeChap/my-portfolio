@@ -3,7 +3,7 @@ import { Route, Switch, BrowserRouter as Router } from 'react-router-dom'
 import NavBar from './components/helper/Nav';
 import NavBarMobile from './components/helper/NavMobile';
 import LiquidGradientBackground from './components/helper/LiquidGradientBackground';
-import { About, Blog, Contact, Home, Work, Projects, PageTransitionDemo, NotFound } from './components/index';
+import { About, Blog, Contact, Home, Work, Projects, NotFound } from './components/index';
 import ScrollToTop from './components/helper/ScrollToTop';
 import PixelTransitionOverlay from './components/helper/PixelTransitionOverlay';
 import Cursor from './components/helper/cursor';
@@ -57,7 +57,6 @@ export default () => {
             <Route exact path="/projects" render={(props) => <Projects {...props} trackPageView={trackPageView} />}></Route>
             <Route exact path="/blog" render={(props) => <Blog {...props} trackPageView={trackPageView} />}></Route>
             <Route exact path="/contact" render={(props) => <Contact {...props} trackPageView={trackPageView} />}></Route>
-            <Route exact path="/transition-demo" render={(props) => <PageTransitionDemo {...props} trackPageView={trackPageView} />}></Route>
             <Route render={(props) => <NotFound {...props} trackPageView={trackPageView} />} />
             </Switch>
             </div>
