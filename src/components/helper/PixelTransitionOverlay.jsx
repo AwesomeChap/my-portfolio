@@ -7,7 +7,6 @@ import {
 } from './pageTransition';
 import '../../styles/pixel-transition-overlay.scss';
 
-const ACCENT = { r: 255, g: 13, b: 45 };
 const MAX_CELLS = 1180;
 
 function buildCells(width, height) {
@@ -19,17 +18,17 @@ function buildCells(width, height) {
   const cw = width / cols;
   const ch = height / rows;
   const cells = [];
-  let idx = 0;
   for (let r = 0; r < rows; r += 1) {
     for (let c = 0; c < cols; c += 1) {
+      const x = c * cw;
+      const y = r * ch;
       cells.push({
-        x: c * cw,
-        y: r * ch,
-        w: Math.ceil(cw) + 1,
-        h: Math.ceil(ch) + 1,
-        i: idx,
+        x,
+        y,
+        // Extend edge cells to viewport bounds; slight bleed avoids hairline gaps.
+        w: c === cols - 1 ? width - x + 0.5 : cw + 0.5,
+        h: r === rows - 1 ? height - y + 0.5 : ch + 0.5,
       });
-      idx += 1;
     }
   }
   return cells;
@@ -75,14 +74,9 @@ function PixelTransitionOverlay({ location }) {
       if (t > maxV) maxV = t;
       if (t < 0.004) continue;
 
-      const { x, y, w: cw, h: ch, i: idx } = cells[i];
+      const { x, y, w: cw, h: ch } = cells[i];
       const a = Math.min(1, Math.max(0, t));
-      const accent = idx % 13 === 0;
-      if (accent) {
-        ctx.fillStyle = `rgba(${12 + ACCENT.r * 0.045}, ${9 + ACCENT.g * 0.02}, ${11 + ACCENT.b * 0.03}, ${0.97 * a})`;
-      } else {
-        ctx.fillStyle = `rgba(8, 8, 10, ${0.97 * a})`;
-      }
+      ctx.fillStyle = `rgba(8, 8, 10, ${0.97 * a})`;
       ctx.fillRect(x, y, cw, ch);
     }
 
