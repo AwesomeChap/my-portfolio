@@ -134,6 +134,12 @@
   flex-direction: column;
 }
 
+.section-contact .contact-form {
+  @media only screen and (min-width: 768px) {
+    height: auto;
+  }
+}
+
 .contact-form{
   display: flex;
   height: 50%;
@@ -292,7 +298,13 @@
   height: 5vh;
   display: flex;
   flex-wrap: wrap;
-  margin: -10vh 0 10vh 0;
+  margin: 0 0 2rem;
+
+  .section-contact & {
+    @media only screen and (min-width: 768px) {
+      margin: 0 0 1.5rem;
+    }
+  }
   span{
     font-size: 20px;
     display: inline-block; 

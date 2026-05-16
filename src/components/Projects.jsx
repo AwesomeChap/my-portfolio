@@ -11,6 +11,7 @@ import '../styles/pages.scss';
 import '../styles/projects.scss';
 import MetaTags from 'react-meta-tags';
 import DistortedPixelsPortrait from './helper/DistortedPixelsPortrait';
+import MaintenanceBlock from './helper/MaintenanceBlock';
 
 const DEFAULT_FILTER = "Show All";
 
@@ -157,36 +158,18 @@ export default (props) => {
             </div>
             </div>
           ) : (
-            <div className="projects-maintenance" role="status" aria-live="polite">
-              <div className="projects-maintenance__ambient" aria-hidden="true" />
-              <div className="projects-maintenance__content">
-                <div className="projects-maintenance__loader" aria-hidden="true">
-                  {Array.from({ length: 8 }, (_, i) => (
-                    <span
-                      key={i}
-                      className="projects-maintenance__loader-cell"
-                      style={{ animationDelay: `${i * 0.14}s` }}
-                    />
-                  ))}
-                </div>
-                <p className="projects-maintenance__eyebrow">Maintenance in progress</p>
-                <p className="projects-maintenance__title">We&apos;ll be right back</p>
-                <p className="projects-maintenance__text">
-                  This section is still under construction. The project showcase will appear
-                  here once the pixel dust settles.
-                </p>
-                <div className="projects-maintenance__rule" aria-hidden="true" />
-              </div>
-            </div>
+            <MaintenanceBlock
+              text="This section is still under construction. The project showcase will appear here once the pixel dust settles."
+            />
           )}
         </div>
       </div>
 
       {isLocalhost ? (
-        <div className="projects-dev-toggle">
+        <div className="dev-preview-toggle">
           <button
             type="button"
-            className="projects-dev-toggle__btn"
+            className="dev-preview-toggle__btn"
             onClick={toggleDevPreview}
             aria-pressed={devShowList}
           >
