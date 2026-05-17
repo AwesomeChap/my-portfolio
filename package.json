@@ -29,7 +29,7 @@
     "react-router-dom": "^5.3.4",
     "react-share": "^4.4.1",
     "smoothscroll-polyfill": "^0.4.4",
-    "three": "^0.103.0",
+    "three": "^0.137.0",
     "vivus": "^0.4.6"
   },
   "devDependencies": {
