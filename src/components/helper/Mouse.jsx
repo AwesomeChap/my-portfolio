@@ -1,41 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
-import '../../styles/mouse.scss'
-
-function resolveScrollContainer() {
-  const candidates = [
-    document.body,
-    document.documentElement,
-    document.scrollingElement,
-    document.getElementById('root'),
-    document.querySelector('.router-wrapper'),
-  ].filter(Boolean);
-
-  const seen = new Set();
-  for (const el of candidates) {
-    if (seen.has(el)) continue;
-    seen.add(el);
-    const max = el.scrollHeight - el.clientHeight;
-    if (max > 2) return el;
-  }
-
-  return document.scrollingElement || document.body;
-}
+import '../../styles/mouse.scss';
+import { getScrollTop, resolveScrollContainer } from './scrollContainer';
 
 export default () => {
   const [isHidden, setIsHidden] = useState(false);
   const lastScrollTopRef = useRef(0);
   const rafRef = useRef(null);
-
-  const getScrollTop = () => {
-    const el = resolveScrollContainer();
-    return Math.max(
-      window.scrollY || 0,
-      window.pageYOffset || 0,
-      document.documentElement?.scrollTop || 0,
-      document.body?.scrollTop || 0,
-      el ? el.scrollTop || 0 : 0
-    );
-  };
 
   useEffect(() => {
     let isMounted = true;

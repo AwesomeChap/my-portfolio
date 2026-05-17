@@ -1,0 +1,234 @@
+@use 'colors' as *;
+
+/* Match nav hamburger track (desktop) — see nav.scss --nav-ham-track */
+$scroll-progress-width: 52px;
+$scroll-progress-pixel-gap: 5px;
+$scroll-progress-pixel-count: 44;
+$scroll-progress-side-inset: 10px;
+$scroll-progress-bottom-inset: 32px;
+$scroll-progress-hover-scale: 1.14;
+$scroll-progress-thumb-scale: 1.14;
+$scroll-progress-thumb-radius: 14px;
+$scroll-progress-thumb-padding-y: 11px;
+$scroll-progress-thumb-padding-x: 8px;
+/* Align with `.nav-bar` — padding-top 10px + height 60px (nav.scss) */
+$nav-bar-offset: calc(10px + 60px);
+/* Page bg #171717 (main.scss) — cells sit slightly above it */
+$scroll-progress-cell-bg: #1f1f1f;
+$scroll-progress-cell-bg-hover: #282828;
+$scroll-progress-fill: #3a3a3a;
+$scroll-progress-caret-fill: rgba(180, 180, 180, 0.92);
+$scroll-progress-caret-fill-hover: rgba(210, 210, 210, 0.98);
+$scroll-progress-thumb-bg: #252525;
+$scroll-progress-thumb-shadow: 0 4px 12px rgba(0, 0, 0, 0.28);
+
+.scroll-progress {
+  position: fixed;
+  top: $nav-bar-offset;
+  right: $scroll-progress-side-inset;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  width: $scroll-progress-width;
+  z-index: 10;
+  box-sizing: border-box;
+  overflow: visible;
+  pointer-events: none;
+  opacity: 1;
+  visibility: hidden;
+  transition: visibility 0.35s ease;
+
+  &--visible {
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  &--dragging {
+    .scroll-progress__pixel.is-filled {
+      transition-duration: 0.08s;
+    }
+  }
+
+  &__track {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: $scroll-progress-pixel-gap;
+    width: 100%;
+    min-height: 0;
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    box-sizing: border-box;
+    touch-action: none;
+    user-select: none;
+  }
+
+  &__bottom-spacer {
+    flex: 0 0 $scroll-progress-bottom-inset;
+    width: 100%;
+    pointer-events: none;
+  }
+
+  &__pixel {
+    flex: 0 0 auto;
+    border: none;
+    padding: 0;
+    border-radius: 0;
+    background-color: $scroll-progress-cell-bg;
+    box-shadow: none;
+    transform: scale(1);
+    transform-origin: center center;
+    transition:
+      transform 0.16s ease,
+      background-color 0.2s ease;
+    cursor: pointer;
+
+    &.is-filled {
+      background-color: $scroll-progress-fill;
+    }
+
+    &.is-hovered:not(.is-filled) {
+      background-color: $scroll-progress-cell-bg-hover;
+      z-index: 1;
+    }
+
+    &.is-hovered.is-filled {
+      transform: scale($scroll-progress-hover-scale);
+      z-index: 1;
+    }
+  }
+
+  /* Thumb row: filled pixel always visible; button overlays on bar hover */
+  &__thumb-slot {
+    position: relative;
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    overflow: visible;
+  }
+
+  &__thumb-slot-pixel {
+    flex: 0 0 auto;
+    pointer-events: auto;
+  }
+
+  /* Thumb: always full size; fade opacity only when bar not hovered */
+  &__thumb {
+    --caret-half: 6px;
+    --caret-height: 5px;
+
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    display: block;
+    margin: 0;
+    padding: $scroll-progress-thumb-padding-y $scroll-progress-thumb-padding-x;
+    border: none;
+    border-radius: $scroll-progress-thumb-radius;
+    background: transparent;
+    box-shadow: none;
+    overflow: visible;
+    cursor: grab;
+    z-index: 3;
+    isolation: isolate;
+    pointer-events: none;
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1);
+    transform-origin: center center;
+    transition:
+      opacity 0.28s ease,
+      transform 0.16s ease;
+
+    &.is-dragging {
+      cursor: grabbing;
+    }
+
+    &.is-hovered,
+    &.is-dragging {
+      transform: translate(-50%, -50%) scale($scroll-progress-thumb-scale);
+      z-index: 4;
+    }
+  }
+
+  &:hover &__thumb,
+  &--track-hovered &__thumb,
+  &--dragging &__thumb {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  &__thumb-blur {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background-color: $scroll-progress-thumb-bg;
+    box-shadow: $scroll-progress-thumb-shadow;
+    pointer-events: none;
+  }
+
+  &__thumb-inner {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    pointer-events: none;
+  }
+
+  &__thumb-caret {
+    flex: 0 0 auto;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+
+    &--up {
+      border-left: var(--caret-half) solid transparent;
+      border-right: var(--caret-half) solid transparent;
+      border-bottom: var(--caret-height) solid $scroll-progress-caret-fill;
+    }
+
+    &--down {
+      border-left: var(--caret-half) solid transparent;
+      border-right: var(--caret-half) solid transparent;
+      border-top: var(--caret-height) solid $scroll-progress-caret-fill;
+    }
+  }
+
+  &__thumb.is-hovered,
+  &--dragging &__thumb.is-dragging {
+    .scroll-progress__thumb-caret--up {
+      border-bottom-color: $scroll-progress-caret-fill-hover;
+    }
+
+    .scroll-progress__thumb-caret--down {
+      border-top-color: $scroll-progress-caret-fill-hover;
+    }
+  }
+}
+
+body.scroll-progress-dragging {
+  user-select: none;
+}
+
+body.page-transitioning .scroll-progress {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+body.eyes-active .scroll-progress {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+html.tab-hidden .scroll-progress {
+  visibility: hidden;
+  pointer-events: none;
+}

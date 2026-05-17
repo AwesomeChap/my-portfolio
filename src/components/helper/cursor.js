@@ -1,5 +1,7 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import '../../styles/cursor.scss';
+import { subscribeCursorMove } from './cursorSync';
 
 const INTERACTIVE_SELECTOR = [
   'a',
@@ -11,14 +13,22 @@ const INTERACTIVE_SELECTOR = [
   'label',
   '[data-cursor="interactive"]',
   '.cursor-pointer',
+  '.scroll-progress__thumb',
 ].join(',');
 
 export default function Cursor() {
   const dotRef = useRef(null);
   const outlineRef = useRef(null);
   const rafRef = useRef(0);
+  const [portalReady, setPortalReady] = useState(false);
 
   useEffect(() => {
+    setPortalReady(true);
+  }, []);
+
+  useEffect(() => {
+    if (!portalReady) return undefined;
+
     const dotEl = dotRef.current;
     const outlineEl = outlineRef.current;
     if (!dotEl || !outlineEl) return undefined;
@@ -44,11 +54,22 @@ export default function Cursor() {
       outlineEl.classList.toggle('is-active', active);
     };
 
+    const applyPosition = (x, y, { instant = false } = {}) => {
+      state.tx = x;
+      state.ty = y;
+      dotEl.style.left = `${x}px`;
+      dotEl.style.top = `${y}px`;
+      if (instant) {
+        state.x = x;
+        state.y = y;
+        outlineEl.style.left = `${x}px`;
+        outlineEl.style.top = `${y}px`;
+      }
+    };
+
     const onMouseMove = (e) => {
-      state.tx = e.clientX;
-      state.ty = e.clientY;
-      dotEl.style.left = `${state.tx}px`;
-      dotEl.style.top = `${state.ty}px`;
+      if (document.body.classList.contains('scroll-progress-dragging')) return;
+      applyPosition(e.clientX, e.clientY);
       if (!state.visible) setVisibility(true);
     };
 
@@ -81,10 +102,41 @@ export default function Cursor() {
     document.addEventListener('mouseleave', onMouseLeaveDocument);
     document.addEventListener('mouseenter', onMouseEnterDocument);
 
+    const onScrollbarDrag = () => {
+      setActive(true);
+      setVisibility(true);
+    };
+    const onScrollbarDragEnd = () => {
+      const overInteractive = document.querySelector(':hover')?.closest(INTERACTIVE_SELECTOR);
+      setActive(Boolean(overInteractive));
+    };
+
+    const unsubCursorMove = subscribeCursorMove(({ x, y, instant }) => {
+      applyPosition(x, y, { instant });
+    });
+
+    const onDragClassChange = () => {
+      if (document.body.classList.contains('scroll-progress-dragging')) {
+        onScrollbarDrag();
+      } else {
+        onScrollbarDragEnd();
+      }
+    };
+
+    const dragObserver = new MutationObserver(onDragClassChange);
+    dragObserver.observe(document.body, {
+      attributes: true,
+      attributeFilter: ['class'],
+    });
+
+    applyPosition(state.tx, state.ty, { instant: true });
+    setVisibility(true);
     rafRef.current = window.requestAnimationFrame(animate);
 
     return () => {
       window.cancelAnimationFrame(rafRef.current);
+      dragObserver.disconnect();
+      unsubCursorMove();
       document.removeEventListener('mousemove', onMouseMove);
       document.removeEventListener('mousedown', onMouseDown);
       document.removeEventListener('mouseup', onMouseUp);
@@ -93,12 +145,16 @@ export default function Cursor() {
       document.removeEventListener('mouseleave', onMouseLeaveDocument);
       document.removeEventListener('mouseenter', onMouseEnterDocument);
     };
-  }, []);
+  }, [portalReady]);
 
-  return (
+  const cursor = (
     <>
       <div ref={outlineRef} className="cursor-dot-outline is-hidden" />
       <div ref={dotRef} className="cursor-dot is-hidden" />
     </>
   );
+
+  if (!portalReady) return null;
+
+  return createPortal(cursor, document.body);
 }

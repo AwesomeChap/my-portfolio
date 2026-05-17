@@ -7,15 +7,24 @@ import { About, Blog, Contact, Home, Work, Projects, NotFound } from './componen
 import ScrollToTop from './components/helper/ScrollToTop';
 import PixelTransitionOverlay from './components/helper/PixelTransitionOverlay';
 import Cursor from './components/helper/cursor';
+import ScrollProgressBar from './components/helper/ScrollProgressBar';
 import ReactGa from "react-ga";
 
 export default () => {
   const [isMobile, setIsMobile] = useState(undefined);
   const [isMobileView, setIsMobileView] = useState(undefined);
+  const [isMobileNav, setIsMobileNav] = useState(
+    () => typeof window !== 'undefined' && window.innerWidth <= 767
+  );
+  const [isTabletView, setIsTabletView] = useState(
+    () => typeof window !== 'undefined' && window.innerWidth <= 1024
+  );
 
   useEffect(() => {
     setIsMobile(/iPhone|iPad|iPod|Android/i.test(navigator.userAgent));
     setIsMobileView(window.innerWidth <= 479);
+    setIsMobileNav(window.innerWidth <= 767);
+    setIsTabletView(window.innerWidth <= 1024);
 
     ReactGa.initialize("UA-191535134-2");
 
@@ -35,9 +44,12 @@ export default () => {
 
   const onWindowResize = () => {
     setIsMobileView(window.innerWidth <= 479);
+    setIsMobileNav(window.innerWidth <= 767);
+    setIsTabletView(window.innerWidth <= 1024);
   }
 
-  const isBiggerScreenDevice = !isMobileView && !isMobile;
+  const isBiggerScreenDevice = isMobileView === false && isMobile === false;
+  const showScrollProgressBar = isBiggerScreenDevice && isTabletView === false;
 
   return (
     <>
@@ -46,9 +58,10 @@ export default () => {
         <div className="app-content-layer">
           <Router>
             <ScrollToTop>
-              {isBiggerScreenDevice ? <NavBar /> : <NavBarMobile />}
+              {isMobileNav ? <NavBarMobile /> : <NavBar />}
             </ScrollToTop>
             {isBiggerScreenDevice ? <PixelTransitionOverlay /> : null}
+            {showScrollProgressBar && <ScrollProgressBar />}
             <div id="route-outlet">
             <Switch>
             <Route exact path="/" render={(props) => <Home {...props} trackPageView={trackPageView} trackClickEvent={trackClickEvent} />}></Route>

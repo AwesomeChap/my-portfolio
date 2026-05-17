@@ -361,7 +361,7 @@ export default function ShareWithLove({ trackClickEvent }) {
       </a>
       <div
         className={cx(
-          'animate-share-enter relative box-border inline-flex h-[48px] min-h-[48px] flex-row items-center overflow-hidden rounded-[5px] border-none bg-[rgba(46,46,46,0.34)] [backdrop-filter:blur(16px)_saturate(140%)] [-webkit-backdrop-filter:blur(16px)_saturate(140%)] shadow-[0_10px_30px_rgba(0,0,0,0.24),0_2px_10px_rgba(0,0,0,0.2)] pl-[18px] pr-[56px] opacity-0 outline-none [font-family:Futura] [backface-visibility:hidden] [transform:translate(0,-30%)] [transition:max-width_0.56s_cubic-bezier(0.77,0,0.175,1)] max-[479px]:rounded-[5px] max-[479px]:hidden',
+          'animate-share-enter max-[767px]:animate-share-enter-top relative box-border inline-flex h-[48px] min-h-[48px] flex-row items-center overflow-hidden rounded-[5px] border-none bg-[rgba(46,46,46,0.34)] [backdrop-filter:blur(16px)_saturate(140%)] [-webkit-backdrop-filter:blur(16px)_saturate(140%)] shadow-[0_10px_30px_rgba(0,0,0,0.24),0_2px_10px_rgba(0,0,0,0.2)] pl-[18px] pr-[56px] opacity-0 outline-none [font-family:Futura] [backface-visibility:hidden] [transform:translate(0,-30%)] max-[767px]:[transform:translate(0,0)] [transition:max-width_0.56s_cubic-bezier(0.77,0,0.175,1)] max-[479px]:rounded-[5px] max-[479px]:hidden',
           shareBarMaxW,
         )}
       >

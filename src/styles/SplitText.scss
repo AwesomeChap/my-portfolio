@@ -2,7 +2,7 @@
     font-family: Futura;
     font-weight: 900;
     text-decoration: none;
-    font-size: 8vw;
+    font-size: clamp(1.75rem, 5vw, 3rem);
     color: #999;
     display: flex;
     justify-content: center;

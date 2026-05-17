@@ -44,12 +44,15 @@ a.share-link:focus-visible {
 html{
   font-size: 16px;
   overflow-y: hidden;
-} 
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
 
 body{
   scroll-behavior: auto;
-  // scroll-behavior: smooth;
-  overflow-y:scroll;
+  overflow-y: scroll;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
   background: #171717;
   color: #ccc;
   font-family: 'Plus Jakarta Sans', sans-serif;
@@ -81,22 +84,11 @@ body{
   pointer-events: none;
 }
 
-/* width */
-::-webkit-scrollbar {
-  width: 0px;
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-  background: #222; 
-}
- 
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: #888; 
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: #555; 
+/* Hide native scrollbars — custom pixel bar is the desktop control */
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+#root::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
 }

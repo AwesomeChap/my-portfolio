@@ -279,8 +279,8 @@ $mobile-nav-side-inset: 10px;
     bottom: mobile-nav-bottom-offset($mobile-follow-icon-height-sm);
   }
 
-  .menu-item-name span{
-    font-size:8vw;
+  .menu-item {
+    font-size: clamp(1.625rem, 6.5vw, 2.5rem);
   }
 }
 
