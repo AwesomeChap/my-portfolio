@@ -14,6 +14,21 @@ $home-mobile-side-inset: 10px;
   max-height: 100vh;
   width: 100%;
   overflow: hidden;
+
+  /* Mobile: 100vh is taller than the visible viewport (dynamic browser chrome) */
+  @media only screen and (max-width: 1024px) {
+    height: 100svh;
+    min-height: 100svh;
+    max-height: 100svh;
+  }
+
+  @supports (height: 100dvh) {
+    @media only screen and (max-width: 1024px) {
+      height: 100dvh;
+      min-height: 100dvh;
+      max-height: 100dvh;
+    }
+  }
 }
 
 /* Mobile placement for ShareWithLove — same horizontal inset as follow bar */
