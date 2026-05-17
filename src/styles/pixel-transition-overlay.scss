@@ -6,3 +6,7 @@
   image-rendering: pixelated;
   image-rendering: crisp-edges;
 }
+
+body.eyes-pixel-transition .pixel-transition-canvas {
+  z-index: 1300;
+}

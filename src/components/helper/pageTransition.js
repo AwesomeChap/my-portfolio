@@ -3,14 +3,29 @@
  * and GSAP cover/reveal in PixelTransitionOverlay).
  */
 
-/** Delay before route commit — matches black-screen duration on desktop */
-export const BLACK_SCREEN_MS = 460;
+/** GSAP pixel grid — shared by nav transitions and eyes overlay */
+export const PIXEL_COVER_CELL_S = 0.15;
+export const PIXEL_COVER_STAGGER_S = 0.32;
+export const PIXEL_REVEAL_CELL_S = 0.14;
+export const PIXEL_REVEAL_STAGGER_S = 0.3;
+
+/** Total wall-clock time ≈ cell duration + stagger amount */
+export function getPixelCoverDurationMs() {
+  return Math.round((PIXEL_COVER_CELL_S + PIXEL_COVER_STAGGER_S) * 1000);
+}
+
+export function getPixelRevealDurationMs() {
+  return Math.round((PIXEL_REVEAL_CELL_S + PIXEL_REVEAL_STAGGER_S) * 1000);
+}
+
+/** Delay before route commit — matches pixel cover on desktop */
+export const BLACK_SCREEN_MS = getPixelCoverDurationMs();
 
 /**
  * How long `body.page-transitioning` stays after the route commits
  * (cover tail + staggered reveal).
  */
-export const PAGE_TRANSITION_CLEAR_MS = 640;
+export const PAGE_TRANSITION_CLEAR_MS = getPixelRevealDurationMs() + 200;
 
 export const PAGE_TRANSITION_CLEAR_REDUCED_MS = 120;
 
@@ -48,5 +63,5 @@ export function beginPageTransition() {
   document.body.classList.add('page-transitioning');
   if (prefersReducedMotion()) return;
   document.body.classList.add('page-transition--pixel');
-  window.dispatchEvent(new CustomEvent('portfolio-pixel-nav-start'));
+  window.dispatchEvent(new Event('portfolio-pixel-nav-start'));
 }

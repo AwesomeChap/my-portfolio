@@ -19,6 +19,21 @@ $ham-d : 0.6s;
   box-sizing: border-box;
 }
 
+$mobile-ham-size: 48px;
+$mobile-ham-bar-offset: 9px;
+$mobile-ham-bar-scale-outer: 0.34;
+$mobile-ham-bar-scale-mid: 0.64;
+$mobile-ham-close-scale: 0.46;
+/* Match `.follow-container a` on mobile in home.scss */
+$mobile-follow-icon-height: 50px;
+$mobile-follow-icon-height-sm: 43px;
+$mobile-follow-icon-bottom-gap: 10px;
+$mobile-nav-side-inset: 10px;
+
+@function mobile-nav-bottom-offset($icon-height) {
+  @return $mobile-follow-icon-bottom-gap + ($icon-height - $mobile-ham-size) * 0.5;
+}
+
 #hamburger{
   // background: rgba(17, 17, 17, 0.795);
   // background: #444;
@@ -27,8 +42,8 @@ $ham-d : 0.6s;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 60px;
-  height: 60px;
+  width: $mobile-ham-size;
+  height: $mobile-ham-size;
   cursor: pointer;
   box-sizing: border-box;
   transition: all 0.3s;
@@ -45,16 +60,16 @@ $ham-d : 0.6s;
 }
 
 .bar2{
-  transform: scaleX(0.85);
+  transform: scaleX($mobile-ham-bar-scale-mid);
   opacity: 1;
 }
 
 .bar1{
-  transform: translateY(-15px) scaleX(0.5) rotate(0);
+  transform: translateY(-#{$mobile-ham-bar-offset}) scaleX($mobile-ham-bar-scale-outer) rotate(0);
 }
 
 .bar3{
-  transform: translateY(15px) scaleX(0.5) rotate(0);
+  transform: translateY($mobile-ham-bar-offset) scaleX($mobile-ham-bar-scale-outer) rotate(0);
 }
 
 .close{
@@ -69,10 +84,10 @@ $ham-d : 0.6s;
   }
   @keyframes close-bar1 {
     50%{
-      transform: translateY(0) scale(0.5) rotate(0);
+      transform: translateY(0) scale($mobile-ham-bar-scale-outer) rotate(0);
     }
     100%{
-      transform: translateY(0) scale(0.6) rotate(135deg);
+      transform: translateY(0) scale($mobile-ham-close-scale) rotate(135deg);
     }
   }
   
@@ -81,11 +96,11 @@ $ham-d : 0.6s;
   }
   @keyframes close-bar2 {
     50%{
-      transform: scaleX(0.7);
+      transform: scaleX($mobile-ham-bar-scale-mid);
       opacity: 0;
     }
     100%{
-      transform: scaleX(0.7);
+      transform: scaleX($mobile-ham-bar-scale-mid);
       opacity: 0;
     }
   }
@@ -94,61 +109,53 @@ $ham-d : 0.6s;
   }
   @keyframes close-bar3 {
     50%{
-      transform: translateY(0) scale(0.5) rotate(0);
+      transform: translateY(0) scale($mobile-ham-bar-scale-outer) rotate(0);
     }
     100%{
-      transform: translateY(0) scale(0.6) rotate(45deg);
+      transform: translateY(0) scale($mobile-ham-close-scale) rotate(45deg);
     }
   }
 }
 
 .ham{
   .bar1{
-    transform: translateY(0) scale(0.6) rotate(135deg);
-    animation: ham1 $ham-d $e-bounce forwards,;
+    transform: translateY(0) scale($mobile-ham-close-scale) rotate(135deg);
+    animation: ham1 $ham-d $e-bounce forwards;
   }
   @keyframes ham1 {
     50%{
-      transform: translateY(0) scale(0.5) rotate(0);
+      transform: translateY(0) scale($mobile-ham-bar-scale-outer) rotate(0);
     }
     100%{
-      transform: translateY(-15px) scaleX(0.5) rotate(0);
+      transform: translateY(-#{$mobile-ham-bar-offset}) scaleX($mobile-ham-bar-scale-outer) rotate(0);
     }
   }
   .bar2{
-    transform: scaleX(0.7);
+    transform: scaleX($mobile-ham-bar-scale-mid);
     opacity: 0;
     animation: ham2 $ham-d $e-bounce forwards;
   }
   @keyframes ham2 {
     50%{
       opacity: 1;
-      transform: scaleX(0.5);
+      transform: scaleX($mobile-ham-bar-scale-outer);
     }
     100%{
       opacity: 1;
-      transform: scaleX(0.85);
+      transform: scaleX($mobile-ham-bar-scale-mid);
     }
   }
   .bar3{
-    transform: translateY(0) scale(0.6) rotate(45deg);
+    transform: translateY(0) scale($mobile-ham-close-scale) rotate(45deg);
     animation: ham3 $ham-d $e-bounce forwards;
   }
   @keyframes ham3 {
     50%{
-      transform: translateY(0) scale(0.5) rotate(0);
+      transform: translateY(0) scale($mobile-ham-bar-scale-outer) rotate(0);
     }
     100%{
-      transform: translateY(15px) scaleX(0.5) rotate(0);
+      transform: translateY($mobile-ham-bar-offset) scaleX($mobile-ham-bar-scale-outer) rotate(0);
     }
-  }
-}
-
-@media only screen and (max-width: 767px) {
-
-  #hamburger{
-    // transform-origin: right center; 
-    transform: scale(0.72);
   }
 }
 
@@ -256,9 +263,11 @@ $ham-d : 0.6s;
 }
 
 @media only screen and (max-width: 767px) {
-  /* For desktop: */
   .nav-m{
-    display:inline-block;
+    display: inline-block;
+    bottom: mobile-nav-bottom-offset($mobile-follow-icon-height);
+    right: $mobile-nav-side-inset;
+    margin: 0;
   }
   #menu-wrapper{
     display:flex;
@@ -266,6 +275,10 @@ $ham-d : 0.6s;
 }
 
 @media only screen and (max-width: 479px){
+  .nav-m{
+    bottom: mobile-nav-bottom-offset($mobile-follow-icon-height-sm);
+  }
+
   .menu-item-name span{
     font-size:8vw;
   }

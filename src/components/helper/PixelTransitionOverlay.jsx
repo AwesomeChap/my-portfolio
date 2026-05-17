@@ -4,6 +4,10 @@ import gsap from 'gsap';
 import {
   isPageTransitionActiveViewport,
   prefersReducedMotion,
+  PIXEL_COVER_CELL_S,
+  PIXEL_COVER_STAGGER_S,
+  PIXEL_REVEAL_CELL_S,
+  PIXEL_REVEAL_STAGGER_S,
 } from './pageTransition';
 import '../../styles/pixel-transition-overlay.scss';
 
@@ -100,60 +104,101 @@ function PixelTransitionOverlay({ location }) {
     draw();
   }, [draw, resizeCanvas]);
 
-  const runReveal = useCallback(() => {
-    const fills = fillsRef.current;
-    if (!fills.length || !fills.some((f) => f.v > 0.02)) {
-      document.body.classList.remove('page-transitioning', 'page-transition--pixel');
-      return;
-    }
+  const runReveal = useCallback(
+    (options = {}) => {
+      const { clearNavClasses = true } = options;
+      const fills = fillsRef.current;
 
-    killTimeline();
-    timelineRef.current = gsap.to(fills, {
-      v: 0,
-      duration: 0.14,
-      ease: 'power3.out',
-      stagger: {
-        amount: 0.3,
-        from: 'random',
-      },
-      onUpdate: draw,
-      onComplete: () => {
-        draw();
-        document.body.classList.remove('page-transitioning', 'page-transition--pixel');
-      },
-    });
-  }, [draw, killTimeline]);
+      return new Promise((resolve) => {
+        if (!fills.length || !fills.some((f) => f.v > 0.02)) {
+          if (clearNavClasses) {
+            document.body.classList.remove('page-transitioning', 'page-transition--pixel');
+          }
+          resolve();
+          return;
+        }
 
-  const runCover = useCallback(() => {
-    if (!isPageTransitionActiveViewport() || prefersReducedMotion()) {
-      return;
-    }
+        killTimeline();
+        timelineRef.current = gsap.to(fills, {
+          v: 0,
+          duration: PIXEL_REVEAL_CELL_S,
+          ease: 'power3.out',
+          stagger: {
+            amount: PIXEL_REVEAL_STAGGER_S,
+            from: 'random',
+          },
+          onUpdate: draw,
+          onComplete: () => {
+            draw();
+            if (clearNavClasses) {
+              document.body.classList.remove('page-transitioning', 'page-transition--pixel');
+            }
+            resolve();
+          },
+        });
+      });
+    },
+    [draw, killTimeline]
+  );
 
-    killTimeline();
-    resetGrid();
-    const fills = fillsRef.current;
+  const runCover = useCallback(
+    (options = {}) => {
+      const { allowMobile = false } = options;
 
-    timelineRef.current = gsap.to(fills, {
-      v: 1,
-      duration: 0.15,
-      ease: 'power2.inOut',
-      stagger: {
-        amount: 0.32,
-        from: 'random',
-      },
-      onUpdate: draw,
-      onComplete: draw,
-    });
-  }, [draw, killTimeline, resetGrid]);
+      if (!allowMobile && (!isPageTransitionActiveViewport() || prefersReducedMotion())) {
+        return Promise.resolve();
+      }
+
+      killTimeline();
+      resetGrid();
+      const fills = fillsRef.current;
+
+      return new Promise((resolve) => {
+        timelineRef.current = gsap.to(fills, {
+          v: 1,
+          duration: PIXEL_COVER_CELL_S,
+          ease: 'power2.inOut',
+          stagger: {
+            amount: PIXEL_COVER_STAGGER_S,
+            from: 'random',
+          },
+          onUpdate: draw,
+          onComplete: () => {
+            draw();
+            resolve();
+          },
+        });
+      });
+    },
+    [draw, killTimeline, resetGrid]
+  );
 
   const onNavStart = useCallback(() => {
     runCover();
   }, [runCover]);
 
+  const onEyesCover = useCallback(() => {
+    runCover({ allowMobile: false }).then(() => {
+      window.dispatchEvent(new Event('portfolio-pixel-eyes-cover-done'));
+    });
+  }, [runCover]);
+
+  const onEyesReveal = useCallback(() => {
+    runReveal({ clearNavClasses: false }).then(() => {
+      window.dispatchEvent(new Event('portfolio-pixel-eyes-reveal-done'));
+    });
+  }, [runReveal]);
+
   useEffect(() => {
     window.addEventListener('portfolio-pixel-nav-start', onNavStart);
-    return () => window.removeEventListener('portfolio-pixel-nav-start', onNavStart);
-  }, [onNavStart]);
+    window.addEventListener('portfolio-pixel-eyes-cover', onEyesCover);
+    window.addEventListener('portfolio-pixel-eyes-reveal', onEyesReveal);
+    return () => {
+      window.removeEventListener('portfolio-pixel-nav-start', onNavStart);
+      window.removeEventListener('portfolio-pixel-eyes-cover', onEyesCover);
+      window.removeEventListener('portfolio-pixel-eyes-reveal', onEyesReveal);
+    };
+  }, [onNavStart, onEyesCover, onEyesReveal]);
 
   useEffect(() => {
     const prev = pathnameRef.current;

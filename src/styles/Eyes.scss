@@ -1,80 +1,128 @@
 @use 'colors' as *;
 
+@function eyes-delay($t) {
+    @return unquote("calc(#{$t} + var(--eyes-seq-delay, 0.7s))");
+}
+
+$eyes-top-inset: 10px;
+$eyes-desktop-inset: 16px;
+$eyes-close-size: 40px;
+$eyes-close-size-desktop: 52px;
+$eyes-close-track: 52px;
+$eyes-progress-width: 150px;
+$eyes-progress-height: 11px;
+$eyes-glass-bg: rgba(46, 46, 46, 0.34);
+$eyes-glass-shadow: 0 10px 30px rgba(0, 0, 0, 0.24), 0 2px 10px rgba(0, 0, 0, 0.2);
+/* Progress: muted accent reds for status (not loud $red-brand / theme solid) */
+$eyes-progress-track: #0d090a;
+$eyes-progress-fill: $red-accent-muted;
+
+.eyes-top-chrome {
+    position: absolute;
+    z-index: 30;
+}
+
+.eyes-close-controls {
+    display: block;
+}
+
 .hide-eyes {
     appearance: none;
     -webkit-appearance: none;
     border: 0;
-    padding: 0;
-    background: transparent;
+    padding: 6px;
+    box-sizing: border-box;
     position: absolute;
-    top: 0;
-    right: 0;
-    z-index: 30;
-    height: 40px;
-    width: 40px;
-    margin: 16px;
+    top: $eyes-top-inset;
+    right: $eyes-top-inset;
+    width: $eyes-close-size;
+    height: $eyes-close-size;
     cursor: pointer;
-    display: grid;
-    place-items: center;
+    border-radius: 5px;
+    background-color: $eyes-glass-bg;
+    box-shadow: $eyes-glass-shadow;
+    backdrop-filter: blur(16px) saturate(140%);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+    transition:
+        background-color 0.2s ease,
+        box-shadow 0.2s ease;
 
-    .cross {
-        position: absolute;
-        width: 14px;
-        height: 14px;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-
-        &::after, &::before {
-            content: "";
-            position: absolute;
-            width: 100%;
-            height: 2px;
-            top: 50%;
-            left: 0;
-            background-color: $red-brand;
-            transform-origin: center;
-        }
-
-        &:before {
-            transform: translateY(-50%) rotate(45deg);
-        }
-
-        &:after {
-            transform: translateY(-50%) rotate(-45deg);
-        }
+    &:hover {
+        background-color: rgba(46, 46, 46, 0.72);
     }
 
-    svg {
-        position: absolute;
-        inset: 0;
-        margin: auto;
+    &:focus-visible {
+        outline: none;
+        background-color: rgba(46, 46, 46, 0.72);
+        box-shadow: inset 0 0 0 2px $red-brand;
+    }
+
+    &__cross {
         width: 100%;
         height: 100%;
-        transform: rotateY(-180deg) rotateZ(-90deg);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        pointer-events: none;
 
-        circle {
-            stroke-dasharray: 113px;
-            stroke-dashoffset: 0px;
-            stroke-width: 3px;
-            fill: none;
-            stroke: #222;
+        .line {
+            width: 100%;
+            height: 1.5px;
+            background-color: $red-brand;
         }
 
-        &.countdown {
-            circle {
-                stroke: $red-brand;
-                animation: countdown var(--countdown-duration, 8s) linear forwards;
-            }
+        .line1 {
+            transform: scale(0.55) translateY(2px) rotate(135deg);
+        }
+
+        .line2 {
+            transform: scaleX(0);
+            opacity: 0;
+        }
+
+        .line3 {
+            transform: scale(0.55) translateY(-2px) rotate(45deg);
         }
     }
+}
 
-    @keyframes countdown {
-        from {
-            stroke-dashoffset: 0px;
+.eyes-progress {
+    position: absolute;
+    top: $eyes-top-inset;
+    left: 50%;
+    z-index: 30;
+    display: flex;
+    gap: 2px;
+    width: $eyes-progress-width;
+    height: $eyes-progress-height;
+    padding: 0;
+    background: transparent;
+    transform: translateX(-50%);
+    box-sizing: border-box;
+
+    &__pixel {
+        flex: 1;
+        min-width: 0;
+        height: 100%;
+        background-color: $eyes-progress-track;
+        transition: background-color 0.2s ease;
+
+        &:first-child {
+            border-radius: 4px 1px 1px 4px;
         }
-        to {
-            stroke-dashoffset: 113px;
+
+        &:last-child {
+            border-radius: 1px 4px 4px 1px;
+        }
+
+        &:not(:first-child):not(:last-child) {
+            border-radius: 1px;
+        }
+
+        &.is-filled {
+            background-color: $eyes-progress-fill;
+            box-shadow: none;
         }
     }
 }
@@ -100,7 +148,60 @@
     justify-content: center;
     align-items: center;
     background: #111;
+    --eyes-seq-delay: 0.7s;
+    --eyes-progress-fill: #{$eyes-progress-fill};
+    --eyes-progress-track: #{$eyes-progress-track};
     animation: eyes-overlay-in 0.42s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+
+    &--exiting {
+        z-index: 1;
+        pointer-events: none;
+        animation: eyes-overlay-out 0.42s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    /* Pixel enter/exit — no opacity fade (GSAP grid handles the wipe) */
+    &--pixel {
+        animation: none;
+        opacity: 1;
+
+        &.eyes-container--exiting {
+            z-index: 1200;
+            animation: none;
+            opacity: 1;
+        }
+
+        /* Cover → reveal finishes before any eyes UI mounts */
+        &.eyes-container--arming {
+            pointer-events: none;
+        }
+    }
+
+    .eyes-stage {
+        display: flex;
+        flex: 1 1 auto;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        min-height: 0;
+    }
+
+    &.eyes-container--ready:not(.eyes-container--sketching) .eyes-stage,
+    &.eyes-container--armed:not(.eyes-container--sketching) .eyes-stage {
+        visibility: hidden;
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    &.eyes-container--sketching .eyes-stage {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    &.eyes-container--sketching .svg-box {
+        opacity: 1;
+        visibility: visible;
+        animation: none;
+    }
 
     .stroke-2 {
         @include stroke-params;
@@ -135,6 +236,16 @@
         max-width: 100%;
         max-height: min(36vh, 220px);
         box-sizing: border-box;
+        opacity: 0;
+        visibility: hidden;
+        animation: eyes-sequence-visible 0s var(--eyes-seq-delay) forwards;
+    }
+
+    @keyframes eyes-sequence-visible {
+        to {
+            opacity: 1;
+            visibility: visible;
+        }
     }
 
     .eyes-animation-svg {
@@ -156,7 +267,7 @@
         fill: none;
         @include stroke-params;
         visibility: visible;
-        animation: UI 0.5s 0.7s forwards, close-eye 0.1s 1.4s forwards;
+        animation: UI 0.5s eyes-delay(0.7s) forwards, close-eye 0.1s eyes-delay(1.4s) forwards;
     }
 
     @keyframes close-eye {
@@ -167,7 +278,7 @@
 
     .opened-eye {
         visibility: hidden;
-        animation: open-eye 0.1s 1.5s forwards;
+        animation: open-eye 0.1s eyes-delay(1.5s) forwards;
     }
 
     @keyframes open-eye {
@@ -179,7 +290,7 @@
     .shine11,
     .shine21 {
         fill: #fff;
-        animation: rotate 0.5s 3s forwards;
+        animation: rotate 0.5s eyes-delay(3s) forwards;
         transform-origin: 72% 55%;
         opacity: 0;
     }
@@ -190,7 +301,7 @@
         opacity: 0;
         transform: scaleY(0.9) rotate(0deg);
         transform-origin: 26% 58%;
-        animation: rotate 0.5s 3s forwards;
+        animation: rotate 0.5s eyes-delay(3s) forwards;
     }
 
     @keyframes rotate {
@@ -207,15 +318,15 @@
     #left-eye-brow {
         fill: none;
         @include stroke-params;
-        animation: UI 0.5s 0.7s forwards, MUI 0.7s 2s forwards, raiseLeft 0.2s 3.5s forwards,
-            decolorize 0.5s 4.5s forwards;
+        animation: UI 0.5s eyes-delay(0.7s) forwards, MUI 0.7s eyes-delay(2s) forwards,
+            raiseLeft 0.2s eyes-delay(3.5s) forwards, decolorize 0.5s eyes-delay(4.5s) forwards;
     }
 
     #right-eye-brow {
-        fill: none;
+        fill: transparent;
         @include stroke-params;
-        animation: UI 0.5s 0.7s forwards, MUI 0.7s 2s forwards, raiseRight 0.2s 3.5s forwards,
-            decolorize 0.5s 4.5s forwards;
+        animation: UI 0.5s eyes-delay(0.7s) forwards, MUI 0.7s eyes-delay(2s) forwards,
+            raiseRight 0.2s eyes-delay(3.5s) forwards, decolorize 0.5s eyes-delay(4.5s) forwards;
     }
 
     @keyframes MUI {
@@ -238,12 +349,12 @@
 
     #left-eye-ball {
         clip-path: url(#id1);
-        animation: change-clip-path-left 0.1s 3.5s forwards;
+        animation: change-clip-path-left 0.1s eyes-delay(3.5s) forwards;
     }
 
     #right-eye-ball {
         clip-path: url(#id2);
-        animation: change-clip-path-right 0.1s 3.5s forwards;
+        animation: change-clip-path-right 0.1s eyes-delay(3.5s) forwards;
     }
 
     /* stage 4 animations animation delay > 3.5s */
@@ -273,11 +384,11 @@
     }
 
     #left-eye-open {
-        animation: focus-left 0.2s 3.5s linear forwards;
+        animation: focus-left 0.2s eyes-delay(3.5s) linear forwards;
     }
 
     #right-eye-open {
-        animation: focus-right 0.2s 3.5s linear forwards;
+        animation: focus-right 0.2s eyes-delay(3.5s) linear forwards;
     }
 
     @keyframes focus-left {
@@ -293,7 +404,7 @@
     }
 
     .eye-balls {
-        animation: focus 0.2s 3.5s linear forwards, fade 1s 4s forwards;
+        animation: focus 0.2s eyes-delay(3.5s) linear forwards, fade 1s eyes-delay(4s) forwards;
     }
 
     @keyframes focus {
@@ -307,7 +418,7 @@
     #eyes-2 {
         visibility: hidden;
         opacity: 0;
-        animation: comeEyes 0.1s 4s forwards;
+        animation: comeEyes 0.1s eyes-delay(4s) forwards;
     }
 
     @keyframes comeEyes {
@@ -317,10 +428,15 @@
         }
     }
 
-    #eyes {
+    &:not(.eyes-container--sketching) #eyes {
+        visibility: hidden;
+        opacity: 0;
+    }
+
+    &.eyes-container--sketching #eyes {
         visibility: visible;
         opacity: 1;
-        animation: goEyes 0.1s 4.7s forwards;
+        animation: goEyes 0.1s eyes-delay(4.7s) forwards;
     }
 
     @keyframes goEyes {
@@ -352,27 +468,27 @@
     }
 
     .logo-color:nth-child(1) {
-        animation-delay: 5.55s;
+        animation-delay: eyes-delay(5.55s);
     }
 
     .logo-color:nth-child(2) {
-        animation-delay: 5.6s;
+        animation-delay: eyes-delay(5.6s);
     }
 
     .logo-color:nth-child(3) {
-        animation-delay: 5.65s;
+        animation-delay: eyes-delay(5.65s);
     }
 
     .logo-color:nth-child(6) {
-        animation-delay: 5.7s;
+        animation-delay: eyes-delay(5.7s);
     }
 
     .logo-color:nth-child(4) {
-        animation-delay: 5.75s;
+        animation-delay: eyes-delay(5.75s);
     }
 
     .logo-color:nth-child(5) {
-        animation-delay: 5.8s;
+        animation-delay: eyes-delay(5.8s);
     }
 
     @keyframes fill-logo {
@@ -383,6 +499,7 @@
     }
 
     &--reduced {
+        --eyes-seq-delay: 0.28s;
         animation: eyes-overlay-in 0.2s ease-out forwards;
 
         #my-svg,
@@ -400,6 +517,135 @@
     }
     to {
         opacity: 1;
+    }
+}
+
+@keyframes eyes-overlay-out {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .eyes-top-chrome {
+        top: $eyes-desktop-inset;
+        right: $eyes-desktop-inset;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        width: $eyes-close-track;
+        gap: 10px;
+    }
+
+    .hide-eyes {
+        position: relative;
+        top: auto;
+        right: auto;
+        width: 100%;
+        height: $eyes-close-size-desktop;
+        padding: 8px;
+    }
+
+    .eyes-progress.eyes-progress--chrome {
+        position: relative;
+        top: auto;
+        left: auto;
+        transform: none;
+        width: 100%;
+    }
+}
+
+// Match NavMobile.scss #menu-wrapper open-menu / close-menu + fadeOut-menu-item
+$nav-mobile-overlay-ease: ease;
+$nav-mobile-overlay-duration: 0.3s;
+$nav-mobile-overlay-exit-delay: 0.4s;
+$nav-mobile-menu-item-ease: cubic-bezier(0.17, 0.89, 0.26, 1);
+
+@keyframes eyes-overlay-slide-in {
+    from {
+        transform: translateY(-100%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+@keyframes eyes-overlay-slide-out {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(-100%);
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .eyes-container:not(.eyes-container--pixel) {
+        transform-origin: top center;
+        animation: eyes-overlay-slide-in $nav-mobile-overlay-duration $nav-mobile-overlay-ease forwards;
+        opacity: 1;
+        will-change: transform;
+
+        &.eyes-container--exiting {
+            z-index: 1200;
+            animation: eyes-overlay-slide-out $nav-mobile-overlay-duration $nav-mobile-overlay-ease forwards;
+            opacity: 1;
+        }
+
+        &.eyes-container--content-hidden .eyes-top-chrome,
+        &.eyes-container--content-hidden .eyes-stage {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition:
+                opacity 0.1s $nav-mobile-menu-item-ease $nav-mobile-overlay-exit-delay,
+                visibility 0.1s $nav-mobile-menu-item-ease $nav-mobile-overlay-exit-delay;
+        }
+
+        &.eyes-container--reduced {
+            animation-duration: 0.2s;
+
+            &.eyes-container--exiting {
+                animation-duration: 0.2s;
+            }
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .eyes-container:not(.eyes-container--pixel) {
+            animation: eyes-overlay-in 0.2s ease-out forwards;
+
+            &.eyes-container--exiting {
+                animation: eyes-overlay-out 0.2s ease-out forwards;
+            }
+        }
+    }
+
+    .eyes-top-chrome {
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 0;
+        pointer-events: none;
+    }
+
+    .eyes-close-controls {
+        pointer-events: auto;
+    }
+
+    .hide-eyes {
+        top: calc(#{$eyes-top-inset} + env(safe-area-inset-top, 0px));
+        right: calc(#{$eyes-top-inset} + env(safe-area-inset-right, 0px));
+    }
+
+    .eyes-progress.eyes-progress--chrome {
+        top: calc(
+            #{$eyes-top-inset} + env(safe-area-inset-top, 0px) +
+            (#{$eyes-close-size} - #{$eyes-progress-height}) * 0.5
+        );
     }
 }
 

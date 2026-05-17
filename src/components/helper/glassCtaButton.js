@@ -27,7 +27,7 @@ export function resumeGlassButtonClasses() {
     GLASS_CTA_BUTTON_BASE,
     GLASS_CTA_BUTTON_ENTER,
     GLASS_CTA_BUTTON_RESUME_MOBILE,
-    'animate-resume-enter',
+    'animate-resume-enter max-[767px]:animate-resume-enter-top',
   );
 }
 

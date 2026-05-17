@@ -16,14 +16,15 @@ $home-mobile-side-inset: 10px;
   overflow: hidden;
 }
 
-/* Mobile placement for ShareWithLove — SCSS wins over utility order/purge issues */
+/* Mobile placement for ShareWithLove — same horizontal inset as follow bar */
 .share-with-love {
   @media only screen and (max-width: 767px) {
     left: $home-mobile-side-inset !important;
-    top: calc(26px + env(safe-area-inset-top, 0px)) !important;
     right: auto !important;
+    top: calc(#{$home-mobile-side-inset} + env(safe-area-inset-top, 0px)) !important;
     bottom: auto !important;
     margin: 0 !important;
+    margin-left: 0 !important;
     z-index: 30 !important;
   }
 }
@@ -294,24 +295,31 @@ $home-mobile-side-inset: 10px;
     left: $home-mobile-side-inset;
     right: auto;
     transform: translate(0,-100%);
+    align-items: flex-start;
   }
 
-  // .follow-me{
-  //   letter-spacing: 0.1em;
-  //   margin-left: 5px;
-  // }
+  .follow-me {
+    text-align: left;
+    margin-left: 0;
+    margin-right: 0;
+  }
 
   .follow-container{
     flex-direction: row;
+    align-items: flex-start;
     overflow: hidden;
     box-shadow: none;
     a{
-      margin:0 0 17px 4px;
+      margin: 0 4px $home-mobile-side-inset 0;
       overflow: hidden;
       transform: translate(0,50%);
       font-size: 22px;
       height: 50px;
       width: 50px;
+
+      &:first-child {
+        margin-left: 0;
+      }
     }
   }
 }
