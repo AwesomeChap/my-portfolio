@@ -69,7 +69,7 @@ export default (props) => {
               <h1 className="distorted-intro-title__sr">HELLO. I&apos;M JATIN</h1>
             ) : (
               <>
-                <div className="intro-text" style={{ color: "#777" }}>
+                <div className="intro-text intro-text--hello">
                   {
                     text1.split("").map((t, i) => {
                       let style = { animationDelay: `${t0 + i / 15}s` };

@@ -158,8 +158,13 @@ export function drawLinesCanvas(width, height, dpr, layout) {
       } catch (e) {
         /* empty */
       }
+      if (line.glass) {
+        ctx.shadowColor = 'rgba(255, 255, 255, 0.14)';
+        ctx.shadowBlur = line.fontSize * 0.14;
+      }
       ctx.fillStyle = line.color;
       ctx.fillText(line.text, centerX, y);
+      ctx.shadowBlur = 0;
       y += line.fontSize + (i < lines.length - 1 ? gap : 0);
     });
     return canvas;
@@ -188,8 +193,13 @@ export function drawLinesCanvas(width, height, dpr, layout) {
     } catch (e) {
       /* empty */
     }
+    if (line.glass) {
+      ctx.shadowColor = 'rgba(255, 255, 255, 0.14)';
+      ctx.shadowBlur = line.fontSize * 0.14;
+    }
     ctx.fillStyle = line.color;
     ctx.fillText(line.text, leftX, y);
+    ctx.shadowBlur = 0;
     y += line.fontSize + (i < lines.length - 1 ? gap : 0);
   });
 
@@ -197,6 +207,8 @@ export function drawLinesCanvas(width, height, dpr, layout) {
 }
 
 /** Home hero: HELLO. / I'M JATIN */
+const INTRO_HELLO_GLASS_FILL = 'rgba(255, 255, 255, 0.42)';
+
 export function heroLayoutForWidth(width, height) {
   let fontSize;
   if (width <= 767) fontSize = Math.max(44, width * 0.11);
@@ -205,8 +217,8 @@ export function heroLayoutForWidth(width, height) {
 
   return {
     lines: [
-      { text: 'HELLO.', color: '#777777', fontSize },
-      { text: "I'M JATIN", color: '#dddddd', fontSize },
+      {text: 'HELLO.', color: INTRO_HELLO_GLASS_FILL, fontSize, glass: true},
+      {text: "I'M JATIN", color: '#dddddd', fontSize},
     ],
     letterSpacingRatio: 0.2,
     lineGapRatio: 0.28,
@@ -224,8 +236,8 @@ export function notFoundLayoutForWidth(width, height) {
 
   return {
     lines: [
-      { text: '404', color: '#dddddd', fontSize: titleSize },
-      { text: NOT_FOUND_SUBTITLE, color: '#777777', fontSize: subSize, letterSpacingRatio: subSpacing },
+      {text: '404', color: '#dddddd', fontSize: titleSize},
+      {text: NOT_FOUND_SUBTITLE, color: '#777777', fontSize: subSize, letterSpacingRatio: subSpacing},
     ],
     letterSpacingRatio: titleSpacing,
     lineGapPx: 10,
@@ -289,7 +301,7 @@ export function createDistortedPixelsSketch(container, config) {
   let rafId;
   let isPlaying = true;
 
-  const mouse = { x: 0, y: 0, prevX: 0, prevY: 0, vX: 0, vY: 0 };
+  const mouse = {x: 0, y: 0, prevX: 0, prevY: 0, vX: 0, vY: 0};
   const revealStart = performance.now() + revealDelayMs;
 
   function regenerateGrid() {
@@ -339,11 +351,11 @@ export function createDistortedPixelsSketch(container, config) {
     depthTest: false,
     depthWrite: false,
     uniforms: {
-      resolution: { value: new THREE.Vector4() },
-      uTexture: { value: canvasTex },
-      uDataTexture: { value: dataTexture },
-      uDistortionStrength: { value: settings.distortion },
-      uReveal: { value: 0 },
+      resolution: {value: new THREE.Vector4()},
+      uTexture: {value: canvasTex},
+      uDataTexture: {value: dataTexture},
+      uDistortionStrength: {value: settings.distortion},
+      uReveal: {value: 0},
     },
     vertexShader: VERTEX_SHADER,
     fragmentShader: buildFragmentShader(mosaicMax),
@@ -397,7 +409,7 @@ export function createDistortedPixelsSketch(container, config) {
     mouse.y = ny;
   }
 
-  window.addEventListener('mousemove', onMouseMove, { passive: true });
+  window.addEventListener('mousemove', onMouseMove, {passive: true});
 
   let resizeTimer;
   function onResize() {
@@ -444,5 +456,5 @@ export function createDistortedPixelsSketch(container, config) {
     }
   }
 
-  return { destroy };
+  return {destroy};
 }

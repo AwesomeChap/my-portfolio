@@ -98,6 +98,32 @@ $home-mobile-side-inset: 10px;
   }
 }
 
+/* Solid glass fill — gradient clip breaks on per-letter spans (mobile/tablet hero). */
+.intro-text--hello {
+  color: $intro-hello-glass-fill;
+  text-shadow:
+    0 1px 0 $intro-hello-glass-edge,
+    0 0 20px $intro-hello-glass-glow;
+
+  span {
+    color: inherit;
+    -webkit-text-fill-color: currentColor;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .intro {
+    z-index: 2;
+  }
+
+  .intro-text--hello {
+    color: rgba(255, 255, 255, 0.36);
+    text-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.14),
+      0 0 16px rgba(255, 255, 255, 0.06);
+  }
+}
+
 .intro-text{
   position: relative;
   font-family: Futura;
