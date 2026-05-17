@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
+import { useLocation } from 'react-router-dom';
 import '../../styles/ScrollProgressBar.scss';
 import { emitCursorMove } from './cursorSync';
 import {
@@ -14,6 +15,7 @@ const SCROLL_PIXEL_GAP = 5;
 const DRAG_THRESHOLD_PX = 4;
 
 export default function ScrollProgressBar() {
+  const location = useLocation();
   const [progress, setProgress] = useState(0);
   const [visible, setVisible] = useState(false);
   const [isTabVisible, setIsTabVisible] = useState(
@@ -44,17 +46,39 @@ export default function ScrollProgressBar() {
   const thumbIndex = filledCount > 0 ? filledCount - 1 : -1;
   const hasThumb = thumbIndex >= 0;
 
-  const progressFromClientY = useCallback((clientY) => {
-    const track = trackRef.current;
-    if (!track) return 0;
-    const rect = track.getBoundingClientRect();
-    if (rect.height < 1) return 0;
-    const y = clientY - rect.top;
-    return Math.min(1, Math.max(0, y / rect.height));
-  }, []);
+  const indexFromClientY = useCallback(
+    (clientY) => {
+      const track = trackRef.current;
+      if (!track) return 0;
+      const y = clientY - track.getBoundingClientRect().top;
+      if (y <= 0) return 0;
 
+      let offset = 0;
+      for (let i = 0; i < SCROLL_PIXEL_COUNT; i += 1) {
+        const size = pixelSizes[i] ?? 0;
+        const cellEnd = offset + size;
+        const bandEnd =
+          i < SCROLL_PIXEL_COUNT - 1
+            ? cellEnd + SCROLL_PIXEL_GAP
+            : cellEnd;
+
+        if (y <= bandEnd) {
+          if (y <= cellEnd) return i;
+          return Math.min(SCROLL_PIXEL_COUNT - 1, i + 1);
+        }
+
+        offset = cellEnd + SCROLL_PIXEL_GAP;
+      }
+
+      return SCROLL_PIXEL_COUNT - 1;
+    },
+    [pixelSizes]
+  );
+
+  /** Progress where pixel `index` is the active (thumb) cell. */
   const progressForPixelIndex = useCallback(
-    (index) => (index + 0.5) / SCROLL_PIXEL_COUNT,
+    (index) =>
+      Math.min(1, (Math.max(0, index) + 1) / SCROLL_PIXEL_COUNT),
     []
   );
 
@@ -86,12 +110,8 @@ export default function ScrollProgressBar() {
     rafLoopRef.current = requestAnimationFrame(tick);
   }, []);
 
-  const stopTicking = useCallback(() => {
-    isTickingRef.current = false;
-    if (rafLoopRef.current) {
-      cancelAnimationFrame(rafLoopRef.current);
-      rafLoopRef.current = null;
-    }
+  const syncFromDocument = useCallback(() => {
+    if (isInteractingRef.current) return;
     const el = resolveScrollContainer();
     const max = Math.max(0, el.scrollHeight - el.clientHeight);
     const nextVisible = max >= MIN_SCROLL_RANGE;
@@ -100,17 +120,21 @@ export default function ScrollProgressBar() {
     setProgress(nextProgress);
   }, []);
 
+  const stopTicking = useCallback(() => {
+    isTickingRef.current = false;
+    if (rafLoopRef.current) {
+      cancelAnimationFrame(rafLoopRef.current);
+      rafLoopRef.current = null;
+    }
+    syncFromDocument();
+  }, [syncFromDocument]);
+
   useEffect(() => {
     let mounted = true;
 
     const apply = () => {
       if (!mounted || isInteractingRef.current) return;
-      const el = resolveScrollContainer();
-      const max = Math.max(0, el.scrollHeight - el.clientHeight);
-      const nextVisible = max >= MIN_SCROLL_RANGE;
-      const nextProgress = nextVisible ? getScrollProgress() : 0;
-      setVisible((prev) => (prev === nextVisible ? prev : nextVisible));
-      setProgress(nextProgress);
+      syncFromDocument();
     };
 
     const onScrollActivity = () => {
@@ -153,7 +177,29 @@ export default function ScrollProgressBar() {
       }
       stopTicking();
     };
-  }, [startTicking, stopTicking]);
+  }, [startTicking, stopTicking, syncFromDocument]);
+
+  useEffect(() => {
+    setHoveredIndex(null);
+    setIsTrackHovered(false);
+    isInteractingRef.current = false;
+    setIsDragging(false);
+    document.body.classList.remove('scroll-progress-dragging');
+
+    syncFromDocument();
+    const rafId = window.requestAnimationFrame(() => {
+      syncFromDocument();
+      window.requestAnimationFrame(syncFromDocument);
+    });
+    const afterLayoutId = window.setTimeout(syncFromDocument, 150);
+    const afterTransitionId = window.setTimeout(syncFromDocument, 550);
+
+    return () => {
+      window.cancelAnimationFrame(rafId);
+      window.clearTimeout(afterLayoutId);
+      window.clearTimeout(afterTransitionId);
+    };
+  }, [location.pathname, syncFromDocument]);
 
   useEffect(() => {
     const onVisibilityChange = () => {
@@ -283,8 +329,12 @@ export default function ScrollProgressBar() {
     (event) => {
       if (activePointerIdRef.current !== event.pointerId) return;
 
+      if (!didDragRef.current) {
+        setHoveredIndex(indexFromClientY(event.clientY));
+      }
+
       const moved = Math.abs(event.clientY - pointerStartYRef.current);
-      const canDrag = pointerOnThumbRef.current && hasThumb;
+      const canDrag = pointerOnThumbRef.current;
 
       if (!didDragRef.current && moved >= DRAG_THRESHOLD_PX && canDrag) {
         beginDrag();
@@ -294,11 +344,12 @@ export default function ScrollProgressBar() {
       if (!didDragRef.current) return;
 
       emitCursorMove(event.clientX, event.clientY, { instant: true });
-      const next = progressFromClientY(event.clientY);
+      const index = indexFromClientY(event.clientY);
+      const next = progressForPixelIndex(index);
       scrollToProgress(next, { behavior: 'auto' });
       setProgress(next);
     },
-    [beginDrag, hasThumb, progressFromClientY]
+    [beginDrag, indexFromClientY, progressForPixelIndex]
   );
 
   const onTrackPointerUp = useCallback(
@@ -307,11 +358,7 @@ export default function ScrollProgressBar() {
 
       trackRef.current?.releasePointerCapture(event.pointerId);
 
-      if (
-        !didDragRef.current
-        && pointerStartIndexRef.current !== null
-        && !pointerOnThumbRef.current
-      ) {
+      if (!didDragRef.current && pointerStartIndexRef.current !== null) {
         scrollToPixelIndex(pointerStartIndexRef.current);
       }
 
@@ -341,11 +388,32 @@ export default function ScrollProgressBar() {
   const isShown = visible && isTabVisible;
   const isBarInteractive = isShown && (isTrackHovered || isDragging);
 
+  const thumbDisplayIndex = isDragging
+    ? thumbIndex
+    : isTrackHovered && hoveredIndex !== null
+      ? hoveredIndex
+      : thumbIndex;
+  const showThumbAt =
+    (isTrackHovered || isDragging) && thumbDisplayIndex >= 0;
+
+  const onTrackMouseMove = useCallback(
+    (event) => {
+      if (isDragging) return;
+      setHoveredIndex(indexFromClientY(event.clientY));
+    },
+    [indexFromClientY, isDragging]
+  );
+
+  const onTrackMouseLeave = useCallback(() => {
+    if (!isDragging) setHoveredIndex(null);
+  }, [isDragging]);
+
   const renderThumb = (index) => {
     const slotSize = pixelSizes[index];
     const caretHalf = Math.max(7, Math.round(slotSize * 0.52));
     const caretHeight = Math.max(8, Math.round(slotSize * 0.66));
     const isHovered = hoveredIndex === index;
+    const slotFilled = index < thumbIndex || (hasThumb && index === thumbIndex);
 
     return (
       <div
@@ -355,7 +423,9 @@ export default function ScrollProgressBar() {
         style={{ width: slotSize, height: slotSize }}
       >
         <span
-          className="scroll-progress__pixel is-filled scroll-progress__thumb-slot-pixel"
+          className={`scroll-progress__pixel scroll-progress__thumb-slot-pixel${
+            slotFilled ? ' is-filled' : ''
+          }`}
           style={{ width: slotSize, height: slotSize }}
           data-scroll-index={index}
           aria-hidden="true"
@@ -375,10 +445,6 @@ export default function ScrollProgressBar() {
           style={{
             '--caret-half': `${caretHalf}px`,
             '--caret-height': `${caretHeight}px`,
-          }}
-          onMouseEnter={() => setHoveredIndex(index)}
-          onMouseLeave={() => {
-            setHoveredIndex((prev) => (prev === index ? null : prev));
           }}
           onKeyDown={(event) => {
             if (event.key === 'ArrowUp') {
@@ -428,14 +494,31 @@ export default function ScrollProgressBar() {
         aria-valuemin={0}
         aria-valuemax={SCROLL_PIXEL_COUNT}
         aria-valuenow={filledCount}
+        onMouseMove={onTrackMouseMove}
+        onMouseLeave={onTrackMouseLeave}
         onPointerDown={onTrackPointerDown}
         onPointerMove={onTrackPointerMove}
         onPointerUp={onTrackPointerUp}
         onPointerCancel={onTrackPointerCancel}
       >
         {Array.from({ length: SCROLL_PIXEL_COUNT }, (_, index) => {
-          if (hasThumb && index === thumbIndex) {
+          if (showThumbAt && index === thumbDisplayIndex) {
             return renderThumb(index);
+          }
+
+          if (hasThumb && index === thumbIndex) {
+            return (
+              <span
+                key={index}
+                data-scroll-index={index}
+                className="scroll-progress__pixel is-filled"
+                style={{
+                  width: pixelSizes[index],
+                  height: pixelSizes[index],
+                }}
+                aria-hidden="true"
+              />
+            );
           }
 
           const isFilled = index < thumbIndex;
@@ -454,10 +537,6 @@ export default function ScrollProgressBar() {
               style={{
                 width: pixelSizes[index],
                 height: pixelSizes[index],
-              }}
-              onMouseEnter={() => setHoveredIndex(index)}
-              onMouseLeave={() => {
-                setHoveredIndex((prev) => (prev === index ? null : prev));
               }}
               onKeyDown={(event) => onPixelKeyDown(event, index)}
             />

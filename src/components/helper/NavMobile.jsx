@@ -16,6 +16,19 @@ const NavMobile = (props) => {
     setClicked(false);
   }, [props.location.pathname]);
 
+  useEffect(() => {
+    if (!clicked) return undefined;
+
+    const onPointerDown = (event) => {
+      if (event.target.closest('#hamburger, .nav-m')) return;
+      if (event.target.closest('.menu-item')) return;
+      setClicked(false);
+    };
+
+    document.addEventListener('pointerdown', onPointerDown, true);
+    return () => document.removeEventListener('pointerdown', onPointerDown, true);
+  }, [clicked]);
+
   const handleSelect = (index) => {
     setSelected(index);
   };

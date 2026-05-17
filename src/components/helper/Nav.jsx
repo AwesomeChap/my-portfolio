@@ -18,6 +18,7 @@ const Nav = (props) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
   const lastScrollTopRef = useRef(0);
+  const navSurfaceRef = useRef(null);
 
   useEffect(() => {
     const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -119,6 +120,19 @@ const Nav = (props) => {
     };
   }, [clicked, props.location.pathname]);
 
+  useEffect(() => {
+    if (clicked !== true) return undefined;
+
+    const onPointerDown = (event) => {
+      const surface = navSurfaceRef.current;
+      if (surface?.contains(event.target)) return;
+      setClicked(false);
+    };
+
+    document.addEventListener('pointerdown', onPointerDown, true);
+    return () => document.removeEventListener('pointerdown', onPointerDown, true);
+  }, [clicked]);
+
   const handleNavLinkClick = (e) => {
     setNavLinkClicked(true);
     const to = e.currentTarget.getAttribute('data-to');
@@ -159,8 +173,8 @@ const Nav = (props) => {
       : clicked === false ? 'nav-right-surface--close'
         : '';
   const navScrolledModifier = isScrolled ? 'nav-right-surface--opaque' : '';
-
   const isMenuOpen = clicked === true;
+
   const isCurrentRoute = (to) => (
     to === '/' ? props.location.pathname === '/' : props.location.pathname === to
   );
@@ -201,6 +215,7 @@ const Nav = (props) => {
         <div className="nav-right-wrapper">
           <div className="nav-right">
             <div
+                ref={navSurfaceRef}
                 className={`nav-right-surface${navRightSurfaceModifier ? ` ${navRightSurfaceModifier}` : ''}${navScrolledModifier ? ` ${navScrolledModifier}` : ''}`}
             >
               <div className="nav-right-expandable">

@@ -26,9 +26,8 @@ export function resolveScrollContainer() {
 
 export function getScrollTop() {
   const el = resolveScrollContainer();
-  const windowY = window.scrollY || window.pageYOffset || 0;
-  const elTop = el?.scrollTop || 0;
-  return Math.max(windowY, elTop);
+  if (!el) return 0;
+  return Math.max(0, el.scrollTop || 0);
 }
 
 export function getScrollProgress() {

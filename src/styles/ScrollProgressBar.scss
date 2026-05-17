@@ -7,15 +7,14 @@ $scroll-progress-pixel-count: 44;
 $scroll-progress-side-inset: 10px;
 $scroll-progress-bottom-inset: 32px;
 $scroll-progress-hover-scale: 1.14;
-$scroll-progress-thumb-scale: 1.14;
 $scroll-progress-thumb-radius: 14px;
 $scroll-progress-thumb-padding-y: 11px;
 $scroll-progress-thumb-padding-x: 8px;
 /* Align with `.nav-bar` — padding-top 10px + height 60px (nav.scss) */
 $nav-bar-offset: calc(10px + 60px);
-/* Page bg #171717 (main.scss) — cells sit slightly above it */
-$scroll-progress-cell-bg: #1f1f1f;
-$scroll-progress-cell-bg-hover: #282828;
+/* Match `.nav-right-surface` glass — nav.scss */
+$scroll-progress-glass-bg: rgba(46, 46, 46, 0.34);
+$scroll-progress-glass-shadow: 0 10px 30px rgba(0, 0, 0, 0.24), 0 2px 10px rgba(0, 0, 0, 0.2);
 $scroll-progress-fill: #3a3a3a;
 $scroll-progress-caret-fill: rgba(180, 180, 180, 0.92);
 $scroll-progress-caret-fill-hover: rgba(210, 210, 210, 0.98);
@@ -77,22 +76,23 @@ $scroll-progress-thumb-shadow: 0 4px 12px rgba(0, 0, 0, 0.28);
     border: none;
     padding: 0;
     border-radius: 0;
-    background-color: $scroll-progress-cell-bg;
-    box-shadow: none;
+    background-color: $scroll-progress-glass-bg;
+    box-shadow: $scroll-progress-glass-shadow;
+    backdrop-filter: blur(16px) saturate(140%);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
     transform: scale(1);
     transform-origin: center center;
     transition:
       transform 0.16s ease,
-      background-color 0.2s ease;
+      background-color 0.2s ease,
+      box-shadow 0.2s ease;
     cursor: pointer;
 
     &.is-filled {
       background-color: $scroll-progress-fill;
-    }
-
-    &.is-hovered:not(.is-filled) {
-      background-color: $scroll-progress-cell-bg-hover;
-      z-index: 1;
+      box-shadow: none;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
     }
 
     &.is-hovered.is-filled {
@@ -139,11 +139,9 @@ $scroll-progress-thumb-shadow: 0 4px 12px rgba(0, 0, 0, 0.28);
     isolation: isolate;
     pointer-events: none;
     opacity: 0;
-    transform: translate(-50%, -50%) scale(1);
+    transform: translate(-50%, -50%);
     transform-origin: center center;
-    transition:
-      opacity 0.28s ease,
-      transform 0.16s ease;
+    transition: opacity 0.28s ease;
 
     &.is-dragging {
       cursor: grabbing;
@@ -151,7 +149,6 @@ $scroll-progress-thumb-shadow: 0 4px 12px rgba(0, 0, 0, 0.28);
 
     &.is-hovered,
     &.is-dragging {
-      transform: translate(-50%, -50%) scale($scroll-progress-thumb-scale);
       z-index: 4;
     }
   }
