@@ -10,8 +10,8 @@ $nav-item-text-muted: #aaa;
 $nav-item-text-active: #fff;
 $nav-ham-line: #fff;
 $nav-link-stagger-delays: 0.42s, 0.39s, 0.36s, 0.33s, 0.3s;
-$nav-surface-duration: 0.3s;
-$nav-surface-close-delay: 0.3s;
+$nav-surface-duration: $duration-default;
+$nav-surface-close-delay: $duration-default;
 $nav-glass-bg: rgba(46, 46, 46, 0.34);
 $nav-glass-shadow: 0 10px 30px rgba(0, 0, 0, 0.24), 0 2px 10px rgba(0, 0, 0, 0.2);
 $nav-opaque-bg: #111111;
@@ -84,7 +84,7 @@ $nav-opaque-bg: #111111;
   padding-right: var(--nav-ham-track);
   grid-template-columns: minmax(0, 0fr);
   transition:
-    grid-template-columns $nav-surface-duration ease,
+    grid-template-columns $nav-surface-duration $ease-default,
     background-color 0.2s ease,
     box-shadow 0.2s ease,
     backdrop-filter 0.2s ease,

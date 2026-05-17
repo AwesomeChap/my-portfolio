@@ -88,27 +88,7 @@
   }
 
   a:not(.social-icon):not(.social-icon-m) {
-    display: inline;
-    text-decoration: none;
-    color: rgba(255, 255, 255, 0.9);
-    overflow-wrap: anywhere;
-    word-break: break-word;
-    padding: 0 1px 0.08em;
-    background: linear-gradient(0deg, $red-brand, $red-brand) 0 100% / 100% 2px no-repeat;
-    box-decoration-break: clone;
-    -webkit-box-decoration-break: clone;
-    transition: color 0.25s ease, background-size 0.25s ease;
-
-    &:hover,
-    &:focus-visible {
-      color: #fff;
-      background: linear-gradient(
-          0deg,
-          $red-accent-soft,
-          $red-accent-soft
-        )
-        0 100% / 100% 52% no-repeat;
-    }
+    @include content-inline-link;
   }
 }
 

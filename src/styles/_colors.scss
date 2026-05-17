@@ -1,4 +1,10 @@
 // -----------------------------------------------------------------------------
+// Default motion (nav open, link reveal, UI transitions)
+// -----------------------------------------------------------------------------
+$ease-default: ease;
+$duration-default: 0.3s;
+
+// -----------------------------------------------------------------------------
 // Brand reds
 // -----------------------------------------------------------------------------
 
@@ -28,3 +34,77 @@ $red-accent-grid: rgba(255, 13, 45, 0.045);
 
 // Slightly lighter solid for emphasis borders (e.g. highlights).
 $neon_red-light: #ff5e73;
+
+// Checkerboard for inline content links (::after layer).
+$link-grid-rows: 2;
+$link-grid-line-height: 1.68em;
+$link-grid-cell: $link-grid-line-height / $link-grid-rows;
+$link-grid-red-light: $red-brand;
+$link-grid-red-dark: #c00820;
+$link-grid-tile: $link-grid-cell * 2;
+$link-underline-height: 2px;
+
+@keyframes content-link-grid-scroll {
+  to {
+    background-position: $link-grid-tile 0;
+  }
+}
+
+@mixin content-inline-link {
+  position: relative;
+  display: inline-block;
+  max-width: 100%;
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.9);
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  line-height: $link-grid-line-height;
+  padding: 0 1px;
+  isolation: isolate;
+  transition: color 0.25s ease;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: $link-grid-line-height;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 1;
+    contain: layout style paint;
+    clip-path: inset(calc(100% - #{$link-underline-height}) 0 0 0);
+    background-image: repeating-conic-gradient(
+      from 0deg,
+      $link-grid-red-dark 0deg 90deg,
+      $link-grid-red-light 90deg 180deg
+    );
+    background-size: $link-grid-tile $link-grid-tile;
+    background-position: 0 0;
+    background-repeat: repeat;
+    animation: content-link-grid-scroll 1.6s linear infinite;
+    transition:
+      clip-path $duration-default $ease-default,
+      opacity $duration-default $ease-default;
+
+    @media (prefers-reduced-motion: reduce) {
+      animation: none;
+      transition: opacity 0.2s ease;
+    }
+  }
+
+  &:hover,
+  &:focus-visible {
+    color: #fff;
+
+    &::after {
+      clip-path: inset(0 0 0 0);
+      opacity: 0.5;
+
+      @media (prefers-reduced-motion: reduce) {
+        clip-path: inset(0 0 0 0);
+      }
+    }
+  }
+}

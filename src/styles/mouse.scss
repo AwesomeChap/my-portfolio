@@ -1,3 +1,5 @@
+@use 'colors' as *;
+
 #mouse{
   position: fixed;
   width: 100%;
@@ -34,6 +36,7 @@ body.page-transitioning #mouse {
   padding: 12px 14px 12px 16px;
   border: 0;
   border-radius: 999px;
+  overflow: hidden;
   background: rgba(46, 46, 46, 0.34);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.24), 0 2px 10px rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(16px) saturate(140%);
@@ -47,6 +50,26 @@ body.page-transitioning #mouse {
   font-size: 12px;
   line-height: 1;
   text-decoration: none;
+  opacity: 0.88;
+  transition:
+    background-color 0.35s cubic-bezier(0.33, 1, 0.68, 1),
+    color 0.25s ease,
+    opacity 0.25s ease;
+
+  &:hover,
+  &:focus-visible {
+    opacity: 1;
+    color: #fff;
+    background-color: rgba(46, 46, 46, 0.72);
+
+    .scroll-cue__label {
+      color: #fff;
+    }
+
+    .scroll-cue__icon {
+      color: #fff;
+    }
+  }
 }
 
 /* 404 back link — arrow left of label, motion right → left */
@@ -60,10 +83,15 @@ body.page-transitioning #mouse {
 }
 
 .scroll-cue__label {
+  position: relative;
+  z-index: 1;
   color: rgba(255, 255, 255, 0.84);
+  transition: color 0.25s ease;
 }
 
 .scroll-cue__icon-wrap {
+  position: relative;
+  z-index: 1;
   width: 1.1em;
   height: 1.1em;
   overflow: hidden;
@@ -89,6 +117,7 @@ body.page-transitioning #mouse {
   height: 1.1em;
   flex: 0 0 1.1em;
   color: rgba(255, 255, 255, 0.92);
+  transition: color 0.25s ease;
 }
 
 .scroll-cue__icon path {
