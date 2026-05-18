@@ -18,11 +18,21 @@
   text-align: center;
 
   &--active {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    box-sizing: border-box;
+    color: #fff;
+  }
+
+  &__pixel-text {
     font-family: Pixel, Futura, sans-serif;
     font-weight: 400;
     font-size: clamp(1.45rem, 4.1vw, 2.55rem);
-    letter-spacing: 0.1em;
-    color: #fff;
+    letter-spacing: 0.08em;
+    /* Cancel trailing letter-spacing so flex centering matches the glyphs */
+    margin-right: -0.08em;
+    font-kerning: none;
     -webkit-font-smoothing: none;
     -moz-osx-font-smoothing: unset;
     text-rendering: optimizeSpeed;
@@ -33,7 +43,7 @@
   .nav-label {
     font-size: clamp(1.625rem, 6.5vw, 2.5rem);
 
-    &--active {
+    &__pixel-text {
       font-size: clamp(1.3rem, 5.2vw, 2.1rem);
     }
   }
