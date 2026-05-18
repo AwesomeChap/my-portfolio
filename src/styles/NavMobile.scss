@@ -210,10 +210,16 @@ $mobile-nav-side-inset: 10px;
   transition:  transform 0.3s 0.4s;
 }
 
-.selected-m-nav-item{
-  div{
-    color: #fff;
-  }
+
+#menu-wrapper > a.menu-item,
+#menu-wrapper > span.menu-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 3.25rem;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 .fadeIn-menu-item{
@@ -279,9 +285,6 @@ $mobile-nav-side-inset: 10px;
     bottom: mobile-nav-bottom-offset($mobile-follow-icon-height-sm);
   }
 
-  .menu-item {
-    font-size: clamp(1.625rem, 6.5vw, 2.5rem);
-  }
 }
 
 body.eyes-active {

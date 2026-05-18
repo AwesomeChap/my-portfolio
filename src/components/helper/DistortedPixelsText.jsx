@@ -1,19 +1,12 @@
 import React, { useRef, useEffect } from 'react';
 import {
   createDistortedPixelsSketch,
-  heroLayoutForWidth,
   notFoundLayoutForWidth,
 } from './distortedPixelsSketch';
 import '../../styles/distorted-pixels-text.scss';
 
-const LAYOUTS = {
-  hero: heroLayoutForWidth,
-  notFound: notFoundLayoutForWidth,
-};
-
 /**
- * Contained distorted pixel text (404 page). Desktop / tablet landscape uses WebGL;
- * pass `fallback` for mobile CSS intro animation.
+ * Contained distorted pixel text (desktop 404).
  */
 export default function DistortedPixelsText({
   variant = 'notFound',
@@ -23,7 +16,7 @@ export default function DistortedPixelsText({
   revealDurationMs = 1100,
 }) {
   const rootRef = useRef(null);
-  const layoutForWidth = LAYOUTS[variant] || notFoundLayoutForWidth;
+  const layoutForWidth = notFoundLayoutForWidth;
 
   useEffect(() => {
     const el = rootRef.current;
@@ -52,7 +45,7 @@ export default function DistortedPixelsText({
       cancelled = true;
       if (sketch) sketch.destroy();
     };
-  }, [layoutForWidth, mosaicMax, revealDelayMs, revealDurationMs]);
+  }, [variant, layoutForWidth, mosaicMax, revealDelayMs, revealDurationMs]);
 
   return (
     <div

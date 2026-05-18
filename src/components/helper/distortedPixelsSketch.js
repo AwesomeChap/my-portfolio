@@ -54,16 +54,7 @@ export function fitSubtitleToTitleWidth(
   };
 }
 
-export function notFoundTitleSizeForViewport(width) {
-  if (width <= 479) return Math.max(56, width * 0.17);
-  if (width <= 767) return Math.max(52, width * 0.15);
-  if (width <= 1024) return 88;
-  return 128;
-}
-
-export function isNotFoundNarrowViewport(width) {
-  return width <= 1024;
-}
+const NOT_FOUND_TITLE_SIZE = 128;
 
 const VERTEX_SHADER = `
 varying vec2 vUv;
@@ -211,25 +202,9 @@ export function drawLinesCanvas(width, height, dpr, layout) {
 /** Home hero: HELLO. / I'M JATIN */
 const INTRO_HELLO_GLASS_FILL = 'rgba(255, 255, 255, 0.42)';
 
-/** Mobile home UI band — share/toggle top, follow row + menu bottom (see home.scss) */
-export const MOBILE_HERO_TOP_CHROME = 58;
-export const MOBILE_HERO_BOTTOM_CHROME = 92;
-
-export function mobileHeroVerticalCenter(height) {
-  const bandMid =
-    MOBILE_HERO_TOP_CHROME +
-    (height - MOBILE_HERO_TOP_CHROME - MOBILE_HERO_BOTTOM_CHROME) * 0.5;
-  return bandMid / height;
-}
-
-export function heroLayoutForWidth(width, height) {
-  let fontSize;
-  if (width <= 767) fontSize = Math.max(44, width * 0.11);
-  else if (width <= 1024) fontSize = 80;
-  else fontSize = 110;
-
-  const verticalCenter =
-    width <= 767 && height > 0 ? mobileHeroVerticalCenter(height) : 0.5;
+/** Desktop home hero (DistortedPixelsHero — width > 1024 only) */
+export function heroLayoutForWidth() {
+  const fontSize = 110;
 
   return {
     lines: [
@@ -238,15 +213,15 @@ export function heroLayoutForWidth(width, height) {
     ],
     letterSpacingRatio: 0.2,
     lineGapRatio: 0.28,
-    verticalCenter,
+    verticalCenter: 0.5,
     verticalOffsetPx: 0,
     minContainerHeight: Math.round(fontSize * 2.65),
   };
 }
 
-/** 404 page: large 404 + subtitle */
+/** Desktop 404 (DistortedPixelsText — width > 1024 only) */
 export function notFoundLayoutForWidth(width, height) {
-  const titleSize = notFoundTitleSizeForViewport(width);
+  const titleSize = NOT_FOUND_TITLE_SIZE;
   const titleSpacing = 0.18;
   const subSize = Math.max(14, titleSize * 0.2);
   const subSpacing = 0.035;

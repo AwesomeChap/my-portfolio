@@ -2,7 +2,7 @@
 $ease-out : cubic-bezier(0.19, 1, 0.22, 1);
 /* Same horizontal inset as `.follow-container-wrapper` on mobile */
 $home-mobile-side-inset: 10px;
-/* Match distortedPixelsSketch.js mobile hero band — centers CSS intro with canvas hero */
+/* Mobile home UI band — share/toggle top, follow row + menu bottom */
 $home-mobile-hero-top-chrome: 58px;
 $home-mobile-hero-bottom-chrome: 92px;
 
@@ -97,14 +97,6 @@ $home-mobile-hero-bottom-chrome: 92px;
   /* Wrapper + canvas must not capture hits — mouse is read on `window` in DistortedPixelsHero.jsx */
   pointer-events: none;
 
-  @media only screen and (max-width: 1024px) {
-    height: 100svh;
-
-    @supports (height: 100dvh) {
-      height: 100dvh;
-    }
-  }
-
   canvas {
     display: block;
     width: 100%;
@@ -116,12 +108,6 @@ $home-mobile-hero-bottom-chrome: 92px;
 .intro--distorted-desktop {
   pointer-events: none;
   min-height: 288px;
-}
-
-@media only screen and (max-width: 1024px) {
-  .intro--distorted-desktop {
-    min-height: 220px;
-  }
 }
 
 /* Solid glass fill — gradient clip breaks on per-letter spans (mobile/tablet hero). */
