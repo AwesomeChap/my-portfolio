@@ -403,6 +403,7 @@ export default ({ trackClickEvent }) => {
         });
         vivusRef.current.play();
 
+        container?.style.setProperty("--eyes-seq-delay", "0ms");
         container?.classList.add(
           "eyes-container--sketching",
           "eyes-container--unified-timeline"

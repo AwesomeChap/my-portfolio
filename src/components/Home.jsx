@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import EyesToLogoTransition from "./helper/EyesToLogoTransition";
 import ShareWithLove from './helper/ShareWithLove';
 import DistortedPixelsHero from './helper/DistortedPixelsHero';
+import ExperimentalToggle from './helper/ExperimentalToggle';
+import { subscribeExperimentalMode } from './helper/experimentalMode';
 import '../styles/pages.scss';
 import '../styles/home.scss';
 import MBackground from './helper/MBackground';
@@ -13,14 +15,17 @@ const title = "Portfolio - Jatin Kumar";
 export default (props) => {
   const [mobileView, setMobileView] = useState(undefined);
   const [tabletView, setTabletView] = useState(undefined);
+  const [experimentalActive, setExperimentalActive] = useState(false);
 
   useEffect(() => {
     setMobileView(window.innerWidth <= 479);
     setTabletView(window.innerWidth <= 1024);
     props.trackPageView();
+    const unsubscribeExperimental = subscribeExperimentalMode(setExperimentalActive);
     window.addEventListener('resize', onWindowResize);
     return () => {
       window.removeEventListener('resize', onWindowResize);
+      unsubscribeExperimental();
     }
   }, [])
 
@@ -29,7 +34,9 @@ export default (props) => {
     setTabletView(window.innerWidth <= 1024);
   }
 
-  const useDistortedHero = mobileView === false && tabletView === false;
+  const useDistortedHero =
+    (mobileView === false && tabletView === false) || experimentalActive;
+  const showMobileBars = mobileView && !experimentalActive;
 
   const text1 = "HELLO.";
   const text2 = "I'M";
@@ -61,8 +68,9 @@ export default (props) => {
         <meta name="twitter:image" content={portfolioImg} />
       </MetaTags>
       <div className="section home">
-        {mobileView ? <MBackground /> : null}
+        {showMobileBars ? <MBackground /> : null}
         {useDistortedHero ? <DistortedPixelsHero /> : null}
+        <ExperimentalToggle />
         <div className={`intro ${useDistortedHero ? 'intro--distorted-desktop' : ''}`}>
           <div className="content">
             {useDistortedHero ? (

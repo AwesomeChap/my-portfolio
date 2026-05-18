@@ -3,6 +3,8 @@
  * and GSAP cover/reveal in PixelTransitionOverlay).
  */
 
+import { isEnhancedEffectsViewport } from './experimentalMode';
+
 /** GSAP pixel grid — shared by nav transitions and eyes overlay */
 export const PIXEL_COVER_CELL_S = 0.15;
 export const PIXEL_COVER_STAGGER_S = 0.32;
@@ -34,12 +36,9 @@ export function prefersReducedMotion() {
   return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 }
 
-/** Same rule as App.jsx `isBiggerScreenDevice` — no transitions on phone / narrow view. */
+/** Desktop, or mobile with experimental mode — pixel route transitions. */
 export function isPageTransitionActiveViewport() {
-  if (typeof window === 'undefined') return false;
-  const isMobileView = window.innerWidth <= 479;
-  const isMobileUa = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-  return !isMobileView && !isMobileUa;
+  return isEnhancedEffectsViewport();
 }
 
 /** Delay before `history.push` so the wipe can cover the swap (0 on mobile / reduced motion). */

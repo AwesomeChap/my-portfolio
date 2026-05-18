@@ -618,13 +618,6 @@ $eyes-progress-fill: $red-accent-muted;
             }
         }
 
-        &.eyes-seq-fade-pupils {
-            #left-eye-ball > .eye-balls,
-            #right-eye-ball > .eye-balls {
-                animation: none !important;
-            }
-        }
-
         &.eyes-seq-logo-layer #eyes-2 {
             animation: comeEyes 0.1s forwards !important;
         }
@@ -637,8 +630,18 @@ $eyes-progress-fill: $red-accent-muted;
             }
         }
 
-        &.eyes-seq-eyes-out.eyes-container--sketching #eyes {
-            animation: goEyes 0.1s forwards !important;
+        /* Pupils hidden before goEyes — nested opacity on #eyes staggers in Firefox */
+        &.eyes-seq-eyes-out {
+            #left-eye-ball,
+            #right-eye-ball {
+                opacity: 0 !important;
+                visibility: hidden !important;
+                animation: none !important;
+            }
+
+            &.eyes-container--sketching #eyes {
+                animation: goEyes 0.1s forwards !important;
+            }
         }
 
         &.eyes-seq-logo-fill {

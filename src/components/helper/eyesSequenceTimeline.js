@@ -5,6 +5,7 @@ import {
   killFocusMorph,
   resetFocusMorph,
   getPupilFadeAt,
+  snapPupilsHidden,
 } from "./eyesFocusMorph";
 
 export const EYES_SEQ_PHASES = [
@@ -21,7 +22,7 @@ export const EYES_SEQ_PHASES = [
   "eyes-seq-logo-fill",
 ];
 
-const FOCUS_AT = 3.62;
+const FOCUS_AT = 3.5;
 
 /** Seconds from sequence start (--eyes-seq-delay must be 0 when sketching). */
 export const PHASE_AT = {
@@ -57,7 +58,12 @@ export function createEyesSequenceTimeline(container, { reduced = false } = {}) 
   const addPhase = (phase) => {
     container.classList.add(phase);
     if (phase === "eyes-seq-fade-pupils") {
-      container._pupilFadeTween = runPupilFade(svg, { reduced });
+      container._pupilFadeTween = runPupilFade(svg, container, { reduced });
+    }
+    if (phase === "eyes-seq-eyes-out") {
+      container._pupilFadeTween?.kill();
+      container._pupilFadeTween = null;
+      snapPupilsHidden(svg);
     }
   };
 

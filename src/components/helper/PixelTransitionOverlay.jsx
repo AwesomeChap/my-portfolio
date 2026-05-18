@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useCallback } from 'react';
 import { withRouter } from 'react-router-dom';
 import gsap from 'gsap';
+import { isFirefox } from './browserUtils';
 import {
   isPageTransitionActiveViewport,
   prefersReducedMotion,
@@ -11,12 +12,17 @@ import {
 } from './pageTransition';
 import '../../styles/pixel-transition-overlay.scss';
 
-const MAX_CELLS = 1180;
+const MAX_CELLS = isFirefox() ? 880 : 1180;
+
+const COVER_EASE = isFirefox() ? 'none' : 'power2.inOut';
+const REVEAL_EASE = isFirefox() ? 'none' : 'power3.out';
+const COVER_STAGGER = isFirefox() ? PIXEL_COVER_STAGGER_S * 0.85 : PIXEL_COVER_STAGGER_S;
+const REVEAL_STAGGER = isFirefox() ? PIXEL_REVEAL_STAGGER_S * 0.85 : PIXEL_REVEAL_STAGGER_S;
 
 function buildCells(width, height) {
   const area = width * height;
   let cellSize = Math.sqrt(area / MAX_CELLS);
-  cellSize = Math.max(12, Math.min(26, cellSize));
+  cellSize = Math.max(12, Math.min(isFirefox() ? 22 : 26, cellSize));
   const cols = Math.ceil(width / cellSize);
   const rows = Math.ceil(height / cellSize);
   const cw = width / cols;
@@ -29,13 +35,36 @@ function buildCells(width, height) {
       cells.push({
         x,
         y,
-        // Extend edge cells to viewport bounds; slight bleed avoids hairline gaps.
         w: c === cols - 1 ? width - x + 0.5 : cw + 0.5,
         h: r === rows - 1 ? height - y + 0.5 : ch + 0.5,
       });
     }
   }
   return cells;
+}
+
+function createDrawScheduler(drawFn) {
+  let scheduled = false;
+  let frame = 0;
+
+  const flush = () => {
+    scheduled = false;
+    frame = 0;
+    drawFn();
+  };
+
+  return {
+    schedule() {
+      if (scheduled) return;
+      scheduled = true;
+      frame = window.requestAnimationFrame(flush);
+    },
+    cancel() {
+      if (frame) window.cancelAnimationFrame(frame);
+      scheduled = false;
+      frame = 0;
+    },
+  };
 }
 
 function PixelTransitionOverlay({ location }) {
@@ -45,13 +74,14 @@ function PixelTransitionOverlay({ location }) {
   const dprRef = useRef(1);
   const timelineRef = useRef(null);
   const pathnameRef = useRef(location.pathname);
+  const drawSchedulerRef = useRef(null);
 
   const resizeCanvas = useCallback(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const w = window.innerWidth;
     const h = window.innerHeight;
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const dpr = Math.min(window.devicePixelRatio || 1, isFirefox() ? 1.5 : 2);
     dprRef.current = dpr;
     canvas.width = Math.floor(w * dpr);
     canvas.height = Math.floor(h * dpr);
@@ -65,7 +95,9 @@ function PixelTransitionOverlay({ location }) {
     const fills = fillsRef.current;
     if (!canvas || !cells.length || !fills.length) return;
 
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext('2d', { alpha: true });
+    if (!ctx) return;
+
     const dpr = dprRef.current;
 
     ctx.setTransform(1, 0, 0, 1, 0, 0);
@@ -87,11 +119,16 @@ function PixelTransitionOverlay({ location }) {
     canvas.style.pointerEvents = maxV > 0.04 ? 'auto' : 'none';
   }, []);
 
+  const scheduleDraw = useCallback(() => {
+    drawSchedulerRef.current?.schedule();
+  }, []);
+
   const killTimeline = useCallback(() => {
     if (timelineRef.current) {
       timelineRef.current.kill();
       timelineRef.current = null;
     }
+    drawSchedulerRef.current?.cancel();
   }, []);
 
   const resetGrid = useCallback(() => {
@@ -122,13 +159,14 @@ function PixelTransitionOverlay({ location }) {
         timelineRef.current = gsap.to(fills, {
           v: 0,
           duration: PIXEL_REVEAL_CELL_S,
-          ease: 'power3.out',
+          ease: REVEAL_EASE,
           stagger: {
-            amount: PIXEL_REVEAL_STAGGER_S,
+            amount: REVEAL_STAGGER,
             from: 'random',
           },
-          onUpdate: draw,
+          onUpdate: scheduleDraw,
           onComplete: () => {
+            scheduleDraw();
             draw();
             if (clearNavClasses) {
               document.body.classList.remove('page-transitioning', 'page-transition--pixel');
@@ -138,7 +176,7 @@ function PixelTransitionOverlay({ location }) {
         });
       });
     },
-    [draw, killTimeline]
+    [draw, killTimeline, scheduleDraw]
   );
 
   const runCover = useCallback(
@@ -157,20 +195,21 @@ function PixelTransitionOverlay({ location }) {
         timelineRef.current = gsap.to(fills, {
           v: 1,
           duration: PIXEL_COVER_CELL_S,
-          ease: 'power2.inOut',
+          ease: COVER_EASE,
           stagger: {
-            amount: PIXEL_COVER_STAGGER_S,
+            amount: COVER_STAGGER,
             from: 'random',
           },
-          onUpdate: draw,
+          onUpdate: scheduleDraw,
           onComplete: () => {
+            scheduleDraw();
             draw();
             resolve();
           },
         });
       });
     },
-    [draw, killTimeline, resetGrid]
+    [draw, killTimeline, resetGrid, scheduleDraw]
   );
 
   const onNavStart = useCallback(() => {
@@ -188,6 +227,11 @@ function PixelTransitionOverlay({ location }) {
       window.dispatchEvent(new Event('portfolio-pixel-eyes-reveal-done'));
     });
   }, [runReveal]);
+
+  useEffect(() => {
+    drawSchedulerRef.current = createDrawScheduler(draw);
+    return () => drawSchedulerRef.current?.cancel();
+  }, [draw]);
 
   useEffect(() => {
     window.addEventListener('portfolio-pixel-nav-start', onNavStart);

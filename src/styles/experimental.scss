@@ -1,0 +1,62 @@
+@use 'colors' as *;
+
+.experimental-toggle {
+  display: none;
+  position: fixed;
+  top: calc(10px + env(safe-area-inset-top, 0px));
+  left: 50%;
+  z-index: 35;
+  margin: 0;
+  padding: 0 !important;
+  transform: translateX(-50%);
+  color: #8a8a8a;
+
+  @media only screen and (max-width: 767px) {
+    display: inline-flex;
+  }
+
+  &:hover {
+    color: #b5b5b5;
+  }
+
+  &--active {
+    color: $red-brand;
+  }
+}
+
+.experimental-toggle__icon {
+  display: block;
+  width: 18px;
+  height: 24px;
+  pointer-events: none;
+}
+
+/* Mobile experimental: fixed liquid gradient on all routes */
+body.experimental-mode {
+  cursor: auto !important;
+
+  &,
+  * {
+    cursor: auto !important;
+  }
+
+  .liquid-gradient-bg {
+    opacity: 1 !important;
+  }
+
+  .background {
+    background: transparent !important;
+  }
+
+  .section.home .background,
+  .home > .background {
+    display: none;
+  }
+}
+
+body.experimental-mode.eyes-active {
+  .experimental-toggle {
+    visibility: hidden;
+    pointer-events: none;
+  }
+}

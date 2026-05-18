@@ -21,14 +21,33 @@ const FOCUS_PATH_TARGETS = [
 
 const FOCUS_DURATION_MS = 200;
 export const PUPIL_DROP_DURATION = 0.2;
-const PUPIL_FADE_DURATION = 1.5;
+export const PUPIL_FADE_DURATION = 1.5;
 const PUPIL_SHIFT_RATIO = 0.14;
 
-/** Seconds after focus beat starts — pupil translate runs here (clip-path applies at focus start) */
-export const PUPIL_DROP_DELAY = 0.45;
+/** Seconds after focus — clip + pupil drop (after path morph finishes) */
+export const PUPIL_DROP_DELAY = 0.2;
 
+/** Matches committed CSS: fade @ 4s with focus @ 3.5s */
 export function getPupilFadeAt(focusAt) {
-  return focusAt + PUPIL_DROP_DELAY + PUPIL_DROP_DURATION;
+  return focusAt + 0.5;
+}
+
+/** Hide pupil clip groups before #eyes goEyes — avoids nested opacity in Firefox */
+export function snapPupilsHidden(svg) {
+  getPupilFadeRoots(svg).forEach((root) => {
+    gsap.killTweensOf(root);
+    root.setAttribute("opacity", "0");
+    root.style.visibility = "hidden";
+    root.style.removeProperty("opacity");
+  });
+
+  const { left, right } = getEyePupils(svg);
+  [left, right].filter(Boolean).forEach((group) => {
+    gsap.killTweensOf(group);
+    group.style.removeProperty("opacity");
+    group.style.removeProperty("visibility");
+    group.removeAttribute("opacity");
+  });
 }
 
 export function getEyePupils(svg) {
@@ -40,13 +59,6 @@ export function getEyePupils(svg) {
   };
 }
 
-/** Paths/ellipses inside pupil groups — fade these, not the <g> (Safari drops group transform on opacity tween). */
-function getPupilFadeTargets(svg) {
-  const { left, right } = getEyePupils(svg);
-  return [left, right]
-    .filter(Boolean)
-    .flatMap((group) => [...group.querySelectorAll("path, ellipse")]);
-}
 
 function pupilShiftY(pupilGroup) {
   if (!pupilGroup) return 0;
@@ -86,7 +98,7 @@ function snapFocusGeometry(svg) {
 
 function settlePupils(container, targets) {
   targets.forEach((group) => {
-    gsap.set(group, { clearProps: "transform,opacity,visibility" });
+    gsap.set(group, { clearProps: "transform" });
     setPupilTranslate(group, pupilShiftY(group));
   });
   container?.classList.add("eyes-seq-pupils-settled");
@@ -126,11 +138,12 @@ function runPupilDrop(svg, container, { reduced = false } = {}) {
   const targets = [left, right].filter(Boolean);
   if (!targets.length) return null;
 
+  applyFocusClipPaths(svg);
+
   gsap.killTweensOf(targets);
   targets.forEach((group) => {
-    gsap.set(group, { clearProps: "transform" });
+    gsap.set(group, { clearProps: "transform,opacity,visibility" });
     setPupilTranslate(group, 0);
-    gsap.set(group, { opacity: 1, visibility: "visible" });
   });
 
   if (reduced) {
@@ -164,7 +177,7 @@ function stopTweens(tweens) {
   });
 }
 
-/** Path morph + angry clip at `at`; pupil translate at `at + PUPIL_DROP_DELAY`. */
+/** Path morph at `at`; angry clip + pupil drop at `at + PUPIL_DROP_DELAY`. */
 export function appendFocusMorphToTimeline(tl, container, at, { reduced = false } = {}) {
   const svg = container?.querySelector("#my-svg");
   if (!svg) return;
@@ -178,6 +191,7 @@ export function appendFocusMorphToTimeline(tl, container, at, { reduced = false 
       container._pupilDropTween?.kill();
       container._pupilDropTween = null;
       container.classList.remove("eyes-seq-pupils-settled");
+      resetPupilFadeStyles(svg);
 
       container.classList.add("eyes-seq-focus", "eyes-seq-focus-snapped");
       applyFocusBrowFill(svg);
@@ -199,25 +213,52 @@ export function appendFocusMorphToTimeline(tl, container, at, { reduced = false 
   }, null, dropAt);
 }
 
-export function runPupilFade(svg, { reduced = false } = {}) {
-  const { left, right } = getEyePupils(svg);
-  const groups = [left, right].filter(Boolean);
-  const parts = getPupilFadeTargets(svg);
-  if (!parts.length) return null;
+function getPupilFadeRoots(svg) {
+  return [svg.querySelector("#left-eye-ball"), svg.querySelector("#right-eye-ball")].filter(
+    Boolean
+  );
+}
+
+function resetPupilFadeStyles(svg) {
+  getPupilFadeRoots(svg).forEach((root) => {
+    gsap.killTweensOf(root);
+    root.style.removeProperty("opacity");
+    root.style.removeProperty("visibility");
+    root.removeAttribute("opacity");
+
+    const inner = root.querySelector(":scope > .eye-balls");
+    if (!inner) return;
+    gsap.killTweensOf(inner);
+    inner.style.removeProperty("opacity");
+    inner.style.removeProperty("visibility");
+    inner.removeAttribute("opacity");
+  });
+}
+
+/** Fade clip roots via SVG opacity attribute — one tween, both eyes in sync. */
+export function runPupilFade(svg, container, { reduced = false } = {}) {
+  const roots = getPupilFadeRoots(svg);
+  if (!roots.length) return null;
+
+  resetPupilFadeStyles(svg);
 
   if (reduced) {
-    gsap.set(parts, { opacity: 0 });
-    gsap.set(groups, { visibility: "hidden" });
+    snapPupilsHidden(svg);
     return null;
   }
 
-  return gsap.to(parts, {
-    opacity: 0,
+  roots.forEach((root) => {
+    root.setAttribute("opacity", "1");
+    root.style.visibility = "visible";
+    root.style.removeProperty("opacity");
+  });
+
+  return gsap.to(roots, {
+    attr: { opacity: 0 },
     duration: PUPIL_FADE_DURATION,
     ease: "none",
-    onComplete: () => {
-      gsap.set(groups, { visibility: "hidden" });
-    },
+    overwrite: true,
+    onComplete: () => snapPupilsHidden(svg),
   });
 }
 
@@ -238,13 +279,11 @@ export function resetFocusMorph(container) {
   const svg = container.querySelector("#my-svg");
   if (!svg) return;
 
-  const { left, right } = getEyePupils(svg);
-  const groups = [left, right].filter(Boolean);
-  const parts = getPupilFadeTargets(svg);
+  resetPupilFadeStyles(svg);
 
-  gsap.killTweensOf([...groups, ...parts]);
-  gsap.set([...groups, ...parts], { clearProps: "opacity,visibility" });
-  groups.forEach((group) => {
+  const { left, right } = getEyePupils(svg);
+  [left, right].filter(Boolean).forEach((group) => {
+    gsap.killTweensOf(group);
     gsap.set(group, { clearProps: "transform" });
     setPupilTranslate(group, 0);
   });

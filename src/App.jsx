@@ -8,6 +8,10 @@ import ScrollToTop from './components/helper/ScrollToTop';
 import PixelTransitionOverlay from './components/helper/PixelTransitionOverlay';
 import Cursor from './components/helper/cursor';
 import ScrollProgressBar from './components/helper/ScrollProgressBar';
+import {
+  subscribeExperimentalMode,
+  syncExperimentalBodyClass,
+} from './components/helper/experimentalMode';
 import ReactGa from "react-ga";
 
 export default () => {
@@ -19,20 +23,25 @@ export default () => {
   const [isTabletView, setIsTabletView] = useState(
     () => typeof window !== 'undefined' && window.innerWidth <= 1024
   );
+  const [experimentalActive, setExperimentalActive] = useState(false);
 
   useEffect(() => {
     setIsMobile(/iPhone|iPad|iPod|Android/i.test(navigator.userAgent));
     setIsMobileView(window.innerWidth <= 479);
     setIsMobileNav(window.innerWidth <= 767);
     setIsTabletView(window.innerWidth <= 1024);
+    syncExperimentalBodyClass();
 
     ReactGa.initialize("UA-191535134-2");
+
+    const unsubscribeExperimental = subscribeExperimentalMode(setExperimentalActive);
 
     window.addEventListener('resize', onWindowResize);
     return () => {
       window.removeEventListener('resize', onWindowResize);
+      unsubscribeExperimental();
     }
-  })
+  }, [])
 
   const trackPageView = () => {
     ReactGa.pageview(window.location.pathname);
@@ -49,18 +58,19 @@ export default () => {
   }
 
   const isBiggerScreenDevice = isMobileView === false && isMobile === false;
+  const showEnhancedEffects = isBiggerScreenDevice || experimentalActive;
   const showScrollProgressBar = isBiggerScreenDevice && isTabletView === false;
 
   return (
     <>
       <div className="router-wrapper">
-        {isBiggerScreenDevice ? <LiquidGradientBackground /> : null}
+        {showEnhancedEffects ? <LiquidGradientBackground /> : null}
         <div className="app-content-layer">
           <Router>
             <ScrollToTop>
               {isMobileNav ? <NavBarMobile /> : <NavBar />}
             </ScrollToTop>
-            {isBiggerScreenDevice ? <PixelTransitionOverlay /> : null}
+            {showEnhancedEffects ? <PixelTransitionOverlay /> : null}
             {showScrollProgressBar && <ScrollProgressBar />}
             <div id="route-outlet">
             <Switch>

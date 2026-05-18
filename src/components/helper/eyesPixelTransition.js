@@ -1,3 +1,4 @@
+import { isExperimentalModeActive } from './experimentalMode';
 import {
   isPageTransitionActiveViewport,
   prefersReducedMotion,
@@ -20,9 +21,10 @@ export function canUseEyesPixelTransition() {
   return isPageTransitionActiveViewport() && !prefersReducedMotion();
 }
 
-/** Eyes overlay slide panel — mobile layout only (matches Eyes.scss breakpoint). */
+/** Eyes overlay slide panel — mobile layout only (experimental uses pixel wipe). */
 export function isEyesMobileSlideOverlay() {
   if (typeof window === 'undefined') return false;
+  if (isExperimentalModeActive()) return false;
   return window.innerWidth <= 767;
 }
 

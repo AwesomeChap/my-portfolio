@@ -497,7 +497,10 @@ export default function LiquidGradientBackground() {
     renderer.domElement.style.transition = 'opacity 120ms linear';
 
     const updateScrollFade = () => {
-      // Fade by top visible route section progress.
+      if (document.body.classList.contains('experimental-mode')) {
+        renderer.domElement.style.opacity = '1';
+        return;
+      }
       const hostSection = document.querySelector('.section');
       if (!hostSection) {
         renderer.domElement.style.opacity = '1';

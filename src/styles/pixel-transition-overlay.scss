@@ -3,10 +3,16 @@
   inset: 0;
   z-index: 5;
   pointer-events: none;
-  image-rendering: pixelated;
-  image-rendering: crisp-edges;
+  will-change: contents;
 }
 
 body.eyes-pixel-transition .pixel-transition-canvas {
   z-index: 1300;
+}
+
+/* Firefox: crisp-edges / pixelated hurts compositing during GSAP updates */
+@supports (-moz-appearance: none) {
+  .pixel-transition-canvas {
+    image-rendering: auto;
+  }
 }

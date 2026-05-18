@@ -31,6 +31,11 @@ export function resumeGlassButtonClasses() {
   );
 }
 
+/** Icon-only glass square — same footprint as mobile resume button */
+export function iconGlassButtonClasses() {
+  return cx(GLASS_CTA_BUTTON_BASE, GLASS_CTA_BUTTON_RESUME_MOBILE);
+}
+
 export function labeledGlassButtonClasses(enterAnimation = 'animate-not-found-home-enter') {
   return cx(
     GLASS_CTA_BUTTON_BASE,
