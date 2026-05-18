@@ -12,6 +12,12 @@ import {
   runEyesPixelCover,
   runEyesPixelReveal,
 } from "./eyesPixelTransition";
+import {
+  createEyesSequenceTimeline,
+  killEyesSequenceTimeline,
+  resetEyesSequencePhases,
+} from "./eyesSequenceTimeline";
+import { resetFocusMorph } from "./eyesFocusMorph";
 
 const MORPH_DELAY = 4700;
 const DURATION = 1000;
@@ -109,11 +115,11 @@ export default ({ trackClickEvent }) => {
   const [dragonHidden, setDragonHidden] = useState(false);
   const [dragonEnter, setDragonEnter] = useState(true);
   const vivusRef = useRef(null);
+  const eyesTimelineRef = useRef(null);
   const timersRef = useRef([]);
   const exitTimerRef = useRef(null);
   const tweensRef = useRef([]);
   const closeAnimationRef = useRef(() => {});
-
   const cleanupPlayback = useCallback(() => {
     clearTimers(timersRef.current);
     if (exitTimerRef.current !== null) {
@@ -121,6 +127,10 @@ export default ({ trackClickEvent }) => {
       exitTimerRef.current = null;
     }
     stopTweens(tweensRef.current);
+    killEyesSequenceTimeline(eyesTimelineRef.current, containerRef.current);
+    eyesTimelineRef.current = null;
+    resetEyesSequencePhases(containerRef.current);
+    resetFocusMorph(containerRef.current);
     destroyVivus(vivusRef.current);
     vivusRef.current = null;
   }, []);
@@ -136,6 +146,8 @@ export default ({ trackClickEvent }) => {
       exitTimerRef.current = null;
     }
     stopTweens(tweensRef.current);
+    killEyesSequenceTimeline(eyesTimelineRef.current, containerRef.current);
+    eyesTimelineRef.current = null;
     destroyVivus(vivusRef.current);
     vivusRef.current = null;
     releaseUiLock();
@@ -145,7 +157,13 @@ export default ({ trackClickEvent }) => {
     setSketchStarted(false);
     setSequenceReady(false);
     setShow(false);
-    containerRef.current?.classList.remove("eyes-container--sketching");
+    const container = containerRef.current;
+    container?.classList.remove(
+      "eyes-container--sketching",
+      "eyes-container--unified-timeline"
+    );
+    resetEyesSequencePhases(container);
+    resetFocusMorph(container);
   }, [releaseUiLock]);
 
   const closeWithPixelTransition = useCallback(async () => {
@@ -167,6 +185,10 @@ export default ({ trackClickEvent }) => {
 
       clearTimers(timersRef.current);
       stopTweens(tweensRef.current);
+      killEyesSequenceTimeline(eyesTimelineRef.current, containerRef.current);
+      eyesTimelineRef.current = null;
+      resetEyesSequencePhases(containerRef.current);
+      resetFocusMorph(containerRef.current);
       destroyVivus(vivusRef.current);
       vivusRef.current = null;
       releaseUiLock();
@@ -181,7 +203,13 @@ export default ({ trackClickEvent }) => {
         exitTimerRef.current = -1;
         setSequenceArmed(false);
         setSketchStarted(false);
-        containerRef.current?.classList.remove("eyes-container--sketching");
+        const slideContainer = containerRef.current;
+        slideContainer?.classList.remove(
+          "eyes-container--sketching",
+          "eyes-container--unified-timeline"
+        );
+        resetEyesSequencePhases(slideContainer);
+        resetFocusMorph(slideContainer);
         setContentHidden(true);
 
         const contentMs = immediate ? 0 : EYES_MOBILE_CONTENT_HIDE_MS;
@@ -221,7 +249,13 @@ export default ({ trackClickEvent }) => {
     setSequenceArmed(false);
     setSketchStarted(false);
     setSequenceReady(false);
-    containerRef.current?.classList.remove("eyes-container--sketching");
+    const openingContainer = containerRef.current;
+    openingContainer?.classList.remove(
+      "eyes-container--sketching",
+      "eyes-container--unified-timeline"
+    );
+    resetEyesSequencePhases(openingContainer);
+    resetFocusMorph(openingContainer);
     sessionRef.current += 1;
     setDragonHidden(true);
     setDragonEnter(false);
@@ -334,9 +368,17 @@ export default ({ trackClickEvent }) => {
       cancelled = true;
       setSequenceArmed(false);
       setSketchStarted(false);
-      containerRef.current?.classList.remove("eyes-container--sketching");
+      const seqContainer = containerRef.current;
+      seqContainer?.classList.remove(
+        "eyes-container--sketching",
+        "eyes-container--unified-timeline"
+      );
+      resetEyesSequencePhases(seqContainer);
+      resetFocusMorph(seqContainer);
       clearTimers(timersRef.current);
       stopTweens(tweensRef.current);
+      killEyesSequenceTimeline(eyesTimelineRef.current, containerRef.current);
+      eyesTimelineRef.current = null;
     };
   }, [show, sequenceReady]);
 
@@ -350,15 +392,28 @@ export default ({ trackClickEvent }) => {
       frame2 = window.requestAnimationFrame(() => {
         if (cancelled || !document.getElementById("my-svg")) return;
 
+        const container = containerRef.current;
+        const reduced = prefersReducedMotion();
+
         vivusRef.current = new Vivus("my-svg", {
           type: "sync",
-          duration: prefersReducedMotion() ? 20 : 50,
+          duration: reduced ? 20 : 50,
           start: "manual",
           animTimingFunction: Vivus.EASE,
         });
         vivusRef.current.play();
 
-        containerRef.current?.classList.add("eyes-container--sketching");
+        container?.classList.add(
+          "eyes-container--sketching",
+          "eyes-container--unified-timeline"
+        );
+        killEyesSequenceTimeline(eyesTimelineRef.current, containerRef.current);
+        eyesTimelineRef.current = createEyesSequenceTimeline(container, {
+          reduced,
+        });
+        if (!reduced) {
+          eyesTimelineRef.current?.play();
+        }
         setSketchStarted(true);
       });
     });
@@ -368,7 +423,15 @@ export default ({ trackClickEvent }) => {
       window.cancelAnimationFrame(frame1);
       if (frame2) window.cancelAnimationFrame(frame2);
       setSketchStarted(false);
-      containerRef.current?.classList.remove("eyes-container--sketching");
+      const sketchContainer = containerRef.current;
+      sketchContainer?.classList.remove(
+        "eyes-container--sketching",
+        "eyes-container--unified-timeline"
+      );
+      resetEyesSequencePhases(sketchContainer);
+      resetFocusMorph(sketchContainer);
+      killEyesSequenceTimeline(eyesTimelineRef.current, containerRef.current);
+      eyesTimelineRef.current = null;
       destroyVivus(vivusRef.current);
       vivusRef.current = null;
     };

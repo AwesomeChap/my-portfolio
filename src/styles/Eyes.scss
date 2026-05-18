@@ -253,6 +253,7 @@ $eyes-progress-fill: $red-accent-muted;
         width: 100%;
         height: auto;
         max-height: inherit;
+        shape-rendering: geometricPrecision;
     }
 
     svg {
@@ -347,14 +348,24 @@ $eyes-progress-fill: $red-accent-muted;
         }
     }
 
+    &:not(.eyes-container--unified-timeline) {
+        #left-eye-ball {
+            clip-path: url(#id1);
+            animation: change-clip-path-left 0.1s eyes-delay(3.5s) forwards;
+        }
+
+        #right-eye-ball {
+            clip-path: url(#id2);
+            animation: change-clip-path-right 0.1s eyes-delay(3.5s) forwards;
+        }
+    }
+
     #left-eye-ball {
         clip-path: url(#id1);
-        animation: change-clip-path-left 0.1s eyes-delay(3.5s) forwards;
     }
 
     #right-eye-ball {
         clip-path: url(#id2);
-        animation: change-clip-path-right 0.1s eyes-delay(3.5s) forwards;
     }
 
     /* stage 4 animations animation delay > 3.5s */
@@ -403,7 +414,8 @@ $eyes-progress-fill: $red-accent-muted;
         }
     }
 
-    .eye-balls {
+    /* Legacy path only — unified timeline uses GSAP (see eyesFocusMorph.js) */
+    &:not(.eyes-container--unified-timeline) .eye-balls {
         animation: focus 0.2s eyes-delay(3.5s) linear forwards, fade 1s eyes-delay(4s) forwards;
     }
 
@@ -450,6 +462,15 @@ $eyes-progress-fill: $red-accent-muted;
         to {
             opacity: 0;
             visibility: hidden;
+        }
+    }
+
+    /* Safari: keep pupil offset while fading (standard fade drops transform) */
+    @keyframes fade-keep-y {
+        to {
+            opacity: 0;
+            visibility: hidden;
+            transform: translate3d(0, 14%, 0);
         }
     }
 
@@ -501,12 +522,155 @@ $eyes-progress-fill: $red-accent-muted;
     &--reduced {
         --eyes-seq-delay: 0.28s;
         animation: eyes-overlay-in 0.2s ease-out forwards;
+    }
 
-        #my-svg,
-        #my-svg * {
-            animation-duration: 0.01ms !important;
-            animation-delay: 0ms !important;
-            transition-duration: 0.01ms !important;
+    /*
+     * GSAP only schedules phases; these rules replay the committed @keyframes
+     * with delay 0 (timeline starts when --eyes-seq-delay is 0).
+     */
+    &.eyes-container--sketching.eyes-container--unified-timeline {
+        .eye-lashes,
+        .opened-eye,
+        .shine11,
+        .shine21,
+        .shine1,
+        .shine2,
+        #left-eye-brow,
+        #right-eye-brow,
+        #left-eye-ball,
+        #right-eye-ball,
+        .eye-balls,
+        #eyes-2,
+        .logo-color {
+            animation: none !important;
+        }
+
+        &.eyes-container--sketching #eyes {
+            visibility: visible;
+            opacity: 1;
+            animation: none !important;
+        }
+
+        #eyes-2 {
+            visibility: hidden;
+            opacity: 0;
+        }
+
+        &.eyes-seq-ui {
+            .eye-lashes,
+            #left-eye-brow,
+            #right-eye-brow {
+                animation: UI 0.5s forwards !important;
+            }
+        }
+
+        &.eyes-seq-lashes-closed .eye-lashes {
+            animation: close-eye 0.1s forwards !important;
+        }
+
+        &.eyes-seq-eyes-open .opened-eye {
+            animation: open-eye 0.1s forwards !important;
+        }
+
+        &.eyes-seq-mui {
+            #left-eye-brow,
+            #right-eye-brow {
+                animation: MUI 0.7s forwards !important;
+            }
+        }
+
+        &.eyes-seq-shines {
+            .shine11,
+            .shine21 {
+                animation: rotate 0.5s forwards !important;
+            }
+
+            .shine1,
+            .shine2 {
+                animation: rotate 0.5s forwards !important;
+            }
+        }
+
+        /* Focus beat: KUTE path morph + GSAP pupil drop (eyesFocusMorph.js) */
+        &.eyes-seq-focus {
+            #left-eye-open,
+            #right-eye-open,
+            #left-eye-brow,
+            #right-eye-brow,
+            #left-eye-ball > .eye-balls,
+            #right-eye-ball > .eye-balls {
+                animation: none !important;
+            }
+        }
+
+        &.eyes-seq-focus-snapped {
+            #left-eye-brow,
+            #right-eye-brow {
+                fill: #b3b3b3;
+            }
+        }
+
+        /* Pupil offset pinned via SVG transform attribute in eyesFocusMorph.js */
+        &.eyes-seq-pupils-settled {
+            #left-eye-ball > .eye-balls,
+            #right-eye-ball > .eye-balls {
+                animation: none !important;
+            }
+        }
+
+        &.eyes-seq-fade-pupils {
+            #left-eye-ball > .eye-balls,
+            #right-eye-ball > .eye-balls {
+                animation: none !important;
+            }
+        }
+
+        &.eyes-seq-logo-layer #eyes-2 {
+            animation: comeEyes 0.1s forwards !important;
+        }
+
+        &.eyes-seq-brows-decolor {
+            #left-eye-brow,
+            #right-eye-brow {
+                fill: #b3b3b3;
+                animation: decolorize 0.5s forwards !important;
+            }
+        }
+
+        &.eyes-seq-eyes-out.eyes-container--sketching #eyes {
+            animation: goEyes 0.1s forwards !important;
+        }
+
+        &.eyes-seq-logo-fill {
+            .logo-color:nth-child(1) {
+                animation: fill-logo 0.5s forwards !important;
+                animation-delay: 0s !important;
+            }
+
+            .logo-color:nth-child(2) {
+                animation: fill-logo 0.5s forwards !important;
+                animation-delay: 0.05s !important;
+            }
+
+            .logo-color:nth-child(3) {
+                animation: fill-logo 0.5s forwards !important;
+                animation-delay: 0.1s !important;
+            }
+
+            .logo-color:nth-child(6) {
+                animation: fill-logo 0.5s forwards !important;
+                animation-delay: 0.15s !important;
+            }
+
+            .logo-color:nth-child(4) {
+                animation: fill-logo 0.5s forwards !important;
+                animation-delay: 0.2s !important;
+            }
+
+            .logo-color:nth-child(5) {
+                animation: fill-logo 0.5s forwards !important;
+                animation-delay: 0.25s !important;
+            }
         }
     }
 }
