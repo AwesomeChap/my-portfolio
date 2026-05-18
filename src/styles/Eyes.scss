@@ -751,6 +751,14 @@ $nav-mobile-menu-item-ease: cubic-bezier(0.17, 0.89, 0.26, 1);
     }
 }
 
+/* Match NavMobile `.fadeOut-menu-item` (0.1s after 0.3s delay). */
+@keyframes eyes-content-exit-fade {
+    to {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
 @media only screen and (max-width: 767px) {
     .eyes-container:not(.eyes-container--pixel) {
         transform-origin: top center;
@@ -758,20 +766,16 @@ $nav-mobile-menu-item-ease: cubic-bezier(0.17, 0.89, 0.26, 1);
         opacity: 1;
         will-change: transform;
 
+        &.eyes-container--content-hidden .eyes-top-chrome,
+        &.eyes-container--content-hidden .eyes-stage {
+            pointer-events: none;
+            animation: eyes-content-exit-fade 0.1s $nav-mobile-menu-item-ease 0.3s forwards;
+        }
+
         &.eyes-container--exiting {
             z-index: 1200;
             animation: eyes-overlay-slide-out $nav-mobile-overlay-duration $nav-mobile-overlay-ease forwards;
             opacity: 1;
-        }
-
-        &.eyes-container--content-hidden .eyes-top-chrome,
-        &.eyes-container--content-hidden .eyes-stage {
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
-            transition:
-                opacity 0.1s $nav-mobile-menu-item-ease $nav-mobile-overlay-exit-delay,
-                visibility 0.1s $nav-mobile-menu-item-ease $nav-mobile-overlay-exit-delay;
         }
 
         &.eyes-container--reduced {
@@ -779,6 +783,12 @@ $nav-mobile-menu-item-ease: cubic-bezier(0.17, 0.89, 0.26, 1);
 
             &.eyes-container--exiting {
                 animation-duration: 0.2s;
+            }
+
+            &.eyes-container--content-hidden .eyes-top-chrome,
+            &.eyes-container--content-hidden .eyes-stage {
+                animation-delay: 0.15s;
+                animation-duration: 0.08s;
             }
         }
     }

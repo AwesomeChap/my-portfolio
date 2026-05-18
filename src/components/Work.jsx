@@ -8,7 +8,6 @@ import MetaTags from 'react-meta-tags';
 import Mouse from './helper/Mouse';
 import ScrollTopButton from './helper/ScrollTopButton';
 import DistortedPixelsPortrait from './helper/DistortedPixelsPortrait';
-import { subscribeExperimentalMode } from './helper/experimentalMode';
 
 const WorkHeroPhoto = ({ src, alt }) => (
   <div className="about-pixel">
@@ -19,18 +18,13 @@ const WorkHeroPhoto = ({ src, alt }) => (
 export default (props) => {
   const [breakline, setBreakline] = useState(undefined);
   const [tabletView, setTabletView] = useState(undefined);
-  const [experimentalActive, setExperimentalActive] = useState(false);
 
   useEffect(() => {
     setBreakline(window.innerWidth <= 767);
     setTabletView(window.innerWidth <= 1024);
     props.trackPageView();
-    const unsubscribeExperimental = subscribeExperimentalMode(setExperimentalActive);
     window.addEventListener('resize', onWindowResize);
-    return () => {
-      window.removeEventListener('resize', onWindowResize);
-      unsubscribeExperimental();
-    };
+    return () => window.removeEventListener('resize', onWindowResize);
   }, []);
 
   const onWindowResize = () => {
@@ -38,7 +32,7 @@ export default (props) => {
     setTabletView(window.innerWidth <= 1024);
   };
 
-  const useDistortedHero = tabletView === false || experimentalActive;
+  const useDistortedHero = tabletView === false;
 
   return (
     <>

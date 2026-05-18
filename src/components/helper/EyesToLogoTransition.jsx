@@ -20,7 +20,9 @@ import {
 const COUNTDOWN_MS = 8000;
 const COUNTDOWN_MS_REDUCED = 2000;
 const EYES_OVERLAY_MS = 420;
+/** Match NavMobile `close-menu` delay before panel transform (0.4s). */
 const EYES_MOBILE_CONTENT_HIDE_MS = 400;
+const EYES_MOBILE_CONTENT_HIDE_MS_REDUCED = 200;
 const EYES_MOBILE_SLIDE_MS = 300;
 const EYES_SEQUENCE_PAUSE_MS = 280;
 const EYES_SEQUENCE_START_MS = EYES_OVERLAY_MS + EYES_SEQUENCE_PAUSE_MS;
@@ -101,6 +103,15 @@ export default function EyesToLogoTransition({ trackClickEvent }) {
     resetSketchMode(containerRef.current);
   }, []);
 
+  /** Pause timeline/Vivus but keep sketch + logo visible for mobile slide-out. */
+  const pausePlaybackForExit = useCallback(() => {
+    clearTimers(timersRef.current);
+    killEyesSequenceTimeline(timelineRef.current, containerRef.current);
+    timelineRef.current = null;
+    destroyVivus(vivusRef.current);
+    vivusRef.current = null;
+  }, []);
+
   const releaseUiLock = useCallback(() => {
     document.body.classList.remove("eyes-active");
   }, []);
@@ -131,10 +142,9 @@ export default function EyesToLogoTransition({ trackClickEvent }) {
     async ({ immediate = false } = {}) => {
       if (exitTimerRef.current !== null) return;
 
-      stopPlayback();
-      releaseUiLock();
-
       if (canUseEyesPixelTransition()) {
+        stopPlayback();
+        releaseUiLock();
         setExiting(true);
         await closeWithPixelTransition();
         return;
@@ -142,13 +152,22 @@ export default function EyesToLogoTransition({ trackClickEvent }) {
 
       if (isEyesMobileSlideOverlay()) {
         exitTimerRef.current = -1;
-        setSequenceArmed(false);
-        setSketchStarted(false);
+        pausePlaybackForExit();
         setContentHidden(true);
 
-        const contentMs = immediate ? 0 : EYES_MOBILE_CONTENT_HIDE_MS;
+        const hideMs = immediate
+          ? 0
+          : prefersReducedMotion()
+            ? EYES_MOBILE_CONTENT_HIDE_MS_REDUCED
+            : EYES_MOBILE_CONTENT_HIDE_MS;
         const slideMs = immediate ? 0 : EYES_MOBILE_SLIDE_MS;
-        await waitMs(contentMs);
+
+        if (hideMs === 0 && slideMs === 0) {
+          finishClose();
+          return;
+        }
+
+        await waitMs(hideMs);
 
         if (slideMs === 0) {
           finishClose();
@@ -160,15 +179,23 @@ export default function EyesToLogoTransition({ trackClickEvent }) {
         return;
       }
 
+      stopPlayback();
+      releaseUiLock();
       setExiting(true);
       if (immediate) {
         finishClose();
         return;
       }
 
-      exitTimerRef.current = window.setTimeout(finishClose, 0);
+      exitTimerRef.current = window.setTimeout(finishClose, EYES_OVERLAY_MS);
     },
-    [finishClose, releaseUiLock, closeWithPixelTransition, stopPlayback]
+    [
+      finishClose,
+      releaseUiLock,
+      closeWithPixelTransition,
+      stopPlayback,
+      pausePlaybackForExit,
+    ]
   );
 
   closeRef.current = closeAnimation;
@@ -343,7 +370,7 @@ export default function EyesToLogoTransition({ trackClickEvent }) {
                 <div className="eyes-close-controls">
                   <button
                     type="button"
-                    onClick={() => closeAnimation({ immediate: true })}
+                    onClick={() => closeAnimation()}
                     className="hide-eyes"
                     aria-label="Close animation"
                   >

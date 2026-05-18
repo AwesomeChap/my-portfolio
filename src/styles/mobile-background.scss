@@ -1,0 +1,152 @@
+@use 'colors' as *;
+
+/* Match resume control: 48×48 inner tiles at ≤767px, 42×42 at ≤479px */
+$theme-toggle-height: 48px;
+$theme-toggle-height-sm: 42px;
+$theme-toggle-inset: 10px;
+$theme-toggle-inset-sm: 8px;
+$theme-toggle-gap: 0;
+$theme-toggle-tile: 28px;
+$theme-toggle-tile-sm: 26px;
+$theme-toggle-radius: 5px;
+
+.theme-toggle,
+.theme-toggle--solo {
+  display: none;
+  box-sizing: border-box;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: $theme-toggle-height;
+  min-height: $theme-toggle-height;
+  width: $theme-toggle-height;
+  min-width: $theme-toggle-height;
+  padding: $theme-toggle-inset !important;
+  gap: $theme-toggle-gap;
+  overflow: hidden;
+
+  @media only screen and (max-width: 767px) {
+    display: inline-flex;
+  }
+
+  @media only screen and (max-width: 479px) {
+    height: $theme-toggle-height-sm;
+    min-height: $theme-toggle-height-sm;
+    width: $theme-toggle-height-sm;
+    min-width: $theme-toggle-height-sm;
+    padding: $theme-toggle-inset-sm;
+  }
+}
+
+.theme-toggle__tile {
+  position: relative;
+  box-sizing: border-box;
+  flex: 0 0 auto;
+  width: $theme-toggle-tile;
+  height: $theme-toggle-tile;
+  min-width: $theme-toggle-tile;
+  min-height: $theme-toggle-tile;
+  aspect-ratio: 1;
+  padding: 0;
+  border: none;
+  border-radius: $theme-toggle-radius;
+  background: transparent;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  opacity: 1;
+  transition: opacity 0.18s ease;
+
+  @media only screen and (max-width: 479px) {
+    width: $theme-toggle-tile-sm;
+    height: $theme-toggle-tile-sm;
+    min-width: $theme-toggle-tile-sm;
+    min-height: $theme-toggle-tile-sm;
+    max-width: $theme-toggle-tile-sm;
+    max-height: $theme-toggle-tile-sm;
+  }
+
+  .theme-toggle__liquid-snap,
+  .theme-toggle__dark-snap {
+    display: block;
+    width: 100%;
+    height: 100%;
+    transition: opacity 0.18s ease;
+  }
+
+  &:hover {
+    opacity: 0.88;
+  }
+
+  &:focus-visible {
+    outline: none;
+    opacity: 0.88;
+  }
+}
+
+/* Minimal previews — readable at small size */
+.theme-toggle__liquid-snap {
+  border-radius: calc(#{$theme-toggle-radius} - 1px);
+  background-color: #050508;
+  background-image:
+    radial-gradient(ellipse 100% 90% at 28% 38%, rgba(79, 4, 14, 0.75) 0%, transparent 62%),
+    radial-gradient(ellipse 90% 80% at 72% 62%, rgba(59, 3, 10, 0.55) 0%, transparent 58%);
+}
+
+.theme-toggle__dark-snap {
+  position: relative;
+  border-radius: calc(#{$theme-toggle-radius} - 1px);
+  background: #0f0f0f;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    background: #131313;
+  }
+
+  &::before {
+    top: 0;
+    left: 0;
+    height: 64%;
+    clip-path: polygon(100% 0, 0 100%, 0 0);
+  }
+
+  &::after {
+    right: 0;
+    bottom: 0;
+    height: 64%;
+    clip-path: polygon(100% 0, 0 100%, 100% 100%);
+  }
+}
+
+body.mobile-liquid-bg {
+  cursor: auto !important;
+
+  &,
+  * {
+    cursor: auto !important;
+  }
+
+  .liquid-gradient-bg {
+    opacity: 1 !important;
+  }
+
+  .background {
+    background: transparent !important;
+  }
+
+  .section.home .background,
+  .home > .background {
+    display: none;
+  }
+}
+
+body.mobile-liquid-bg.eyes-active {
+  .theme-toggle {
+    visibility: hidden;
+    pointer-events: none;
+  }
+}

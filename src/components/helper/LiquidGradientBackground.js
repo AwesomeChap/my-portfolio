@@ -497,7 +497,7 @@ export default function LiquidGradientBackground() {
     renderer.domElement.style.transition = 'opacity 120ms linear';
 
     const updateScrollFade = () => {
-      if (document.body.classList.contains('experimental-mode')) {
+      if (document.body.classList.contains('mobile-liquid-bg')) {
         renderer.domElement.style.opacity = '1';
         return;
       }

@@ -36,7 +36,7 @@ export function prefersReducedMotion() {
   return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 }
 
-/** Desktop, or mobile with experimental mode — pixel route transitions. */
+/** Desktop only — pixel route transitions. */
 export function isPageTransitionActiveViewport() {
   return isEnhancedEffectsViewport();
 }

@@ -7,7 +7,6 @@ import { set1, set2 } from './helper/data';
 import aboutImg from '../images/about-me.png';
 import ScrollTopButton from './helper/ScrollTopButton';
 import DistortedPixelsPortrait from './helper/DistortedPixelsPortrait';
-import { subscribeExperimentalMode } from './helper/experimentalMode';
 
 /** Smooth square photo fallback (tablet / mobile) — no canvas pixelation. */
 const AboutPortraitPhoto = ({ src, alt }) => (
@@ -19,19 +18,13 @@ const AboutPortraitPhoto = ({ src, alt }) => (
 export default (props) => {
   const [breakline, setBreakline] = useState(undefined);
   const [tabletView, setTabletView] = useState(undefined);
-  const [experimentalActive, setExperimentalActive] = useState(false);
 
   useEffect(() => {
     setBreakline(window.innerWidth <= 767);
     setTabletView(window.innerWidth <= 1024);
     props.trackPageView();
-
-    const unsubscribeExperimental = subscribeExperimentalMode(setExperimentalActive);
     window.addEventListener("resize", onWindowResize);
-    return () => {
-      window.removeEventListener("resize", onWindowResize);
-      unsubscribeExperimental();
-    }
+    return () => window.removeEventListener("resize", onWindowResize);
   }, [])
 
   useEffect(() => {
@@ -66,7 +59,7 @@ export default (props) => {
     setTabletView(window.innerWidth <= 1024);
   }
 
-  const useDistortedPortrait = tabletView === false || experimentalActive;
+  const useDistortedPortrait = tabletView === false;
 
   const getSkillsSet = (set) => (
     set.map((s, i) => {

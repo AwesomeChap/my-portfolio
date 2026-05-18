@@ -36,6 +36,19 @@ export function iconGlassButtonClasses() {
   return cx(GLASS_CTA_BUTTON_BASE, GLASS_CTA_BUTTON_RESUME_MOBILE);
 }
 
+/** Mobile theme picker — glass shell; tile sizing in mobile-background.scss */
+export function themeToggleContainerClasses() {
+  return cx(
+    GLASS_CTA_BUTTON_BASE,
+    GLASS_CTA_BUTTON_ENTER,
+    'theme-toggle animate-resume-enter max-[767px]:animate-resume-enter-top',
+  );
+}
+
+export function themeToggleTileClasses() {
+  return 'theme-toggle__tile';
+}
+
 export function labeledGlassButtonClasses(enterAnimation = 'animate-not-found-home-enter') {
   return cx(
     GLASS_CTA_BUTTON_BASE,

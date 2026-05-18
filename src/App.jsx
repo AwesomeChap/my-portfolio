@@ -8,9 +8,9 @@ import ScrollToTop from './components/helper/ScrollToTop';
 import PixelTransitionOverlay from './components/helper/PixelTransitionOverlay';
 import Cursor from './components/helper/cursor';
 import {
-  subscribeExperimentalMode,
-  syncExperimentalBodyClass,
-} from './components/helper/experimentalMode';
+  subscribeMobileLiquidBg,
+  syncMobileLiquidBgBodyClass,
+} from './components/helper/mobileBackgroundMode';
 import ReactGa from "react-ga";
 
 export default () => {
@@ -19,22 +19,22 @@ export default () => {
   const [isMobileNav, setIsMobileNav] = useState(
     () => typeof window !== 'undefined' && window.innerWidth <= 767
   );
-  const [experimentalActive, setExperimentalActive] = useState(false);
+  const [mobileLiquidBgActive, setMobileLiquidBgActive] = useState(false);
 
   useEffect(() => {
     setIsMobile(/iPhone|iPad|iPod|Android/i.test(navigator.userAgent));
     setIsMobileView(window.innerWidth <= 479);
     setIsMobileNav(window.innerWidth <= 767);
-    syncExperimentalBodyClass();
+    syncMobileLiquidBgBodyClass();
 
     ReactGa.initialize("UA-191535134-2");
 
-    const unsubscribeExperimental = subscribeExperimentalMode(setExperimentalActive);
+    const unsubscribeMobileBg = subscribeMobileLiquidBg(setMobileLiquidBgActive);
 
     window.addEventListener('resize', onWindowResize);
     return () => {
       window.removeEventListener('resize', onWindowResize);
-      unsubscribeExperimental();
+      unsubscribeMobileBg();
     }
   }, [])
 
@@ -52,18 +52,18 @@ export default () => {
   }
 
   const isBiggerScreenDevice = isMobileView === false && isMobile === false;
-  const showEnhancedEffects = isBiggerScreenDevice || experimentalActive;
+  const showLiquidGradient = isBiggerScreenDevice || mobileLiquidBgActive;
 
   return (
     <>
       <div className="router-wrapper">
-        {showEnhancedEffects ? <LiquidGradientBackground /> : null}
+        {showLiquidGradient ? <LiquidGradientBackground /> : null}
         <div className="app-content-layer">
           <Router>
             <ScrollToTop>
               {isMobileNav ? <NavBarMobile /> : <NavBar />}
             </ScrollToTop>
-            {showEnhancedEffects ? <PixelTransitionOverlay /> : null}
+            {isBiggerScreenDevice ? <PixelTransitionOverlay /> : null}
             <div id="route-outlet">
             <Switch>
             <Route exact path="/" render={(props) => <Home {...props} trackPageView={trackPageView} trackClickEvent={trackClickEvent} />}></Route>

@@ -11,7 +11,6 @@ import '../styles/pages.scss';
 import '../styles/projects.scss';
 import MetaTags from 'react-meta-tags';
 import DistortedPixelsPortrait from './helper/DistortedPixelsPortrait';
-import { subscribeExperimentalMode } from './helper/experimentalMode';
 import MaintenanceBlock from './helper/MaintenanceBlock';
 
 const DEFAULT_FILTER = "Show All";
@@ -42,20 +41,15 @@ export default (props) => {
   const [selectedFilter, setSelectedFilter] = useState(DEFAULT_FILTER);
   const [noOfProjects, setNoOfProjects] = useState(0);
   const [tabletView, setTabletView] = useState(undefined);
-  const [experimentalActive, setExperimentalActive] = useState(false);
   const [isLocalhost, setIsLocalhost] = useState(false);
   const [devShowList, setDevShowList] = useState(false);
 
   useEffect(() => {
     setTabletView(window.innerWidth <= 1024);
     props.trackPageView();
-    const unsubscribeExperimental = subscribeExperimentalMode(setExperimentalActive);
     const onResize = () => setTabletView(window.innerWidth <= 1024);
     window.addEventListener("resize", onResize);
-    return () => {
-      window.removeEventListener("resize", onResize);
-      unsubscribeExperimental();
-    };
+    return () => window.removeEventListener("resize", onResize);
   }, []);
 
   useEffect(() => {
@@ -94,7 +88,7 @@ export default (props) => {
     return <div key={`keyword-${index}-${kw}`} onClick={handleClick} data-name={kw} className={classes}>{kw}</div>
   });
 
-  const useDistortedHero = tabletView === false || experimentalActive;
+  const useDistortedHero = tabletView === false;
   const showProjectsList = isLocalhost ? devShowList : PROJECTS_LIST_LIVE;
 
   const toggleDevPreview = () => {

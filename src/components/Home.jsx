@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import EyesToLogoTransition from "./helper/EyesToLogoTransition";
 import ShareWithLove from './helper/ShareWithLove';
 import DistortedPixelsHero from './helper/DistortedPixelsHero';
-import ExperimentalToggle from './helper/ExperimentalToggle';
-import { subscribeExperimentalMode } from './helper/experimentalMode';
+import { subscribeMobileLiquidBg } from './helper/mobileBackgroundMode';
 import '../styles/pages.scss';
 import '../styles/home.scss';
 import MBackground from './helper/MBackground';
@@ -15,17 +14,17 @@ const title = "Portfolio - Jatin Kumar";
 export default (props) => {
   const [mobileView, setMobileView] = useState(undefined);
   const [tabletView, setTabletView] = useState(undefined);
-  const [experimentalActive, setExperimentalActive] = useState(false);
+  const [mobileLiquidBgActive, setMobileLiquidBgActive] = useState(false);
 
   useEffect(() => {
     setMobileView(window.innerWidth <= 479);
     setTabletView(window.innerWidth <= 1024);
     props.trackPageView();
-    const unsubscribeExperimental = subscribeExperimentalMode(setExperimentalActive);
+    const unsubscribeMobileBg = subscribeMobileLiquidBg(setMobileLiquidBgActive);
     window.addEventListener('resize', onWindowResize);
     return () => {
       window.removeEventListener('resize', onWindowResize);
-      unsubscribeExperimental();
+      unsubscribeMobileBg();
     }
   }, [])
 
@@ -34,9 +33,8 @@ export default (props) => {
     setTabletView(window.innerWidth <= 1024);
   }
 
-  const useDistortedHero =
-    (mobileView === false && tabletView === false) || experimentalActive;
-  const showMobileBars = mobileView && !experimentalActive;
+  const useDistortedHero = mobileView === false && tabletView === false;
+  const showMobileBars = mobileView && !mobileLiquidBgActive;
 
   const text1 = "HELLO.";
   const text2 = "I'M";
@@ -70,7 +68,6 @@ export default (props) => {
       <div className="section home">
         {showMobileBars ? <MBackground /> : null}
         {useDistortedHero ? <DistortedPixelsHero /> : null}
-        <ExperimentalToggle />
         <div className={`intro ${useDistortedHero ? 'intro--distorted-desktop' : ''}`}>
           <div className="content">
             {useDistortedHero ? (
