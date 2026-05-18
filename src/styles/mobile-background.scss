@@ -95,31 +95,8 @@ $theme-toggle-radius: 5px;
 }
 
 .theme-toggle__dark-snap {
-  position: relative;
   border-radius: calc(#{$theme-toggle-radius} - 1px);
-  background: #0f0f0f;
-
-  &::before,
-  &::after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    background: #131313;
-  }
-
-  &::before {
-    top: 0;
-    left: 0;
-    height: 64%;
-    clip-path: polygon(100% 0, 0 100%, 0 0);
-  }
-
-  &::after {
-    right: 0;
-    bottom: 0;
-    height: 64%;
-    clip-path: polygon(100% 0, 0 100%, 100% 100%);
-  }
+  background: linear-gradient(135deg, #111111 50%, #2a2a2a 50%);
 }
 
 body.mobile-liquid-bg {
