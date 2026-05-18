@@ -68,8 +68,9 @@ app.post('/send', (req, res) => {
   })
 })
 
-app.get('/{*splat}', (req, res) => {
-  res.sendFile(path.join(publicPath, 'index.html'))
+// Express 4: serve index.html for client-side routes (e.g. reload on /projects)
+app.get('*', (req, res) => {
+  res.sendFile(path.join(publicPath, 'index.html'));
 });
 
 app.listen(port, () => {

@@ -1,3 +1,11 @@
+@font-face {
+  font-family: Pixel;
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/Pixel.ttf') format('truetype');
+}
+
 .nav-label {
   display: inline-block;
   font-family: Futura, sans-serif;
