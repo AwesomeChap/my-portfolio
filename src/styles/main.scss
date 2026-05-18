@@ -44,15 +44,11 @@ a.share-link:focus-visible {
 html{
   font-size: 16px;
   overflow-y: hidden;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
 }
 
 body{
   scroll-behavior: auto;
   overflow-y: scroll;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
   background: #171717;
   color: #ccc;
   font-family: 'Plus Jakarta Sans', sans-serif;
@@ -82,13 +78,4 @@ body{
   height: 100vh;
   z-index: 0;
   pointer-events: none;
-}
-
-/* Hide native scrollbars — custom pixel bar is the desktop control */
-html::-webkit-scrollbar,
-body::-webkit-scrollbar,
-#root::-webkit-scrollbar {
-  width: 0;
-  height: 0;
-  display: none;
 }

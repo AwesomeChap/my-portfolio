@@ -1,43 +1,10 @@
 import gsap from "gsap";
-import {
-  appendFocusMorphToTimeline,
-  runPupilFade,
-  killFocusMorph,
-  resetFocusMorph,
-  getPupilFadeAt,
-  snapPupilsHidden,
-} from "./eyesFocusMorph";
+import { EYES_SEQ_PHASES, PHASE_AT } from "./eyesSequenceConfig";
+import { getEyesPlayback, killEyesPlayback, clearEyesPlayback } from "./eyesPlayback";
+import { appendFocusMorphToTimeline, runPupilFade, resetFocusMorph, snapPupilsHidden } from "./eyesFocusMorph";
+import { appendLogoMorphToTimeline, resetLogoMorph } from "./eyesLogoMorph";
 
-export const EYES_SEQ_PHASES = [
-  "eyes-seq-ui",
-  "eyes-seq-lashes-closed",
-  "eyes-seq-eyes-open",
-  "eyes-seq-mui",
-  "eyes-seq-shines",
-  "eyes-seq-focus",
-  "eyes-seq-fade-pupils",
-  "eyes-seq-logo-layer",
-  "eyes-seq-brows-decolor",
-  "eyes-seq-eyes-out",
-  "eyes-seq-logo-fill",
-];
-
-const FOCUS_AT = 3.5;
-
-/** Seconds from sequence start (--eyes-seq-delay must be 0 when sketching). */
-export const PHASE_AT = {
-  "eyes-seq-ui": 0.7,
-  "eyes-seq-lashes-closed": 1.4,
-  "eyes-seq-eyes-open": 1.5,
-  "eyes-seq-mui": 2,
-  "eyes-seq-shines": 3,
-  "eyes-seq-focus": FOCUS_AT,
-  "eyes-seq-fade-pupils": getPupilFadeAt(FOCUS_AT),
-  "eyes-seq-logo-layer": 4,
-  "eyes-seq-brows-decolor": 4.5,
-  "eyes-seq-eyes-out": 4.7,
-  "eyes-seq-logo-fill": 5.55,
-};
+export { EYES_SEQ_PHASES, PHASE_AT } from "./eyesSequenceConfig";
 
 export function resetEyesSequencePhases(container) {
   if (!container) return;
@@ -48,21 +15,24 @@ export function resetEyesSequencePhases(container) {
 export function createEyesSequenceTimeline(container, { reduced = false } = {}) {
   if (!container?.querySelector("#my-svg")) return null;
 
+  const svg = container.querySelector("#my-svg");
+  const session = getEyesPlayback(container);
+
   resetEyesSequencePhases(container);
   resetFocusMorph(container);
-  killFocusMorph(null, container._pupilFadeTween);
-  container._pupilFadeTween = null;
+  resetLogoMorph(container);
+  killEyesPlayback(container);
 
-  const svg = container.querySelector("#my-svg");
-
-  const addPhase = (phase) => {
+  const onPhase = (phase) => {
     container.classList.add(phase);
+
     if (phase === "eyes-seq-fade-pupils") {
-      container._pupilFadeTween = runPupilFade(svg, container, { reduced });
+      session.pupilFadeTween = runPupilFade(svg, { reduced });
     }
+
     if (phase === "eyes-seq-eyes-out") {
-      container._pupilFadeTween?.kill();
-      container._pupilFadeTween = null;
+      session.pupilFadeTween?.kill();
+      session.pupilFadeTween = null;
       snapPupilsHidden(svg);
     }
   };
@@ -71,11 +41,19 @@ export function createEyesSequenceTimeline(container, { reduced = false } = {}) 
 
   EYES_SEQ_PHASES.forEach((phase) => {
     const at = PHASE_AT[phase];
+
     if (phase === "eyes-seq-focus") {
       appendFocusMorphToTimeline(tl, container, at, { reduced });
       return;
     }
-    tl.call(() => addPhase(phase), null, at);
+
+    if (phase === "eyes-seq-eyes-out") {
+      tl.call(() => onPhase(phase), null, at);
+      appendLogoMorphToTimeline(tl, container, { reduced });
+      return;
+    }
+
+    tl.call(() => onPhase(phase), null, at);
   });
 
   return tl;
@@ -83,9 +61,12 @@ export function createEyesSequenceTimeline(container, { reduced = false } = {}) 
 
 export function killEyesSequenceTimeline(timeline, container) {
   timeline?.kill();
-  if (!container) return;
-  killFocusMorph(container._focusMorphTweens, null);
-  container._focusMorphTweens = null;
-  killFocusMorph(null, container._pupilFadeTween);
-  container._pupilFadeTween = null;
+  if (container) killEyesPlayback(container);
+}
+
+export function disposeEyesSequence(container) {
+  resetEyesSequencePhases(container);
+  resetFocusMorph(container);
+  resetLogoMorph(container);
+  clearEyesPlayback(container);
 }

@@ -414,14 +414,14 @@ $eyes-progress-fill: $red-accent-muted;
         }
     }
 
-    /* Legacy path only — unified timeline uses GSAP (see eyesFocusMorph.js) */
+    /* Legacy path only — unified timeline uses phase classes (see eyesFocusMorph.js) */
     &:not(.eyes-container--unified-timeline) .eye-balls {
-        animation: focus 0.2s eyes-delay(3.5s) linear forwards, fade 1s eyes-delay(4s) forwards;
+        animation: focus 0.2s eyes-delay(3.5s) ease-in-out forwards, fade 1s eyes-delay(4s) forwards;
     }
 
     @keyframes focus {
         to {
-            transform: translateY(14%);
+            transform: translateY(13%);
         }
     }
 
@@ -470,7 +470,7 @@ $eyes-progress-fill: $red-accent-muted;
         to {
             opacity: 0;
             visibility: hidden;
-            transform: translate3d(0, 14%, 0);
+            transform: translate3d(0, 13%, 0);
         }
     }
 
@@ -591,7 +591,7 @@ $eyes-progress-fill: $red-accent-muted;
             }
         }
 
-        /* Focus beat: KUTE path morph; clip + pupil drop via committed CSS (Chrome-smooth) */
+        /* Focus beat: path morph (JS) + pupil drop (CSS), clip synced once morph ends */
         &.eyes-seq-focus {
             #left-eye-open,
             #right-eye-open,
@@ -600,17 +600,9 @@ $eyes-progress-fill: $red-accent-muted;
                 animation: none !important;
             }
 
-            #left-eye-ball {
-                animation: change-clip-path-left 0.1s forwards !important;
-            }
-
-            #right-eye-ball {
-                animation: change-clip-path-right 0.1s forwards !important;
-            }
-
             #left-eye-ball > .eye-balls,
             #right-eye-ball > .eye-balls {
-                animation: focus 0.2s linear forwards !important;
+                animation: focus 0.2s ease-in-out forwards !important;
             }
         }
 
@@ -621,7 +613,6 @@ $eyes-progress-fill: $red-accent-muted;
             }
         }
 
-        /* Pupil offset pinned via SVG transform attribute in eyesFocusMorph.js */
         &.eyes-seq-pupils-settled {
             #left-eye-ball > .eye-balls,
             #right-eye-ball > .eye-balls {

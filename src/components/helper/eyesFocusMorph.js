@@ -1,118 +1,58 @@
 import gsap from "gsap";
 import KUTE from "kute.js";
+import { FOCUS_MORPH, PUPIL } from "./eyesSequenceConfig";
+import { getEyesPlayback } from "./eyesPlayback";
 
-const FOCUS = {
-  leftEyeOpen:
+const FOCUS_PATHS = {
+  "#left-eye-open":
     "M80 100c1,-5 48,141 48,141 88,1 174,25 244,36l8 -26c-97,-53 -209,-143 -300,-151z",
-  rightEyeOpen:
+  "#right-eye-open":
     "M894 96c-1,-4 -48,142 -48,142 -88,0 -174,24 -244,36l-8 -26c97,-54 208,-143 300,-152z",
-  leftBrow:
+  "#left-eye-brow":
     "M440 224l-2 38c-117,3 -260,-201 -436,-158l47 -100c177,27 332,247 391,220z",
-  rightBrow:
+  "#right-eye-brow":
     "M534 220l2 39c117,3 260,-201 436,-159l-48 -99c-177,26 -331,247 -390,219z",
 };
 
-const FOCUS_PATH_TARGETS = [
-  ["#left-eye-open", FOCUS.leftEyeOpen],
-  ["#right-eye-open", FOCUS.rightEyeOpen],
-  ["#left-eye-brow", FOCUS.leftBrow],
-  ["#right-eye-brow", FOCUS.rightBrow],
-];
+const FOCUS_TARGETS = Object.entries(FOCUS_PATHS);
 
-const FOCUS_DURATION_MS = 200;
-export const PUPIL_DROP_DURATION = 0.2;
-export const PUPIL_FADE_DURATION = 1.5;
-const PUPIL_SHIFT_RATIO = 0.14;
-
-/** Pupil drop duration — matches CSS `focus` keyframe (unified timeline) */
-export const PUPIL_DROP_DELAY = 0;
-
-/** Matches committed CSS: fade @ 4s with focus @ 3.5s */
-export function getPupilFadeAt(focusAt) {
-  return focusAt + 0.5;
+function syncClipsFromEyes(svg) {
+  const leftD = svg.querySelector("#left-eye-open")?.getAttribute("d");
+  const rightD = svg.querySelector("#right-eye-open")?.getAttribute("d");
+  if (leftD) document.querySelector("#id3 path")?.setAttribute("d", leftD);
+  if (rightD) document.querySelector("#id4 path")?.setAttribute("d", rightD);
 }
 
-/** Hide pupil clip groups before #eyes goEyes — avoids nested opacity in Firefox */
-export function snapPupilsHidden(svg) {
-  getPupilFadeRoots(svg).forEach((root) => {
-    gsap.killTweensOf(root);
-    root.setAttribute("opacity", "0");
-    root.style.visibility = "hidden";
-    root.style.removeProperty("opacity");
-  });
-
-  const { left, right } = getEyePupils(svg);
-  [left, right].filter(Boolean).forEach((group) => {
-    gsap.killTweensOf(group);
-    group.style.removeProperty("opacity");
-    group.style.removeProperty("visibility");
-    group.removeAttribute("opacity");
-  });
-}
-
-export function getEyePupils(svg) {
-  return {
-    left: svg.querySelector("#left-eye-ball > .eye-balls"),
-    right: svg.querySelector("#right-eye-ball > .eye-balls"),
-    leftBall: svg.querySelector("#left-eye-ball"),
-    rightBall: svg.querySelector("#right-eye-ball"),
-  };
-}
-
-
-function pupilShiftY(pupilGroup) {
-  if (!pupilGroup) return 0;
-  try {
-    return pupilGroup.getBBox().height * PUPIL_SHIFT_RATIO;
-  } catch {
-    return 0;
-  }
-}
-
-function setPupilTranslate(group, y) {
-  if (!group) return;
-  if (y === 0) {
-    group.removeAttribute("transform");
-    return;
-  }
-  group.setAttribute("transform", `translate(0 ${y})`);
-}
-
-function applyFocusBrowFill(svg) {
-  svg.querySelector("#left-eye-brow")?.setAttribute("fill", "#b3b3b3");
-  svg.querySelector("#right-eye-brow")?.setAttribute("fill", "#b3b3b3");
-}
-
-function applyFocusClipPaths(svg) {
+function applyFocusClips(svg) {
   svg.querySelector("#left-eye-ball")?.setAttribute("clip-path", "url(#id3)");
   svg.querySelector("#right-eye-ball")?.setAttribute("clip-path", "url(#id4)");
 }
 
 function snapFocusGeometry(svg) {
-  FOCUS_PATH_TARGETS.forEach(([selector, d]) => {
+  FOCUS_TARGETS.forEach(([selector, d]) => {
     svg.querySelector(selector)?.setAttribute("d", d);
   });
-  applyFocusBrowFill(svg);
-  applyFocusClipPaths(svg);
+  svg.querySelector("#left-eye-brow")?.setAttribute("fill", "#b3b3b3");
+  svg.querySelector("#right-eye-brow")?.setAttribute("fill", "#b3b3b3");
+  syncClipsFromEyes(svg);
+  applyFocusClips(svg);
 }
 
-function settlePupils(container, targets) {
-  targets.forEach((group) => {
-    gsap.set(group, { clearProps: "transform" });
-    setPupilTranslate(group, pupilShiftY(group));
+function stopKuteTweens(tweens) {
+  tweens?.forEach((tween) => {
+    try {
+      tween.stop?.();
+    } catch {
+      /* empty */
+    }
   });
-  container?.classList.add("eyes-seq-pupils-settled");
 }
 
-function startFocusPathMorph(svg, { reduced = false } = {}) {
-  if (reduced) {
-    snapFocusGeometry(svg);
-    return [];
-  }
+function startFocusMorph(svg, session) {
+  stopKuteTweens(session.focusPathTweens);
+  session.focusPathTweens = [];
 
-  const tweens = [];
-
-  FOCUS_PATH_TARGETS.forEach(([selector, toPath]) => {
+  FOCUS_TARGETS.forEach(([selector, toPath]) => {
     const el = svg.querySelector(selector);
     if (!el) return;
 
@@ -121,62 +61,69 @@ function startFocusPathMorph(svg, { reduced = false } = {}) {
       { path: el },
       { path: toPath },
       {
-        duration: FOCUS_DURATION_MS,
-        easing: "linear",
-        morphIndex: 75,
+        duration: FOCUS_MORPH.durationMs,
+        easing: FOCUS_MORPH.easing,
+        morphIndex: FOCUS_MORPH.morphIndex,
       }
     );
     tween.start();
-    tweens.push(tween);
-  });
-
-  return tweens;
-}
-
-function clearPupilTransforms(svg) {
-  const { left, right } = getEyePupils(svg);
-  [left, right].filter(Boolean).forEach((group) => {
-    gsap.killTweensOf(group);
-    gsap.set(group, { clearProps: "transform" });
-    setPupilTranslate(group, 0);
-    group.style.removeProperty("transform");
+    session.focusPathTweens.push(tween);
   });
 }
 
-function stopTweens(tweens) {
-  tweens?.forEach((tween) => {
-    try {
-      tween.stop?.();
-    } catch {
-      /* already stopped */
-    }
+function getPupilRoots(svg) {
+  return [svg.querySelector("#left-eye-ball"), svg.querySelector("#right-eye-ball")].filter(Boolean);
+}
+
+function resetPupilFadeStyles(svg) {
+  getPupilRoots(svg).forEach((root) => {
+    gsap.killTweensOf(root);
+    root.style.removeProperty("opacity");
+    root.style.removeProperty("visibility");
+    root.removeAttribute("opacity");
   });
 }
 
-/** Path morph at `at`; clip + pupil drop via CSS `focus` keyframes (same time as committed build). */
+function clearPupilStyles(svg) {
+  svg.querySelectorAll("#left-eye-ball > .eye-balls, #right-eye-ball > .eye-balls").forEach((el) => {
+    gsap.killTweensOf(el);
+    el.style.removeProperty("transform");
+    el.style.removeProperty("transform-origin");
+  });
+}
+
+/** Hide pupil clip groups before #eyes goEyes — avoids nested opacity in Firefox */
+export function snapPupilsHidden(svg) {
+  getPupilRoots(svg).forEach((root) => {
+    gsap.killTweensOf(root);
+    root.setAttribute("opacity", "0");
+    root.style.visibility = "hidden";
+    root.style.removeProperty("opacity");
+  });
+}
+
 export function appendFocusMorphToTimeline(tl, container, at, { reduced = false } = {}) {
   const svg = container?.querySelector("#my-svg");
-  if (!svg) return;
+  const session = getEyesPlayback(container);
+  if (!svg || !session) return;
 
   tl.call(
     () => {
-      stopTweens(container._focusMorphTweens);
-      container._focusMorphTweens = null;
+      stopKuteTweens(session.focusPathTweens);
+      session.focusPathTweens = [];
       container.classList.remove("eyes-seq-pupils-settled");
       resetPupilFadeStyles(svg);
-      clearPupilTransforms(svg);
-
+      clearPupilStyles(svg);
       container.classList.add("eyes-seq-focus", "eyes-seq-focus-snapped");
-      applyFocusBrowFill(svg);
 
       if (reduced) {
         snapFocusGeometry(svg);
-        const { left, right } = getEyePupils(svg);
-        settlePupils(container, [left, right].filter(Boolean));
+        container.classList.add("eyes-seq-pupils-settled");
         return;
       }
 
-      container._focusMorphTweens = startFocusPathMorph(svg, { reduced: false });
+      applyFocusClips(svg);
+      startFocusMorph(svg, session);
     },
     null,
     at
@@ -186,38 +133,16 @@ export function appendFocusMorphToTimeline(tl, container, at, { reduced = false 
 
   tl.call(
     () => {
+      syncClipsFromEyes(svg);
       container.classList.add("eyes-seq-pupils-settled");
     },
     null,
-    at + PUPIL_DROP_DURATION
+    at + PUPIL.dropDuration
   );
 }
 
-function getPupilFadeRoots(svg) {
-  return [svg.querySelector("#left-eye-ball"), svg.querySelector("#right-eye-ball")].filter(
-    Boolean
-  );
-}
-
-function resetPupilFadeStyles(svg) {
-  getPupilFadeRoots(svg).forEach((root) => {
-    gsap.killTweensOf(root);
-    root.style.removeProperty("opacity");
-    root.style.removeProperty("visibility");
-    root.removeAttribute("opacity");
-
-    const inner = root.querySelector(":scope > .eye-balls");
-    if (!inner) return;
-    gsap.killTweensOf(inner);
-    inner.style.removeProperty("opacity");
-    inner.style.removeProperty("visibility");
-    inner.removeAttribute("opacity");
-  });
-}
-
-/** Fade clip roots via SVG opacity attribute — one tween, both eyes in sync. */
-export function runPupilFade(svg, container, { reduced = false } = {}) {
-  const roots = getPupilFadeRoots(svg);
+export function runPupilFade(svg, { reduced = false } = {}) {
+  const roots = getPupilRoots(svg);
   if (!roots.length) return null;
 
   resetPupilFadeStyles(svg);
@@ -235,31 +160,29 @@ export function runPupilFade(svg, container, { reduced = false } = {}) {
 
   return gsap.to(roots, {
     attr: { opacity: 0 },
-    duration: PUPIL_FADE_DURATION,
+    duration: PUPIL.fadeDuration,
     ease: "none",
     overwrite: true,
     onComplete: () => snapPupilsHidden(svg),
   });
 }
 
-export function killFocusMorph(tweens, pupilTween) {
-  stopTweens(tweens);
-  pupilTween?.kill?.();
-}
-
 export function resetFocusMorph(container) {
   if (!container) return;
 
-  stopTweens(container._focusMorphTweens);
-  container._focusMorphTweens = null;
+  const session = getEyesPlayback(container);
+  if (session) {
+    stopKuteTweens(session.focusPathTweens);
+    session.focusPathTweens = [];
+  }
+
   container.classList.remove("eyes-seq-focus-snapped", "eyes-seq-pupils-settled");
 
   const svg = container.querySelector("#my-svg");
   if (!svg) return;
 
   resetPupilFadeStyles(svg);
-
-  clearPupilTransforms(svg);
+  clearPupilStyles(svg);
 
   svg.querySelector("#left-eye-ball")?.setAttribute("clip-path", "url(#id1)");
   svg.querySelector("#right-eye-ball")?.setAttribute("clip-path", "url(#id2)");
