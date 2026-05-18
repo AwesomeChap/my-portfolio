@@ -24,8 +24,8 @@ export const PUPIL_DROP_DURATION = 0.2;
 export const PUPIL_FADE_DURATION = 1.5;
 const PUPIL_SHIFT_RATIO = 0.14;
 
-/** Seconds after focus — clip + pupil drop (after path morph finishes) */
-export const PUPIL_DROP_DELAY = 0.2;
+/** Pupil drop duration — matches CSS `focus` keyframe (unified timeline) */
+export const PUPIL_DROP_DELAY = 0;
 
 /** Matches committed CSS: fade @ 4s with focus @ 3.5s */
 export function getPupilFadeAt(focusAt) {
@@ -133,37 +133,13 @@ function startFocusPathMorph(svg, { reduced = false } = {}) {
   return tweens;
 }
 
-function runPupilDrop(svg, container, { reduced = false } = {}) {
+function clearPupilTransforms(svg) {
   const { left, right } = getEyePupils(svg);
-  const targets = [left, right].filter(Boolean);
-  if (!targets.length) return null;
-
-  applyFocusClipPaths(svg);
-
-  gsap.killTweensOf(targets);
-  targets.forEach((group) => {
-    gsap.set(group, { clearProps: "transform,opacity,visibility" });
+  [left, right].filter(Boolean).forEach((group) => {
+    gsap.killTweensOf(group);
+    gsap.set(group, { clearProps: "transform" });
     setPupilTranslate(group, 0);
-  });
-
-  if (reduced) {
-    settlePupils(container, targets);
-    return null;
-  }
-
-  const shifts = targets.map((group) => pupilShiftY(group));
-  const state = { y: 0 };
-
-  return gsap.to(state, {
-    y: 1,
-    duration: PUPIL_DROP_DURATION,
-    ease: "none",
-    onUpdate: () => {
-      targets.forEach((group, i) => {
-        setPupilTranslate(group, shifts[i] * state.y);
-      });
-    },
-    onComplete: () => settlePupils(container, targets),
+    group.style.removeProperty("transform");
   });
 }
 
@@ -177,30 +153,30 @@ function stopTweens(tweens) {
   });
 }
 
-/** Path morph at `at`; angry clip + pupil drop at `at + PUPIL_DROP_DELAY`. */
+/** Path morph at `at`; clip + pupil drop via CSS `focus` keyframes (same time as committed build). */
 export function appendFocusMorphToTimeline(tl, container, at, { reduced = false } = {}) {
   const svg = container?.querySelector("#my-svg");
   if (!svg) return;
-
-  const dropAt = at + PUPIL_DROP_DELAY;
 
   tl.call(
     () => {
       stopTweens(container._focusMorphTweens);
       container._focusMorphTweens = null;
-      container._pupilDropTween?.kill();
-      container._pupilDropTween = null;
       container.classList.remove("eyes-seq-pupils-settled");
       resetPupilFadeStyles(svg);
+      clearPupilTransforms(svg);
 
       container.classList.add("eyes-seq-focus", "eyes-seq-focus-snapped");
       applyFocusBrowFill(svg);
-      applyFocusClipPaths(svg);
-      container._focusMorphTweens = startFocusPathMorph(svg, { reduced });
 
       if (reduced) {
-        container._pupilDropTween = runPupilDrop(svg, container, { reduced: true });
+        snapFocusGeometry(svg);
+        const { left, right } = getEyePupils(svg);
+        settlePupils(container, [left, right].filter(Boolean));
+        return;
       }
+
+      container._focusMorphTweens = startFocusPathMorph(svg, { reduced: false });
     },
     null,
     at
@@ -208,9 +184,13 @@ export function appendFocusMorphToTimeline(tl, container, at, { reduced = false 
 
   if (reduced) return;
 
-  tl.call(() => {
-    container._pupilDropTween = runPupilDrop(svg, container);
-  }, null, dropAt);
+  tl.call(
+    () => {
+      container.classList.add("eyes-seq-pupils-settled");
+    },
+    null,
+    at + PUPIL_DROP_DURATION
+  );
 }
 
 function getPupilFadeRoots(svg) {
@@ -272,8 +252,6 @@ export function resetFocusMorph(container) {
 
   stopTweens(container._focusMorphTweens);
   container._focusMorphTweens = null;
-  killFocusMorph(null, container._pupilDropTween);
-  container._pupilDropTween = null;
   container.classList.remove("eyes-seq-focus-snapped", "eyes-seq-pupils-settled");
 
   const svg = container.querySelector("#my-svg");
@@ -281,12 +259,7 @@ export function resetFocusMorph(container) {
 
   resetPupilFadeStyles(svg);
 
-  const { left, right } = getEyePupils(svg);
-  [left, right].filter(Boolean).forEach((group) => {
-    gsap.killTweensOf(group);
-    gsap.set(group, { clearProps: "transform" });
-    setPupilTranslate(group, 0);
-  });
+  clearPupilTransforms(svg);
 
   svg.querySelector("#left-eye-ball")?.setAttribute("clip-path", "url(#id1)");
   svg.querySelector("#right-eye-ball")?.setAttribute("clip-path", "url(#id2)");

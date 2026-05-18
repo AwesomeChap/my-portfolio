@@ -1,7 +1,9 @@
 import React from 'react';
 import {
   isExperimentalModeActive,
-  toggleExperimentalMode,
+  isExperimentalViewport,
+  readExperimentalEnabled,
+  setExperimentalEnabled,
 } from './experimentalMode';
 import { cx, iconGlassButtonClasses } from './glassCtaButton';
 import '../../styles/experimental.scss';
@@ -36,7 +38,7 @@ function ExperimentalIcon() {
 }
 
 export default function ExperimentalToggle() {
-  const [active, setActive] = React.useState(isExperimentalModeActive);
+  const [active, setActive] = React.useState(() => isExperimentalModeActive());
 
   React.useEffect(() => {
     const onChange = () => setActive(isExperimentalModeActive());
@@ -44,15 +46,21 @@ export default function ExperimentalToggle() {
     return () => window.removeEventListener('portfolio-experimental-change', onChange);
   }, []);
 
+  const handleClick = () => {
+    const next = !readExperimentalEnabled();
+    setExperimentalEnabled(next);
+    setActive(isExperimentalViewport() && next);
+  };
+
   return (
     <button
       type="button"
       className={cx(
         'experimental-toggle',
         iconGlassButtonClasses(),
-        active && 'experimental-toggle--active'
+        active && 'experimental-toggle--active',
       )}
-      onClick={toggleExperimentalMode}
+      onClick={handleClick}
       aria-pressed={active}
       aria-label={active ? 'Disable experimental mode' : 'Enable experimental mode'}
       title={active ? 'Experimental mode on' : 'Experimental mode off'}

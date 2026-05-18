@@ -591,15 +591,26 @@ $eyes-progress-fill: $red-accent-muted;
             }
         }
 
-        /* Focus beat: KUTE path morph + GSAP pupil drop (eyesFocusMorph.js) */
+        /* Focus beat: KUTE path morph; clip + pupil drop via committed CSS (Chrome-smooth) */
         &.eyes-seq-focus {
             #left-eye-open,
             #right-eye-open,
             #left-eye-brow,
-            #right-eye-brow,
+            #right-eye-brow {
+                animation: none !important;
+            }
+
+            #left-eye-ball {
+                animation: change-clip-path-left 0.1s forwards !important;
+            }
+
+            #right-eye-ball {
+                animation: change-clip-path-right 0.1s forwards !important;
+            }
+
             #left-eye-ball > .eye-balls,
             #right-eye-ball > .eye-balls {
-                animation: none !important;
+                animation: focus 0.2s linear forwards !important;
             }
         }
 

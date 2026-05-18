@@ -4,12 +4,8 @@ const bodyParser = require('body-parser');
 const publicPath = path.join(__dirname, '..', 'dist');
 const nodemailer = require('nodemailer');
 const dotenv = require('dotenv');
+const { startKeepAlive } = require('./keepAlive');
 const result = dotenv.config();
-
-var http = require("http");
-setInterval(function() {
-    http.get("http://jatinkumar.herokuapp.com");
-}, 1800000); // every 5 minutes (300000)
 
 const {
   USER_ID,
@@ -44,6 +40,10 @@ app.use(express.static(path.join(__dirname, '..', 'dist')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.get('/api/health', (req, res) => {
+  res.status(200).json({ ok: true, ts: Date.now() });
+});
+
 app.post('/send', (req, res) => {
   const { name, email, message } = req.body;
   const content = `name: ${name} \nemail: ${email} \nmessage: ${message} `;
@@ -73,5 +73,6 @@ app.get('/{*splat}', (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`App listening on port ${port}`)
+  console.log(`App listening on port ${port}`);
+  startKeepAlive();
 });

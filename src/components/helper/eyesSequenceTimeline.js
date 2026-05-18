@@ -84,9 +84,8 @@ export function createEyesSequenceTimeline(container, { reduced = false } = {}) 
 export function killEyesSequenceTimeline(timeline, container) {
   timeline?.kill();
   if (!container) return;
-  killFocusMorph(container._focusMorphTweens, container._pupilDropTween);
+  killFocusMorph(container._focusMorphTweens, null);
   container._focusMorphTweens = null;
-  container._pupilDropTween = null;
   killFocusMorph(null, container._pupilFadeTween);
   container._pupilFadeTween = null;
 }

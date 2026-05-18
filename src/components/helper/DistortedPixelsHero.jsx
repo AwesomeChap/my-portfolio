@@ -13,10 +13,8 @@ export default function DistortedPixelsHero() {
     if (!el) return undefined;
 
     let sketch;
-    let cancelled = false;
 
     const run = () => {
-      if (cancelled) return;
       sketch = createDistortedPixelsSketch(el, {
         layoutForWidth: heroLayoutForWidth,
         mosaicMax: 112,
@@ -30,7 +28,6 @@ export default function DistortedPixelsHero() {
     }
 
     return () => {
-      cancelled = true;
       if (sketch) sketch.destroy();
     };
   }, []);

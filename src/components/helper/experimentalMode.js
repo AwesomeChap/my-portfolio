@@ -43,7 +43,9 @@ export function setExperimentalEnabled(enabled) {
 }
 
 export function toggleExperimentalMode() {
-  setExperimentalEnabled(!readExperimentalEnabled());
+  const next = !readExperimentalEnabled();
+  setExperimentalEnabled(next);
+  return isExperimentalModeActive();
 }
 
 /** Desktop-sized viewport, or mobile with experimental mode on. */

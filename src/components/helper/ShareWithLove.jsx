@@ -26,15 +26,13 @@ const NAV_EIO = 'cubic-bezier(0.77, 0, 0.175, 1)';
 const LINKS_TRANSITION_EXPANDED = {
   transitionProperty: 'max-width, opacity',
   transitionDuration: '0.56s, 0.32s',
-  transitionTimingFunction:
-    `${NAV_EIO}, ${NAV_EIO}`,
+  transitionTimingFunction: `${NAV_EIO}, ${NAV_EIO}`,
 };
 
 const LINKS_TRANSITION_COLLAPSE_FAST = {
   transitionProperty: 'max-width, opacity',
   transitionDuration: '0.32s, 0.22s',
-  transitionTimingFunction:
-    `${NAV_EIO}, ${NAV_EIO}`,
+  transitionTimingFunction: `${NAV_EIO}, ${NAV_EIO}`,
 };
 
 const SHARE_SPEC_HEART_A = {
@@ -400,7 +398,7 @@ export default function ShareWithLove({ trackClickEvent }) {
           className={cx(
             'box-border m-0 flex max-w-0 shrink-0 flex-row items-center self-center overflow-hidden p-0 opacity-0 pointer-events-none',
             shareIconsMounted && 'max-w-[300px] opacity-100',
-            shareIconsReady && 'pointer-events-auto',
+            shareIconsReady && 'relative z-[22] pointer-events-auto',
           )}
           style={linksTransitionStyle}
           onClick={(e) => e.stopPropagation()}
@@ -427,7 +425,7 @@ export default function ShareWithLove({ trackClickEvent }) {
         </div>
         <button
           type="button"
-          className="absolute inset-y-0 right-[8px] z-[25] box-border inline-flex h-[40px] w-[40px] min-w-[40px] cursor-pointer items-center justify-center self-center border-0 bg-transparent p-0 text-[var(--theme-red-brand)] outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--theme-red-brand)] focus-visible:outline-offset-[2px] [-webkit-tap-highlight-color:transparent]"
+          className="absolute top-[4px] right-[8px] z-[25] box-border inline-flex h-[40px] w-[40px] min-w-[40px] cursor-pointer items-center justify-center border-0 bg-transparent p-0 text-[var(--theme-red-brand)] outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--theme-red-brand)] focus-visible:outline-offset-[2px] [-webkit-tap-highlight-color:transparent]"
           aria-label={shareOpen ? 'Close share options' : 'Open share options'}
           tabIndex={shareOpen ? 0 : -1}
           onMouseDown={(e) => e.stopPropagation()}
@@ -438,8 +436,8 @@ export default function ShareWithLove({ trackClickEvent }) {
           }}
         >
           <svg
-            className="block h-[29px] w-[29px] shrink-0 overflow-visible"
-            viewBox="0 0 24 24"
+            className="block h-[26px] w-[26px] shrink-0"
+            viewBox="2 5 20 15"
             focusable="false"
             aria-hidden
           >

@@ -2,6 +2,9 @@
 $ease-out : cubic-bezier(0.19, 1, 0.22, 1);
 /* Same horizontal inset as `.follow-container-wrapper` on mobile */
 $home-mobile-side-inset: 10px;
+/* Match distortedPixelsSketch.js mobile hero band — centers CSS intro with canvas hero */
+$home-mobile-hero-top-chrome: 58px;
+$home-mobile-hero-bottom-chrome: 92px;
 
 /* Trap .background (z-index: -1) inside this stacking context so it stays above body #171717 */
 .home{
@@ -88,11 +91,19 @@ $home-mobile-side-inset: 10px;
 .distorted-pixels-hero {
   position: fixed;
   inset: 0;
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   z-index: 1;
   /* Wrapper + canvas must not capture hits — mouse is read on `window` in DistortedPixelsHero.jsx */
   pointer-events: none;
+
+  @media only screen and (max-width: 1024px) {
+    height: 100svh;
+
+    @supports (height: 100dvh) {
+      height: 100dvh;
+    }
+  }
 
   canvas {
     display: block;
@@ -324,7 +335,15 @@ $home-mobile-side-inset: 10px;
 }
 
 @media only screen and (max-width: 767px){
-  
+  /* Non-experimental mobile/tablet hero: center in band between top UI and bottom follow row */
+  .intro:not(.intro--distorted-desktop) {
+    top: calc(#{$home-mobile-hero-top-chrome} + env(safe-area-inset-top, 0px));
+    bottom: calc(#{$home-mobile-hero-bottom-chrome} + env(safe-area-inset-bottom, 0px));
+    height: auto;
+    transform: none;
+    align-items: center;
+  }
+
   .intro-text{
     span{
       font-size: 11vw;

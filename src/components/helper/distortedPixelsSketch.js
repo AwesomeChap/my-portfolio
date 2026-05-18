@@ -125,6 +125,7 @@ export function drawLinesCanvas(width, height, dpr, layout) {
     lineGapRatio = 0.28,
     lineGapPx,
     verticalCenter = 0.5,
+    verticalOffsetPx = 0,
     align = 'left',
   } = layout;
 
@@ -144,7 +145,8 @@ export function drawLinesCanvas(width, height, dpr, layout) {
       : 0;
   const blockH = lineHeights.reduce((sum, h, i) => sum + h + (i < lines.length - 1 ? gap : 0), 0);
   const cy = height * verticalCenter;
-  let y = cy - blockH * 0.5 + lineHeights[0] * 0.35;
+  const firstLineAnchor = verticalCenter !== 0.5 ? 0.5 : 0.35;
+  let y = cy - blockH * 0.5 + lineHeights[0] * firstLineAnchor + verticalOffsetPx;
 
   const centerX = width / 2;
 
@@ -209,11 +211,25 @@ export function drawLinesCanvas(width, height, dpr, layout) {
 /** Home hero: HELLO. / I'M JATIN */
 const INTRO_HELLO_GLASS_FILL = 'rgba(255, 255, 255, 0.42)';
 
+/** Mobile home UI band — share/toggle top, follow row + menu bottom (see home.scss) */
+export const MOBILE_HERO_TOP_CHROME = 58;
+export const MOBILE_HERO_BOTTOM_CHROME = 92;
+
+export function mobileHeroVerticalCenter(height) {
+  const bandMid =
+    MOBILE_HERO_TOP_CHROME +
+    (height - MOBILE_HERO_TOP_CHROME - MOBILE_HERO_BOTTOM_CHROME) * 0.5;
+  return bandMid / height;
+}
+
 export function heroLayoutForWidth(width, height) {
   let fontSize;
   if (width <= 767) fontSize = Math.max(44, width * 0.11);
   else if (width <= 1024) fontSize = 80;
   else fontSize = 110;
+
+  const verticalCenter =
+    width <= 767 && height > 0 ? mobileHeroVerticalCenter(height) : 0.5;
 
   return {
     lines: [
@@ -222,7 +238,8 @@ export function heroLayoutForWidth(width, height) {
     ],
     letterSpacingRatio: 0.2,
     lineGapRatio: 0.28,
-    verticalCenter: 0.5,
+    verticalCenter,
+    verticalOffsetPx: 0,
     minContainerHeight: Math.round(fontSize * 2.65),
   };
 }
@@ -411,20 +428,22 @@ export function createDistortedPixelsSketch(container, config) {
 
   window.addEventListener('mousemove', onMouseMove, {passive: true});
 
+  function applySize() {
+    width = container.clientWidth || window.innerWidth;
+    height = container.clientHeight || window.innerHeight;
+    layout = layoutForWidth(width, height);
+    if (height < 2) height = layout.minContainerHeight || Math.round(width * 0.4);
+    if (width < 2) return;
+    renderer.setSize(width, height);
+    setTitleResolution();
+    buildTitleTexture();
+    regenerateGrid();
+  }
+
   let resizeTimer;
   function onResize() {
     window.clearTimeout(resizeTimer);
-    resizeTimer = window.setTimeout(() => {
-      width = container.clientWidth || window.innerWidth;
-      height = container.clientHeight || window.innerHeight;
-      layout = layoutForWidth(width, height);
-      if (height < 2) height = layout.minContainerHeight || Math.round(width * 0.4);
-      if (width < 2) return;
-      renderer.setSize(width, height);
-      setTitleResolution();
-      buildTitleTexture();
-      regenerateGrid();
-    }, 80);
+    resizeTimer = window.setTimeout(applySize, 80);
   }
   window.addEventListener('resize', onResize);
 
@@ -456,5 +475,5 @@ export function createDistortedPixelsSketch(container, config) {
     }
   }
 
-  return {destroy};
+  return {destroy, resize: applySize};
 }

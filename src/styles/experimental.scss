@@ -15,11 +15,14 @@
     display: inline-flex;
   }
 
-  &:hover {
+  &:hover:not(&--active) {
     color: #b5b5b5;
   }
 
-  &--active {
+  &--active,
+  &--active:hover,
+  &--active:focus,
+  &--active:focus-visible {
     color: $red-brand;
   }
 }
